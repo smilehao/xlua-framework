@@ -1,3 +1,11 @@
 xlua-framework.sln
 xlua-framework.csproj
 xlua-framework.Editor.csproj
+Assets/LuaScripts/NppGTags.cfg.meta
+Assets/LuaScripts/NppGTags.cfg
+Assets/LuaScripts/GTAGS.meta
+Assets/LuaScripts/GTAGS
+Assets/LuaScripts/GRTAGS.meta
+Assets/LuaScripts/GRTAGS
+Assets/LuaScripts/GPATH.meta
+Assets/LuaScripts/GPATH
