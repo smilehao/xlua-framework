@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1978339450
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e150c0d503377bf73a3f1835102b21ce
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fa3924242a2a156456239784e70a9a9d
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/Fonts/system.TTF
+Dependencies: []

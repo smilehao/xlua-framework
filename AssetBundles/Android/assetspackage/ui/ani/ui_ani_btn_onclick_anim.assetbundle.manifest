@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 703460214
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8f8160b54d3f28f11be6e4ccb4c693ae
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ce8adfdc5173c287f9cedd0ed1817021
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/Ani/ui_ani_btn_onclick.anim
+Dependencies: []

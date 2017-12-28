@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 1669031219
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 30f9bb193f4ef5ce5454dec2868ec81f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ebfb7cb207e8572fcf99e9416fdcd08a
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/Ani/ui_ani_btn_Scale.controller
+Dependencies:
+- D:/GitHub/xlua-framework/AssetBundles/Android/assetspackage/ui/ani/ui_ani_btn_onclick_anim.assetbundle
+- D:/GitHub/xlua-framework/AssetBundles/Android/assetspackage/ui/ani/ui_ani_main_btn_shark_anim.assetbundle

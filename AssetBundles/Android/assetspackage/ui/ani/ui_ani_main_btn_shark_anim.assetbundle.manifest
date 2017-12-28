@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 2397690235
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 52bb34577b1dd06ae25212b7350d107a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ce8adfdc5173c287f9cedd0ed1817021
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/Ani/ui_ani_main_btn_shark.anim
+Dependencies: []

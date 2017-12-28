@@ -2,19 +2,19 @@ using UnityEngine;
 
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
-	private static T m_instance = null;
+	private static T mInstance = null;
 
-	public static T instance
+	public static T Instance
     {
         get
         {
-			if (m_instance == null)
+			if (mInstance == null)
             {
-            	m_instance = GameObject.FindObjectOfType(typeof(T)) as T;
-                if (m_instance == null)
+            	mInstance = GameObject.FindObjectOfType(typeof(T)) as T;
+                if (mInstance == null)
                 {
                     GameObject go = new GameObject(typeof(T).Name);
-                    m_instance = go.AddComponent<T>();
+                    mInstance = go.AddComponent<T>();
                     GameObject parent = GameObject.Find("Boot");
                     if (parent != null)
                     {
@@ -23,7 +23,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
                 }
             }
 
-            return m_instance;
+            return mInstance;
         }
     }
 
@@ -37,9 +37,9 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
 
     private void Awake()
     {
-        if (m_instance == null)
+        if (mInstance == null)
         {
-            m_instance = this as T;
+            mInstance = this as T;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -54,7 +54,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
     public void DestroySelf()
     {
         Dispose();
-        MonoSingleton<T>.m_instance = null;
+        MonoSingleton<T>.mInstance = null;
         UnityEngine.Object.Destroy(gameObject);
     }
 

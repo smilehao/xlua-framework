@@ -9,22 +9,45 @@ using XLua;
 
 public class XLuaManager : MonoSingleton<XLuaManager>
 {
+    const string commonMainScriptName = "Common.Main";
     const string gameMainScriptName = "GameMain";
-    const string commonGameTools = "Common.Main";
+    const string hotfixMainScriptName = "XLua.HotfixMain";
     LuaEnv luaEnv = null;
     LuaUpdater luaUpdater = null;
 
     protected override void Init()
     {
         base.Init();
-
         luaEnv = new LuaEnv();
+
         if (luaEnv != null)
         {
             luaEnv.AddLoader(CustomLoader);
-            LoadScript(commonGameTools);
+            LoadScript(commonMainScriptName);
             luaUpdater = gameObject.AddComponent<LuaUpdater>();
             luaUpdater.OnInit(luaEnv);
+        }
+    }
+
+    public void StartHotfix(bool restart = false)
+    {
+        if (luaEnv != null)
+        {
+            if (restart)
+            {
+                ReloadScript(hotfixMainScriptName);
+            }
+            else
+            {
+                LoadScript(hotfixMainScriptName);
+            }
+        }
+    }
+
+    public void StartGame()
+    {
+        if (luaEnv != null)
+        {
             LoadScript(gameMainScriptName);
         }
     }
@@ -41,7 +64,7 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         catch (System.Exception ex)
         {
             string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
-            Debug.LogError(msg, null);
+            Logger.LogError(msg, null);
         }
         LoadScript(scriptName);
     }
@@ -58,7 +81,7 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         catch (System.Exception ex)
         {
             string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
-            Debug.LogError(msg, null);
+            Logger.LogError(msg, null);
         }
     }
 
@@ -69,15 +92,6 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         return GameUtility.SafeReadAllBytes(scriptPath);
 #else
         // TODO：此处从项目资源管理器加载lua脚本
-        //TextAsset textAsset = (TextAsset)ResourceMgr.instance.SyncLoad(ResourceMgr.RESTYPE.XLUA_SCRIPT, filepath).resObject;
-
-        string scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua";
-        TextAsset textAsset = Resources.Load<TextAsset>(scriptPath);
-        if (textAsset != null)
-        {
-            return textAsset.bytes;
-        }
-        return null;
 #endif
     }
 

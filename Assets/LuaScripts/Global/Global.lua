@@ -65,7 +65,7 @@ UIWindowNames = require "UI.Config.UIWindowNames"
 UIConfig = require "UI.Config.UIConfig"
 
 -- res
-ResourcesManager = require "Framework.Resources.ResourcesManager"
+ResourcesManager = require "Framework.Resource.ResourcesManager"
 
 -- update & time
 Timer = require "Framework.Updater.Timer"

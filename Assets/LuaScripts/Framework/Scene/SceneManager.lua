@@ -50,7 +50,7 @@ local function CoInnerSwitchScene(self, scene_config)
 	collectgarbage()
 	CS.System.GC.Collect()
 	local cur_progress = model.value
-	coroutine.waitforasyncop(resources.UnloadUnusedAssets(), function(progress)
+	coroutine.waitforasyncop(resources.UnloadUnusedAssets(), function(co, progress)
 		assert(progress <= 1.0, "What's the funck!!!")
 		model.value = cur_progress + 0.1 * progress
 	end)

@@ -41,6 +41,8 @@ local function __init(self, holder, var_arg)
 	self.__bind_data = nil
 	-- 可变类型参数，用于重载
 	self.__var_arg = var_arg
+	-- 这里一定要等资源异步加载完毕才启用Update
+	self:EnableUpdate(false)
 end
 
 -- 析构函数：所有组件的子类不要再写这个函数，释放工作全部放到OnDestroy

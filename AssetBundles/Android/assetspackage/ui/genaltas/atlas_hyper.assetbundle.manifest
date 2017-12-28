@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 4052768668
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fa3c4c02fdb7cacfc3391446907d87b4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9dea23ffc7e96552740e12d1ee5309d8
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/GenAltas/Atlas_Hyper/Atlas_Hyper_tp0.png
+Dependencies: []

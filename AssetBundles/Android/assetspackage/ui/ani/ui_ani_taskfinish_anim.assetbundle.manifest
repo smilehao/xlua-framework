@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1868837774
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3c961d83e1ade9d1a094ec5d01890020
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1e05b48bdf9804fabbe4e2bc3a785346
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/UI/Ani/ui_ani_TaskFinish.anim
+Dependencies: []

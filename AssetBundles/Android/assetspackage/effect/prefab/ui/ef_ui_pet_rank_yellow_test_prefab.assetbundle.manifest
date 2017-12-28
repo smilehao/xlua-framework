@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 3528879731
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e805fd48f8b8db42d84e246492635a47
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4c7187cdb43d5a4d6435d185aaf8a868
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetsPackage/Effect/Prefab/UI/ef_ui_pet_rank_yellow_test.prefab
+Dependencies:
+- D:/GitHub/xlua-framework/AssetBundles/Android/assetspackage/shaders.assetbundle

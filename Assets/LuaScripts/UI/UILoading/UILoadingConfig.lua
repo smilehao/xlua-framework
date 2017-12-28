@@ -10,7 +10,7 @@ local UILoading = {
 	Model = require "UI.UILoading.Model.UILoadingModel",
 	Ctrl = nil,
 	View = require "UI.UILoading.View.UILoadingView",
-	PrefabPath = "UI/Prefabs/View/UILoading",
+	PrefabPath = "UI/Prefabs/View/UILoading.prefab",
 }
 
 return {
