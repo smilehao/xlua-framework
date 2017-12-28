@@ -161,9 +161,8 @@ end
 local function yieldcallback(co, ...)
 	assert(co ~= nil and type(co) == "thread")
 	local map = yield_map[co]
-	local parent = map.parent
 	-- 没有父级协程，啥都不做
-	if not map or not parent then
+	if not map or not map.parent then
 		return
 	end
 	
