@@ -1,0 +1,33 @@
+package mail;
+
+import 'mail.proto';
+//import 'inter_common.proto';
+
+message ntf_player_status
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 status = 2[default = 0];  //0上线 1下线
+	optional int32 gate_conn_id = 3[default =0];
+	optional int32 socket_idx   = 4[default =0];
+	optional int32 country = 5[default =0];
+	optional int32 create_time = 6[default =0];
+}
+
+message ntf_player_new_mail
+{
+	optional int32 uid = 1[default = 0];
+	optional mail.mail_info  new_mail = 2;
+}
+
+message req_player_take_attachment
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+	optional mail.mail_attachment attachment = 3;
+}
+
+message rsp_player_take_attachment
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+}

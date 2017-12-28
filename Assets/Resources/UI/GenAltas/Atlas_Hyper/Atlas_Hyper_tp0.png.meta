@@ -1,0 +1,489 @@
+fileFormatVersion: 2
+guid: f9a9406dcb847b045b6a8a11e4dd36f3
+timeCreated: 1449730326
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ui_hyper_acer.png
+    21300002: ui_hyper_book.png
+    21300004: ui_hyper_chat_bangpai.png
+    21300006: ui_hyper_chat_dangqian.png
+    21300008: ui_hyper_chat_duiwu.png
+    21300010: ui_hyper_chat_haoyou.png
+    21300012: ui_hyper_chat_shijie.png
+    21300014: ui_hyper_chat_xiaoxi.png
+    21300016: ui_hyper_chat_xitong.png
+    21300018: ui_hyper_copper.png
+    21300020: ui_hyper_emoji_01_1.tga
+    21300022: ui_hyper_emoji_01_2.tga
+    21300024: ui_hyper_emoji_02_1.tga
+    21300026: ui_hyper_emoji_02_2.tga
+    21300028: ui_hyper_emoji_03_1.tga
+    21300030: ui_hyper_emoji_03_2.tga
+    21300032: ui_hyper_exp.png
+    21300034: ui_hyper_money_01.png
+    21300036: ui_hyper_money_02.png
+    21300038: ui_hyper_money_03.png
+    21300040: ui_hyper_note.png
+    21300042: ui_hyper_petexp.png
+    21300044: ui_hyper_school_11.png
+    21300046: ui_hyper_school_12.png
+    21300048: ui_hyper_school_13.png
+    21300050: ui_hyper_school_14.png
+    21300052: ui_hyper_school_15.png
+    21300054: ui_hyper_school_16.png
+    21300056: ui_hyper_career_01.png
+    21300058: ui_hyper_career_02.png
+    21300060: ui_hyper_career_03.png
+    21300062: ui_hyper_career_04.png
+    21300064: ui_hyper_career_05.png
+    21300066: ui_hyper_career_06.png
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: ui_hyper_acer.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 174
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 21, y: 63}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -29}
+        - {x: 9, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: -7}
+        - {x: 19, y: 0}
+    - name: ui_hyper_book.png
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 156
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 91, y: 85}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_01.png
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 124
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 91, y: 117}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_02.png
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 92
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 119, y: 149}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_03.png
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 156
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 123, y: 85}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_04.png
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 124
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 123, y: 117}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_05.png
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 190
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 125, y: 51}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_career_06.png
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 224
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 127, y: 17}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_chat_bangpai.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 60
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 18, y: 180}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_dangqian.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 26
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 18, y: 214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_duiwu.png
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 60
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 52, y: 180}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_haoyou.png
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 26
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 52, y: 214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_shijie.png
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 180
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 58, y: 60}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_xiaoxi.png
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 222
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 60, y: 18}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_chat_xitong.png
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 146
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 58, y: 94}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_copper.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 134
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 21, y: 103}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 0}
+        - {x: 1, y: -8}
+        - {x: 1, y: -34}
+        - {x: 3, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: 0}
+    - name: ui_hyper_emoji_01_1.tga
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 112
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 58, y: 128}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -27}
+        - {x: 1, y: -32}
+        - {x: 32, y: -32}
+        - {x: 32, y: 0}
+    - name: ui_hyper_emoji_01_2.tga
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 78
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 86, y: 162}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -27}
+        - {x: 1, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -27}
+        - {x: 32, y: 0}
+    - name: ui_hyper_emoji_02_1.tga
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 44
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 86, y: 196}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -31}
+        - {x: 1, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -30}
+        - {x: 32, y: 0}
+    - name: ui_hyper_emoji_02_2.tga
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 10
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 86, y: 230}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -31}
+        - {x: 1, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -30}
+        - {x: 32, y: 0}
+    - name: ui_hyper_emoji_03_1.tga
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 188
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 92, y: 52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -31}
+        - {x: 1, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -31}
+        - {x: 32, y: 0}
+    - name: ui_hyper_emoji_03_2.tga
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 222
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 94, y: 18}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 31, y: -32}
+        - {x: 32, y: -31}
+        - {x: 32, y: 0}
+    - name: ui_hyper_exp.png
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 60
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 119, y: 181}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_money_01.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 214
+        width: 40
+        height: 40
+      alignment: 1
+      pivot: {x: 22, y: 22}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: 0}
+        - {x: 6, y: 0}
+        - {x: 0, y: -7}
+        - {x: 0, y: -33}
+        - {x: 8, y: -40}
+        - {x: 39, y: -40}
+        - {x: 40, y: -36}
+        - {x: 40, y: -5}
+        - {x: 35, y: -1}
+    - name: ui_hyper_money_02.png
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 28
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 119, y: 213}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_money_03.png
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 224
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 159, y: 17}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_hyper_note.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 94
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 21, y: 143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 0}
+        - {x: 0, y: -4}
+        - {x: 0, y: -20}
+        - {x: 7, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: -2}
+        - {x: 35, y: 0}
+    - name: ui_hyper_petexp.png
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 224
+        width: 30
+        height: 30
+      alignment: 1
+      pivot: {x: 191, y: 17}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

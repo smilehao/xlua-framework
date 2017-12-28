@@ -1,0 +1,8 @@
+package db;
+
+message SaveResponse
+{
+	optional string last_response_bin = 1[default = ''];
+	optional int32 request_seq = 2[default = 0];
+	optional int32 msg_id = 3[default = 0];
+}

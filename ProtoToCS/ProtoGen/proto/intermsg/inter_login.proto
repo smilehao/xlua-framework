@@ -1,0 +1,20 @@
+package inter_login;
+
+message req_first_login
+{
+  optional string plat_id      = 5[default =''];
+  optional int32  region_id    = 1[default =0];
+  optional int32  time         = 3[default =0];
+  optional string ip           = 4[default =''];
+  optional string md5_verify   = 6[default =''];
+}
+
+message rsp_first_login
+{
+  optional int32  result =1[default = 0];
+  optional int32  uid =2[default = 0];
+  optional int32  is_new =3[default =0];        //0 不是 1是
+  optional string gatesvr_ip = 4[default = ''];
+  optional int32  gatesvr_port = 5[default =0];
+  optional bytes  token       = 6[default =''];
+}

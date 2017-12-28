@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: 266bcb311abf5a5418c87a075c4cbd80
+timeCreated: 1447816645
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: login2-01.png
+    21300002: login2-05.png
+    21300004: login2-06.png
+    21300006: login2-08.png
+    21300008: login2-10.png
+    21300010: login2-11.png
+    21300012: ui_comm_217_187-241.png
+    21300014: login2_01.png
+    21300016: login2_05.png
+    21300018: login2_06.png
+    21300020: login2_08.png
+    21300022: login2_10.png
+    21300024: login2_11.png
+    21300026: ui_comm_217_187_241.png
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 512
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: login2_01.png
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 172
+        width: 280
+        height: 82
+      alignment: 1
+      pivot: {x: 331, y: 43}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 1, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -82}
+        - {x: 280, y: -82}
+        - {x: 280, y: -1}
+        - {x: 279, y: 0}
+      - - {x: 17, y: -17}
+        - {x: 263, y: -17}
+        - {x: 263, y: -65}
+        - {x: 17, y: -65}
+    - name: login2_05.png
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 231
+        width: 22
+        height: 23
+      alignment: 1
+      pivot: {x: 484, y: 13.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: login2_06.png
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 206
+        width: 22
+        height: 23
+      alignment: 1
+      pivot: {x: 484, y: 38.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: login2_08.png
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 98
+        width: 271
+        height: 72
+      alignment: 1
+      pivot: {x: 326.5, y: 122}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 271, y: -72}
+        - {x: 271, y: 0}
+    - name: login2_10.png
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 181
+        width: 22
+        height: 23
+      alignment: 1
+      pivot: {x: 484, y: 63.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: login2_11.png
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 156
+        width: 22
+        height: 23
+      alignment: 1
+      pivot: {x: 484, y: 88.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_217_187_241.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 13
+        width: 187
+        height: 241
+      alignment: 1
+      pivot: {x: 95.5, y: 122.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -240}
+        - {x: 1, y: -241}
+        - {x: 183, y: -241}
+        - {x: 187, y: -238}
+        - {x: 187, y: 0}
+      - - {x: 11, y: -12}
+        - {x: 41, y: -13}
+        - {x: 110, y: -22}
+        - {x: 174, y: -12}
+        - {x: 174, y: -144}
+        - {x: 11, y: -144}
+      - - {x: 112, y: -26}
+        - {x: 115, y: -25}
+        - {x: 115, y: -22}
+        - {x: 112, y: -21}
+        - {x: 110, y: -23}
+      - - {x: 42, y: -16}
+        - {x: 47, y: -23}
+        - {x: 50, y: -22}
+        - {x: 50, y: -19}
+        - {x: 45, y: -13}
+        - {x: 43, y: -13}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,8 @@
+message PBMsgHead {
+    optional int32 version = 1;
+    optional int32 time = 2;
+    optional int32 msgact = 3;
+    optional int32 msgtype = 4;
+    optional int32 msgid = 5;
+    optional int32 msgret = 6 [default = 0]; // 默认成功值是0
+}

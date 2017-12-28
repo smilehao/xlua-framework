@@ -1,0 +1,72 @@
+package client_common;
+
+message one_mapnode_data
+{
+	optional int32 key = 1[default = 0];
+	optional uint32 owner_UID = 3[default = 0];
+	optional int32 res_id = 4[default = 0];
+	optional int32 attach_res_id = 5[default = 0];
+	optional int32 attach_res_level = 6[default = 1];
+}
+
+message one_treasure_box
+{
+	optional int32 key = 1[default = 0];
+	optional int32 res_id = 4[default = 0];
+}
+
+message one_map
+{
+	optional int32 map_id = 1[default = 0];
+	optional int32 width = 2[default = 0];
+	optional int32 height = 3[default = 0];
+	repeated one_mapnode_data node_list = 4;
+	repeated one_treasure_box treasure_list = 5;
+}
+
+message one_player
+{
+	optional uint32 UID = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32 camp = 3[default = 0];
+	repeated int32 card_list = 4;
+	optional int32 coin = 5[default = 200];
+	optional int32 race = 6[default = 0];
+	repeated int32  technology_list = 7;
+	optional int32  init_technology_id = 8[default = 0];
+	optional int32 bornpos = 9[default = 0];  // 在地图上的出生点位
+	optional int32 robot_config_id = 10[default = 0]; //机器人配置id
+}
+
+message ntf_battle_status
+{
+	optional int32 battle_status = 1[default = 0];		//1：开始
+	optional int32 battle_mode = 2[default = 0];
+	optional int32 joiner_count = 3[default = 0];
+	optional uint32 random_seed = 4[default = 34751];
+	optional int32 server_frame_delta = 5[default = 33];
+	optional int32 battle_during_ms = 6[default = 900000];
+	optional int64 battle_id = 7[default = 1];
+	optional one_map map_data = 10;
+	repeated one_player player_list = 11;
+}
+
+message one_rank_entry
+{
+	optional int32 rank = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32 icon = 3[default = 0];
+	optional int32 grade = 4[default = 0];
+	optional int32 score = 5[default = 0];
+	optional uint32 UID = 6[default = 0];
+}
+
+message match_player
+{
+	optional int32 uid = 1[default = 0];
+	optional string name = 2[default = '']; 
+	optional int32 country = 3[default = 0];
+	optional int32 icon = 4[default = 0];
+	optional int32 race = 5[default = 0];
+	optional int32 race_level = 6[default = 0];
+}

@@ -1,0 +1,36 @@
+id`sName`sIcon`hoverIcon`sAtlas`position`sortId`sysId`effectName`btnName
+1`领地`zjm (14)``mainAtlas`0`1`1``
+2`武将`zjm (13)``mainAtlas`0`2`2``
+3`建设`zjm (12)``mainAtlas`0`3`3``
+4`生产`zjm (9)``mainAtlas`0`4`4``
+5`背包`zjm (11)``mainAtlas`0`5`5``
+6`布阵`zjm (10)``mainAtlas`0`6`6``
+7`排行`zjm (2)``mainAtlas`1`7`7``
+8`演武`zjm (5)``mainAtlas`1`8`8``
+9`家族`zjm (4)``mainAtlas`1`9`9``
+10`附属`zjm (3)``mainAtlas`1`10`10``
+11`训练`zjm (6)``mainAtlas`1`11`11``
+12`修行`zjm (8)``mainAtlas`1`12`12``
+13`集市`zjm (7)``mainAtlas`2`45`13``
+14`福利`zjm (1)``mainAtlas`3`14`14`ui_fuli_icon_loop`
+19`任务`zjm (16)``mainAtlas`4`20`19``
+20`日常`zjm (24)``mainAtlas`4`26`20``
+22`活动`zjm (21)``mainAtlas`3`22`22`ui_huodong_icon_loop`
+23`月卡`zjm (15)``mainAtlas`6`23`23``
+24`平匪`shanzei``mainAtlas`3`24`24`ui_jiaofei_icon_loop`
+26`充值`zjm (17)``mainAtlas`4`19`26``
+27`游商`zjm (27)``mainAtlas`2`44`27``
+32`七天`zjm (30)``mainAtlas`6`32`32`ui_7day_icon_loop`
+33`首充`zjm (31)``mainAtlas`7`33`33`ui_sc_icon_loop`
+34`闯关`zhanjiang``mainAtlas`2`27`34``
+35`俘虏`juntuan``mainAtlas`3`35`35``
+36`小秘`xiaomishu``uiCommonAtlas`4`36`36``
+38`国战`guozhan``mainAtlas`5`38`38``
+39`乱斗`luandou``mainAtlas`5`39`39``
+40`资源`cunluotubiao``mainAtlas`2`0`40``
+43`七天`zjm (30)``mainAtlas`6`32`43`ui_7day_icon_loop`
+44`征战`zhengzhan``mainAtlas`2`27`44``
+42`战役`zhanyitubiao``FontImage`2`42`42``
+45`屠龙`worldBoss``uiCommon2Atlas`2`13`45``
+46`好友`haoyoutubiao``mainAtlas`8`0`46``
+47`绑定`bd``uiCommonAtlas`7`46`47``

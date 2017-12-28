@@ -1,0 +1,75 @@
+package common;
+
+
+message test4
+{
+	optional int32 f = 1[default = 0];
+	optional string ccc = 2[default = 'asdasdasd'];
+	optional string cmd_data = 3[default = ""];
+}
+
+message test3
+{
+	optional int32 d = 1[default = 0];
+	optional test4 cc = 2;
+}
+
+
+message user_one_level_exp
+{
+	optional int32 race = 1[default = 0];
+	optional int32 level = 2[default = 1];
+	optional int32 exp = 3[default = 0];
+}
+
+message user_level_record
+{
+	repeated user_one_level_exp level_list = 1;
+}
+
+
+message player_one_card_info
+{
+	optional int32 card_id = 1[default = 0];
+}
+
+message player_card_group
+{
+	optional int32 group_id = 1[default = 0];
+	optional int32 race = 2[default=1];   //1 common 2 airen 3 shouren 4 jingling 5 renlei
+	repeated int32 card_list = 3;  
+	optional string group_name = 4[default=''];
+	optional int32 init_technology_type = 5[default = 0];   //初始科技的type
+}
+
+message player_technology_info
+{
+	optional int32  id = 1[default = 0];
+	optional int32  count = 2[default = 0];
+}
+
+message client_info
+{
+	//用户相关///////////////////////////////
+	optional string user_name = 7[default = ''];
+	optional int32 use_icon = 8[default = 0];	//正在使用的头像
+
+	//货币类
+	optional int32 yuanbao = 21[default = 0];	//元宝
+	
+	optional int32 guild_id = 30[default = 0];	//军团id
+
+	optional int32 guide_new_step = 39[default = 0];	//新手指引
+
+	optional user_level_record level_info = 46;
+	
+	
+	//card 相关///////////////////////////////////
+	repeated player_one_card_info card_list = 201;             //拥有的卡牌信息
+	 
+	repeated player_card_group card_group_list = 202;          //卡组信息
+	
+	optional int32 last_game_card_group_id = 203[default =0];              //上次战斗卡组id
+	
+	repeated player_technology_info technology_list = 301;         //科技背包信息
+}

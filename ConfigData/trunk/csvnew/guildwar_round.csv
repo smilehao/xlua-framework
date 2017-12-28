@@ -1,0 +1,5 @@
+id`name`open_date`open_time`start_time`ready_time`fight_time`next_time`winner_award_id1`winner_award_count1`winner_award_id2`winner_award_count2`winner_award_id3`winner_award_count3`loser_award_id1`loser_award_count1`loser_award_id2`loser_award_count2`loser_award_id3`loser_award_count3`win_show`sAtlas`sIcon
+1`16进8`2`0`0`1`2`15`30102`100`30110`25`````````我们成功晋级八强`mainAtlas`33205
+2`8进4```19`1`2`15`30102`200`30110`50`33208`5`30102`100`30110`25``5``mainAtlas`33206
+3`4进2```43`1`2`15`30102`400`30110`100`33208`5````````mainAtlas`33207
+4`冠军争夺```67`1`2`15`30102`600`30110`200`33208`5````````mainAtlas`33208

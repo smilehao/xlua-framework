@@ -1,0 +1,43 @@
+package db;
+
+//一个附件，暂时就当成是道具好了
+message one_attach
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+
+message one_mail
+{
+	optional int32 mail_seq = 1[default = 1];	
+	optional int32 mail_id = 2[default = 0];	//邮件ID
+	optional int32 send_time = 3[default = 0];
+	optional int32 read_time = 6[default = 1];	//是否已读,0未读，1为已经读的时间
+	optional int32 is_plat = 7[default = 0];	//是否是平台邮件
+	repeated one_attach attach_list = 8;	//附件列表
+	optional int32 param1 = 10[default = 0];	//预留两
+	optional int32 param2 = 11[default = 0];
+	optional string str_p1 = 12[default = ''];
+	optional string str_p2 = 13[default = ''];
+}
+
+message one_platmail
+{
+	optional int32 mail_id = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+}
+
+message Mail
+{
+	optional int32 mail_seq = 1[default = 1];
+	repeated one_mail mail_list = 2;
+	repeated one_platmail deal_platmail_list = 3;	//已经处理过的邮件列表
+	optional int32 last_mail_time = 8[default = 0];	//最后一次邮件的时间
+
+	message external_mail_info
+	{
+		optional int32 mail_id = 1[default = 0];
+		repeated one_attach attach_list = 2;
+	}
+	repeated external_mail_info external_mail_list = 10;	//外部邮件
+}

@@ -1,0 +1,46 @@
+--------------------------------------------------------------------------------
+--      Copyright (c) 2015 - 2016 , 蒙占志(topameng) topameng@gmail.com
+--      All rights reserved.
+--      Use, modification and distribution are subject to the "MIT License"
+--------------------------------------------------------------------------------
+
+--[[
+local aaa = CS.UnityEngine.GameObject("fuck")
+print(type(aaa))
+print(CS.UnityEngine.GameObject.IsNull)
+print(aaa.IsNull)
+print(getmetatable(CS.UnityEngine))
+print("----------")
+for i,v in pairs(getmetatable(CS.UnityEngine)) do print(i, v) end
+print("----------")
+print(CS.UnityEngine.Component)
+for i,v in pairs(CS.UnityEngine.Component) do print(i, type(i), v, type(v)) end
+for i,v in pairs(getmetatable(CS.UnityEngine.Component)) do print(i, v) end
+--]]
+
+-- add by wsh @ 2017-12-27
+-- 1、Unity侧部分功能的Lua代码实现用来降低与cs代码的交互来提供性能
+-- 2、这里的模块在游戏逻辑跑之前开始启动，雷同Unity中的Plugin下脚本
+
+require "Common.Tools.import"
+
+Mathf		= require "Common.Tools.UnityEngine.Mathf"
+Vector2		= require "Common.Tools.UnityEngine.Vector2"
+Vector3 	= require "Common.Tools.UnityEngine.Vector3"
+Vector4		= require "Common.Tools.UnityEngine.Vector4"
+Quaternion	= require "Common.Tools.UnityEngine.Quaternion"
+Color		= require "Common.Tools.UnityEngine.Color"
+Ray			= require "Common.Tools.UnityEngine.Ray"
+Bounds		= require "Common.Tools.UnityEngine.Bounds"
+RaycastHit	= require "Common.Tools.UnityEngine.RaycastHit"
+Touch		= require "Common.Tools.UnityEngine.Touch"
+LayerMask	= require "Common.Tools.UnityEngine.LayerMask"
+Plane		= require "Common.Tools.UnityEngine.Plane"
+Time		= reimport "Common.Tools.UnityEngine.Time"
+Object		= reimport "Common.Tools.UnityEngine.Object"
+
+list		= require "Common.Tools.list"
+
+require "Common.Tools.event"
+require "Common.Tools.System.ValueType"
+require "Common.Tools.System.Reflection.BindingFlags"

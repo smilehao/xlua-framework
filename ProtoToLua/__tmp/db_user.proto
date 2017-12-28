@@ -1,0 +1,65 @@
+package db;
+
+message charged_record
+{
+	repeated int32 goods_id_list = 1;
+	optional int32 last_charge_time = 2[default = 0];	//最后一次充值时间
+}
+
+message one_level_exp
+{
+	optional int32 race = 1[default = 0];
+	optional int32 level = 2[default = 1];
+	optional int32 exp = 3[default = 0];
+}
+
+message level_record
+{
+	repeated one_level_exp level_list = 1;
+}
+
+message User
+{
+	optional uint32 uid = 1[default = 0];
+	optional string user_name = 2[default = ''];
+	optional int32 use_icon = 3[default = 0];	//正在使用的头像
+	//optional int32 sex = 4[default = 0];		//性别
+	//optional int32 level = 5[default = 0];		//玩家等级
+	//optional int32 exp = 6[default = 0];		//经验
+	optional int32 last_login_time = 7[default = 0];
+	optional int32 last_logout_time = 8[default = 0];//最后下线的时间
+	optional int32 last_crossday_time = 9[default = 0];	//最后一次跨天的时间
+	optional int32 vip_level = 10[default = 0];	//玩家的VIP等级
+	optional int32 pay_total = 11[default =0];	//总的付费元宝数
+	//optional int32 exp_time = 12[default = 0];	//增加经验的时间，用于排行的
+	optional int32 platform_id = 13[default = 0];	//玩家对应的平台id
+	optional int32 vip_exp = 14[default = 0];
+
+	//货币类
+	optional int32 game_money = 15[default = 0];		//银两
+	optional int32 yuanbao = 16[default = 0];	//元宝
+	optional int32 charge_total = 17[default =0];	//总的充值元宝数
+	
+	//optional int32 handled_offline_seq = 18[default = 0];	//离线事件上次处理的序号
+	//optional int32 created_offline_seq = 19[default = 0];	//离线事件上次生成的序号
+
+	optional int32 guild_id = 30[default = 0];	//军团id
+	optional int32 create_time = 31[default = 0];	//用户的创建时间
+
+	//日常标记，可用于做一日常记录,第0个bit是中午吃饭,第1个bit是晚上吃饭
+	//optional uint32 daily_flag = 32[default = 0];
+
+	////月卡相关
+	optional uint32 guide_new_step = 39[default = 0];	//新手指引
+	optional string account = 44[default = ''];
+
+	optional charged_record charged_record_info = 45;
+	
+	optional level_record level_info = 46;
+	
+	optional int32 mmr = 51[default = 0];
+	optional int32 grade = 52[default = 1];
+	optional int32 score = 53[default = 0];
+	optional int32 win_count = 54[default =0];  //胜负场次  负数表示输多少场
+	optional int32 country = 55[default = 0];	
+}

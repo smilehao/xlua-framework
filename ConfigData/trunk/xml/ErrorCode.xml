@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--提示语-->
+<labes>
+<label id="5">元宝不足</label>
+<label id="12">铜钱不足</label> 
+<label id="11">异常错误</label>
+<label id="1">登录失败，请重试</label>
+<label id="2">异地登录</label>
+<label id="3">体力不足</label>
+<label id="4">材料不足</label>
+<label id="6">已经满级</label>
+<label id="7">领地等级不足</label>
+<label id="8">正在升级中</label>
+<label id="9">建筑等级不足</label>
+<label id="10">数量太多</label>
+<label id="13">人口不足</label>
+<label id="14">正在建造中</label>
+<label id="15">复活丹不足</label>
+<label id="17">战斗异常</label>
+<label id="47">现在不是吃饭时间</label>
+<label id="48">您已经吃过饭了</label>
+<label id="50">抱歉，您的月卡已过期</label>
+<label id="51">今天已经领过了哦</label>
+<label id="54">你已经有家族了</label>
+<label id="55">家族名字重复</label>
+<label id="56">家族不存在</label>
+<label id="57">你的领地等级小于该家族要求的最低等级</label>
+<label id="58">只有族长才可以修改职务名字</label>
+<label id="59">职务名称不可超过6个汉字长度</label>
+<label id="60">只有族长才可以任职</label>
+<label id="61">只有族长才可以设置</label>
+<label id="62">公告长度不得超过200字</label>
+<label id="63">已经是这个职务了</label>
+<label id="64">职务错误</label>
+<label id="65">这个职务已经满人啦</label>
+<label id="66">权限不足</label>
+<label id="67">已经有家族了</label>
+<label id="68">该家族不允许任何人加入</label>
+<label id="69">该家族人数已满，请换一个试试</label>
+<label id="70">你已经向8个家族提交了申请，请耐心等待批准</label>
+<label id="71">该玩家已经加入其他军团</label>
+<label id="72">这条消息已经处理过了</label>
+<label id="73">你的家族已经满人啦</label>
+<label id="74">7天内最多能加入3次军团</label>
+<label id="75">退出家族后的6小时内，无法再次加入任意家族</label>
+<label id="76">退出家族后的6小时内，无法再次加入原家族</label>
+<label id="77">必须先转让团长后才能退出军团</label>
+<label id="78">只有族长才能让位</label>
+<label id="79">退出家族后的6小时内，无法创建新家族</label>
+<label id="80">今天购买体力次数已满。提升VIP等级可购买更多次数</label>
+<label id="81">已经有名字了</label>
+<label id="82">体力已经到达极限了</label>
+<label id="83">名字已经存在了</label>
+<label id="85">名字太长</label>
+<label id="86">内容含有敏感词</label>
+<label id="87">号码不能为空</label>
+<label id="130">等级不足以使用该功能</label>
+<label id="141">一次性使用的礼包太太太太太太太太多啦</label>
+<label id="142">一次性使用的礼包太多啦</label>
+
+<!--新手领地任务-->
+<label id="88">条件未达成，奖励不可领</label>
+<label id="89">已经领取</label>
+<label id="90">当前任务不存在</label>
+
+<!--武将 士兵 布阵-->
+<label id="101">武将不存在</label>
+<label id="102">兵种不匹配</label>
+<label id="103">超过出兵上限</label>
+<label id="104">武将已经不属于你</label>
+<label id="105">还不到可以赎回的时间</label>
+<label id="106">武将已经阵亡</label>
+<label id="107">您的部队没有配备士兵！无法出战</label>
+<label id="108">该武将已经出征</label>
+<label id="109">该部队已经出征</label>
+<label id="110">该布阵已经出征</label>
+<label id="111">已达修行上限，请升级修行馆</label>
+<label id="112">该武将已达修行上限</label>
+<label id="113">已达训练上限，请升级训练营</label>
+<label id="114">兵种已满级</label>
+<label id="115">武将已经存在</label>
+<label id="116">布阵不存在</label>
+<label id="117">武将已满级</label>
+<label id="118">超出武将最高级别</label>
+<label id="120">未达到常规阵容数量，不能开启新阵容</label>
+<label id="121">不能开启该阵容</label>
+<label id="122">没有可开启阵容</label>
+<label id="123">vip等级不够，不能开启</label>
+
+<label id="143">没有对应阵容，交换失败</label>
+<label id="144">出战部队不需要交换</label>
+<label id="145">没有对应部队,交换失败</label>
+<label id="146">勾玉不足</label>
+<label id="147">信物不足</label>
+<label id="148">神兵已经满级</label>
+<label id="149">尚未获得对应武将</label>
+<label id="177">已经装备神兵</label>
+<label id="178">尚未获得该神兵</label>
+<label id="179">没有可用的宝物</label>
+<label id="180">只能选择稀有度等级更高的宝物</label>
+<label id="181">武将没有治理技能，不能装备</label>
+
+<!--俘虏武将-->
+<label id="1201">您已经交过赎金了</label>
+<label id="1202">对方已经要求赎金了</label>
+<label id="1203">您已经要求过赎金了</label>
+<label id="1204">对方已经交付赎金了</label>
+<label id="1205">对方还未同意你赎回</label>
+<label id="1206">你已交过赎金了，请等待对方同意</label>
+
+<!-- 抢夺 -->
+<label id="150">对方信息发生了变化</label>
+<label id="151">找不到可掠夺的领地</label>
+<label id="152">有土匪，不能征收</label>
+<label id="153">没有可征收的资源</label>
+<label id="154">征收冷却中</label>
+<label id="155">您还没有附属呐，先去别处逛逛去</label>
+<label id="156">战斗至少需要出战一个部队</label>
+<label id="157">哎呀！对方领主在线，不宜偷袭！</label>
+<label id="158">领地等级不匹配</label>
+<label id="159">目标处于保护时间内</label>
+<label id="160">附属的土匪不见了</label>
+<label id="161">平匪扫荡需要平匪令，平匪令数量不足</label>
+<label id="162">不能对自己发起攻击</label>
+<label id="163">只有失败方才能复仇</label>
+<label id="164">只有非复仇及援助战斗才能复仇</label>
+<label id="165">已经复仇成功，不可再次复仇</label>
+<label id="166">已有人帮忙复仇，不可再次复仇</label>
+<label id="167">只有失败方才能求助</label>
+<label id="168">只有非复仇及援助战斗才能求助</label>
+<label id="169">不可多次求助</label>
+<label id="170">已复仇成功，不要再次帮助复仇了</label>
+<label id="171">已有人帮助复仇成功，不要再次帮助复仇了</label>
+<label id="172">目标被援助次数太多了</label>
+<label id="173">对方已经成为别人的附属</label>
+<label id="174">对方是自己的领主</label>
+<label id="175">对方是自己家族的人</label>
+<label id="176">没有强攻令</label>
+
+<!-- 建筑 -->
+<label id="201">超过部署上限</label>
+
+<!-- 通用协议 -->
+<label id="203">请求处理超时，请重新尝试</label>
+
+<!-- 黑名单 -->
+<label id="421">已经在黑名单中</label>
+<label id="422">黑名单满了</label>
+
+<!-- 聊天 -->
+<label id="305">等级低不能聊天</label>
+<label id="440">发言太快</label>
+<label id="714">离线消息条数已达上限</label>
+<label id="749">私聊玩家名字不合法</label>
+<label id="750">没有使用该名字的玩家</label>
+
+<!-- 商店 -->
+<label id="401">刷新次数已达上限</label>
+<label id="402">已售馨不可购买</label>
+<label id="403">演武勋章不足</label>
+<label id="404">家族勋章不足</label>
+<label id="405">购买次数已用完，请重置购买</label>
+<label id="406">商店已经关闭</label>
+
+<!-- 演武场 -->
+<label id="430">今日演武次数已用完</label>
+<label id="501">已经开过该宝箱</label>
+<label id="502">未达到开宝箱条件</label>
+
+<!-- 家族 -->
+<label id="443">名字相同</label>
+<label id="601">您有探索奖待领</label>
+<label id="602">您已经在探索队列中了</label>
+<label id="603">探索队列已满员了</label>
+<label id="604">没有武将在探索中</label>
+<label id="605">没有探索奖励可领</label>
+<label id="606">探索队伍已经出发了</label>
+<label id="607">重新加入一个家族72小时之内不可参与家族战</label>
+<label id="608">重新加入一个家族24小时之内不可参与Boss战</label>
+<label id="609">重新加入一个家族72小时之内不可参与国战</label>
+<label id="610">军团只有军团长的时候，军团长无法退出</label>
+<label id="611">没有探索队伍</label>
+<label id="612">正处于国战战斗中，操作无效</label>
+<label id="613">正处于家族战战斗中，操作无效</label>
+<label id="924">今天不能再逐出成员</label>
+
+<!-- 礼包码 -->
+<label id="700">你已经领过这种奖励了</label>
+<label id="701">您输入的兑换码无效</label>
+<label id="702">您输入的兑换码已经过期了</label>
+<label id="703">您输入的兑换码已经被使用过了</label>
+<label id="704">兑换失败,请联系游戏客服</label>
+<label id="705">未到领取时间</label>
+
+<!-- 家族boss -->
+<label id="441">尚未有家族</label>
+<label id="451">有人正在打家族boss</label>
+<label id="452">当前家族boss不能打</label>
+<label id="453">今日攻打家族boss次数已用完</label>
+<label id="459">家族boss未开启</label>
+<label id="460">在新家族只能挑战旧家族未挑战过的Boss</label>
+<label id="461">您还没有击败本周所有BOSS</label>
+<label id="462">BOSS已经重置过了</label>
+<label id="463">您已经捐献过了</label>
+<label id="464">您已经在别的家族捐献过了</label>
+
+<!-- 家族战 -->
+<label id="801">当前家族战活动未开始</label>
+<label id="802">当前时间不可报名，家族战的报名时间为19点到20点</label>
+<label id="803">您的家族没有参与本轮家族战</label>
+<label id="804">您已经参战</label>
+<label id="805">当前阵营已满员</label>
+<label id="806">家族战没有开战中</label>
+<label id="807">当前没有家族战</label>
+<label id="808">已经有阵容参加家族战了</label>
+<label id="809">没有处于家族战中</label>
+<label id="810">已经复活过了</label>
+<label id="811">家族战胜负已分</label>
+<label id="812">您不能报名了</label>
+
+<!-- 国战 -->
+<label id="821">已达到宣战上限</label>
+<label id="822">已宣战</label>
+<label id="823">已占领</label>
+<label id="824">地块不存在</label>
+<label id="825">当前国战未开始</label>
+<label id="826">本服世界等级太低</label>
+<label id="827">您的领地等级太低</label>
+<label id="828">当前不是宣战阶段</label>
+<label id="829">您没有家族</label>
+<label id="830">您已经出兵</label>
+<label id="831">您没有空闲阵容</label>
+<label id="832">您今天不能领取Buff</label>
+<label id="833">不能直接进攻敌方腹地</label>
+<label id="834">家族活跃度到达2级才能宣战</label>
+<label id="835">剩余捐献次数不足</label>
+<label id="836">地块已达最高等级</label>
+<label id="837">资源不足</label>
+<label id="838">食物不足</label>
+<label id="839">您的出兵已达上限</label>
+<label id="840">当前没有季报</label>
+<label id="841">您有部队没有配备士兵！无法出战</label>
+<label id="842">领地至少留守一个阵容</label>
+<label id="843">水路距离太远！</label>
+
+<!-- 运营活动 -->
+<label id="900">不在活动期间</label>
+<label id="901">条件未达成</label>
+<label id="902">你已经领过这个活动奖励啦</label>
+<label id="903">该活动不存在</label>
+<label id="904">你已经没有购买次数了</label>
+<label id="905">VIP等级不足，无法购买</label>
+<label id="906">你已经购买过基金了</label>
+<label id="907">不在领取时间</label>
+<label id="908">抽奖次数用完，不能再抽</label>
+<label id="909">宝箱不存在</label>
+<label id="910">宝箱已领取</label>
+<label id="911">虎符不够</label>
+<label id="912">宝箱未到开启时间</label>
+
+<label id="933">VIP等级不足！</label>
+<label id="1000">该功能暂时关闭</label>
+
+<label id="1001">对方好友已满</label>
+<label id="1002">您在对方的黑名单中，不能申请对方为好友</label>
+<label id="1003">已经申请对方为好友了，不能重复申请</label>
+<label id="1004">您的好友列表已满，不能添加对方为好友</label>
+<label id="1005">对方的好友列表已满</label>
+<label id="1006">您的黑名单已满</label>
+<label id="1007">对方已关闭好友申请！</label>
+<label id="1008">不能添加自己为好友！</label>
+<label id="1009">你们已经是好友了！</label>
+<label id="1010">对方在你的黑名单中，不能添加对方</label>
+<label id="1011">好友关系发生变化，此次操作无效！</label>
+<label id="1012">对方不是您的好友</label>
+<label id="1013">对方没有给您赠送体力</label>
+<label id="1014">当前体力状态不可领取</label>
+<label id="1015">没有那个用户</label>
+<label id="1016">今天的赠送体力次数已用完</label>
+<label id="1017">今日已经没有获取体力次数了</label>
+<label id="1018">对方不在你的好友申请列表内</label>
+<label id="1019">没有可赠与体力的朋友了</label>
+<label id="1020">没有可收取的体力</label>
+<label id="1021">您当前没有好友申请</label>
+<label id="1022">您当前没有好友申请</label>
+<label id="1023">您当前没有好友，可以去‘推荐好友’添加好友</label>
+<label id="1024">您的等级还不能添加好友</label>
+<label id="1025">对方的等级还不能添加好友</label>
+
+
+
+<!-- 过关斩将 -->
+<label id="1101">战力不足</label>
+<label id="1102">已经挑战过了</label>
+<label id="1103">挑战目标不存在</label>
+<label id="1104">未达到开宝箱条件</label>
+<label id="1105">已经开过该宝箱</label>
+
+<!-- 大乱斗 -->
+<label id="1301">领地等级太低，不予开放</label>
+<label id="1302">今日匹配次数已用完</label>
+<label id="1303">不满足领取条件</label>
+<label id="1304">奖励已领取</label>
+<label id="1305">已经开过该宝箱</label>
+<label id="1306">世界等级太低，不予开放</label>
+<label id="1307">您还有奖励未领取</label>
+<label id="1311">乱斗未开启</label>
+<label id="1312">已报名</label>
+
+<!--村落-->
+<label id='1401'>领地等级太低，不予开放</label>
+<label id='1402'>有人正在攻打，请稍后再来</label>
+<label id='1403'>领地等级不符合，不能攻打</label>
+<label id='1404'>处于保护时间内，不能攻打</label>
+<label id='1405'>占领次数已达上限，不能攻打</label>
+<label id='1406'>不能攻打自己</label>
+<label id='1407'>刷新次数已达上限</label>
+
+<!-- 战役 -->
+<label id="1501">没有可扫荡的传记</label>
+<label id="1502">关卡无效</label>
+<label id="1503">不能查看此关卡阵容</label>
+<label id="1504">无人通过此关卡，没有首推阵容</label>
+<label id="1505">不能攻打此关卡</label>
+<label id="1506">战斗序号错误</label>
+<label id="1507">武将国别不符合</label>
+
+<!-- 世界boss -->
+<label id="1601">不在开启时间</label>
+<label id="1602">没有可出战的阵容</label>
+<label id="1603">神龙已被击杀</label>
+<label id="1604">入侵者已被击杀</label>
+<label id="1605">本服未开启</label>
+<label id="1606">请求服务器未开启</label>
+<label id="1607">未开启</label>
+<label id="1608">不能挑战，要先驱逐本服的入侵者</label>
+<label id="1609">不能攻击，该入侵者是本服的</label>
+<label id="1610">不能攻击，已被杀死</label>
+
+</labes>

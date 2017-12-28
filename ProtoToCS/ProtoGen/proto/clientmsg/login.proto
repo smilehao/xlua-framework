@@ -1,0 +1,95 @@
+package login;
+
+import 'client_common.proto';
+
+message req_login
+{
+	optional int32 flag = 1[default = 0];
+}
+
+//通知玩家退出
+message ntf_logout
+{
+	optional int32 reason = 1[default = 0];	//0表示异地登录
+}
+
+message req_join_match 
+{
+	optional int32 battle_type = 1[default = 0];      //  1  3v3   4 1v1   5 天梯	
+	optional int32 card_group_id = 2[default = 0];
+	optional int32 race = 3[default = 0];	
+	repeated int32 card_list = 4;
+	optional int32 join_team = 5[default = 0]; //测试用队伍设置  0随机匹配  1 队伍1  2 队伍2 
+}
+
+message rsp_join_match
+{
+	optional int32 result = 1[default = 0];
+	optional client_common.match_player player = 2;
+	optional int32 battle_type = 3[default =0];  //  1  3v3   4 1v1   5 天梯	
+}
+
+message ntf_join_match_mateinfo
+{
+	optional int32 result = 1[default = 0];
+	repeated client_common.match_player mate_list = 2;
+}
+
+message ntf_join_match_result
+{
+	optional int32 result = 1[default = 0];
+	optional int32 battle_svr_id = 2[default = 0];
+	optional int64 battle_id = 3[default = 0];
+	optional int32 to_battle_trans_1 = 4[default = 0];
+	optional int32 to_battle_trans_2 = 5[default = 0];
+	repeated client_common.match_player mate_list = 6;
+	repeated client_common.match_player enemy_list = 7;
+	optional int32 battle_type = 8[default = 0];
+}
+
+message req_cancel_join_match  
+{
+
+}
+
+message rsp_cancel_join_match
+{
+	optional int32 result = 1[default = 0]; 
+}
+
+message req_rank_list
+{}
+
+message rsp_rank_list
+{
+	optional int32 result = 1[default = 0];
+	repeated client_common.one_rank_entry entry_list = 2;
+}
+
+message ntf_get_items
+{
+	optional int32 result =1[default = 0];
+	repeated int32 card_id_list = 2;    //卡片
+	repeated int32 technology_list = 3; //科技
+}
+
+message test_inside_proto
+{
+	optional int32 inside_int =1[default =0];
+	optional string inside_string =2[default =''];
+}
+
+message req_test_proto
+{
+	optional int32 test_int =1[default =0];
+	optional string test_string = 2[default = ''];
+	optional test_inside_proto inside_proto =3;
+}
+
+message rsp_test_proto
+{
+	optional int32 result =1[default = 0];
+	optional int32 test_int = 2[default = 0];
+	optional string test_string = 3[default = ''];
+	optional test_inside_proto inside_proto =4;
+}

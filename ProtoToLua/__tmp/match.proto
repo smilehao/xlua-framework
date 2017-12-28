@@ -1,0 +1,146 @@
+package match;
+
+import 'inter_common.proto';
+
+message ntf_capacity_list
+{
+	optional int32 svr_id = 1[default = 0];			
+	optional int32 battle_type = 2[default = 0];	
+	optional int32 left_room_count = 3[default = 0];	
+}
+
+message req_match	// gamesvr to matchsvr
+{
+	optional int32 battle_type = 1[default = 0];	
+	optional uint32 UID = 2[default = 0];	
+	optional int32 score = 3[default = 0];	
+	optional int32 card_group_id = 4[default = 0];
+	optional int32 race = 5[default = 0];	
+	optional int32 race_level = 6[default =0];
+	repeated int32 card_list = 7;
+	optional int32 is_join = 8[default = 1];
+	optional int32 country = 9[default = 1];
+	optional int32 net_delay = 10[default = 0];
+	optional int32 grade = 11[default = 0];
+	optional int32 mmr = 12[default = 0];
+	optional int32 level = 13[default = 1];
+	optional int32 icon  = 14[default = 1];
+	optional int32 init_technology_id = 15[default = 0];
+	repeated int32 technology_list = 16;
+	optional int32 client_version = 17;
+	optional string name = 18[default = ""];
+	optional int32 join_team = 19[default = 0];
+}
+
+message rsp_match	// matchsvr to gamesvr
+{
+	optional int32 result = 1[default = 0];	
+}
+
+message req_cancel_match
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 battle_type = 2[default = 0];
+	optional int32 request_seq = 3[default = 0];
+}
+
+message rsp_cancel_match
+{
+	optional int32 result = 1[default = 0];
+	optional int32 uid = 2[default =0];
+	optional int32 request_seq = 3[default = 0];
+}
+
+message ntf_match_mate_info
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 uid    = 2[default =0];
+	repeated inter_common.player_info mate_list = 3;
+}
+
+message ntf_match_result	// matchsvr to gamesvr
+{
+	optional int32 result = 1[default = 0];	
+	optional int32 battle_svr_id = 2[default = 0];	
+	optional int64 battle_id = 4[default = 0];	
+	optional uint32 UID = 5[default = 0];
+	repeated inter_common.player_info player_list = 6;
+}
+
+message req_one_room	// matchsvr to battlesvr
+{
+	message OnePlayer
+	{
+		optional uint32 uid = 1[default = 0];	
+		optional int32 race = 2[default = 0];	
+		optional int32 card_group = 3[default = 0];	
+		repeated int32 card_list = 4;
+		optional int32 camp = 5[default = 0];
+		repeated int32  technology_list = 6;
+		optional int32  init_technology_id = 7[default = 0];
+		optional string name = 8[default = ""];
+		optional int32  robot_config_id = 9[default = 0];
+	}
+	optional int64 battle_id = 1[default = 0];	
+	repeated OnePlayer player_list = 2;	
+	optional int32 battle_type = 3[default = 0];
+}
+
+message rsp_one_room	// battlesvr to matchsvr
+{
+	optional int32 result = 1[default = 0];	
+	optional int64 battle_id = 3[default = 0];	
+	optional int32 battle_type = 4[default = 0];
+}
+
+message req_room_group
+{
+	optional int32  group_id = 1[default = 0];
+	optional int32  battle_type = 2[default = 0];
+	repeated inter_common.battle_room   room_list = 3;
+}
+
+message rsp_room_group
+{
+	optional int32 result =1[default = 0];
+	optional int32 group_id    = 2[default = 1];
+	optional int32 battle_type = 3[default = 0];
+	repeated inter_common.room_info info_list = 4;
+}
+
+
+message ntf_battle_position
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 battle_svr_id = 2[default = 0];	
+	optional int64 battle_id = 3[default = 0];
+}
+
+message req_finish_battle
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 uid = 2[default = 0];
+	optional int32 rank = 3[default = 0];
+	optional int64 battle_id = 4[default = 0];
+	optional int32 battle_type = 5[default = 0];
+	optional int32 race = 6[default = 0];
+	optional int32 camp = 7[default = 0];
+	optional int32 mmr  = 8[default = 0];
+}
+
+message rsp_finish_battle
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 uid = 2[default = 0];
+	optional int64 battle_id = 4[default = 0];
+}
+
+message req_rematch_battle
+{
+	repeated req_match req_list = 1;
+}
+
+message rsp_rematch_battle
+{
+	optional int32 result = 1[default = 0];
+}

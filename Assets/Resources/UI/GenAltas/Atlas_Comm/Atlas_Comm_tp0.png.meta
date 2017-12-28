@@ -1,0 +1,1647 @@
+fileFormatVersion: 2
+guid: 29430503fc0954d4da82ff11ddbf8312
+timeCreated: 1449800303
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: arrow_a_32x16.png
+    21300002: arrow_a_32x64.png
+    21300004: bar_a_bg_32x20.png
+    21300006: bar_a_frame_32x20.png
+    21300008: bar_b_bg_58x36.png
+    21300010: bar_b_frame_58x36.png
+    21300012: bar_fill.png
+    21300014: bg_170x170.png
+    21300016: bg_corner_a_31x32.png
+    21300018: bg_line_a_518x14.png
+    21300020: bg_titlebg_a_526x48.png
+    21300022: bg_titlebg_b_593x58.png
+    21300024: bg_titlebg_c_105x39.png
+    21300026: bg_titlebg_d_135x45.png
+    21300028: bg_titlebg_e_235x88.png
+    21300030: bg_titlebg_f_299x46.png
+    21300032: bg_titlebg_g_256x64.png
+    21300034: bg_underlay_a_103x61.png
+    21300036: bg_underlay_a_347x66.png
+    21300038: bg_underlay_b_66x159.png
+    21300040: bg_underlay_c_208x36.png
+    21300042: bg_underlay_d_130x31.png
+    21300044: bg_underlay_e_254x188.png
+    21300046: bg_underlay_f_100x91.png
+    21300048: bg_underlay_g_78x43.png
+    21300050: bg_underlay_h_88x113.png
+    21300052: bg_underlay_i_40x235.png
+    21300054: bg_underlay_j_410x141.png
+    21300056: bg_underlay_k_354x72.png
+    21300058: bg_underlay_l_347x66.png
+    21300060: bg_underlay_m_100x443.png
+    21300062: bg_underlay_n_129x50.png
+    21300064: bg_underlay_o_19x34.png
+    21300066: btn_a_act_134x48.png
+    21300068: btn_a_disable_130x51.png
+    21300070: btn_a_nor134x51.png
+    21300072: btn_b_act_139x47.png
+    21300074: btn_b_choose_139x47.png
+    21300076: btn_b_disable_139x47.png
+    21300078: btn_b_nor_139x47.png
+    21300080: btn_c_act_169x59.png
+    21300082: btn_c_disable_168x59.png
+    21300084: btn_c_nor_169x59.png
+    21300086: btn_close_act_77x77.png
+    21300088: btn_close_act_82x77.png
+    21300090: btn_close_nor_82x44.png
+    21300092: btn_close_nor_82x77.png
+    21300094: btn_d_choose_149x48.png
+    21300096: btn_d_nor_149x48.png
+    21300098: btn_d_nor_87x50.png
+    21300100: btn_e_01_198x55.png
+    21300102: btn_e_02_198x56.png
+    21300104: btn_f_nor64x32.png
+    21300106: btn_info_55x55.png
+    21300108: btn_minus_43x34.png
+    21300110: btn_plus_38x38.png
+    21300112: btn_plus_43x34.png
+    21300114: btn_seach_71x54.png
+    21300116: btn_tab_choose_128x128.png
+    21300118: btn_tab_nor_128x128.png
+    21300120: frame_32x32.png
+    21300122: frame_96x96.png
+    21300124: frame_96x96_01.png
+    21300126: frame_96x96_02.png
+    21300128: frame_96x96_03.png
+    21300130: frame_96x96_04.png
+    21300132: frame_96x96_05.png
+    21300134: frame_a_110x110.png
+    21300136: frame_b_108x108.png
+    21300138: frame_b_90x90.png
+    21300140: frame_c_38-38.png
+    21300142: frame_choose_a_127x124.png
+    21300144: frame_choose_b_126x126.png
+    21300146: frame_choose_c_88x88.png
+    21300148: frame_plus_109x109.png
+    21300150: icon_career_01.png
+    21300152: icon_career_02.png
+    21300154: icon_career_03.png
+    21300156: icon_career_04.png
+    21300158: icon_career_05.png
+    21300160: icon_career_06.png
+    21300162: icon_player_01_90x90.jpg
+    21300164: icon_player_02_90x90.jpg
+    21300166: icon_player_03_90x90.jpg
+    21300168: icon_player_04_90x90.jpg
+    21300170: icon_player_05_90x90.jpg
+    21300172: icon_player_06_90x90.jpg
+    21300174: light_a_277x22.png
+    21300176: light_b_442x16.png
+    21300178: light_c_20x20.png
+    21300180: line_blue_256x16.png
+    21300182: line_gray_6x4.png
+    21300184: mask_hexagon.png
+    21300186: mask_round.png
+    21300188: mask_square.png
+    21300190: sign_arrow_38x70.png
+    21300192: sign_battle_37x47.png
+    21300194: sign_diam_42x42.png
+    21300196: sign_gold_42x42.png
+    21300198: sign_lock_32x32.png
+    21300200: sign_notice_26x26.png
+    21300202: sign_plus_32x32.png
+    21300204: sign_silver_42x42.png
+    21300206: sign_star_empty.png
+    21300208: sign_star_full.png
+    21300210: sign_star02_empty.png
+    21300212: sign_star02_full.png
+    21300214: ui_battle_btn_frame.png
+    21300216: ui_comm_mask_scroll.png
+    21300218: ui_battle_01.png
+    21300220: ui_battle_02.png
+    21300222: ui_battle_03.png
+    21300224: ui_battle_04.png
+    21300226: ui_battle_05.png
+    21300228: ui_battle_06.png
+    21300230: ui_battle_07.png
+    21300232: ui_battle_08.png
+    21300234: ui_battle_09.png
+    21300236: ui_battle_10.png
+    21300238: ui_battle_11.png
+    21300240: ui_battle_12.png
+    21300242: ui_battle_13.png
+    21300244: ui_battle_14.png
+    21300246: ui_battle_15.png
+    21300248: ui_battle_16.png
+    21300250: ui_battle_17.png
+    21300252: ui_battle_18.png
+    21300254: ui_comm_alpha.png
+    21300256: ui_comm_bg_underlay_a.png
+    21300258: ui_comm_bg_underlay_b.png
+    21300260: ui_comm_bg_underlay_c.png
+    21300262: ui_comm_bg_underlay_d.png
+    21300264: ui_comm_bg_underlay_e.png
+    21300266: ui_comm_bg_underlay_f.png
+    21300268: ui_comm_btn_a.png
+    21300270: ui_comm_btn_b.png
+    21300272: ui_comm_btn_c.png
+    21300274: ui_comm_btn_close.png
+    21300276: ui_comm_btn_d.png
+    21300278: ui_comm_btn_e.png
+    21300280: ui_comm_btn_frame.png
+    21300282: ui_comm_frame_choose.png
+    21300284: ui_comm_frame_item.png
+    21300286: ui_comm_frame_rank_bule.png
+    21300288: ui_comm_frame_rank_gold.png
+    21300290: ui_comm_frame_rank_green.png
+    21300292: ui_comm_frame_rank_orange.png
+    21300294: ui_comm_frame_rank_purple.png
+    21300296: ui_comm_frame_rank_white.png
+    21300298: ui_comm_light_round.png
+    21300300: ui_comm_line_a.png
+    21300302: ui_comm_line_b.png
+    21300304: ui_comm_line_c.png
+    21300306: ui_comm_line_d.png
+    21300308: ui_comm_mask_hexagon.png
+    21300310: ui_comm_mask_round.png
+    21300312: ui_comm_mask_square.png
+    21300314: ui_comm_pic_moji.png
+    21300316: ui_comm_pic_score.png
+    21300318: ui_comm_pic_table.png
+    21300320: ui_comm_sign_arrow_a.png
+    21300322: ui_comm_sign_arrow_b.png
+    21300324: ui_comm_sign_arrow_c.png
+    21300326: ui_comm_sign_lock.png
+    21300328: ui_comm_sign_notice.png
+    21300330: ui_comm_sign_plus.png
+    21300332: ui_comm_sign_plus_a.png
+    21300334: ui_comm_sign_plus_b.png
+    21300336: ui_comm_sign_plus_c.png
+    21300338: ui_comm_sign_tongqian.png
+    21300340: ui_comm_sign_yinpiao.png
+    21300342: ui_comm_sign_yuanbao.png
+    21300344: ui_comm_tab_a_01_act.png
+    21300346: ui_comm_tab_a_01_nor.png
+    21300348: ui_comm_tab_a_02_act.png
+    21300350: ui_comm_tab_a_02_nor.png
+    21300352: ui_comm_tab_a_03_act.png
+    21300354: ui_comm_tab_a_03_nor.png
+    21300356: ui_comm_tab_a_04_act.png
+    21300358: ui_comm_tab_a_04_nor.png
+    21300360: ui_comm_tab_b_act.png
+    21300362: ui_comm_tab_b_nor.png
+    21300364: ui_equip_07.png
+    21300366: ui_equip_28.png
+    21300368: ui_main_03.png
+    21300370: ui_main_032.png
+    21300372: ui_main_12.png
+    21300374: ui_main_21.png
+    21300376: ui_main_26.png
+    21300378: ui_main_35.png
+    21300380: ui_main_72.png
+    21300382: ui_main_85.png
+    21300384: ui_main_86.png
+    21300386: ui_pet_10.png
+    21300388: ui_pet_17.png
+    21300390: ui_role_04.png
+    21300392: ui_role_11.png
+    21300394: ui_role_22.png
+    21300396: ui_role_23.png
+    21300398: ui_role_41.png
+    21300400: ui_role_42.png
+    21300402: ui_role_43.png
+    21300404: ui_role_44.png
+    21300406: ui_role_63.png
+    21300408: ui_comm_bg_underlay_g.png
+    21300410: ui_comm_bg_underlay_pic.png
+    21300412: ui_comm_frame_round.png
+    21300414: ui_comm_sign_battle.png
+    21300416: ui_frame_choose.png
+    21300418: ui_comm_frame_rank_blue.png
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: sign_battle_37x47.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 555
+        width: 37
+        height: 47
+      alignment: 1
+      pivot: {x: 988.5, y: 445.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: 0}
+        - {x: 6, y: -7}
+        - {x: 0, y: -20}
+        - {x: 0, y: -47}
+        - {x: 31, y: -47}
+        - {x: 37, y: -37}
+        - {x: 37, y: -8}
+        - {x: 34, y: 0}
+    - name: ui_comm_alpha.png
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 865
+        width: 4
+        height: 4
+      alignment: 1
+      pivot: {x: 1020, y: 157}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_bg_underlay_a.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 648
+        width: 550
+        height: 374
+      alignment: 1
+      pivot: {x: 277, y: 189}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 543, y: -346}
+        - {x: 545, y: -333}
+        - {x: 545, y: -316}
+        - {x: 546, y: -315}
+        - {x: 547, y: -307}
+        - {x: 549, y: -289}
+        - {x: 550, y: -277}
+        - {x: 550, y: -125}
+        - {x: 549, y: -111}
+        - {x: 548, y: -96}
+        - {x: 547, y: -84}
+        - {x: 545, y: -62}
+        - {x: 544, y: -52}
+        - {x: 547, y: -47}
+        - {x: 550, y: -40}
+        - {x: 550, y: -23}
+        - {x: 548, y: -18}
+        - {x: 544, y: -13}
+        - {x: 536, y: -9}
+        - {x: 526, y: -8}
+        - {x: 521, y: -9}
+        - {x: 515, y: -9}
+        - {x: 509, y: -8}
+        - {x: 505, y: -9}
+        - {x: 500, y: -14}
+        - {x: 496, y: -21}
+        - {x: 209, y: -21}
+        - {x: 208, y: -20}
+        - {x: 194, y: -17}
+        - {x: 182, y: -11}
+        - {x: 172, y: -7}
+        - {x: 160, y: -3}
+        - {x: 151, y: -1}
+        - {x: 146, y: 0}
+        - {x: 70, y: 0}
+        - {x: 62, y: -2}
+        - {x: 60, y: 0}
+        - {x: 43, y: 0}
+        - {x: 39, y: -2}
+        - {x: 38, y: -5}
+        - {x: 34, y: -11}
+        - {x: 24, y: -14}
+        - {x: 18, y: -20}
+        - {x: 8, y: -32}
+        - {x: 6, y: -38}
+        - {x: 4, y: -48}
+        - {x: 3, y: -55}
+        - {x: 2, y: -79}
+        - {x: 1, y: -80}
+        - {x: 0, y: -92}
+        - {x: 0, y: -282}
+        - {x: 1, y: -293}
+        - {x: 2, y: -307}
+        - {x: 3, y: -319}
+        - {x: 6, y: -349}
+        - {x: 7, y: -357}
+        - {x: 8, y: -366}
+        - {x: 9, y: -369}
+        - {x: 13, y: -374}
+        - {x: 534, y: -374}
+        - {x: 540, y: -369}
+        - {x: 541, y: -364}
+        - {x: 542, y: -356}
+    - name: ui_comm_bg_underlay_b.png
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 509
+        width: 38
+        height: 380
+      alignment: 1
+      pivot: {x: 949, y: 325}
+      border: {x: 12, y: 0, z: 13, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -379}
+        - {x: 1, y: -380}
+        - {x: 37, y: -380}
+        - {x: 38, y: -379}
+        - {x: 38, y: 0}
+    - name: ui_comm_bg_underlay_c.png
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 923
+        width: 49
+        height: 49
+      alignment: 1
+      pivot: {x: 996.5, y: 76.5}
+      border: {x: 21, y: 23, z: 21, w: 21}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -47}
+        - {x: 2, y: -49}
+        - {x: 46, y: -49}
+        - {x: 49, y: -45}
+        - {x: 49, y: 0}
+    - name: ui_comm_bg_underlay_d.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 849
+        width: 267
+        height: 173
+      alignment: 1
+      pivot: {x: 687.5, y: 88.5}
+      border: {x: 126, y: 88, z: 124, w: 81}
+      outline:
+      - - {x: 264, y: -6}
+        - {x: 257, y: -3}
+        - {x: 28, y: -3}
+        - {x: 25, y: 0}
+        - {x: 11, y: 0}
+        - {x: 6, y: -2}
+        - {x: 0, y: -8}
+        - {x: 0, y: -29}
+        - {x: 2, y: -30}
+        - {x: 1, y: -164}
+        - {x: 6, y: -172}
+        - {x: 9, y: -173}
+        - {x: 261, y: -173}
+        - {x: 266, y: -169}
+        - {x: 267, y: -168}
+        - {x: 267, y: -10}
+      - - {x: 0, y: 0}
+        - {x: 0, y: -4}
+        - {x: 4, y: -4}
+        - {x: 6, y: -2}
+        - {x: 5, y: 0}
+    - name: ui_comm_bg_underlay_e.png
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 594
+        width: 53
+        height: 52
+      alignment: 1
+      pivot: {x: 104.5, y: 404}
+      border: {x: 22, y: 23, z: 20, w: 24}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -43}
+        - {x: 3, y: -50}
+        - {x: 4, y: -52}
+        - {x: 53, y: -52}
+        - {x: 53, y: -6}
+        - {x: 47, y: 0}
+    - name: ui_comm_bg_underlay_f.png
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 573
+        width: 82
+        height: 46
+      alignment: 1
+      pivot: {x: 858, y: 428}
+      border: {x: 40, y: 24, z: 40, w: 21}
+      outline:
+      - - {x: 3, y: 0}
+        - {x: 0, y: -3}
+        - {x: 0, y: -43}
+        - {x: 3, y: -46}
+        - {x: 79, y: -46}
+        - {x: 82, y: -43}
+        - {x: 82, y: -3}
+        - {x: 79, y: 0}
+    - name: ui_comm_bg_underlay_g.png
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 526
+        width: 29
+        height: 29
+      alignment: 1
+      pivot: {x: 913.5, y: 483.5}
+      border: {x: 11, y: 13, z: 12, w: 13}
+      outline: []
+    - name: ui_comm_bg_underlay_pic.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 592
+        width: 211
+        height: 101
+      alignment: 1
+      pivot: {x: 659.5, y: 381.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 0}
+        - {x: 0, y: -16}
+        - {x: 0, y: -98}
+        - {x: 1, y: -99}
+        - {x: 4, y: -101}
+        - {x: 211, y: -101}
+        - {x: 211, y: 0}
+    - name: ui_comm_btn_a.png
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 967
+        width: 147
+        height: 55
+      alignment: 1
+      pivot: {x: 896.5, y: 29.5}
+      border: {x: 74, y: 0, z: 73, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -51}
+        - {x: 4, y: -55}
+        - {x: 143, y: -55}
+        - {x: 147, y: -51}
+        - {x: 147, y: 0}
+    - name: ui_comm_btn_b.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 509
+        width: 37
+        height: 44
+      alignment: 1
+      pivot: {x: 988.5, y: 493}
+      border: {x: 15, y: 19, z: 15, w: 23}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -44}
+        - {x: 37, y: -44}
+        - {x: 37, y: -1}
+        - {x: 36, y: 0}
+    - name: ui_comm_btn_c.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 830
+        width: 46
+        height: 39
+      alignment: 1
+      pivot: {x: 993, y: 174.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -39}
+        - {x: 44, y: -39}
+        - {x: 46, y: -37}
+        - {x: 46, y: -1}
+        - {x: 44, y: 0}
+    - name: ui_comm_btn_close.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 435
+        width: 57
+        height: 66
+      alignment: 1
+      pivot: {x: 30.5, y: 556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 41, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -53}
+        - {x: 9, y: -66}
+        - {x: 50, y: -66}
+        - {x: 57, y: -61}
+        - {x: 57, y: -16}
+        - {x: 53, y: -3}
+    - name: ui_comm_btn_d.png
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 614
+        width: 75
+        height: 32
+      alignment: 1
+      pivot: {x: 418.5, y: 394}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 75, y: -32}
+        - {x: 75, y: -1}
+        - {x: 73, y: 0}
+    - name: ui_comm_btn_e.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 697
+        width: 18
+        height: 30
+      alignment: 1
+      pivot: {x: 807, y: 312}
+      border: {x: 7, y: 0, z: 8, w: 0}
+      outline: []
+    - name: ui_comm_btn_frame.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 747
+        width: 44
+        height: 42
+      alignment: 1
+      pivot: {x: 992, y: 256}
+      border: {x: 18, y: 16, z: 18, w: 16}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -42}
+        - {x: 41, y: -42}
+        - {x: 44, y: -37}
+        - {x: 44, y: -3}
+        - {x: 39, y: 0}
+    - name: ui_comm_frame_choose.png
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 500
+        width: 24
+        height: 24
+      alignment: 1
+      pivot: {x: 911, y: 512}
+      border: {x: 9, y: 10, z: 9, w: 9}
+      outline: []
+    - name: ui_comm_frame_item.png
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 518
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 114, y: 470}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_blue.png
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 574
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 494, y: 414}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_gold.png
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 540
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 417, y: 448}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_green.png
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 471
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 188, y: 517}
+      border: {x: 9, y: 0, z: 9, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_orange.png
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 471
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 262, y: 517}
+      border: {x: 9, y: 0, z: 9, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_purple.png
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 471
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 336, y: 517}
+      border: {x: 9, y: 0, z: 9, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_rank_white.png
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 357
+        width: 72
+        height: 72
+      alignment: 1
+      pivot: {x: 185, y: 631}
+      border: {x: 9, y: 0, z: 9, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -72}
+        - {x: 72, y: -72}
+        - {x: 72, y: 0}
+    - name: ui_comm_frame_round.png
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 431
+        width: 76
+        height: 76
+      alignment: 1
+      pivot: {x: 963, y: 555}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: 0}
+        - {x: 0, y: -4}
+        - {x: 0, y: -66}
+        - {x: 3, y: -76}
+        - {x: 73, y: -76}
+        - {x: 76, y: -67}
+        - {x: 76, y: -6}
+        - {x: 71, y: 0}
+      - - {x: 12, y: -52}
+        - {x: 17, y: -16}
+        - {x: 67, y: -31}
+        - {x: 52, y: -64}
+    - name: ui_comm_light_round.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 750
+        width: 20
+        height: 20
+      alignment: 1
+      pivot: {x: 808, y: 264}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_line_a.png
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 491
+        width: 62
+        height: 10
+      alignment: 1
+      pivot: {x: 92, y: 528}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_line_b.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 503
+        width: 17
+        height: 192
+      alignment: 1
+      pivot: {x: 806.5, y: 425}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_line_c.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 512
+        width: 59
+        height: 4
+      alignment: 1
+      pivot: {x: 31.5, y: 510}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_line_d.png
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 708
+        width: 8
+        height: 2
+      alignment: 1
+      pivot: {x: 1014, y: 315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_mask_hexagon.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 15
+        width: 33
+        height: 32
+      alignment: 1
+      pivot: {x: 18.5, y: 993}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 0}
+        - {x: 0, y: -7}
+        - {x: 0, y: -32}
+        - {x: 28, y: -32}
+        - {x: 33, y: -27}
+        - {x: 33, y: 0}
+    - name: ui_comm_mask_round.png
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 491
+        width: 80
+        height: 80
+      alignment: 1
+      pivot: {x: 857, y: 493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: 0}
+        - {x: 0, y: -9}
+        - {x: 0, y: -66}
+        - {x: 21, y: -80}
+        - {x: 65, y: -80}
+        - {x: 80, y: -66}
+        - {x: 80, y: -17}
+        - {x: 63, y: 0}
+    - name: ui_comm_mask_scroll.png
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 712
+        width: 10
+        height: 10
+      alignment: 1
+      pivot: {x: 1015, y: 307}
+      border: {x: 4, y: 3, z: 3, w: 3}
+      outline: []
+    - name: ui_comm_mask_square.png
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 751
+        width: 104
+        height: 104
+      alignment: 1
+      pivot: {x: 875, y: 221}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 103, y: 0}
+        - {x: 2, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -102}
+        - {x: 1, y: -104}
+        - {x: 102, y: -104}
+        - {x: 104, y: -103}
+        - {x: 104, y: -2}
+    - name: ui_comm_pic_moji.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 695
+        width: 242
+        height: 57
+      alignment: 1
+      pivot: {x: 675, y: 300.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 80, y: 0}
+        - {x: 7, y: 0}
+        - {x: 0, y: -11}
+        - {x: 0, y: -48}
+        - {x: 4, y: -57}
+        - {x: 165, y: -57}
+        - {x: 235, y: -54}
+        - {x: 242, y: -44}
+        - {x: 242, y: -20}
+        - {x: 222, y: -11}
+    - name: ui_comm_pic_score.png
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 436
+        width: 56
+        height: 53
+      alignment: 1
+      pivot: {x: 89, y: 561.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 7, y: 0}
+        - {x: 0, y: -10}
+        - {x: 0, y: -33}
+        - {x: 17, y: -53}
+        - {x: 50, y: -53}
+        - {x: 56, y: -43}
+        - {x: 56, y: -30}
+        - {x: 37, y: 0}
+    - name: ui_comm_pic_table.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 754
+        width: 242
+        height: 93
+      alignment: 1
+      pivot: {x: 675, y: 223.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 67, y: 0}
+        - {x: 0, y: -10}
+        - {x: 0, y: -80}
+        - {x: 10, y: -93}
+        - {x: 242, y: -93}
+        - {x: 242, y: -21}
+        - {x: 207, y: 0}
+    - name: ui_comm_sign_arrow_a.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 772
+        width: 21
+        height: 14
+      alignment: 1
+      pivot: {x: 808.5, y: 245}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_arrow_b.png
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 587
+        width: 24
+        height: 32
+      alignment: 1
+      pivot: {x: 913, y: 421}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_arrow_c.png
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 891
+        width: 39
+        height: 27
+      alignment: 1
+      pivot: {x: 949.5, y: 119.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_battle.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 555
+        width: 37
+        height: 47
+      alignment: 1
+      pivot: {x: 988.5, y: 445.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 19, y: 0}
+        - {x: 6, y: -7}
+        - {x: 0, y: -20}
+        - {x: 0, y: -47}
+        - {x: 31, y: -47}
+        - {x: 37, y: -37}
+        - {x: 37, y: -8}
+        - {x: 34, y: 0}
+    - name: ui_comm_sign_lock.png
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 920
+        width: 39
+        height: 45
+      alignment: 1
+      pivot: {x: 949.5, y: 81.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: 0}
+        - {x: 6, y: 0}
+        - {x: 1, y: -1}
+        - {x: 0, y: -4}
+        - {x: 0, y: -45}
+        - {x: 39, y: -45}
+        - {x: 39, y: -10}
+        - {x: 35, y: -3}
+    - name: ui_comm_sign_notice.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 819
+        width: 23
+        height: 28
+      alignment: 1
+      pivot: {x: 809.5, y: 191}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_plus.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 729
+        width: 19
+        height: 19
+      alignment: 1
+      pivot: {x: 807.5, y: 285.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_plus_a.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 729
+        width: 19
+        height: 19
+      alignment: 1
+      pivot: {x: 807.5, y: 285.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_plus_b.png
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 613
+        width: 33
+        height: 33
+      alignment: 1
+      pivot: {x: 149.5, y: 394.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 0}
+        - {x: 0, y: -7}
+        - {x: 0, y: -25}
+        - {x: 9, y: -33}
+        - {x: 25, y: -33}
+        - {x: 33, y: -24}
+        - {x: 33, y: -5}
+        - {x: 25, y: 0}
+    - name: ui_comm_sign_plus_c.png
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 458
+        width: 31
+        height: 31
+      alignment: 1
+      pivot: {x: 134.5, y: 550.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_comm_sign_tongqian.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 684
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 989, y: 321}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 0}
+        - {x: 1, y: -8}
+        - {x: 1, y: -34}
+        - {x: 3, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: 0}
+    - name: ui_comm_sign_yinpiao.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 644
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 989, y: 361}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 0}
+        - {x: 0, y: -4}
+        - {x: 0, y: -20}
+        - {x: 7, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: -2}
+        - {x: 35, y: 0}
+    - name: ui_comm_sign_yuanbao.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 604
+        width: 38
+        height: 38
+      alignment: 1
+      pivot: {x: 989, y: 401}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -29}
+        - {x: 9, y: -38}
+        - {x: 38, y: -38}
+        - {x: 38, y: -7}
+        - {x: 19, y: 0}
+    - name: ui_comm_tab_a_01_act.png
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 308
+        width: 69
+        height: 121
+      alignment: 1
+      pivot: {x: 112.5, y: 655.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 0}
+        - {x: 0, y: -4}
+        - {x: 0, y: -121}
+        - {x: 65, y: -121}
+        - {x: 69, y: -115}
+        - {x: 69, y: -2}
+        - {x: 67, y: 0}
+    - name: ui_comm_tab_a_01_nor.png
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 185
+        width: 69
+        height: 121
+      alignment: 1
+      pivot: {x: 165.5, y: 778.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 0}
+        - {x: 0, y: -3}
+        - {x: 0, y: -121}
+        - {x: 69, y: -121}
+        - {x: 69, y: 0}
+    - name: ui_comm_tab_a_02_act.png
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 175
+        width: 62
+        height: 124
+      alignment: 1
+      pivot: {x: 98, y: 787}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -124}
+        - {x: 62, y: -124}
+        - {x: 62, y: 0}
+    - name: ui_comm_tab_a_02_nor.png
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 49
+        width: 62
+        height: 124
+      alignment: 1
+      pivot: {x: 98, y: 913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -3}
+        - {x: 0, y: -124}
+        - {x: 62, y: -124}
+        - {x: 62, y: -3}
+    - name: ui_comm_tab_a_03_act.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 175
+        width: 63
+        height: 124
+      alignment: 1
+      pivot: {x: 33.5, y: 787}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: -124}
+        - {x: 4, y: -124}
+        - {x: 4, y: -121}
+        - {x: 1, y: -120}
+        - {x: 0, y: -121}
+      - - {x: 0, y: 0}
+        - {x: 0, y: -120}
+        - {x: 6, y: -124}
+        - {x: 60, y: -124}
+        - {x: 63, y: -119}
+        - {x: 63, y: 0}
+    - name: ui_comm_tab_a_03_nor.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 49
+        width: 63
+        height: 124
+      alignment: 1
+      pivot: {x: 33.5, y: 913}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -118}
+        - {x: 8, y: -124}
+        - {x: 62, y: -124}
+        - {x: 63, y: -123}
+        - {x: 63, y: -4}
+        - {x: 57, y: 0}
+    - name: ui_comm_tab_a_04_act.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 301
+        width: 74
+        height: 128
+      alignment: 1
+      pivot: {x: 39, y: 659}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 70, y: 0}
+        - {x: 1, y: 0}
+        - {x: 0, y: -12}
+        - {x: 0, y: -59}
+        - {x: 3, y: -58}
+        - {x: 0, y: -75}
+        - {x: 0, y: -120}
+        - {x: 4, y: -128}
+        - {x: 74, y: -128}
+        - {x: 74, y: -3}
+    - name: ui_comm_tab_a_04_nor.png
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 518
+        width: 74
+        height: 128
+      alignment: 1
+      pivot: {x: 39, y: 442}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 1, y: -3}
+        - {x: 0, y: -27}
+        - {x: 0, y: -128}
+        - {x: 58, y: -128}
+        - {x: 74, y: -111}
+        - {x: 74, y: -7}
+        - {x: 72, y: -3}
+    - name: ui_comm_tab_b_act.png
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 912
+        width: 105
+        height: 53
+      alignment: 1
+      pivot: {x: 875.5, y: 85.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 0}
+        - {x: 0, y: -3}
+        - {x: 0, y: -53}
+        - {x: 105, y: -53}
+        - {x: 105, y: -3}
+        - {x: 102, y: 0}
+    - name: ui_comm_tab_b_nor.png
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 857
+        width: 105
+        height: 53
+      alignment: 1
+      pivot: {x: 875.5, y: 140.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 3, y: 0}
+        - {x: 3, y: -42}
+        - {x: 8, y: -48}
+        - {x: 104, y: -48}
+        - {x: 104, y: 0}
+    - name: ui_equip_07.png
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 22
+        width: 58
+        height: 25
+      alignment: 1
+      pivot: {x: 66, y: 989.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_equip_28.png
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 431
+        width: 76
+        height: 76
+      alignment: 1
+      pivot: {x: 963, y: 555}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 2, y: 0}
+        - {x: 0, y: -4}
+        - {x: 0, y: -66}
+        - {x: 3, y: -76}
+        - {x: 73, y: -76}
+        - {x: 76, y: -67}
+        - {x: 76, y: -6}
+        - {x: 71, y: 0}
+      - - {x: 12, y: -52}
+        - {x: 17, y: -16}
+        - {x: 67, y: -31}
+        - {x: 52, y: -64}
+    - name: ui_frame_choose.png
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 974
+        width: 50
+        height: 48
+      alignment: 1
+      pivot: {x: 997, y: 26}
+      border: {x: 24, y: 23, z: 25, w: 24}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -48}
+        - {x: 50, y: -48}
+        - {x: 50, y: 0}
+      - - {x: 12, y: -35}
+        - {x: 14, y: -11}
+        - {x: 38, y: -13}
+        - {x: 36, y: -37}
+    - name: ui_main_03.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 592
+        width: 211
+        height: 101
+      alignment: 1
+      pivot: {x: 659.5, y: 381.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 0}
+        - {x: 0, y: -16}
+        - {x: 0, y: -98}
+        - {x: 1, y: -99}
+        - {x: 4, y: -101}
+        - {x: 211, y: -101}
+        - {x: 211, y: 0}
+    - name: ui_main_032.png
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 545
+        width: 211
+        height: 101
+      alignment: 1
+      pivot: {x: 273.5, y: 428.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 26, y: 0}
+        - {x: 0, y: -16}
+        - {x: 0, y: -98}
+        - {x: 1, y: -99}
+        - {x: 4, y: -101}
+        - {x: 211, y: -101}
+        - {x: 211, y: 0}
+    - name: ui_main_12.png
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 557
+        width: 24
+        height: 28
+      alignment: 1
+      pivot: {x: 913, y: 453}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_main_21.png
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 526
+        width: 29
+        height: 29
+      alignment: 1
+      pivot: {x: 913.5, y: 483.5}
+      border: {x: 11, y: 13, z: 12, w: 13}
+      outline: []
+    - name: ui_main_26.png
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 587
+        width: 24
+        height: 32
+      alignment: 1
+      pivot: {x: 913, y: 421}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_main_35.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 791
+        width: 46
+        height: 37
+      alignment: 1
+      pivot: {x: 993, y: 214.5}
+      border: {x: 24, y: 17, z: 20, w: 18}
+      outline:
+      - - {x: 0, y: -22}
+        - {x: 1, y: -31}
+        - {x: 5, y: -37}
+        - {x: 46, y: -37}
+        - {x: 46, y: 0}
+        - {x: 1, y: 0}
+        - {x: 0, y: -3}
+    - name: ui_main_72.png
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 614
+        width: 75
+        height: 32
+      alignment: 1
+      pivot: {x: 418.5, y: 394}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -32}
+        - {x: 75, y: -32}
+        - {x: 75, y: -1}
+        - {x: 73, y: 0}
+    - name: ui_main_85.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 724
+        width: 44
+        height: 21
+      alignment: 1
+      pivot: {x: 992, y: 289.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_main_86.png
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 509
+        width: 37
+        height: 44
+      alignment: 1
+      pivot: {x: 988.5, y: 493}
+      border: {x: 15, y: 19, z: 15, w: 23}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -44}
+        - {x: 37, y: -44}
+        - {x: 37, y: -1}
+        - {x: 36, y: 0}
+    - name: ui_pet_10.png
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 974
+        width: 50
+        height: 48
+      alignment: 1
+      pivot: {x: 997, y: 26}
+      border: {x: 24, y: 23, z: 25, w: 24}
+      outline:
+      - - {x: 0, y: 0}
+        - {x: 0, y: -48}
+        - {x: 50, y: -48}
+        - {x: 50, y: 0}
+      - - {x: 12, y: -35}
+        - {x: 14, y: -11}
+        - {x: 38, y: -13}
+        - {x: 36, y: -37}
+    - name: ui_pet_17.png
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 754
+        width: 242
+        height: 93
+      alignment: 1
+      pivot: {x: 675, y: 223.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 67, y: 0}
+        - {x: 0, y: -10}
+        - {x: 0, y: -80}
+        - {x: 10, y: -93}
+        - {x: 242, y: -93}
+        - {x: 242, y: -21}
+        - {x: 207, y: 0}
+    - name: ui_role_04.png
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 122
+        width: 61
+        height: 61
+      alignment: 1
+      pivot: {x: 161.5, y: 871.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: 0}
+        - {x: 0, y: -2}
+        - {x: 0, y: -48}
+        - {x: 14, y: -61}
+        - {x: 50, y: -61}
+        - {x: 61, y: -50}
+        - {x: 61, y: -11}
+        - {x: 50, y: 0}
+    - name: ui_role_11.png
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 788
+        width: 21
+        height: 29
+      alignment: 1
+      pivot: {x: 808.5, y: 221.5}
+      border: {x: 10, y: 12, z: 9, w: 12}
+      outline: []
+    - name: ui_role_22.png
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 678
+        width: 86
+        height: 55
+      alignment: 1
+      pivot: {x: 862, y: 318.5}
+      border: {x: 59, y: 0, z: 25, w: 0}
+      outline:
+      - - {x: 85, y: 0}
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -52}
+        - {x: 4, y: -55}
+        - {x: 82, y: -55}
+        - {x: 86, y: -51}
+        - {x: 86, y: -3}
+    - name: ui_role_23.png
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 621
+        width: 86
+        height: 55
+      alignment: 1
+      pivot: {x: 860, y: 375.5}
+      border: {x: 59, y: 0, z: 25, w: 0}
+      outline:
+      - - {x: 85, y: 0}
+        - {x: 1, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -52}
+        - {x: 4, y: -55}
+        - {x: 82, y: -55}
+        - {x: 86, y: -51}
+        - {x: 86, y: -3}
+    - name: ui_role_41.png
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 871
+        width: 48
+        height: 50
+      alignment: 1
+      pivot: {x: 995, y: 128}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -44}
+        - {x: 7, y: -50}
+        - {x: 39, y: -50}
+        - {x: 48, y: -41}
+        - {x: 48, y: -13}
+        - {x: 41, y: -1}
+    - name: ui_role_42.png
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 458
+        width: 31
+        height: 31
+      alignment: 1
+      pivot: {x: 134.5, y: 550.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_role_43.png
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 596
+        width: 31
+        height: 15
+      alignment: 1
+      pivot: {x: 148.5, y: 420.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_role_44.png
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 433
+        width: 32
+        height: 23
+      alignment: 1
+      pivot: {x: 135, y: 579.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ui_role_63.png
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 735
+        width: 99
+        height: 14
+      alignment: 1
+      pivot: {x: 869.5, y: 282}
+      border: {x: 67, y: 0, z: 31, w: 0}
+      outline: []
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

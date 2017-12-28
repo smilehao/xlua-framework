@@ -1,0 +1,28 @@
+package db;
+
+message one_card_info
+{
+	optional int32 card_id = 1[default = 0];
+}
+
+message card_group
+{
+	optional int32 group_id = 1[default = 0];
+	optional int32 race = 2[default=1];   //1 common 2 airen 3 shouren 4 jingling 5 renlei
+	repeated int32 card_list = 3;  
+	optional string group_name = 4[default=''];
+	optional int32 init_technology_type = 5[default = 0];   //初始科技的type
+}
+
+message technology_info
+{
+	optional int32  id = 1[default = 0];
+	optional int32  count = 2[default = 0];
+}
+
+message Card
+{
+	repeated one_card_info card_list = 1;
+	repeated card_group card_group_list = 2;
+	repeated technology_info technology_list  = 3;
+}

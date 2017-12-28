@@ -1,0 +1,57 @@
+id`name``tagbgname`titlebgname`sAtlas`sIcon
+502`单笔充值{cond_value}元宝`剩余次数:{curr_value}/{cond_value}`h7``actAtlas`Icon_0014_Layer-1
+503`累计充值{cond_value}元宝`进度:{curr_value}/{cond_value}`h9`1`actAtlas`Icon_0017_Layer-1
+504`第{day}天 单笔充值{cond_value}元宝`剩余次数:{curr_value}/{cond_value}`h7``actAtlas`Icon_0014_Layer-1
+505`自选奖励{index}``h9`1`actAtlas`Icon_0017_Layer-1
+507`第{rank}名 {user_name}`积分:{score}```actAtlas`Icon_0018_Layer-1
+508`Vip{vip_level}可兑换`剩余次数:{curr_value}/{cond_value}`h9`1`actAtlas`Icon_0015_Layer-1
+509`````actAtlas`Icon_0016_Layer-1
+510`累计消耗{cond_value}点体力`已消耗{curr_value}/{cond_value}点`h3`3`actAtlas`Icon_0021_Layer-1
+511`累计消费{cond_value}元宝`已消费{curr_value}/{cond_value}元宝`h3`2`actAtlas`Icon_0031_Layer-1
+512`````actAtlas`Icon_0021_Layer-1
+513`{yueka_type}玩家可领取````actAtlas`Icon_0029_Layer-1
+515`VIP{cond_value}可购买`剩余次数:{curr_value}/{cond_value}`h0`1`actAtlas`Icon_0033_Layer-1
+516`累计充值{cond_value}元宝获得,每天可领取``h9`20`actAtlas`Icon_0022_Layer-1
+517`夺宝奇兵``h10`3`actAtlas`Icon_0019_Layer-1
+519`累计充值{cond_value}天`进度:{curr_value}/{cond_value}`h0`4`actAtlas`Icon_0032_Layer-1
+520`````actAtlas`Icon_0025_Layer-1
+521`掠地胜利{cond_value}次`进度:{curr_value}/{cond_value}`h6`15`actAtlas`Icon_0021_Layer-1
+522`演武挑战{cond_value}次`进度:{curr_value}/{cond_value}`h11`1`actAtlas`Icon_0023_Layer-1
+523`平匪胜利{cond_value}次`进度:{curr_value}/{cond_value}`h6`15`actAtlas`Icon_0026_Layer-1
+524``剩余次数:{curr_value}/{cond_value}`h2`17`actAtlas`Icon_0027_Layer-1
+525`累计登录{cond_value}天`进度:{curr_value}/{cond_value}`h0`4`actAtlas`Icon_0028_Layer-1
+526``{t_month}月{t_day}日`h10`18`actAtlas`Icon_0031_Layer-1
+527`第{rank}名 {user_name}`充值元宝：{cond_value}```actAtlas`Icon_0014_Layer-1
+528`第{rank}名 {user_name}`消费元宝：{cond_value}```actAtlas`Icon_0017_Layer-1
+301`只要充值60元宝即可领取````actAtlas`
+302`````actAtlas`
+303`累计充值{cond_value}元宝`进度:{curr_value}/{cond_value}```actAtlas`
+304`第{rank}名 {user_name}`积分:{score}```actAtlas`
+305`演武挑战{cond_value}次`进度:{curr_value}/{cond_value}```actAtlas`
+306`第{rank}名 {user_name}`演武排名:{score}```actAtlas`
+307`平匪胜利{cond_value}次`进度:{curr_value}/{cond_value}```actAtlas`
+308`第{rank}名 {user_name}`积分:{score}```actAtlas`
+309`掠地胜利{cond_value}次`进度:{curr_value}/{cond_value}```actAtlas`
+310`第{rank}名 {user_name}`积分:{score}```actAtlas`
+311`拥有名将{cond_value}名`进度:{curr_value}/{cond_value}```actAtlas`
+312`第{rank}名 {user_name}`积分:{score}```actAtlas`
+313`领地达到 {cond_value}````actAtlas`
+314`第{rank}名 {user_name}`积分:{score}```actAtlas`
+315`积分 {cond_value}`进度:{curr_value}/{cond_value}```actAtlas`
+316`第{rank}名 {user_name}`积分:{score}```actAtlas`
+401``({curr_value}/{cond_value})```actAtlas`
+402``({curr_value}/{cond_value})```actAtlas`
+403``({curr_value}/{cond_value})```actAtlas`
+404``最高排名:{rank}```actAtlas`
+405``({curr_value}/{cond_value})```actAtlas`
+406``({curr_value}/{cond_value})```actAtlas`
+407``({curr_value}/{cond_value})```actAtlas`
+408``({curr_value}/{cond_value})```actAtlas`
+409``({curr_value}/{cond_value})```actAtlas`
+410``({curr_value}/{cond_value})```actAtlas`
+411``({curr_value}/{cond_value})```actAtlas`
+412``({curr_value}/{cond_value})```actAtlas`
+413``({curr_value}/{cond_value})```actAtlas`
+414``({curr_value}/{cond_value})```actAtlas`
+415``({curr_value}/{cond_value})```actAtlas`
+416``({curr_value}/{cond_value})```actAtlas`

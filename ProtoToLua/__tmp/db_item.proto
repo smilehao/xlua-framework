@@ -1,0 +1,12 @@
+package db;
+
+message one_item
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+
+message Item
+{
+	repeated one_item item_list = 1;
+}

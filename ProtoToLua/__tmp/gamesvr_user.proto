@@ -1,0 +1,137 @@
+package user;
+
+import 'common.proto';
+
+message test2
+{
+	optional int32 c = 1[default = 0];
+	repeated common.test3 ss = 2;
+}
+
+message test1
+{
+	optional int32 a = 1[default = 0];
+	repeated test2 b = 2;
+}
+
+message rsp_login
+{
+	optional int32 result = 1[default = 0];//登录失败，请重试
+	optional int32 game_time = 2[default = 0];	//服务器游戏时间，秒
+	optional int64 battle_id = 3[default = 0];	//当前参与的战斗ID
+	optional int32 battle_svr_id = 4[default = 0];	//当前战斗所在的战斗服
+	optional int32 to_battle_trans_1 = 5[default = 0];
+	optional int32 to_battle_trans_2 = 6[default = 0];
+	optional int32 status = 7[default = 0];   //玩家状态   2.在线 3.匹配中 4.战斗中 
+	optional common.client_info client_info = 8;
+	optional test1  test = 9;
+}
+
+message req_set_guide_flags
+{
+    optional uint32 flags = 1[default = 0];
+}
+
+message rsp_set_guide_flags
+{
+    optional int32 result = 1[default = 0];       //0是成功 其他未定 
+    optional uint32 curr_flags = 2[default = 0];  //
+}
+
+message ntf_guide_flags_chg
+{
+    optional uint32 guide_flags = 1[default = 0];   //新手指引的标志变化
+}
+
+message req_set_new_step
+{
+  optional int32 step = 1[default = 0];
+}
+
+message rsp_set_new_step
+{
+  optional int32 result	 = 1[default = 0];  
+  optional int32 step = 2[default = 0];
+}
+
+message req_battle_result
+{
+   optional int64 battle_id = 1[default = 0];
+}
+
+message rsp_battle_result
+{
+	optional int32 result = 1[default = 0];
+	optional int32 camp = 2[default = 0];
+	optional int32 before_exp = 5[default = 0];
+	optional int32 after_exp = 6[default = 0];
+	optional int32 before_max_exp = 7[default = 0];
+	optional int32 after_max_exp = 8[default = 0];
+	optional int32 before_level = 9[default = 1];
+	optional int32 after_level = 10[default = 1];	
+	repeated int32 new_card_list = 11;
+
+	optional bytes result_data = 12[default =''];
+}
+
+message ntf_login_info
+{
+	
+}
+
+
+message req_create_user
+{
+	//optional int32 sex = 1[default = 0];	            //0是男，1是女
+	optional string name = 2[default = ''];	            //玩家名字
+}
+
+message rsp_create_user
+{
+	optional int32 result = 1[default = 0];	           //0成功，-1是名字有敏感词，-2是名字已经存在
+	//optional int32 sex = 2[default = 0];	           //0是男，1是女
+	optional string name = 3[default = ''];	           //玩家名字
+	optional int32 use_icon = 4[default = 0];
+}
+
+message req_change_name
+{
+	optional string name = 1[default = ''];
+}
+
+message rsp_change_name
+{
+	optional int32 result =1[default = 0];
+	optional string name = 2[default = ''];
+}
+
+message req_change_card_group
+{
+	optional int32 type = 1[default = 0];                //0 创建卡组  1 删除卡组
+	optional common.player_card_group  card_group = 2;
+	optional int32 init_technology_id = 3[default = 0];   //初始科技的id
+}
+
+message rsp_change_card_group
+{
+	optional int32 result =1[default = 0];
+	optional int32 type = 2[default = 0];                //0 创建卡组  1 删除卡组
+	optional common.player_card_group  card_group = 3;  
+	optional int32 init_technology_id = 4[default = 0];   //初始科技的id
+}
+
+message req_compound_technology
+{
+	optional int32  technology_type = 1[default = 0];
+}
+
+message rsp_compound_technology
+{
+	optional int32 result = 1[default = 0];
+	repeated common.player_technology_info technology_list = 2;
+}
+
+message ntf_take_attachment
+{
+	optional int32 result = 1[default = 0];
+}

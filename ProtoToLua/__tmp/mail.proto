@@ -1,0 +1,102 @@
+package mail;
+
+message mail_attachment_content
+{
+	optional int32 type = 1[default = 0];    //1 卡 2科技 3  等 
+	optional int32 item_id  =2[default =0];
+	optional int32 count =3[default =0];                 
+}
+
+message mail_attachment
+{
+	optional int32 is_taken   = 1[default =0]; //是否已领取  0未领  1等待gamesvr通知 2已领
+	repeated mail_attachment_content  attachment_list= 2; //科技
+}
+
+message mail_content
+{
+	optional int32 language = 1[default = 0];
+	optional string sender = 2[default = ''];
+	optional string title = 3[default = ''];
+	optional string content = 4[default = ''];
+}
+
+message mail_info
+{
+	optional int32 mail_seq = 1[default = 0];
+	optional int32 type = 2[default = 0];          //邮件类型  1 个人邮件 2 系统邮件 3.全局邮件 新用户也可以收到
+	optional int32 status = 3[default = 0];       //0未读 1已读
+	repeated mail_content content_list = 4;                    //邮件内容
+	optional int32 send_time = 7[default = 0];  //邮件发布时间
+	optional int32 recv_time = 8[default = 0];   //收到邮件的时间   
+	optional int32 effect_end_time = 9[default = 0]; //邮件失效时间  0的话表示没有失效时间
+	optional mail_attachment attachment  = 10;  //附件
+}
+
+message ntf_mail
+{
+	optional int32 result = 1[default = 0];
+	repeated mail_info mail_list = 2;
+}
+
+message ntf_new_mail
+{
+	optional int32 result = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+
+message req_mail
+{
+
+}
+
+message rsp_mail
+{
+	optional int32 result = 1[default = 0];
+	repeated mail_info mail_list = 2;
+}
+
+message req_read_mail
+{
+	optional int32  mail_seq = 1[default =0]; 
+}
+
+message rsp_read_mail
+{
+	optional int32 result = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+}
+
+message req_remove_mail
+{
+	optional int32 mail_seq = 1[default = 0];
+}
+
+message rsp_remove_mail
+{
+	optional int32 result = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+}
+
+message req_take_mail_attachment
+{
+	optional int32 mail_seq = 3[default = 0];
+}
+
+message rsp_take_mail_attachment
+{
+	optional int32 result =1[default =0];
+	optional int32 mail_seq =2[default =0];
+	optional mail_attachment attachment =3;
+}
+
+message req_test_init_system_mail
+{
+	optional mail_info info = 1;
+}
+
+message rsp_test_init_system_mail
+{
+	optional int32 result = 1[default =0];
+	optional mail_info info =2;
+}

@@ -1,0 +1,2253 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--游戏中的语言-->
+<labes>
+  <!--通用-->
+  <label id="1">确定</label>
+  <label id="2">返回</label>
+  <label id="3">提 示</label>
+  <label id="4">确  定</label>
+  <label id="5">取 消</label>
+  <label id="89">已达到最高级</label>
+  <label id="90">[7d4830]已满级[-][ff0000]</label>
+  <label id="91">[7d4830]需要[-]{0}    [7d4830]现有{1}[-]</label>
+  <label id="92">空闲</label>
+  <label id="93">{0}级</label>
+  <label id="94">物攻</label>
+  <label id="95">物防</label>
+  <label id="96">法攻</label>
+  <label id="97">法防</label>
+  <label id="98">武将</label>
+  <label id="99">武将技能</label>
+  <label id="100">武将小传</label>
+  <label id="101">正常,加速</label>
+  <label id="102">暴击</label>
+  <label id="103">主公，分配好请传令吧</label>
+  <label id="104">族长,长老,成员</label>
+  <label id="105">10,30,50,70</label>
+  <label id="106">获得{0}级武将</label>
+  <label id="107">重复获得武将自动转化为{0}个武将信物</label>
+  <label id="108">[532512][EE7942]{0}[-]需要[009966]{1}型[-]武将[-]</label>
+  <label id="109">C,B,A,S</label>
+  <label id="110">充值暂未开放</label>
+  <label id="111">体力每6分钟自动回复1点。每天12点、18点和21点可以通过吃包子得到60点体力</label>
+  <label id="112">您领地的建筑等级之和越高，繁荣度就越高</label>
+  <label id="113">总战力等于所有阵容的当前战力。训练士兵、培养武将、征召军队都可以提升总战力</label>
+  <label id="114">没有土匪了</label>
+  <label id="115">健康游戏公告</label>
+  <label id="116">抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。
+适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。</label>
+  <label id="117">[9D6B3B]UID：[ff4800]{0}[-][-]</label>
+  <label id="118">{0}天 </label>
+  <label id="119">家族：</label>
+  <label id="120">寻访到重复武将自动转化为{0}个武将信物</label>
+  <label id="121">刚刚</label>
+  <label id="122">{x}分钟前</label>
+  <label id="123">半小时前</label>
+  <label id="124">{x}小时前</label>
+  <label id="125">{x}天前</label>
+  <label id="126">一周前</label>
+  <label id="127">一个月前</label>
+  <label id="128">需要{0}x{1},{2}x{3}</label>
+  <label id="129">需要{0}x{1}</label>
+  <label id="130">[f3f3f2]获得神兵：[-][ce19dd]{0}[-]</label>
+  <label id="132">录像已过期</label>
+  <label id="133">物攻,法攻,物防,法防</label>
+  <label id="134">专属神兵</label>
+  <label id="135">{0}%</label>
+  <label id="136">修改家族名字需要花费300元宝。是否修改？</label>
+  <label id="137">[ffffff]（[-][ff0000]{0}[-][ffffff]专属神兵）[-]</label>
+  <label id="138">获得</label>
+  <label id="139">您已退出家族</label>
+  <label id="140">物攻,物防,法攻,法防</label>
+  <label id="141">[db0402]{0}[-]</label>
+  <label id="142">[9d5f21]{0}[-]</label>
+  
+  <!--布阵-->
+  <label id="200">[B63909]可武装{0}人[-]</label>
+  <label id="201">[0DB200]使用中[-]</label>
+  <label id="202">{0}级</label>
+  <label id="203">选择兵种</label>
+  <label id="204">更换兵种后原部队将就地解散，回收所有士兵装备</label>
+  <label id="205">主公，您命令此部队停止出战，原部队{0}人将就地解散，是否确认？</label>
+  <label id="206">可回收</label>
+  <label id="207">算了</label>
+  <label id="208">确定</label>
+  <label id="209">武将配置栏位已满</label>
+  <label id="210">空闲人口 {0}</label>
+  <label id="211">统率,武力,智力</label>
+  <label id="213">[502512]部队人数: [B63909]{0}[-][-]</label>
+  <label id="214">速度,战力,物攻,物防,法攻,法防</label>
+  <label id="215">领地储备</label>
+  <label id="216">士兵</label>
+  <label id="217">一键招兵</label>
+  <label id="218">可回收</label>
+  <label id="219">更换兵种后原部队将就地解散，回收所有士兵装备</label>
+  <label id="220">可招募{0}人</label>
+  <label id="221">主公，将此部队补充至能装备的最大人数。装备不够时自动用材料合成。是否确认？</label>
+  <label id="222">[B63909]已上阵[-],[2EA71C]空闲[-],[B63909]{0}[-],[B63909]出征[-]</label>
+  <label id="223">更换兵种</label>
+  <label id="224">停止出战</label>
+  <label id="225">{0}人</label>
+  <label id="226">速度{0}</label>
+  <label id="227">已上阵,空闲中,已配于【{0}】,出征,探索,被俘虏,已死亡</label>
+  <label id="228">阵容</label>
+  <label id="229">1.初始有2个阵容，可以花元宝解锁第3、第4个阵容。
+
+2.战斗默认使用【阵容1】。【阵容1】处于出征状态则【阵容2】为防御阵容，【阵容2】处于出征状态则【阵容3】为防御阵容，以此类推。
+
+3.打国战时最多可出战3个阵容，至少留一个阵容驻守领地。
+
+4.每个阵容初始可上阵2个部队，升级领地增加上阵部队，最多上阵6个部队。
+
+5.每一个上阵的部队可自选一个兵种，兵种可重复。
+
+6.兵种共有5种，特性如下：
+1).枪兵：有概率反击近程物理攻击的敌人
+2).弓兵：有概率造成高倍率伤害
+3).刀盾兵：有概率反弹一定比例的物理伤害
+4).骑兵：有概率横向攻击2格敌人
+5).方士：拥有法术攻击伤害
+
+7.点击部队按住拖动，可以在部队之间快速切换位置。
+
+8.点击“编成”按钮，可在二级界面切换武将顺序（该顺序影响武将大招施放顺序）。
+
+9.部队的士兵数量上限随领地等级提升而增加，VIP有额外加成。
+
+10.每个部队至少出战1个士兵，否则该兵团不能参战。
+
+11.每个部队最多放置3个武将，兵团的战斗速度等于放置武将的统率总和。
+
+12.部队的怒气满时，放置在该部队的所有武将根据自身发动大招的概率发动大招。未发动大招不损耗怒气。
+
+13.招募士兵需要消耗士兵装备、空闲人口。若装备不足，则自动消耗制作装备所需的资源。
+
+14.兵团停止出战将就地解散，返回士兵装备、空闲人口。</label>
+  <label id="230">布阵说明</label>
+  <label id="231">前排,后排</label>
+  <label id="232">该武将在探索中</label>
+  <label id="233">提升领地等级才能出战更多部队</label>
+  <label id="234">出战部队: {0}</label>
+  <label id="235">兵种已变更为{0}[f15721]{1}级[-]</label>
+  <label id="236">招募成功</label>
+  <label id="237">部队解散成功</label>
+  <label id="238">装备或空闲人口不足</label>
+  <label id="239">布阵</label>
+  <label id="240">[9d7144]解锁[3478f6]阵容{0}[-]需要达到[e74848]VIP{1}[-]，花费[e74848]{2}[-]元宝。[-]</label>
+  <label id="245">成功解锁[ffcf2a]阵容{0}[-]</label>
+  <label id="246">解锁</label>
+  <label id="247">统率,智力,武力</label>
+  
+  <!--背包-->
+  <label id="250">装 备,兵 书,道 具,珍 品,装 备,信 物,神 兵,宝 物</label>
+  <label id="251">制 作,背 包</label>
+  <label id="252">库存: {0}</label>
+  <label id="253">消耗: {0}</label>
+  <label id="254">当前拥有: {0}</label>
+  <label id="255">分解信物</label>
+  <label id="256">使用</label>
+  <label id="257">分解</label>
+  <label id="258">取消</label>
+  <label id="259">[502512]预计库存精华:{0}[-]</label>
+  <label id="260">物品数量不足，去演武场商店买一些吧。</label>
+  <label id="261">恭喜获得</label>
+  <label id="262">确定</label>
+  <label id="263">提 示</label>
+  <label id="264">知道了</label>
+  <label id="265">好 的</label>
+  <label id="266">取 消</label>
+  <label id="267">[954E27]{0}[-]
+[502512]{1}[-]</label>
+<label id="268">增加保护时间成功。目前保护时间为: {0}小时{1}分钟</label>
+<label id="269">[954E27]拥有: [2FB500]{0}[-][-]</label>
+ <label id="270">[954E27]{0}[-]</label>
+ <label id="271">最大</label>
+ <label id="272">最小</label>
+ <label id="273">消耗:</label>
+ <label id="274">[954E27]{0}[-]</label>
+ <label id="275">物品数量不足，去集市买一些吧。</label>
+ <label id="280">消耗:</label>
+ <label id="281">生产:</label>
+ <label id="290">魂力不足</label>
+ 
+  <label id="300">演武场</label>
+  <label id="301">剩余次数</label>
+  <label id="302">当前奖励</label>
+  <label id="303">胜场</label>
+  <label id="304">开战</label>
+  <label id="305">战力：{0}</label>
+  <label id="306">征兵</label>
+  <label id="307">演武商店</label>
+  <label id="308">换一批</label>
+  <label id="309">（剩余{0}次）</label>
+  <label id="310">每天0点自动刷新</label>
+  <label id="311">刷新</label>
+  <label id="312">演武场说明</label>
+  <label id="313">1.演武场根据您当前的排名随机选取5名不同排名段的对手。
+
+2.挑战比自己排名高的对手获胜，自己将和对手互换排名。挑战失败排名不变。
+
+3.挑战比自己排名低的对手，无论胜负排名都不变。
+
+4.每次挑战，无论胜负都能获得1个演武勋章的奖励。
+
+5.每天完成3次、6次、10次挑战，都可获得一份宝箱奖励。
+
+6.每天免费挑战5次，挑战次数不足时可花费元宝购买，每天购买次数上限随vip等级提升。
+
+7.演武场不损耗士兵。</label>
+  <label id="314"></label>
+  <label id="315"></label>
+  <label id="316"></label>
+  <label id="317"></label>
+  <label id="318">{0}.</label>
+  <label id="319">演武宝箱</label>
+  <label id="320">确定</label>
+  <label id="321">3战奖励,6战奖励,10战奖励</label>
+  <label id="322">您确定花费{0}元宝增加5次挑战机会吗？</label>
+  <label id="323">今天购买次数已满，请明天再买</label>
+  <label id="324">演武场战斗为模拟战斗，不消耗士兵</label>
+  <label id="325">您还有{0}次挑战机会</label>
+  <label id="326">[9D6B3B]{0}[-][f85a0d]【{1}】[-]</label>
+  <label id="327">[9D6B3B]{0}[-][18c13D]【无家族】[-]</label>
+  <label id="328">更换对手成功</label>
+  
+  <!--训练营-->
+  <label id="400">训练营{0}级</label>
+  <label id="401">{0} {1}级</label>
+  <label id="402">训练等级上限：{0}{1}级</label>
+  <label id="403">物攻 {0}</label>
+  <label id="404">物防 {0}</label>
+  <label id="405">法防 {0}</label>
+  <label id="406">10级可进阶为【{0}】</label>
+  <label id="407">训练</label>
+  <label id="408">进阶</label>
+  <label id="409">法攻 {0}</label>
+  <label id="410">{0}{1}级</label>
+  <label id="411">点击进阶</label>
+  <label id="412">请主公选择要训练的兵种</label>
+  <label id="413">升级训练营提升训练等级上限</label>
+  <label id="414">已达最高阶兵种</label>
+  <label id="415">【{0}{1}级】训练完成</label>
+  <label id="416">{0}/{1}</label>
+  <label id="417">已达最高级</label>
+  
+  <!--商店-->
+  <label id="500">演武商店</label>
+  <label id="501">每天0点自动刷新</label>
+  <label id="502">刷新</label>
+  <label id="503">{0}x{1}</label>
+  <label id="504">[581c00]您今日的演武商店刷新次数已达上限[-]</label>
+  <label id="505">[581c00]您的元宝不够啦[-]</label>
+  <label id="506">[581c00]您确定购买[fe4a00]“{0}”[-]吗[-]</label>
+  <label id="507">[581c00]当前拥有：[04c600]{0}[-][-]</label>
+  <label id="508">嘤嘤嘤，土豪你好棒哦！</label>
+  
+  <!--网络连接相关-->
+  <label id="600">[EECD8F]连接中......[-]</label>
+  <label id="601">网络不稳定\n请确认网络连接畅通后再试</label>
+  <label id="602">重试</label>
+  <label id="603">您已经很久没有登录游戏了，请重新登录</label>
+  
+  <!--修行馆-->
+  <label id="700">修行馆{0}级</label>
+  <label id="701">统率影响部队出手速度，智力、武力影响部队属性与大招效果</label>
+  <label id="702">请选择武将</label>
+  <label id="703">主公，30级以上的武将才能开始修行哟~</label>
+  <label id="704">属性提升上限：+{0}</label>
+  <label id="705">统率,智力,武力</label>
+  <label id="706">+{0}</label>
+  <label id="707">成功率{0}%</label>
+  <label id="708">修行</label>
+  <label id="709">主公，快点击左上角选择武将哟</label>
+  <label id="710">{0}级</label>
+  <label id="711">[FE0100]已被俘[-]</label>
+  <label id="712">[FE0100]已阵亡[-]</label>
+  <label id="713">召唤</label>
+  <label id="714">以下武将尚未招募</label>
+  <label id="715">修行失败</label>
+  <label id="716">修行成功</label>
+  <label id="717">全部</label>
+  <label id="718">统率</label>
+  <label id="719">[954E27]统率决定武将所在部队的行动速度。统率越高，部队行动速度越快。统率同时少量影响部队的双攻和双防[-]</label>
+  <label id="720">智力</label>
+  <label id="721">[954E27]智力决定武将所在部队的法攻和法防。一些建筑的产能可通过安排放置智力型武将得到提升。[-]</label>
+  <label id="722">武力</label>
+  <label id="723">[954E27]武力决定武将所在部队的物攻和物防。一些建筑的产能可通过安排放置武力型武将得到提升。[-]</label>
+  <label id="724">[9d5f21]{0}[-]</label>
+  <label id="725">[db0402]{0}[-]</label>
+  <label id="726">您的兵书不足，是否自动将残页转换为兵书？</label>
+  <label id="727">您的魂晶石不足，是否自动将魂力转换为魂晶石？</label>
+  <label id="728">[532512]可选择带有【[009966]{0}[-]建筑】治理技能的武将[-]</label>
+  
+  <!--建设,领地，生产-->
+  <label id="800">级</label>
+  <label id="801">生产加成</label>
+  <label id="802">加速</label>
+  <label id="803">建设</label>
+  <label id="804">升级</label>
+  <label id="805">建筑</label>
+  <label id="806">人口</label>
+  <label id="807">武将</label>
+  <label id="808">附属领地</label>
+  <label id="809">空闲人口</label>
+  <label id="810">士兵</label>
+  <label id="811">工匠</label>
+  <label id="812">位于</label>
+  <label id="813">[411408]上级统治者：</label>
+  <label id="814">领地升级所需条件</label>
+  <label id="815">升级预览</label>
+  <label id="816">未达成</label>
+  <label id="817">已达成</label>
+  <label id="818">领地等级</label>
+  <label id="819">级城市</label>
+  <label id="820">秒后获得</label>
+  <label id="821">没有多余的空闲人口</label>
+  <label id="822">解锁新建筑</label>
+  <label id="823">解锁新功能</label>
+  <label id="824">附属领地上限</label>
+  <label id="825">武将栏位配置</label>
+  <label id="826">出战士兵上限</label>
+  <label id="827">[5c1b02]需要{0}级[0055fe]{1}</label>
+  <label id="828">[1BA900]自由状态</label>
+  <label id="829">每个生产人口每分钟</label>
+  <label id="830">您的领地已提升至[0dc837]{0}[-]</label>
+  <label id="831">建筑队正在忙着建设【{0}】呢，您可以下令加速完成</label>
+  <label id="832">已经满级</label>
+  <label id="833">附属领地数量</label>
+  <label id="834">部队配置武将</label>
+  <label id="835">建筑配置武将</label>
+  <label id="836">部队士兵数量</label>
+  <label id="837">上阵部队数量</label>
+  <label id="838">可升级</label>
+  <label id="839">{0}建造完成</label>
+  <label id="840">{0}已升到{1}级</label>
+  <label id="841">[10C62F](+{0})[-]</label>
+  <label id="842">[10C62F](+{0}%)[-]</label>
+  <label id="843">[10C62F](消耗减少{0}%)[-]</label>
+  <label id="844">解锁新建筑</label>
+  <label id="845">已满级</label>
+  <label id="846">{0}奖励</label>
+  <label id="847">升级奖励</label>
+  <label id="848">好的</label>
+  <label id="849">武将最高等级</label>
+  <label id="850">[682215]建筑升级后不要忘记去安排生产哦~[-]</label>
+  <label id="851">人口分配成功~</label>
+  
+  
+  <!--武将俘虏-->
+  <label id="900">俘虏</label>
+  <label id="901">对俘获武将可进行处决、释放操作，未进行任何操作的关押24小时后自动释放</label>
+  <label id="902">俘获武将</label>
+  <label id="903">被俘武将</label>
+  <label id="904">{0}级</label>
+  <label id="905">+{0}</label>
+  <label id="906">关押:</label>
+  <label id="907">获得赎金</label>
+  <label id="908">处决</label>
+  <label id="909">释放</label>
+  <label id="910">复活</label>
+  <label id="911">已救回武将 {0}</label>
+  <label id="912">您的铜钱不足以支付赎金</label>
+  <label id="913">武将被俘3小时候后才可赎回</label>
+  <label id="914">成功复活了 {0}</label>
+  <label id="915">您的 [fc4c00]武将复活丹[-] 不足以复活该武将</label>
+  <label id="916">赎回</label>
+  <label id="917">已处决</label>
+  <label id="918">您确定要处决该武将吗</label>
+  <label id="919">您确定要释放该武将吗</label>
+  <label id="920">您确定交付[24c618]{0}铜钱[-]赎回[fc4c00]{1}+{2}[-]吗？</label>
+  <label id="921">俘</label>
+  <label id="922">亡</label>
+  <label id="923">该武将已被俘，是否前往赎回该武将？</label>
+  <label id="924">该武将已阵亡，是否前往复活该武将？</label>
+  <label id="925">选择武将</label>
+  <label id="926">选择武将说明</label>
+  <label id="927">选择武将说明内容</label>
+  <label id="928">武将已死亡</label>
+  <label id="929">武将已被俘</label>
+  <label id="930">暂时没有符合条件的武将
+
+请多多寻访获得武将</label>
+  <label id="931">需要赎金</label>
+  <label id="932">要赎金</label>
+  <label id="933">您确定向[0185e7]{0}[-]要求[0185e7]{1}[-]铜钱赎金吗？对方支付赎金后将立即释放武将。如果关押24小时仍未支付赎金，将自动处决武将。</label>
+  <label id="934">您确定处决[0185e7]{0}[-]的武将[0185e7]{1}[-]吗？处决可获得[0185e7]{2}[-]个勾玉。</label>
+  <label id="935">您确定接受[0185e7]{0}[-]支付的赎金[0185e7]{1}[-]铜钱释放被俘武将[0185e7]{2}[-]吗？</label>
+  <label id="936">已向对方发送要求赎金信件，等待对方响应</label>
+  <label id="937">处决武将成功，奖励通过信件发送</label>
+  <label id="938">释放武将成功</label>
+  <label id="939">赎回</label>
+  <label id="940">请求赎回</label>
+  <label id="941">已求赎回</label>
+  <label id="942">[0185e7]{0}[-]要求您支付赎金[ec4901]{1}铜钱[-]，来赎回被俘武将[ff2b01]{2}[-]，您要支付赎金吗？支付赎金后立即赎回被俘武将。</label>
+  <label id="943">您是否交付赎金[ec4901]{0}铜钱[-]，向[0185e7]{1}[-]请求赎回被俘武将[ff2b01]{2}[-]？交付赎金后，如果关押24小时仍未受理，将自动释放武将。</label>
+  <label id="944">支付赎金成功，已赎回被俘武将</label>
+  <label id="945">发送赎回请求成功</label>
+  <label id="946">处决时间</label>
+  <label id="947">被处决时间</label>
+  <label id="948">可要求赎金</label>
+  <label id="949">对方已支付赎金</label>
+  <label id="950">处决名单</label>
+  <label id="951">复活该武将消耗{0}个武将复活丹，是否复活？</label>
+  <label id="952">可向俘获玩家请求赎回武将，交付赎金后若对方未作处理，在关押24小时后自动释放并归还赎金</label>
+  <label id="953">处决武将可获得少许勾玉，释放武将可获得大量铜钱。被处决的武将需要使用“武将复活丹”复活。</label>
+  
+  <!--其他-->
+  <label id="1000">正在与服务器通信...</label>
+  <label id="1001">无法与服务器通信</label>
+  <label id="1002">重试</label>
+  <label id="1003">账号验证失败</label>
+  <label id="1004">您已被禁止登陆至{time}</label>
+  <label id="1005">您已经很久没有登录游戏了，请重新登录</label>
+  <label id="1006">确认退出游戏？</label>
+  
+  <!--登录-->
+  <label id="1100">账号验证失败</label>
+  <label id="1101">您已被禁止登陆至{time}</label>
+  <label id="1102">您的帐号已经在其它地方登录，点击退出游戏！</label>
+  <label id="1103">[ff0000]未开服[-]</label>
+  <label id="1104">[808080]维护[-]</label>
+  <label id="1105">[11a502]畅通[-]</label>
+  <label id="1106">[ec0b00]火爆[-]</label>铜雀台
+  <label id="1107">[00ff00]新区[-]</label>
+  <label id="1108">[808080]已关闭[-]</label>
+  <label id="1109">{0}服</label>
+  <label id="1110">切外网</label>
+  <label id="1111">切内网</label>
+  <label id="1112">服务器未开放</label>
+  <label id="1113">切换账号</label>
+  <label id="1114">登入游戏</label>
+  <label id="1115">区服</label>
+  <label id="1116">版本号：{0}</label>
+  <label id="1117">最近登录</label>
+  <label id="1118">选择服务器</label>
+  <label id="1119">无</label>
+  <label id="1120">公告</label>
+  <label id="1121">知道了</label>
+  <label id="1122">请选择服务器</label>
+  <label id="1123">服务器将于{0}开启，请耐心等待</label>
+  <label id="1124">yyyy年MM月dd日 HH:mm</label>
+  <label id="1125">服务器正在维护</label>
+  <label id="1126">服务器已经关闭</label>
+  <label id="1127">账号</label>
+  
+  <!--错误代码-->
+  <label id="1200">当前元宝不足，是否去充值？</label>
+  <label id="1201">当前铜钱不足，是否去招财？</label>
+  <label id="1202">当前体力不足，是否去购买体力？</label>
+  
+  <!--任务-->
+  <label id="1301">前往查看</label>
+  <label id="1302">领取奖励</label>
+  <label id="1303">暂未打开</label>
+  <label id="1304">主线</label>
+  <label id="1305">支线</label>
+  <label id="1306">委托</label>
+  <label id="1307">任务奖励</label>
+  <label id="1308">（{0}/{1}）</label>
+  <label id="1309">新手领主目标{0}</label>
+  <label id="1310">领取</label>
+  <label id="1311">达成以下目标，领取宝箱奖励。</label>
+  <label id="1312">当前没有土匪，寻访有概率遇到土匪</label>
+  
+  <!--主界面-->
+  <label id="1401">任务</label>
+  <label id="1402">月卡</label>
+  <label id="1403">充值</label>
+  <label id="1404">福利</label>
+  <label id="1405">首充</label>
+  <label id="1406">领地处于保护期。剩余保护时间：
+  
+  [76FBA3FF]{0}[-]</label>
+  
+  <!--寻访-->
+  <label id="1701">开启连寻,关闭连寻</label>
+  <label id="1702">[581B01]寻访中......[-]</label>
+  <label id="1703">连寻中</label>
+  
+  <!--掠地-->
+  <label id="1500">攻击目标</label>
+  <label id="1501">无家族</label>
+  <label id="1502">战力</label>
+  <label id="1503">箭塔</label>
+  <label id="1504">城墙</label>
+  <label id="1505">守军攻击+{0}%</label>
+  <label id="1506">守军防御+{0}%</label>
+  <label id="1507">选择1种战利品</label>
+  <label id="1508">当前累积</label>
+  <label id="1509">村庄名称</label>
+  <label id="1510">奖励</label>
+  <label id="1511">敌军详情</label>
+  <label id="1512">搜索</label>
+  <label id="1513">攻击</label>
+  <label id="1514">士兵</label>
+  <label id="1515">级</label>
+  <label id="1516">请选中一项战利品</label>
+  <label id="1517">掠地说明</label>
+  <label id="1518">1.  随机搜索同级领地作为目标
+
+2.  只能攻击离线的玩家
+
+3.  战斗双方都会损失士兵，武将不会阵亡
+
+4.  医馆可以救回一部分战斗中损失的士兵
+
+5.  如果附属领地数量没达到上限，掠地胜利可获得对方一座附属领地，若对方没有附属领地则将对方收为附属领地
+
+6. 掠地胜利有小概率破坏对方随机一座建筑，被破坏的建筑建筑等级-1
+
+7. 防守胜利会获得1小时保护期，防守失败获得6小时保护期，VIP等级5以上玩家为8小时
+
+8. 处于保护期的玩家若主动攻击他人，将解除保护期
+
+9. 掠地战斗中如果部队的士兵数量少于士兵上限的20%，战败时有概率被俘虏武将
+
+  </label> <label id="1519">附属领地说明</label>
+  <label id="1520">1. 每个附属领地都可以额外产出大量资源
+
+2. 升级领地、升级VIP可以增加可拥有的附属领地的数量上限
+
+3. 附属领地的等级越高，资源存储上限越大、每小时产出资源量越大
+
+4. 升级自己的VIP等级，可提升附属领地的资源存储上限、每小时产出资源量
+
+5. 每次“征收”后会随机改变附属产出的资源种类
+
+6. 当某个附属领地上出现匪军时会致使其生产停滞，无法进行征收
+
+7. 点击匪军图标可帮助附属领地直接消灭匪军
+
+8. 脱离统治的附属领地，已经产出的资源仍归原领主获得
+
+9. 附属领地超出上限时，继续获得附属领地将自动驱逐等级最低的附属领地，驱逐前自动征收产出资源
+</label>
+  <label id="1521">附属领地({0}/{1})</label>
+  <label id="1522">每小时产量</label>
+  <label id="1523">确定要一键驱逐吗？驱逐后您将失去所有的附属领地。</label>
+  <label id="1524">没有可以驱逐的领地</label>
+  <label id="1525">有土匪，请先帮助驱逐土匪</label>
+  <label id="1526">前往掠地</label>
+  <label id="1527">清除土匪</label>
+  <label id="1528">驱逐</label>
+  <label id="1529">是否帮助附属领地消灭土匪？灭匪后附属可继续生产资源。</label>
+  <label id="1530">是否驱逐？</label>
+  <label id="1531">驱逐成功</label>
+  <label id="1532">{0}个/小时</label>
+  <label id="1533">您确定将 [ff0501]{0}[-] 逐出家族吗?</label>
+  <label id="1534">逐出</label>
+  <label id="1535">算了</label>
+  <label id="1536">您确定将族长之位转让给 [ff0501]{0}[-] 吗?</label>
+  <label id="1537">转让</label>
+  <label id="1538">您确定任命 [ff0501]{0}[-] 为长老吗?</label>
+  <label id="1539">任命</label>
+  <label id="1540">您确定任命 [ff0501]{0}[-] 为成员吗?</label>
+  
+  
+    <!--邮件界面-->
+  <label id="1600">信件</label>
+  <label id="1601">系统</label>
+  <label id="1602">战报</label>
+  <label id="1603">一键收取</label>
+  <label id="1604">发件人</label>
+  <label id="1605">附件</label>
+  <label id="1606">领取</label>
+  <label id="1607">主公，您目前没有信件</label>
+  <label id="1608">回看战报</label>
+  <label id="1609">复仇</label>
+  <label id="1610">求助</label>
+  <label id="1611">[18c13d]{0}[-][0067ff]{1}[-][62250d]帮助[-][18c13d]{2}[-][0067ff]{3}[-][62250d]向[-][ff0501]{4}[-][62250d]的[-][0067ff]{5}[-][62250d]发起复仇，得胜而归。[-]</label>
+  <label id="1612">[18c13d]{0}[-][0067ff]{1}[-][62250d]帮助[-][18c13d]{2}[-][0067ff]{3}[-][62250d]向[-][ff0501]{4}[-][62250d]的[-][0067ff]{5}[-][62250d]发起复仇，无奈敌众我寡，铩羽而归。[-]</label>
+  <label id="1613">[18c13d]{0}[-][0067ff]{1}[-][62250d]被[-][ff0501]{2}[-][62250d]的[-][0067ff]{3}[-][62250d]忽然袭击，不幸战败。还望家族亲友助他一臂之力，报仇雪恨。[-]</label>
+  <label id="1614">帮助</label>
+  <label id="1615">回放战报</label>
+  <label id="1616">[18c13d]{0}[-][0067ff]{1}[-][62250d]帮助[-][18c13d]{2}[-][0067ff]{3}[-][62250d]向[-][0067ff]{4}[-][62250d]发起复仇，得胜而归。[-]</label>
+  <label id="1617">[18c13d]{0}[-][0067ff]{1}[-][62250d]帮助[-][18c13d]{2}[-][0067ff]{3}[-][62250d]向[-][0067ff]{4}[-][62250d]发起复仇，无奈敌众我寡，铩羽而归。[-]</label>
+  <label id="1618">[18c13d]{0}[-][0067ff]{1}[-][62250d]被[-][0067ff]{2}[-][62250d]忽然袭击，不幸战败。还望家族亲友助他一臂之力，报仇雪恨。[-]</label>
+  <label id="1619">new</label>
+  <label id="1620">[62250d]我们家族向驻守[ff0501]{0}[-]的[0067ff]{1}[-]发起了宣战，请大家积极响应，派兵参加战斗。</label>
+  <label id="1621">[62250d]大家注意啦！[ff0501]{0}[-]向我们家族的[0067ff]{1}[-]发起了宣战，请大家积极出兵应敌。</label>
+  <label id="1622">[18c13d]{0}[-][0067ff]{1}[-][62250d]向[0067ff]{2}[-]出兵了！</label>
+  <label id="1623">[18c13d]{0}[-][0067ff]{1}[-][62250d]从[0067ff]{2}[-]撤走了军队！[-]</label>
+  <label id="1624">[62250d]国战开始了！[-]</label>
+  <label id="1625">[62250d]我们家族的[0067ff]{0}[-]击败了[ff0501]{1}[-]的[0067ff]{2}[-]。</label>
+  <label id="1626">[62250d]我们家族的[0067ff]{0}[-]被[ff0501]{1}[-]的[0067ff]{2}[-]击败了。</label>
+  <label id="1627">[62250d]我们家族击败了[ff0501]{0}[-]！</label>
+  <label id="1628">[62250d]我们家族击败了[ff0501]{0}[-]。成功的夺得了[0067ff]{1}[-]。</label>
+  <label id="1629">[62250d]我们家族击败了[ff0501]{0}[-]。成功的守住了[0067ff]{1}[-]。</label>
+  <label id="1630">[62250d]我们家族被[ff0501]{0}[-]击败了，没能攻占[0067ff]{1}[-]。</label>
+  <label id="1631">[62250d]我们家族被[ff0501]{0}[-]击败了。我们的[0067ff]{1}[-]被敌人占据了。</label>
+  <label id="1632">[62250d]我们宣战的[0067ff]{0}[-]被[ff0501]{1}[-]抢先拿下了，我们家族出战的军队只好撤回了。</label>
+  
+  <!--集市界面-->
+  <label id="1800">集市</label>
+  <label id="1801">每天9、12、18、21、24点自动刷新</label>
+  <label id="1802">刷新</label>
+  <label id="1803">剩余刷新次数：{0}</label>
+  <label id="1804">嘤嘤嘤，土豪你好棒哦！</label>
+  <label id="1805">当前在线</label>
+  
+  <!--家族界面-->
+  <label id="1900">家族</label>
+  <label id="1901">聊天,签到,管理,探索,商店,战报,Boss,家族战</label>
+  <label id="1902">请输入您要说的话(最多100个字符)</label>
+  <label id="1903">发送</label>
+  <label id="1904">[5E331DFF]活跃度再增加[-][fd5b0d]{0}[-]</label>
+  <label id="1905">[5E331DFF]家族即可升到[-][fd5b0d]{0}级[-]</label>
+  <label id="1906">{0}退出家族</label>
+  <label id="1907">{0}加入家族</label>
+  <label id="1908">{0}已签到</label>
+  <label id="1909">星期{0}</label>
+  <label id="1910">签到</label>
+  <label id="1911">退出,设置,公告,招募,信件</label>
+  <label id="1912">家族成员{0}/{1}</label>
+  <label id="1913">每天0点自动刷新</label>
+  <label id="1914">刷新</label>
+  <label id="1915">上次登录</label>
+  <label id="1916">是否退出家族</label>
+  <label id="1917">是否解散家族</label>
+  <label id="1918">此权限属于族长</label>
+  <label id="1919">{0}/{1}</label>
+  <label id="1920">今天已经签过到了</label>
+  <label id="1921">家族列表</label>
+  <label id="1922">{0}级</label>
+  <label id="1923">[fe2c28]不允许加入[-]</label>
+  <label id="1924">[00ab40]自由加入[-]</label>
+  <label id="1925">[1492d9]{0}以上[-]</label>
+  <label id="1926">创建家族</label>
+  <label id="1927">选择家族底框</label>
+  <label id="1928">选择家族图标</label>
+  <label id="1929">请选择家族战旗</label>
+  <label id="1930">选择家徽</label>
+  <label id="1931">选择战旗</label>
+  <label id="1932">请输入家族名称</label>
+  <label id="1933">2-7个字符</label>
+  <label id="1934">创建</label>
+  <label id="1935">ID查询</label>
+  <label id="1936">换一批</label>
+  <label id="1937">申请加入</label>
+  <label id="1938">公告</label>
+  <label id="1939">请输入家族公告</label>
+  <label id="1940">族长比较懒，还没发公告</label>
+  <label id="1941">修改</label>
+  <label id="1942">招募</label>
+  <label id="1943">请输入招募宣言</label>
+  <label id="1944">最多200个字</label>
+  <label id="1945">招募条件</label>
+  <label id="1946">领地等级</label>
+  <label id="1947">{0}级村庄以上</label>
+  <label id="1948">保存</label>
+  <label id="1949">不允许加入</label>
+  <label id="1950">信件</label>
+  <label id="1951">全员信件标题</label>
+  <label id="1952">不能多于12字</label>
+  <label id="1953">信件内容</label>
+  <label id="1954">不能多于100字</label>
+  <label id="1955">发送</label>
+  <label id="1956">包含非法字符</label>
+  <label id="1957">请输入家族名称</label>
+  <label id="1958">您输入的家族名称或ID错误</label>
+  <label id="1959">{0}级城市</label>
+  <label id="1960">逐出家族</label>
+  <label id="1961">转让族长</label>
+  <label id="1962">任命为成员</label>
+  <label id="1963">官职</label>
+  <label id="1964">爵位</label>
+  <label id="1965">切磋</label>
+  <label id="1966">领地等级</label>
+  <label id="1967">领地人口</label>
+  <label id="1968">附属领地</label>
+  <label id="1969">建设排名</label>
+  <label id="1970">繁荣度</label>
+  <label id="1971">名将排名</label>
+  <label id="1972">历史名将</label>
+  <label id="1973">战争排名</label>
+  <label id="1974">战争积分</label>
+  <label id="1975">[60331d]家族ID[-]  [fc8651]{0}[-]</label>
+  <label id="1976">信件的标题和内容不能为空</label>
+  <label id="1977">家族战,家族Boss</label>
+  <label id="1978">队伍{0}</label>
+  <label id="1979">将于{0}:00开启,招募中 将于{0}:00点出发,探索中 将于{0}:00点结束,已完成搜索</label>
+  <label id="1980">加入</label>
+  <label id="1981">退出</label>
+  <label id="1982">完成</label>
+  <label id="1983">您的家族已经击杀本周所有Boss</label>
+  <label id="1984">[0169ff]本周剩余[-][fe0f03]{0}组[-][0169ff]Boss[-]</label>
+  <label id="1985">探索结束</label>
+  <label id="1986">我的分数：{0}</label>
+  <label id="1987">我的评级</label>
+  <label id="1988">队伍分数</label>
+  <label id="1989">领取奖励</label>
+  <label id="1990">查询家族</label>
+  <label id="1991">请输入查询的家族名字或ID</label>
+  <label id="1992">发送</label>
+  <label id="1993">剩余部队：{0}%</label>
+  <label id="1994">参与击杀Boss的
+  家族成员都可以获得下列奖励</label>
+  <label id="1995">本次探索：</label>
+  <label id="1996">，{0}次，</label>
+  <label id="1997">任命为长老</label>
+  <label id="1998">不能少于{0}个字，且不能超过{1}个字</label>
+  <label id="1999">，{0}次。</label>
+  
+  <!--平匪-->
+  <label id="2000">扫荡</label>
+  <label id="2001">攻击</label>
+  <label id="2002">{0}后将消失无踪</label>
+  <label id="2003">战力</label>
+  <label id="2004">奖励 :</label>
+  <label id="2005">可能掉落 :</label>
+  <label id="2006">平匪</label>
+  <label id="2007">{h}小时{m}分钟后将消失无踪</label>
+  <label id="2008">1.寻访中有概率遇到土匪。
+
+2.每天领地会自动出现3股盗匪。
+
+3.每天的0点，没有被消灭的盗匪将会自动消失。
+
+4.土匪的部队在战斗后不会回复。
+
+5.领地等级达到“3级村庄”或以上会出现土匪首领，每遇到6股土匪就遭遇一次土匪首领。
+
+6.每天最多遇到300股土匪，包括土匪首领。
+</label>
+  <label id="2009">平匪说明</label>
+  <label id="2010">土匪首领不能扫荡</label>
+  <label id="2011">没有土匪</label>
+  
+    <!--掠地战报-->
+  <label id="2100">麾下众将</label>
+  <label id="2101">我军败于{0}</label>
+  <label id="2102">我军击退{0}</label>
+  <label id="2103">掠地成功</label>
+  <label id="2104">领主大人，{0}您在对{1}进行的掠地战斗中胜利了。</label>
+  <label id="2105">损失了{0}名士兵。</label>
+  <label id="2106">俘虏了敌方武将{0}。</label>
+  <label id="2107">破坏了敌方建筑{0}。</label>
+  <label id="2108">成功将对方纳入了附属势力</label>
+  <label id="2109">夺取了敌方的附属势力{0}。</label>
+  <label id="2110">掠地失败</label>
+  <label id="2111">领主大人，{0}您在对{1}进行的掠地战斗中失败了，损失了{2}名士兵。</label>
+  <label id="2112">武将{0}被敌方俘虏了。</label>
+  <label id="2113">领主大人，{0}您成功抵御了来自{1}的进攻，但也损失了{2}名士兵。</label>
+  <label id="2114">防守失败</label>
+  <label id="2115">防守成功</label>
+  <label id="2116">领主大人，{0}您遭到了{1}的攻击，损失了{2}名士兵。</label>
+  <label id="2117">{0}成为了您的领主</label>
+  <label id="2118">夺取了您的附属势力{0}。</label>
+  <label id="2119">您的建筑{0}被破坏了，建筑等级-1。</label>
+  <label id="2120">您可以进行复仇或者向家族中的高手进行求助。</label>
+  <label id="2121">演武场战报</label>
+  <label id="2122">演武管理员</label>
+  <label id="2123">您在演武场向{0}发起挑战，您胜利了，排名上升至{1}。</label>
+  <label id="2124">您在演武场向{0}发起挑战，您胜利了，排名不变。</label>
+  <label id="2125">您在演武场向{0}发起挑战，您失败了，排名不变。</label>
+  <label id="2126">{0}在演武场向您发起挑战，您防守胜利，排名不变。</label>
+  <label id="2127">{0}在演武场向您发起挑战，您防守失败，排名下降至{1}。</label>
+  <label id="2128">{0}在演武场向您发起挑战，您防守失败，排名不变。</label>
+  <label id="2129">{0}向您发起切磋，您兵强马壮、技高一筹，获得了胜利。</label>
+  <label id="2130">{0}向您发起切磋，您兵微将寡、技逊一筹，遗憾败北了。</label>
+  <label id="2131">切磋战斗 胜利</label>
+  <label id="2132">切磋战斗 失败</label>
+  <label id="2133">从对方的仓库中搜刮了{0}。</label>
+  <label id="2134">被夺走了{0}x{1}。</label>
+  <label id="2135">复仇成功</label>
+  <label id="2136">复仇失败</label>
+  <label id="2137">复仇防守失败</label>
+  <label id="2138">复仇防守成功</label>
+  <label id="2139">领主大人，{0}我们对{1}发起复仇胜利了！</label>
+  <label id="2140">领主大人，{0}我们对{1}发起复仇战败了！损失了{2}名士兵。</label>
+  <label id="2141">领主大人，{0}{1}对我们领地发起疯狂复仇，我们战败了！损失了{2}名士兵。</label>
+  <label id="2142">领主大人，{0}{1}对我们领地发起疯狂复仇，我们击溃了来犯之敌！</label>
+  <label id="2143">被帮助成功</label>
+  <label id="2144">被帮助失败</label>
+  <label id="2145">帮助别人成功</label>
+  <label id="2146">帮助别人失败</label>
+  <label id="2147">镇压成功</label>
+  <label id="2148">镇压失败</label>
+  <label id="2149">领主大人，{0}{1}{2}帮我们向{3}复仇，得胜而归。总算为我们出了一口气！ </label>
+  <label id="2150">领主大人，{0}{1}{2}帮我们向{3}复仇，不幸失败。 </label>
+  <label id="2151">领主大人，您大兴王道帮助{0}{1}向{2}复仇，得胜而归。为受欺凌者争回一口气。</label>
+  <label id="2152">领主大人，您大兴王道帮助{0}{1}向{2}复仇，无奈敌众我寡，铩羽而归。</label>
+  <label id="2153">领主大人，{0}帮助{1}复仇，兴兵来犯，被我们击败。</label>
+  <label id="2154">领主大人，{0}帮助{1}复仇，兴兵来犯。我们拼死抵抗，无奈敌众我寡，败下阵来。</label>
+  <label id="2155">您已经向家族发布了求助信息</label>
+  <label id="2156">您还没有加入家族，无法求助</label>
+  <label id="2157">您当前处于保护时间，攻击别人会解除保护，确定要攻击吗？</label>
+  <label id="2158">当前玩家处于保护时间，</label>
+  <label id="2159">您当前处于保护时间，攻击别人会解除保护。当前玩家处于保护时间，</label>
+  <label id="2160">附属领地{0}被夺走了</label>
+  <label id="2161">您的领地成为{0}的附属领地</label>
+  <label id="2162">您向{0}发起切磋，您技高一筹，取得了胜利</label>
+  <label id="2163">您向{0}发起切磋，对手技高一筹，您失败了！</label>
+  <label id="2164">{0}向您发起了切磋，您技高一筹，击败了对方！</label>
+  <label id="2165">{0}向您发起了切磋，对方技高一筹，您失败了！</label>
+  <label id="2166">领主大人， {0}您成功抵御了来自{1}携带[ff6100]强攻令[-]的入侵，损失了{2}名士兵。</label>
+  <label id="2167">领主大人，{0}{1}携带[ff6100]强攻令[-]对我们领地发起疯狂复仇，我们击溃了来犯之敌！</label>
+  <label id="2168">领主大人，{0}携带[ff6100]强攻令[-]帮助{1}复仇，兴兵来犯，被我们击败。</label>
+  <label id="2169">领主大人，{0}您遭到了{1}携带[ff6100]强攻令[-]的攻击，损失了{2}名士兵。</label>
+  <label id="2170">领主大人，{0}{1}携带[ff6100]强攻令[-]对我们领地发起疯狂复仇，我们战败了！损失了{2}名士兵。</label>
+  <label id="2171">领主大人，{0}携带[ff6100]强攻令[-]帮助{1}复仇，兴兵来犯。我们拼死抵抗，无奈敌众我寡，败下阵来。</label>
+  <label id="2172">注意！您的战力比对方低，战败将失去大量兵力！是否发动进攻？</label>
+  <label id="2173">确定消耗1个强攻令强行攻击吗？</label>
+  <label id="2174">保护期间内第{0}次攻击该玩家需要消耗{1}个强攻令，确定强攻吗？</label>
+
+  <!--聊天-->
+  <label id="2200">世界</label>
+  <label id="2201">私聊</label>
+  <label id="2202">公告</label>
+  <label id="2203">发送</label>
+  <label id="2204">请输入您要说的话(最多100个字符)</label>
+  <label id="2205">请输入您要说的话</label>
+  <label id="2206">[7E3C02FF]对[-]{0}[7E3C02FF]说[-]</label>
+  <label id="2207">没有私聊对象</label>
+
+  <!--战斗-->
+  <label id="2300">{0}{1}级</label>
+  <label id="2301">行动槽 {0}</label>
+  <label id="2302">物攻 {0}%</label>
+  <label id="2303">物防 {0}%</label>
+  <label id="2304">法攻 {0}%</label>
+  <label id="2305">法防 {0}%</label>
+  <label id="2306">怒气 {0}%</label>
+  <label id="2307">速度 {0}%</label>
+  <label id="2308">升到2级乡邑或VIP1方可跳过战斗</label>
+  <label id="2309">免疫</label>
+  <label id="2310">吸收 {0}</label>
+  <label id="2311">{0}+{1}</label>
+  <label id="2312"> {0}级</label>
+  <label id="2313">被封禁</label>
+  <label id="2314">物攻 {0}</label>
+  <label id="2315">物防 {0}</label>
+  <label id="2316">法攻 {0}</label>
+  <label id="2317">法防 {0}</label>
+  <label id="2318">怒气 {0}</label>
+  <label id="2319">速度 {0}</label>
+  
+   <!--日常-->
+  <label id="2400">日常</label>
+  <label id="2401">每天0点刷新，完成其中{0}个任务，
+就可以开启宝箱，获得超值奖励！</label>
+<label id="2402">查看奖励</label>
+<label id="2403">领取</label>
+<label id="2404">日常礼包</label>
+<label id="2405">今日已完成: {0}</label>
+<label id="2406">前往</label>
+
+
+  <!--排行榜-->
+  <label id="2500">个人榜,家族榜</label>
+  <label id="2501">建设榜,名将榜,战争榜,演武榜,建设榜,名将榜,战争榜,</label>
+  <label id="2502">[502611FF]以建筑等级总和进行排名，每晚9点根据排名发送奖励信件。奖品为[-][006cff]【铜钱】[-],[502611FF]以拥有的S/A级武将数量进行排名，每晚9点根据排名发送奖励信件。奖品为[-][006cff]【勾玉】[-],[502611FF]附属领地争夺战胜利+1分、失败-1分，每晚9点根据战争积分排名发送奖励信件。奖品为[-][006cff]【魂力】[-],[502611FF]根据演武场排名，每晚9点发送奖励信件。奖品为[-][006cff]【演武勋章】【元宝】[-],[502611FF]以家族中所有成员的建设繁荣度的总和进行排名。家族建设榜不设奖励。[-],[502611FF]以家族中所有成员拥有的S/A级武将数量总和进行排名。家族名将榜不设奖励。[-],[502611FF]以家族中所有成员的战争积分总和进行排名。家族战争榜不设奖励。[-]</label>
+  <label id="2503">演武榜</label>
+  <label id="2504">{0}级城市</label>
+  <label id="2505">您当前没有加入任何家族</label>
+  <label id="2506">繁荣度,历史名将,战争积分,演武积分</label>
+
+  <!--福利-->
+  <label id="2600">兑换</label>
+  <label id="2601">请输入兑换码</label>
+  <label id="2602">开吃</label>
+  <label id="2603">礼包码不能为空</label>
+  <label id="2604">{0}级</label>
+  <label id="2605">{m}分{s}秒</label>
+  <label id="2606">未达成</label>
+  <label id="2607">签到{0}天</label>
+  <label id="2608">购买</label>
+  <label id="2609">已购买</label>
+  <label id="2610">VIP等级不足</label>
+  <label id="2611">V{0}双倍</label>
+  <label id="2612">已购买人数: {0}</label>
+  <label id="2613">购买成功</label>
+  <label id="2614">(VIP{0}可购买)</label>
+  
+  <!--充值-->
+  <label id="2700">充值</label>
+  <label id="2701">{0}/{1}</label>
+  <label id="2702">特权</label>
+  <label id="2703">[561F05FF]再充[-][fe5600]{0}[-]</label>
+  <label id="2704">就能晋级</label>
+  <label id="2705">享受更多特权</label>
+  <label id="2706">首次</label>
+  <label id="2707">{0}元宝</label>
+  <label id="2708">额外送{0}元宝</label>
+  <label id="2710">VIP{0}特权</label>
+  <label id="2711">VIP{0}专属礼包</label>
+  <label id="2712">领取</label>
+  <label id="2713">超值月卡,至尊月卡,永久月卡</label>
+  <label id="2714">[520f02]剩余[-][ff3d00]{0}[-][520f02]天[-]</label>
+  <label id="2715">购买</label>
+  <label id="2716">已领取</label>
+  <label id="2717">￥ {0}</label>
+  <label id="2718">获取充值订单失败\n请确认网络连接畅通后再试</label>
+  
+  
+  <!--玩家信息-->
+  <label id="2800">切磋</label>
+  <label id="2801">爵位：</label>
+  <label id="2802">领地等级</label>
+  <label id="2803">{0}级城市</label>
+  <label id="2804">建设排名</label>
+  <label id="2805">繁荣度</label>
+  <label id="2806">名将排名</label>
+  <label id="2807">历史名将</label>
+  <label id="2808">战争排名</label>
+  <label id="2809">战争积分</label>
+  <label id="2810">第{0}名</label>
+  <label id="2811">无</label>
+  <label id="2812">切磋</label>
+  <label id="2813">领地人口</label>
+  <label id="2814">附属领地</label>
+  <label id="2815">私聊</label>
+  <label id="2816">更换形象</label>
+  <label id="2817">查看特权</label>
+  <label id="2818">公告</label>
+  <label id="2819">设置</label>
+  <label id="2820">形象</label>
+  <label id="2821">头像框</label>
+  <label id="2822">查看信息</label>
+  <label id="2823">使用</label>
+  <label id="2824">使用期限：</label>
+  <label id="2825">设置</label>
+  <label id="2826">音乐</label>
+  <label id="2827">音效</label>
+  <label id="2828">暂无公告</label>
+  <label id="2829">未解锁</label>
+  <label id="2830">正在使用</label>
+  <label id="2831">改名成功</label>
+  <label id="2832">点击输入框修改名字</label>
+  <label id="2833">{0}服</label>
+  <label id="2834">[{0}服]</label>
+  <label id="2835">战斗力</label>
+  
+    <!--开场引导-->
+  <label id="2900">曹操已于长坂坡退兵，短期不再南征，但难民仍持续涌来，咱们快集聚流民建造屋舍，暂居于此。</label>
+  <label id="2901">建造民居，为村民提供居所，提升人口上限</label>
+  <label id="2902">今天下大乱，四分五裂，十万荆州难民更是没有定所，这么多人要如何安置养活呢？</label>
+  <label id="2903">人多力量大，愚公尚且能移山；咱们这么多号人，自己耕地屯田，伐木造房，用不了多久都能在此安居乐业。</label>
+  <label id="2906">恩人有此决心，必能带领咱们重建家园。从今起你便是我的主公，打铁需趁热，赶快下令开始屯田吧！</label>
+  <label id="2907">开垦农田可以生产小麦，为生产食物提供材料。</label>
+  <label id="2908">建造磨坊，可以生产食物。</label>
+  <label id="2909">造好建筑后，记得去安排生产。</label>
+  <label id="2910">[ff00ff]长按[-]加号按钮，分配人口生产小麦。</label>
+  <label id="2911">[ff00ff]长按[-]加号按钮，快速分配工人生产食物。</label>
+  <label id="2912">分配完成后，每分钟会产出食物。主公在安排生产时，需要注意各项资源的消耗和产出哟！</label>
+  <label id="2913">点击下拉资源列表，查看仓库储量。</label>
+  <label id="2915">虽说有了生产，却被附近的响马盯上了，快去寻找帮手，解决燃眉之急！</label>
+  <label id="2916">哇哦！寻访有几率免费获得元宝，主公可要小心别被天上的元宝砸晕哟！</label>
+  <label id="2917">恭喜主公，时来运转，名将周仓前来投靠！~</label>
+  <label id="2918">主公，这里显示当前拥有的资源，有了资源我们才能发展壮大！</label>
+  <label id="2919">平时可以将面板隐藏起来哦。</label>
+  <label id="2920">现在去提升周仓的等级吧！</label>
+  <label id="2921">有了武将，还需要编辑部队，招募士兵。</label>
+  <label id="2922">哼！现在咱们兵强马壮，快去给这些盗匪点颜色瞧瞧！</label>
+
+  <label id="2950">甘小妹</label>
+  <label id="2951">奴家是甘夫人的小妹，在长坂坡与其走失，多亏恩人搭救，还未请教尊姓大名？</label>
+  <label id="2954">跳过序章</label>
+  
+  <!--活动-->
+  <label id="3100">活动</label>
+  <label id="3101">{0} ~ {1}</label>
+  <label id="3102">当前充值: {0}元宝</label>
+  <label id="3103">可领取奖励: {0}次数</label>
+  <label id="3104">领取</label>
+  <label id="3105">[a2794d]{0}[-]</label>
+  <label id="3106">[a2794d]{0}[-]</label>
+  <label id="3107">购买</label>
+  <label id="3108">原价:</label>
+  <label id="3109">总价:</label>
+  <label id="3110">[5c1a00]我的奖励:</label>
+  <label id="3111">充 值</label>
+  <label id="3112">[5c1a00]当前累充: [ff7f00]{0}[-]元宝     目标: [f94503]{1}元宝[-]</label>
+  <label id="3113">[fff7cd]累计充值[fbe801]{0}元宝[-]获得[-]</label>
+  <label id="3114">[5c1a00]当前累充: [ff8000]{0}元宝[-][-]</label>
+  <label id="3115">[24ba22]本轮剩余时间: {0}[-]</label>
+  <label id="3116">[fd0304]本次夺宝结束[-]</label>
+  <label id="3117">参与值:</label>
+  <label id="3118">[01a3f5]神秘宝箱[-],[ff6100]华丽宝箱[-],[cc01fd]至尊宝箱[-]</label>
+  <label id="3119">历史
+记录</label>
+  <label id="3120">购买{0}元宝,购买{0}元宝,购买{0}元宝</label>
+  <label id="3121">参与值:</label>
+  <label id="3122">神秘宝箱活动记录</label>
+  <label id="3123">[944805]活动时间: [005cff]{0} ~ {1}[-]</label>
+  <label id="3124">[944805]总参与值: [05a30e]{0}[-]</label>
+  <label id="3125">[502301]参与值: [05a30e]{0}[-]</label>
+  <label id="3126">[e51b00]中奖[-]</label>
+  <label id="3127">[693700]累计转盘次数: [ff5b02]{0}[-][-]</label>
+  <label id="3130">转{0}次</label>
+  <label id="3131">恭喜主公获得</label>
+  <label id="3128">剩余次数</label>
+  <label id="3129">兑换</label>
+  <label id="3135">累计消费元宝：</label>
+  <label id="3136">返还元宝</label>
+  <label id="3137">宝箱奖励</label>
+  <label id="3138">前往充值</label>
+  <label id="3139">价格:</label>
+  <label id="3140">兑换</label>
+  <label id="3141">铜聚宝盆,银聚宝盆,金聚宝盆</label>
+  <label id="3142">[5c1a00]暂无获得[-]</label>
+  <label id="3143">[5c1a00]获得: [f94503]{0}[-][-]</label>
+  <label id="3144">{0}.{1}.{2} {3}:{4}</label>
+  <label id="3145">xshd (3),xshd (2),xshd (1)</label>
+  <label id="3146">{0}天</label>
+  <label id="3147">{0}小时</label>
+  <label id="3148">{0}分钟</label>
+  <label id="3149">星期天,星期一,星期二,星期三,星期四,星期五,星期六</label>
+  <label id="3150">[693700][ff5b02]vip{0}[-]可转动[-]</label>
+  <label id="3151">转{0}次[-]</label>
+  <label id="3152">[5c1a00]充值截止: [ff7f00]{0}[-]</label>
+  <label id="3153">[5c1a00]我的积分: {0}</label>
+  <label id="3154">x{0}倍</label>
+  <label id="3155">0,1004,2001,1035</label>
+  <label id="3156">赵云[5A1705]，五虎上将之一，于敌阵中七进七出，愈战愈勇[-]</label>
+  <label id="3157">魏延[5A1705]，蜀汉名将，善于攻击敌方防御最弱的部队[-]</label>
+  <label id="3158">孙尚香[5A1705]，东吴巾帼英雄，擅长使弓击破对方护甲[-]</label>
+  <label id="3159">弓兵,枪兵,盾兵,骑兵,方士</label>
+  <label id="3160">本轮奖品：{0}武将神兵</label>
+  <label id="3161">（再抽奖{0}次刷新兵种）</label>
+  <label id="3162">抽奖</label>
+  <label id="3163">今天还能抽奖[11E600FF]{0}[-]次</label>
+  <label id="3164">{0}神兵
+{1}</label>
+  <label id="3165">本次消耗：</label>
+  <label id="3166">规则说明</label>
+  <label id="3167">1.本活动专门产出武将神兵、神兵魂
+
+2.每次抽奖在4样奖品中随机选取一样
+
+3.每抽奖3次更换一组奖品
+
+4.每天最多抽奖30次
+
+5.每组奖品的前2次抽奖需要消耗资源+神兵魂，第3次消耗资源+元宝</label>
+  
+  <label id="3170">[5A1705]再充[ff5400]{0}元[-]即可领取[-]</label>
+  <label id="3180">立即打开</label>
+  <label id="3181">[591C02]打开宝箱需要 [097BCC]虎符x{0}[-]，您拥有 [097BCC]虎符x{1}[-] ，可补充 [097BCC]元宝x{2}[-] 打开宝箱。是否立即打开宝箱?[-]</label>
+  <label id="3182">您可以通过平匪获得虎符宝箱</label>
+  <label id="3183">未获得</label>
+   <label id="3184">宝箱奖励
+(随机抽取5次)</label>
+   <label id="3185">[9d5f21]{0}/{1}[-]</label>
+   <label id="3186">[9d5f21][db0402]{0}[-]/{1}[-][-]</label>
+    <label id="3187">虎符宝箱说明</label>
+   <label id="3188">1、活动期间平匪有一定概率获得虎符宝箱，宝箱有3种类型。
+   
+2、开启虎符宝箱需要时间，3种宝箱分别需要1小时、3小时、12小时，开启时间越长，奖励越丰厚。
+   
+3、可使用虎符直接打开宝箱，时长越长需要虎符数量越多。
+   
+4、如果虎符不够，可以用元宝替代。（按一定比例）
+   
+5、最多可同时拥有10个虎符宝箱。
+   
+6、活动结束，清除所有虎符宝箱。（不清除虎符）
+
+   </label> 
+   <label id="3189">请选择宝箱</label>
+   
+  <!--游商-->
+  <label id="3200">游商</label>
+  <label id="3201">我是云游行商，出售各类珍品。交易的次数有限，您可以重置购买次数。</label>
+  <label id="3202">剩余购买次数：{0}</label>
+  <label id="3203">重置</label>
+  <label id="3204">珍品</label>
+  <label id="3205">装备</label>
+  
+  <!--战斗结算-->
+  <label id="3300">[fae698]演武场排名上升至：[-][3af600]{0}[-]</label>
+  <label id="3301">[fae698]损兵[-][fd4900]{0}[-]</label>
+  <label id="3302">升级武将,武将修行,训练士兵,招募士兵</label>
+  <label id="3306">战损详情</label>
+  <label id="3307">我军兵力</label>
+  <label id="3308">敌军兵力</label>
+  <label id="3309">[60270f]医馆救治：[-][23c046]{0}[-][60270f]人[-]</label>
+  <label id="3310">[60270f]实际战损：[-][f10f0e]{0}[-][60270f]人[-]</label>
+  <label id="3311">{0}级 {1}人 → {2}人</label>
+  <label id="3312">[fae698]演武场排名不变</label>
+  <label id="3313">领地已满，未获得附属领地</label>
+  <label id="3314">[ff7e00]{0}[-][fce69a]战胜了[-][00aeff]{1}[-]</label>
+  <label id="3315">[fae698]您对Boss造成了[-][fd4900]{0}%[-][fae698]的伤害,
+累计造成了[-][fd4900]{1}%[-][fae698]的伤害</label>
+  <label id="3316">下一场</label>
+  <label id="3317">[843007FF]本次战斗为模拟战斗[-]</label>
+  <label id="3318">[843007FF]不会造成实际损兵[-]</label>
+  <label id="3319">您对家族boss造成了{0}%伤害，
+  获得以下奖励</label>
+  <label id="3320">{0}的兵力</label>
+  <label id="3321">剩余     回合</label>
+ 
+  
+  <!--体力-->
+  <label id="3400">您的体力不足，是否购买体力？</label>
+  <label id="3401">今天购买次数已满，请明天再买</label>
+  <label id="3402">剩余购买次数:{0}</label>
+  <label id="3403">体力+{0}</label>
+  
+  <!--家族战-->
+  <label id="3500">本周比赛结束,未开始,16进8,8进4,半决赛,决赛</label>
+  <label id="3501">本轮对战</label>
+  <label id="3502">[ba3e11]距离下次家族战开始剩余：[-][04a30b]{0}[-]</label>
+  <label id="3503">报名参加</label>
+  <label id="3504">对阵表</label>
+  <label id="3505">家族战：</label>
+  <label id="3506">您的家族暂未获取资格</label>
+  <label id="3507">[ba3e11]战斗已经开始：[-][04a30b]{0}[-]</label>
+  <label id="3508">[ba3e11]战斗已结束[-]</label>
+  <label id="3509">[7e3c02]【{0}】我方{1}击溃了敌方{2}[-],[d00200]【{0}】我方{1}被敌方{2}击溃[-],[7e3c02]【{0}】我方胜利![-],[d00200]【{0}】敌方胜利![-]</label>
+  <label id="3510">左军,右军,前军,中军</label>
+  <label id="3511">[ba3e11]当前报名数：[-][04a30b]{0}/{1}[-]</label>
+  <label id="3512">[7e3c02]您的家族本轮没有获得参赛资格[-]</label>
+  <label id="3513">[7e3c02]每周一0点根据家族建设榜前8名决定本周参与家族战的家族，[FF1B00]参战获胜即可获得丰厚的奖励[-][-]</label>
+  <label id="3514">[7e3c02]本轮成绩：{0}[-]</label>
+  <label id="3515">[04a30b]十六强[-],[04a30b]八强[-],[04a30b]四强[-],[04a30b]亚军[-],[04a30b]冠军[-]</label>
+  <label id="3516">[7e3c02]【{0}】成功晋级[-]</label>
+  <label id="3517">[7e3c02]【{0}】遗憾止步[-]</label>
+  <label id="3518">军队部署情况</label>
+  <label id="3519">{0}/{1}</label>
+  <label id="3520">确认</label>
+  <label id="3521">请选择要报名的军团</label>
+  <label id="3522">您即将派出阵容{0}参加家族战，阵容{0}派出期间您的领地将使用其他阵容作战</label>
+  <label id="3523">您的部队未满，是否继续报名</label>
+  <label id="3524">家族战</label>
+  <label id="3525">查看部署</label>
+  <label id="3526">参加战斗</label>
+  <label id="3527">{0}月{1}日</label>
+  <label id="3528">参与家族战获胜即可赢得奖励宝箱！</label>
+  <label id="3529">每晚奖励都会通过邮件发放，不要错过哦！</label>
+  <label id="3530">?</label>
+  <label id="3531">冠军宝箱,双雄宝箱,四强宝箱,八强宝箱</label>
+  <label id="3532">  未开始,  部署阶段,  战斗阶段,  结束阶段</label>
+  <label id="3533">总战斗力：{0}</label>
+  <label id="3534">攻防加成：{0}%</label>
+  <label id="3535">[FEFFAF]我的歼敌数：[-][f3430d]{0}[-]</label>
+  <label id="3536">[FEFFAF]我击败的部队数：[-][f3430d]{0}[-]</label>
+  <label id="3537">{0}/{1}</label>
+  <label id="3538">[0fb51e]【{0}】[-][1178e9]{1}[-][72380e] 战胜了[-] [d63901]{2}[-]</label>
+  <label id="3539">[da3800]【{0}】{1} 击败了 {2} 的{3}[-]</label>
+  <label id="3540">点击对阵表查看对战记录</label>
+  <label id="3541">本轮对战：无</label>
+  <label id="3542">开始</label>
+  <label id="3543">复活</label>
+  <label id="3544">[5e331d]{0}[-][ff0700]退出家族[-]</label>
+  <label id="3545">[5e331d]{0}[-][0067fd]加入家族[-]</label>
+  <label id="3546">[5e331d]{0}[-][13c139]已签到[-]</label>
+  <label id="3547">[0fb51e]【{0}】[-][1178e9]{1}[-][72380e] 被[-] [d63901]{2}[-][72380e]击败[-]</label>
+  <label id="3548">[da3800]【{0}】{1}的{2} 被{3}击败了[-]</label>
+  <label id="3549">恭喜您已复活！</label>
+  <label id="3550">结束</label>
+  <label id="3551">[6d2418]BOSS剩余部队人数：[-][0169ff]{0}%[-]</label>
+  <label id="3552">[6d2418]每对BOSS造成[-][0169ff]1%[-][6d2418]伤害即可获得[-]</label>
+  <label id="3553">今天还能挑战{0}次</label>
+  <label id="3554">击败前一组BOSS方可挑战</label>
+  <label id="3555">挑战</label>
+  <label id="3556">主公，目前没有探索队伍耶，再等等啦</label>
+  <label id="3557">本组家族boss已被消灭</label>
+  <label id="3558">击杀宝箱</label>
+  <label id="3559">家族已达满级</label>
+  <label id="3560">[5e331d]{0}[-][0067fd]创建了家族[-]</label>
+  <label id="3561">您已将{0}请出了家族</label>
+  <label id="3562">本轮轮空</label>
+  <label id="3563">[ba3e11]报名时间：[-][04a30b]{0}[-][ba3e11]至[-][04a30b]{1}[-]</label>
+  <label id="3564">[da3800]【{0}】{1}家族的{2}无人部署，{3}家族{4}兵不血刃地击败了{1}的{2}[-]</label>
+  <label id="3565">撤兵</label>
+  <label id="3566">您的总兵量少于[8B3626]50%[-]或战斗[8B3626]20回合[-]后会自动撤兵</label>
+  <label id="3567">加入家族成功</label>
+  <label id="3568">伤害排名</label>
+  <label id="3569">每日伤害排名</label>
+  <label id="3570">[8f5737]每日击杀[de2f15]Boss[-]兵量[357ef7]前10名[-]可获得家族勋章奖励
+每日[2ca52c]24时[-]奖励通过邮件发放[-]</label>
+  <label id="3571">伤害总量</label>
+  <label id="3572">返回</label>
+  <label id="3573">是否确定要从{0}中撤军？</label>
+  <label id="3574">战斗力</label>
+  <label id="3575">报名</label>
+  <label id="3576">复活</label>
+  <label id="3577">[04a30b]十六强[-],[04a30b]八强[-],[04a30b]四强[-],[04a30b]决赛[-],[04a30b]冠军[-]</label>
+  <label id="3578">领地等级达到{0}级才可以攻打家族Boss。</label>
+  <label id="3579">战役回放</label>
+  <label id="3580">今天 </label>
+  <label id="3581">昨天 </label>
+  <label id="3582">[5e331d]{0}[-][13c139]成为新族长[-]</label>
+  <label id="3583">[5e331d]{0}[-][0067fd]升为长老[-]</label>
+  <label id="3584">[5e331d]{0}[-][0067fd]降为成员[-]</label>
+  <label id="3585">更改家族公告成功</label>
+  <label id="3586">更改家族招募信息成功</label>
+  <label id="3587">更改家族设置成功</label>
+  <label id="3588">捐献</label>
+  <label id="3589">集齐捐献即可重置家族Boss</label>
+  <label id="3590">[ff0000]{0}[-][8c561f]/{1}人[-]</label>
+  <label id="3591">发送成功</label>
+  
+    <!--标题说明-->
+  <label id="10000">修行馆</label>
+  <label id="10001">1、30级以上的武将才能修行
+
+2、修行有成功率，属性提升越高成功率越低
+
+3、每次修行成功，可以永久提升2点武将的属性
+
+4、修行可以提升的点数受限于修行馆的等级
+
+5、修行馆在升级时不可修行
+
+6、某些武将的技能可减少修行馆的资源消耗，将其放置到修行馆可生效
+
+7、修行消耗的魂晶石不足时，自动用魂力合成魂晶石</label>
+  <label id="10002">训练营</label>
+  <label id="10003">1、训练可以永久提升部队的等级
+
+2、您的部队可以提升的最大等级受限于训练营等级
+
+3、训练营只能容纳一支部队进行升级训练
+
+4、士兵等级提升后可以提升物攻、物防、法攻、法防
+
+5、兵书和兵书残页可以通过平匪、演武商店和寻访获得
+
+6、某些武将的技能可减少士兵训练的资源消耗(兵书不会减少)，将其放置到训练营可生效
+
+7、训练消耗的兵书不足时，自动用兵书残卷合成兵书</label>
+  <label id="10004">家族说明</label>
+  <label id="10005">
+一、家族说明
+1、家族是您和您的盟友的聚集地
+
+2、在家族中您可以跟其他家族成员聊天、打家族战、打家族Boss
+
+3、升级家族可提升家族的人数上限
+
+4、升级家族需要一定活跃度，家族成员每次签到获得1点活跃，每次挑战家族Boss获得2点活跃
+
+5、在家族签到可获得签到奖励
+
+6、在“管理”页签可查看本家族所有成员的信息，族长和长老可以管理家族
+
+7、退出家族规则：
+     (1).退出家族后6小时内不能创建或加入新家族
+     (2).重新进入一个家族24小时内不能参加Boss战
+     (3).重新进入一个家族72小时内不能参加家族战、国战
+
+8、您可以用“家族勋章”在家族商店购买到特有的稀有物品
+
+
+二、探索说明
+1、您可以与家族成员一起派遣武将外出探索，获得探索奖励
+
+2、每天有5批探索，分别在7点、10点、13点、16点、19点出现，进行3个小时的组队
+
+3、每批探索有5个队伍，玩家只能同时加入一个探索队伍
+
+4、探索队伍出发后，经历5小时完成探索
+
+5、探索队伍的总战力越大，探索的奖励类型越好。个人在队伍的评分等级越好，获得奖励数量越多
+</label>
+  <label id="10006">训练营主界面说明</label>
+  <label id="10007">训练营主界面内容</label>
+  <label id="10008">训练营进阶说明</label>
+  <label id="10009">训练营进阶内容</label>
+  <label id="10010">家族说明</label>
+  <label id="10011">家族内容</label>
+  <label id="10012">武将说明</label>
+  <label id="10013">1、  武将拥有统率、智力、武力3项基本属性。统率决定武将所在部队的行动速度，并影响部队的物防与法防；智力影响武将法攻与部队法攻；武力影响武将物攻与部队物攻。
+
+2、  通过消耗勾玉可以提升武将等级。武将升级后物攻、物防、法攻、法防都会得到提升。
+
+3、  通过消耗该武将的信物和铜钱可以令武将转生。武将转生后等级不变，统率、智力与武力得到大幅度的提升，进而提升武将物攻、物防、法攻、法防。
+
+4、  每个武将都拥有一些技能。各个技能的发动条件与效果各不相同。武将等级提升到10级、30级、50级、70级时可激活技能。
+
+5、  每个武将都有不同的兵种属性。例如，骑兵武将只能配置在骑兵部队中。
+
+6、  您可以通过寻访、任务、活动、家族商店、演武商店、家族Boss等方式得到新的武将或武将信物。攒够足够数量的武将信物后也可以直接招募武将。
+
+7、  请记住，三国时代最宝贵的就是人才。拥有强大的武将阵容可以令您在征战中所向披靡，攻无不克，战无不胜。
+</label>
+  <label id="10014">俘虏规则说明</label>
+  <label id="10015">1.部队的士兵数量少于士兵数量上限20%，战败时有可能被俘获武将。
+
+2.被俘获的武将不能使用，直到被赎回或释放。
+
+3.武将被俘后可交赎金请求赎回，对方收取赎金后自动释放武将。
+
+4.交付赎金后如果对方未作任何处理，关押24小时后武将自动释放并退回赎金。
+
+5.赎回武将需要花费铜钱，武将的等级越高、品质越好，要求的赎金越高。
+
+6.俘获武将后可向对方要求赎金，或处决被俘武将。
+
+7.向对方要求赎金后，如果对方未作任何处理，关押24小时后自动处决武将。
+
+8.处决武将可得到少许勾玉。
+
+9.武将被处决后需要使用“复活丹”复活武将，才能再度启用。</label>
+  <label id="10016">家族列表说明</label>
+  <label id="10017">家族列表内容</label>
+  <label id="10018">家族战说明</label>
+  <label id="10019">
+一、规则说明
+1、本服建设榜排名前16的家族获得家族战参赛资格
+
+2、所有参赛家族随机分配、两两对决，胜出者晋级，失败者淘汰
+
+3、家族战每周一轮，周二至周五分别进行：16进8、8进4、半决赛、决赛
+
+4、在比赛进行日，每天00:00到20:00为部署时间，20:00到21:00为战斗时间
+
+5、在部署时间，每个玩家可以往己方左军、中军、右军中的一个军团排兵部署
+
+6、对决中若一方未部署任何兵力，则另一方自动胜出；若双方都未部署任何兵力，则双方都不晋级
+
+7、派出的兵无法撤回，直至战斗结束
+
+二、战斗说明
+1、家族战双方分别有左军、右军和中军3个军团
+
+2、在派兵阶段，家族成员可选择一个军团进行派兵，每个军团最多容纳20人参加
+
+3、战斗开始后，双方的左军、右军和中军会依次与对方的左军、右军和中军交战
+
+4、左军获胜后，右军会获得攻防加成，右军获胜后，中军会获得攻防加成
+
+5、左军或右军获胜后，还存活的军团不会参与接下来的战斗
+
+6、最后双方的中军交战，获得胜利的一方最终获胜
+
+7、若您自己的部队被击溃，而战斗仍在继续，您可复活增加一次出兵机会，可向任意尚存的军团派兵
+
+三、奖励说明
+1、比赛中每晋级一次，都可获得本次晋级的奖励
+
+2、奖励有大量的家族勋章和魂晶石
+
+3、奖励通过邮件发放
+</label>
+
+  <label id="10020">家族Boss说明</label>
+  <label id="10021">1、每天可挑战Boss次数：普通玩家2次、Vip4以上3次
+
+2、战斗中玩家损失总兵量的一半或战至20回合则自动撤兵
+
+3、击败一组Boss后自动出现下一组Boss，每周共有6组Boss，每周一00:00自动重置
+
+4、击败所有Boss后可通过募集捐献重置所有家族Boss，每周可重置一次，每人每周只可捐献一次
+
+5、每周自然重置和每周捐献重置的家族Boss可以分别参与击杀一次，转换家族之后依然生效
+
+6、对Boss造成每1%兵量的伤害，可获得1份奖励
+
+7、对单个Boss的伤害百分比算上小数点累加取整。比如对某Boss第1场造成1.5%伤害，得1份奖励，第2场造成0.5%伤害，累加2%伤害，也可获得1份奖励
+
+8、Boss被击败后，有参与该Boss战的家族成员都可获得一份击杀奖励！
+
+9、击杀奖励通过邮箱发放</label>
+  <label id="10022">乱斗说明</label>
+  <label id="10023">1、乱斗为模拟战斗，不损耗士兵
+
+2、乱斗玩法需要报名组队，每次报名消耗100元宝
+
+3、报名成功后，将与其他玩家匹配队友，队伍由3个玩家组成
+
+4、组队成功后，按当前胜场匹配对手
+
+5、战斗时双方队伍按战力从高到低依次出场。胜出者继承剩余的兵量迎战下一个对手，直至某一方全部战败
+
+6、每次战斗胜利后可领取乱斗胜场奖励。5胜、10胜奖励可分别获得1个徐晃信物
+
+7、每10分钟匹配一场战斗，胜者继承上次剩余的兵量继续战斗，赢10场获得最终胜利
+
+8、普通玩家每天可报名2次，VIP3及以上可报名3次，VIP9及以上可报名4次
+
+9、必须领取完上一轮的乱斗奖励才能报名参加下一轮乱斗
+
+10、您可以查看战报，回放战斗的经过
+
+11、在排名界面，您可以查看自己本周参加乱斗的总胜场。排行不设奖励，每周日的24:00重置排名</label>
+  <label id="10024">资源点说明</label>
+  <label id="10025">
+一、开启
+领地升到1级乡邑，开启资源点玩法。
+
+二、类型
+有4类资源点，分别产石块、玉石、木材、铁锭。
+
+三、品质
+每类资源点分5个品质，品质越高，产量越多，高品质资源点需要提高领地等级才能占领。建设榜第1名玩家领地等级越高，资源产量越多。
+
+四、数量
+资源点数量有限，品质越高，资源点数量越少，5个品质资源点数量分别是250、12、8、4、1。
+
+五、刷新
+可花费元宝刷新资源点。
+
+六、进攻
+1.每次可选择1个资源点发动进攻，进攻需消耗5点体力，并且会损失兵力。
+
+2.在已占领资源点的情况下，进攻新的资源点，会自动放弃旧的资源点。
+
+3.进攻胜利后，占领资源点，自动占领6小时。
+
+4.每次成功占领资源点，有3分钟保护时间。
+
+5.占领资源点的情况下，被其他玩家进攻，会损失兵力。
+
+6.任意一方兵力损失达到50%即告失败。
+
+7.战斗战败，有可能被俘虏武将。</label>
+  <label id="10026">神龙活动说明</label>
+  <label id="10027">1、活动时间为每天中午12:00至14:00
+
+2、活动分为两个阶段，第一阶段为挑战神龙（12:00-12:30）；第二阶段，击杀神龙的玩家可获得神龙之力Buff入侵他服（12:30-14:00）
+
+3、第一阶段，对神龙造成每0.01%血量的伤害即可获得一份奖励，神龙被击杀时，所有参与的玩家都可获得击杀奖励
+
+4、神龙从龙蛋形态变为神龙形态后难度大增，而碎蛋者可以获得一份特殊的碎蛋奖励
+
+5、每个服务器最后一位击杀神龙的玩家成为本服务器的神龙使者，代表在第二阶段本服入侵他服
+
+6、第二阶段开始后每个服务器的神龙使者将会入侵其他服务器，被入侵的玩家必须先驱逐入侵本服的神龙使者才能协助驱逐其他服务器的神龙使者
+
+7、在第二阶段玩家每对神龙使者造成1%兵量的伤害即可获得一份奖励，驱逐神龙使者后，每位参与驱逐的玩家都可获得一份驱逐奖励
+
+8、击杀/驱逐奖励通过邮箱发放，请注意查收
+
+9、神龙战斗：神龙分为龙蛋形态与神龙形态。龙蛋形态不会普通攻击，每次行动时回复生命；当生命降低到30%时，神龙破蛋而出，神龙每次普攻对单体目标造成巨大伤害。龙蛋与神龙在行动5回合后都会进行毁天灭地的全体大招攻击。</label>
+
+  
+  <!--创建角色-->
+  <label id="3601">名字存在敏感词</label>
+  <label id="3602">名字已经存在</label>
+  <label id="3603">名字不能为空</label>
+  <label id="3604">名字太长了</label>
+  <label id="3605">请问主公高姓大名？</label>
+  
+   <!--引导领地升级-->
+  <label id="3702">难民听说咱打了胜仗，都赶趟似地涌来，不快点召集人手扩建领地，就要人满为患啦！</label>
+  <label id="3703">呼~升级领地可不简单，主公快去达成这些条件吧！</label>
+  <label id="3704">人口是治世的最大资本。要想建功立业，以后请尽可能多地升级民居，收留难民！</label>
+  <label id="3705">民以食为天，不断升级农田，是建设根据地的基础。</label>
+  <label id="3706">有了磨坊产出食物，流民才能在此安居乐业，壮大你的根据地。</label>
+  <label id="3707">领地升级条件已达成，快去升级领地吧！</label>
+  <label id="3708">恭喜主公将领地升至2级村庄！提升领地等级不仅能改变领地面貌，更能开放更多新功能！</label>
+  
+  <!--引导领地升级-->
+  <label id="3802">可喜可贺，咱们不仅赶跑了盗匪，还获得了名将祝融，战力刷刷直涨！</label>
+  <label id="3803">领地蒸蒸日上，活儿也多起来了。还请主公去看看村里还有哪些待办事项。</label>
+  <label id="3804">主公可点击主界面的“小秘”按钮呼叫小甘，我会立刻现身并提醒主公当前优先级较高的事项。</label>
+  <label id="3805">啊~出现了一个大宝箱，快打开看看</label>
+  <label id="3806">完成罗列的3个目标就可以领取宝箱的奖励啦，主公加油哦！</label>
+
+   <!--7天活动-->
+  <label id="4001">7天活动</label>
+  <label id="4004">领取奖励</label>
+  <label id="4005">第一天,第二天,第三天,第四天,第五天,第六天,第七天</label>
+  <label id="4006">fl (1),fl (2),fl (34),fl (35),fl (36),fl (26),fl (29)</label>
+  <label id="4007">mainAtlas</label>
+  <label id="4008">充值</label>
+  
+  <label id="4010">活动截止时间:{0}</label>
+
+  <label id="4011">第{0}名</label>
+  <label id="4003">未上榜</label>
+  <label id="4002">我的积分: {0} ({1})</label>
+  <label id="4012">我的排名: {0} ({1})</label>
+  <label id="4013">已领取</label>
+  <label id="4009">领取</label>
+  <label id="4014">已过期</label>
+  <label id="4015">领取奖励</label>
+  <label id="4016">平匪数量: {0} ({1})</label>
+  <label id="4017">掠地次数: {0} ({1})</label>
+  <label id="4018">战争积分: {0} ({1})</label>
+  <label id="4019">我的排名: {0}</label>
+  <label id="4030">领奖倒计时:</label>
+  <label id="4031">活动结束倒计时:</label>
+  
+   <!--过关斩将-->
+  <label id="4101">[a07a50]战力达到[990033]{0}[a07a50]可挑战</label>
+  <label id="4102">闯关</label>
+  <label id="4103">闯关说明</label>
+  <label id="4104">1.达到战力要求方可挑战关卡，战力越高可挑战的关卡越多。
+
+2.  每个难度包含5个关卡，全部通关方可打开通关宝箱。
+
+3.  闯关不消耗士兵。
+</label>
+  <label id="4105">过关难点：</label>
+  <label id="4106">暂不可领</label>
+  <label id="4107">通过本层关卡后可获得</label>
+  <label id="4108">人</label>
+  <label id="4109">恭喜您通过本层所有关卡</label>
+  <label id="4110">闯关战斗为模拟战斗，不消耗士兵</label>
+  
+  <!--引导训练-->
+  <label id="4201">恭喜主公，领地升级后可以训练士兵了，赶紧去建造训练营吧！</label>
+  <label id="4202">点击建造训练营。</label>
+  <label id="4203">升级训练营，提高小兵训练等级上限。</label>
+  <label id="4204">点击“加速”按钮，立即完成。</label>
+  <label id="4205">要想驰骋沙场，训练士兵是重中之重。赶快去训练士兵吧！</label>
+  <label id="4206">点击箭头切换兵种，升级枪兵至2级</label>
+  <label id="4207">之前被驱逐的喽啰跟随土匪首领回来找场子了，还请主公率领士兵击退土匪首领。</label>
+  <label id="4208">土匪首领可以通过寻访产生，战胜首领可以获得训练士兵所需的兵书和升级武将所需的勾玉。</label>
+  <label id="4209">获得奖励后，现在可以去给孟获升级了！</label>
+  <label id="4210">继续点击将孟获升至10级，解锁技能“蛮族入侵”。</label>
+
+  <!--引导修行-->
+  <label id="4301">领地升为市镇后，可以建造修行馆，用来修行武将哦~</label>
+  <label id="4302">修行馆已竣工，主公快下令武将进行修行吧。修行可提升武将三围，令战斗力更上一层楼!</label>
+  
+    <!--小秘书-->
+  <label id="4400">主公，主公！快来和我一起搞事情吧！</label>
+  <label id="4401">前往</label>
+  <label id="4402">家族战已经开启！19点部署，20点开打！获胜有丰厚奖励！ 详情请在家族面板[家族战]中查询。</label>
+  <label id="4403">下一条</label>
+  
+   <!--国战-->
+  <label id="4500">春,夏,秋,冬</label>
+  <label id="4501">{0}年{1}</label>
+  <label id="4502">宣战阶段,攻城阶段,休战阶段</label>
+  <label id="4503">[FCFFBE]占地数量:[2bff41]{0}[-]</label>
+  <label id="4504">[FCFFBE]城池数量:[2bff41]{0}[-]</label>
+  <label id="4505">查看</label>
+  <label id="4506">黄巾军</label>
+  <label id="4507">{0}服 {1}</label>
+  <label id="4510">国战说明</label>
+  <label id="4511">一、宣战说明
+   1.国战是以家族为单位，在三国版图上争夺城池、地块的玩法
+
+   2.家族2级时开放宣战权限，由家族族长或长老对地块发起宣战，然后全部家族成员可出兵
+
+   3.最多可出战3个阵容，至少留一个阵容驻守领地
+
+   4.出战需要消耗食物，每个参战的士兵消耗1份食物。撤兵可返回食物
+
+   5.每晚10点到次日下午6点为宣战和出兵时间，下午6点前可撤兵
+
+   6.每个家族最多同时对2个地块进行宣战，且只能对己方地块上下左右4格邻近的地块宣战
+
+   7.如果家族还未占据任何地块，族长可对任意地块发起宣战，且只能对1个地块宣战
+
+   8.一个地块可被多个家族宣战，按家族部队总战力的高低顺序进攻，总战力最先进攻。获胜的家族占据地块，其余家族自行撤离
+
+   9.每个地块四周的地块都是同一个家族占领或是阻挡（山、海等地形）的情况下，该地块视为腹地，其他家族不可对腹地进行宣战
+
+   10.两个地块中间间隔河流可跨河宣战，若两个地块不相邻，但都与某条河流相连，则在不超过5格距离的情况下可宣战（此处不受“不得攻击敌方腹地”规则的约束）
+   
+   11.地块类型为“海”时，默认“海”的4条边均为河流，“海”的沿岸地块在5格的距离内，可以发起宣战
+   
+   12.跨河出兵将额外消耗战船资源，耗船量=（出兵数量/100）×地块距离。此处只有进攻方消耗战船，防守方不消耗
+   
+   
+二、战斗说明
+   1.每天下午6点开始进行战斗
+
+   2.宣战时间每早1小时，全体军队获得的双攻加成多1%
+
+   3.防守方拥有固定的双防加成20%
+
+   4.战斗采用车轮战的方式。攻守双方均按战力从高到低出战，胜出者迎战下一个对手，直至某一方全部战败
+
+   5.每轮战斗后，胜方按自身的“医馆”效果恢复伤兵
+
+
+三、产出说明
+   1.国战中的一季为实际时间的一周
+
+   2.每个地块在每个季节的产出资源不同
+
+   3.地块从低级到高级分为贫地、中地、富地、小城、中城、大城，地块等级越高产出越好
+
+   4.每周日晚上7点，占据地块的家族的所有成员获得地块产出奖励，奖励通过邮件发放
+
+
+四、战功排行
+   1.每天的国战结束后，歼敌数量累加到战功排行
+
+   2.歼灭敌军数量越多，排名越高，歼敌数量相等时战力高的玩家排前
+
+   3.每周日晚上7点根据“天下战功排行”通关邮件发放排名奖励，奖品为家族勋章
+
+   4.退出家族时，在该家族获得的战功将会清零，直接影响战功排行
+
+
+五、部分地块每季可产出武将信物，详情如下：
+   邺·北1      [126dd1]甄姬信物x4[-]
+   涿郡           [126dd1]张飞信物x4[-]
+   武威           [126dd1]贾诩信物x4[-]
+   邺·西1      [126dd1]赵云信物x4[-]
+   东莱           [126dd1]太史慈信物x4[-]
+   安定           [126dd1]马超信物x4[-]
+   濮阳·西1  [126dd1]乐进信物x4[-]
+   北海·南1  [126dd1]颜良信物x4[-]
+   长安           [126dd1]貂蝉信物x4[-]
+   许昌           [126dd1]荀彧信物x4[-]
+   许昌·东1  [126dd1]夏侯渊信物x4[-]
+   汝南           [126dd1]许褚信物x4[-]
+   下邳           [126dd1]吕布信物x4[-]
+   江夏·北1  [126dd1]魏延信物x4[-]
+   庐江           [126dd1]大乔信物x4[-]
+   长沙           [126dd1]黄忠信物x4[-]
+   会稽           [126dd1]孙尚香信物x4[-]
+   建宁·北1  [126dd1]祝融信物x4[-]
+   云南·北1  [126dd1]孟获信物x4[-]
+   零陵           [126dd1]黄盖信物x4[-]
+   襄阳·西1  [126dd1]马良信物x4[-]
+   洛阳·西北2[126dd1]李傕信物x4[-]
+   陇西·西北1[126dd1]郭汜信物x4[-]
+   武陵·东南1[126dd1]沙摩柯信物x4[-]
+   太原·西     [126dd1]王允信物x4[-]
+   
+</label>
+  <label id="4512">[ff2a00]{4}[-] [6b3a15]我们已对[126dd1]{0}[-][6202f7]{1}[-]宣战[-]</label>
+  <label id="4513">[ff2a00]{4}[-] [6b3a15]我们的[126dd1]{0}[-]被[6202f7]{1}[-]宣战[-]</label>              
+  <label id="4508">出兵</label>
+  <label id="4509">激战中</label>
+  <label id="4514">撤兵</label>
+  <label id="4515">[6b3a15]我们攻占了[126dd1]{0}[-][6202f7]{1}[-][-]</label>
+  <label id="4516">[6b3a15]我们未能攻占[126dd1]{0}[-][6202f7]{1}[-][-]</label>
+  <label id="4517">[6202f7]{1}[-][6b3a15]攻占了我们的[126dd1]{0}[-][-]</label>
+  <label id="4518">[6202f7]{1}[-][6b3a15]未能攻占我们的[126dd1]{0}[-][-]</label>
+  <label id="4519">详情</label>
+  <label id="4520">今日战况</label>
+  <label id="4521">{0}月{1}日
+{2}</label>
+  <label id="4522">查看全年产出</label>
+  <label id="4523">宣战</label>
+  <label id="4524">大城,中城,小城,富地,中地,贫地,山,海</label>
+  <label id="4525">[591d00]当前占领者:[-][c102fa]{0}[-]</label>
+  <label id="4526">[591d00]本日太平无事</label>
+  <label id="4527">[591d00]已被[007aff]{0}[-]宣战[-]</label>
+  <label id="4528">[591d00]守方胜利[-]</label>
+  <label id="4529">[591d00][007aff]{0}[-]战胜了[007aff]{1}[-]，占领了此地[-]</label>
+  <label id="4530">查看攻守阵容</label>
+  <label id="4531">查看详情</label>
+  <label id="4532">[0074ff]{0}[-] [692a04]争夺战</label>
+  <label id="4533">防守方</label>
+  <label id="4534">进攻方</label>
+  <label id="4535">总战力:{0}</label>
+  <label id="4536">[692a04][0074ff]{0}[-][b802ff]{1}[-]战胜了[0074ff]{2}[-][ff2b01]{3}[-]</label>
+  <label id="4537">回放</label>
+  <label id="4538">宣战成功</label>
+  <label id="4539">[1cac2c]{0}[-]</label>
+  <label id="4540">[e81600]{0}[-]</label>
+  <label id="4541">战力{0}</label>
+  <label id="4542">春季,夏季,秋季,冬季</label>
+  <label id="4543">返回</label>
+  <label id="4544">提前{0}个小时宣战</label>
+  <label id="4545">[5a1b02]防守增益:[-] [fd6300]双防提升{0}%[-]</label>
+  <label id="4546">[5a1b02]攻方增益:[-] [fd6300]双攻提升{0}%[-]</label>
+  <label id="4547">防守家族:</label>
+  <label id="4548">进攻家族:</label>
+  <label id="4549">[5a1b02]族长: 无[-]</label>
+  <label id="4550">[5a1b02]族长: [0289ff]{0}[-]</label>
+  <label id="4551">家族战功排行</label>
+  <label id="4552">天下战功排行</label>
+  <label id="4553">歼敌数</label>
+  <label id="4554">[692a08]战斗时间:[fd5c00]{0}[-]</label>
+  <label id="4555">[5a1b02]占地数量:[2fc020] {0}[-]</label>
+  <label id="4556">[5a1b02]城池数量:[2fc020] {0}[-]</label>
+  <label id="4557">今日</label>
+  <label id="4558">排行</label>
+  <label id="4559">本季产出汇总</label>
+  <label id="4560">您所在的家族尚未占领任何地盘</label> 
+  <label id="4561">[ff2a00]{4}[-] [782301][bf01fe]{0}[-]对[0074ff]{1}[-][bf01fe]{2}[-]宣战[-]</label>
+  <label id="4562">[782301][ff2a00]{0}[-]攻占了[bf01fe]{2}[-]的[0074ff][{1}][-][-]</label>
+  <label id="4563">[782301][ff2a00]{0}[-]守住了[0074ff]{1}[-]，打退了[bf01fe]{2}[-]等家族的进攻[-]</label>
+  <label id="4564">出兵成功</label>
+  <label id="4565">撤兵成功</label>
+  <label id="4566">前往</label>
+  <label id="4567">本季产出时间:</label>
+  <label id="4568">[591c02]主公，是否要攻打[a403e6]{0}[-]占领的[0185e7][{1}][-]?[-]</label>
+  <label id="4569">[591c02]主公，是否要撤回已派往[0185e7]{0}[-]的部队?[-]</label>
+  <label id="4570">[591c02]主公，是否向[0185e7][{0}][-]派驻部队?[-]</label>
+  <label id="4571">撤兵</label>
+  <label id="4572">[27a1fd][edff28]{0}[{1}服_{2}][fcffbe]:{3}[-]</label>
+  <label id="4573">[ff7904]对[edff28]{0}[-][27a1fd][{1}服_{2}][-]说[fcffbe]:{3}[-][-]</label>
+  <label id="4574">[ff7904][edff28]{0}[-][27a1fd][{1}服_{2}][-]对我说[fcffbe]:{3}[-][-]</label>
+  <label id="4575">mainAtlas</label>
+  <label id="4576">qz (10)</label>
+  <label id="4577">[{0}服 {1}]</label>
+  <label id="4578">本日太平无事</label>
+  <label id="4579">[黄巾军]</label>
+  <label id="4580">[{1}服_{2}]</label>
+  <label id="4581">无人上榜</label>
+  <label id="4582">{0}攻防战</label>
+  <label id="4585">攻防加成</label>
+  <label id="4586">[9d7144]您所在区服({2}服)比本世界首服({3}服)[1495f0]晚开服{0}天[-]，特此发放[ff5d04]新服Buff[-]，该加成将在[1495f0]{1}天[-]内持续衰减。[-]</label>
+  <label id="4587">[9d7144]领取后，部队当天可在所有跨服玩法中获得[ff5d04]{0}%[-]的[ff5d04]双攻[-]和[ff5d04]双防[-]加成，且医馆回复效果增加[ff5d04]{1}%[-][-]</label>
+  <label id="4588">[9d7144]若领取当天不参与国战战斗，则[c34f02]24小时[-]后才能领取[-]</label>
+  <label id="4589">buff领取成功</label>
+  <!--国战 地块捐献-->
+  <label id="4590">产出加成,守军数量,守军战力</label>
+  <label id="4591">捐献</label>
+  <label id="4592">{0}级{1}</label>
+  <label id="4593">捐献日志</label>
+  <label id="4594">[9d7144]今天还可捐献: [f14a00]{0}次[-][-]</label>
+  <label id="4595">温馨提示: {0}每次捐献{1}个材料，完成全部捐献自动升级</label>
+  <label id="4596">[AA7157]{0}[3478f6]{1}[-]对[3478f6]{2}[-]捐献了[f1721d]{3}[-][-]</label>
+  <label id="4597">[AA7157]我们家族众志成城，把[3478f6]{0}[-]升到了[f1721d]{1}级[-][-]</label>
+  <label id="4598">建设</label>
+  <label id="4599">家族产出</label>
+  <label id="45100">[591c02]主公，本次捐献[0185e7]{0}[-]，获得奖励[0185e7]{1}[-]。要捐献吗?[-]</label>
+  <label id="45101">(已满级)</label>
+  <label id="45102">产出加成：,守军数量：,守军战力：</label>
+  <!--国战 季报-->
+  <label id="45103">{0}月{1}日~{2}月{3}日</label>
+  <label id="45104">,家族表现,玩家表现,天下无双,百万雄师,血流成河,金戈铁马,势如破竹,开疆扩土,退避三舍,揭竿而起,揭竿而起,揭竿而起</label>
+  <label id="45106">[aa7157]第[ec6c2d]{0}[-]/{1}页[-]</label>
+  <label id="45107">[aa7157]宣战地块：[-][0b86df]{0}[-][aa7157]，[-][0b86df]{2}处[-][aa7157]
+一共派出[-][ff2f2f]{4}支[-][aa7157]部队，合计[-][ff2f2f]{5}士兵[-][aa7157]
+一共进行[-][ff2f2f]{6}场[-][aa7157]战斗，歼灭了[-][ff2f2f]{7}士兵[-][aa7157]，阵亡了[-][ff2f2f]{8}士兵[-][aa7157][-]</label>
+  <label id="45108">{0}等</label>
+  <label id="45113">{0}</label>
+  <label id="45109">[aa7157]家族占领地块数量由[-][0b86df]{0}块[-][aa7157]增加到[-][0b86df]{1}块[-][aa7157][-]</label>
+  <label id="45110">[aa7157]家族占领地块数量[-][0b86df]不变[-][aa7157][-]</label>
+  <label id="45111">[aa7157]家族占领地块数量由[-][0b86df]{1}块[-][aa7157]减少到[-][0b86df]{0}块[-][aa7157][-]</label>
+  <label id="45112">[aa7157]成功占领[-][0b86df]{0}[-][aa7157]全部地块，族长[-][0b86df]{1}[-][aa7157]成为[-][d005ef]{2}牧[-][aa7157][-]</label>
+  <label id="45114">[aa7157]一共派出[-][ff2f2f]{0}士兵[-][aa7157]（超越[-][0b86df]{3}%[-][aa7157]玩家）
+一共进行[-][ff2f2f]{1}场[-][aa7157]战斗
+一共歼灭[-][ff2f2f]{2}士兵[-][aa7157]（超越[-][0b86df]{4}%[-][aa7157]玩家）
+一共阵亡[-][ff2f2f]{5}士兵[-]</label>
+ <label id="45105">[aa7157]消灭士兵最多的玩家是[-][0078ff]{0}[-][aa7157]，一共消灭了[-][ff2f2f]{1}士兵[-]</label>
+ <label id="45115">季报</label>
+ <label id="45116">[aa7157]最壮观的战场是[-][0078ff]{0}[-][aa7157]，一共[-][ff2f2f]{1}士兵[-][aa7157]在这里集结[-]</label>
+ <label id="45117">[aa7157]最惨烈的战场是[-][0078ff]{0}[-][aa7157]，前后发生了[-][0078ff]{1}场[-][aa7157]战斗，有[-][ff2f2f]{2}士兵[-][aa7157]在这里阵亡 [-]</label>
+ <label id="45118">[aa7157]派出士兵最多的家族是[-][0078ff]{0}[-][aa7157]，一共派出了[-][ff2f2f]{1}士兵[-]</label>
+ <label id="45119">[aa7157]消灭士兵最多的家族是[-][0078ff]{0}[-][aa7157]，一共消灭了[-][ff2f2f]{1}士兵[-]</label>
+ <label id="45120">[aa7157]扩张领土最多的家族是[-][0078ff]{0}[-][aa7157]，占领地块数量由[-][ff2f2f]{1}块[-][aa7157]增加到[-][ff2f2f]{2}块[-]</label>
+ <label id="45121">[0b86df]新家族[-][aa7157]前来参加国战[-]</label>
+ <label id="45122">[aa7157]家族[-][0078ff]{0}[-][aa7157]成功占领[-][0078ff]{1}[-][aa7157]全部地块，族长[-][d005ef]{2}[-][aa7157]成为[-][d005ef]{3}牧[-]</label>
+ <label id="45123">{0}牧</label>
+ <label id="45124">[aa7157]失去领土最多的家族是[-][0078ff]{0}[-][aa7157]，占领地块数量由[-][ff2f2f]{1}块[-][aa7157]减少到[-][ff2f2f]{2}块[-] </label>
+ <label id="45125">选择出战阵容</label>
+ <label id="45126">出战</label>
+ <label id="45127">({0})</label>
+ <label id="45128">战力</label>
+ <label id="45129">出兵将消耗:</label>
+ <label id="45130">请选择阵容</label>
+ <label id="45131">{0}升到{1}级</label>
+ <label id="45132">[F11B15]我们家族众志成城，把[3478f6]{0}[-]升到了[f1721d]{1}级[-][-]</label>
+ <label id="45133">{0}服 {1}</label>
+ <label id="45134">选择撤兵阵容</label>
+ <label id="45135">撤兵返回:</label>
+ <label id="45136">出兵部队数量已达上限</label>
+ <label id="45137">Lv.{0}</label>
+ <label id="45138">领地至少留守一个阵容</label>
+ <label id="45139">暂无捐献记录</label>
+ <label id="45140">[62250d]我们家族统一了[0067ff]{0}[-]，族长[ff0501]{1}[-]成为[0067ff]{2}州牧[-]。[-]</label>
+
+  <!--乱斗-->
+  <label id="4600">乱斗</label>
+  <label id="4601">乱斗战斗为模拟战斗，不消耗士兵</label>
+  <label id="4602">报名组队</label>
+  <label id="4603">{0}</label>
+  <label id="4604">[795E46]剩余报名次数：[-][F04C00]{0}[-]</label>
+  <label id="4605">暂无战斗记录</label>
+  <label id="4606">战报</label>
+  <label id="4607">排行</label>
+  <label id="4608">奖励</label>
+  <label id="4609">组队中</label>
+  <label id="4610">[795e46]战斗开始于：[-][18b111]{0}[-]</label>
+  <label id="4611">寻找对手中</label>
+  <label id="4612">[795e46]当前胜场：[-][18b111]{0}[-]</label>
+  <label id="4613">战斗中</label>
+  <label id="4614">[8f632f]服务器：[-][13b312]{0}[-]</label>
+  <label id="4615">[8f632f]兵力：[-][0073ff]{0}[-]</label>
+  <label id="4616">[8f632f]战力：[-][0073ff]{0}[-]</label>
+  <label id="4617">胜</label>
+  <label id="4618">负</label>
+  <label id="4619">[d45c23]【{0}】[-][9d7243]您的队伍击败了[-][d45c23]{1}[-][12b20f]【{2}服】[-][9d7243]带领的队伍！[-]</label>
+  <label id="4620">[d45c23]【{0}】[-][9d7243]您的队伍败于[-][d45c23]{1}[-][12b20f]【{2}服】[-][9d7243]带领的队伍！[-]</label>
+  <label id="4621">[9d7243]剩余兵力：[-][0073ff]{0}/{1}[-]</label>
+  <label id="4622">{0}:{1}</label>
+  <label id="4623">回放</label>
+  <label id="4624">{0}天前</label>
+  <label id="4625">{0}小时前</label>
+  <label id="4626">{0}分钟前</label>
+  <label id="4627">刚刚</label>
+  <label id="4628">胜利</label>
+  <label id="4629">{0}次</label>
+  <label id="4630">领取</label>
+  <label id="4631">奖励</label>
+  <label id="4632">本周排行</label>
+  <label id="4633">未上榜</label>
+  <label id="4634">胜场</label>
+  <label id="4635">根据玩家昨日在所有参加的队伍所获得的胜利总次数排名</label>
+  <label id="4636">战报</label>
+  <label id="4637">胜场</label>
+  <label id="4638">排行榜</label>
+  <label id="4639">等待战斗</label>
+  <label id="4640">乱斗匹配成功</label>
+  <label id="4641">以本周加入的全部队伍累计获得的胜场进行排名。排行榜在每周日24:00点重置</label>
+  <label id="4642">[9d7243]本轮大乱斗，您所在的队伍共获得了[d45c23]{0}[-]次胜利，再接再厉哦！[-]</label>
+  <label id="4643">[9d7243]本轮大乱斗，您所在的队伍击败了[d45c23]{0}[-]个队伍，获得了最终的胜利，恭喜！[-]</label>
+  <label id="4644">一键领取</label>
+  <label id="4645">当前已无可领取的奖励</label>
+  
+  <!--转生-->
+  <label id="4700">武将转生</label>
+  <label id="4701">数据错误，请重新打开界面</label>
+  <label id="4702">转生</label>
+  <label id="4703">{0}级</label>
+  <label id="4704">[F3EEE5]{0}[-]</label>
+  <label id="4705">[FF6009]{0}[-]</label>
+  <label id="4706">合成,转生,技能</label>
+  <label id="4707">武将合成</label>
+  <label id="4708">合成</label>
+  
+  <!--资源点-->
+  <label id="4800">资源点</label>
+  <label id="4801">无家族</label>
+  <label id="4802">战力</label>
+  <label id="4803">箭塔</label>
+  <label id="4804">城墙</label>
+  <label id="4805">[F4641AFF]注意[-]</label>
+  <label id="4806">[99734c]进攻资源点将[-][ce2c00]耗损兵力[-][99734c]，任何一方损兵达到[-][ce2c00]50%[-][99734c]即告战败[-]</label>
+  <label id="4807">[99734c]您的战斗力比对方[-][ce2c00]低[-]</label>
+  <label id="4808">[99734c]您只能占领[-][ce2c00]1个资源点[99734c]，进攻新资源点将自动放弃旧资源点[-]</label>
+  <label id="4809">进攻</label>
+  <label id="4810">[714029]剩余占领次数：[-][3ab31e]{0}[-][714029]/{1}[-]</label>
+  <label id="4811">{0}/小时</label>
+  <label id="4812">刷新</label>
+  <label id="4813">历史记录</label>
+  <label id="4814">守军攻击+{0}%</label>
+  <label id="4815">守军防御+{0}%</label>
+  <label id="4816">[F4641AFF]剩余时间[-]</label>
+  <label id="4817">保护时间</label>
+  <label id="4818">[ff0000]资源点保护状态，不可进攻[-]</label>
+  <label id="4819">[804c3b]您进攻[-][01a2ff]{0}[-][804c3b]失败，损失[-][fd1e1e]{1}[-][804c3b]兵力。[-]</label>
+  <label id="4820">[804c3b]您进攻[-][01a2ff]{0}[-][804c3b]胜利，损失[-][fd1e1e]{1}[-][804c3b]兵力，成功[-][26ba28]占领资源点[-][804c3b]。[-]</label>
+  <label id="4821">[804c3b]您进攻[-][01a2ff]{0}[-][804c3b]胜利，损失[-][fd1e1e]{1}[-][804c3b]兵力，成功[-][26ba28]占领资源点[-][804c3b]。您在上一个资源点中占领了[-][ff762c]{2}小时{3}分钟[-][804c3b]，获得[-][d618ff]{4}x{5}[-][804c3b]。（奖励通过邮件发放）[-]</label>
+  <label id="4822">[01a2ff]{0}[-][804c3b]对您发动进攻，您防守胜利，损失[-][fd1e1e]{1}[-][804c3b]兵力。[-]</label>
+  <label id="4823">[01a2ff]{0}[-][804c3b]对您发动进攻，您防守失败，损失[-][fd1e1e]{1}[-][804c3b]兵力。您在上一个资源点中占领了[-][ff762c]{2}小时{3}分钟[-][804c3b]，获得[-][d618ff]{4}x{5}[-][804c3b]。（奖励通过邮件发放）[-]</label>
+  <label id="4824">[804c3b]您占领资源点时间已满[-][ff762c]{0}小时[-][804c3b]，自动撤兵，获得[-][d618ff]{1}x{2}[-][804c3b]。（奖励通过邮件发放）[-]</label>
+  <label id="4825">详情</label>
+  <label id="4826">需要您的领地等级达到{0}级才开放</label>
+  <label id="4827">目标资源点信息发生变化，已自动刷新</label>
+  <label id="4828">{0}/小时</label>
+  <label id="4829">[714029]剩余刷新次数：[-][3ab31e]{0}[-][714029]/{1}[-]</label>
+  <label id="4830">占领者</label>
+  <label id="4831">[ff2a00]【{0}天前】[-]</label>
+  <label id="4832">[ff2a00]【{0}小时前】[-]</label>
+  <label id="4833">[ff2a00]【{0}分钟前】[-]</label>
+  <label id="4834">[ff2a00]【刚刚】[-]</label>
+  <label id="4835">刷新成功</label>
+  <label id="4836">{0}资源点</label>
+  <label id="4837">{0}级</label>
+  <label id="4838">[804c3b]俘获了对方的武将[-][0067FF]{0}[-][804c3b]。[-]</label>
+  <label id="4839">[804c3b]武将[-][0067FF]{0}[-][804c3b]被对方俘虏了。[-]</label>
+  <label id="4840">占用/空余：{0} / {1}</label>
+  <label id="4841">累计获得</label>
+  
+  <!--资源点引导-->
+  <label id="4900">领地升为1级乡邑，可以占领资源点，获得大批物质哟~</label>
+  <label id="4901">这里有石块、玉石、木材、铁锭资源点，主公可占领资源点，6小时后就能获得获得丰收~</label>
+  
+  <!--国战引导-->
+  <label id="5000">主公首次参加国战之前，先来进行一次虚拟的国战演练吧。</label>
+  <label id="5001">国战以家族为单位进行对抗，2级家族开放宣战权限。现在主公默认为2级家族族长，快点击长沙，行使族长宣战的特权，向曹魏宣战！</label>
+  <label id="5002">宣战成功！现在所有家族成员可以对长沙进行“出兵”。</label>
+  <label id="5003">请点击“出兵”按钮，派遣军队赶往长沙。</label>
+  <label id="5004">宣战阶段结束后是攻城阶段，在此阶段军队到达前线，攻守双方按战力顺序进行车轮战，当守城家族成员全部被击败时，进攻方占领该城。</label>
+  <label id="5005">为了节省时间，让我们直接跳至18点进入攻城阶段。</label>
+  <label id="5006">长沙燃起了战火，我方军队与曹操军激战中！</label>
+  <label id="5007">恭喜主公，经过一番激战，咱们成功战胜了曹操军，占领了长沙。</label>
+  <label id="5008">点击地块，查看占地详情。</label>
+  <label id="5009">每个领地都有物资产出，产出每周结算一次，以邮件的方式派送给领地家族成员。点击按钮查看该地格的全年产出一览。</label>
+  <label id="5010">每个季节跨度一周，结算时可获得该地格的夏季特产。</label>
+  <label id="5011">需要注意的是，当主公作为家族普通成员时没有宣战权力，只能对家族宣战的对象出兵，或在被宣战的家族地格上进行守城。</label>
+  <label id="5012">虚拟国战教学到这就告一段落，主公将跳转至线上正式的国战地图，与各个服务器的强者共同享受争霸天下的乐趣。</label>
+  
+  <label id="5013">[ff2f31]刘备：曹贼已从江陵南下，情势危急，请您速来支援！[-]</label>
+  <label id="5014">[ff2f31]孙权：吴已从江东起兵，将于长沙赤壁与曹操决一死战！[-]</label>
+  <label id="5015">孙刘联盟</label>
+  <label id="5016">7001</label>
+  <label id="5017">6001</label>
+  <label id="5018">曹操</label>
+  <label id="5019">209</label>
+  <label id="5020">100000000</label>
+  <label id="5021">[曹操军]</label>
+  <label id="5022">曹操军</label>  
+  <label id="5023">Buff</label>
+  
+  <!--武将评价，神兵以及宝物-->
+  <label id="5100">赞最多,踩最多,最新</label>
+  <label id="5101">发表</label>
+  <label id="5102">[2e70f1]{0}[-][fd672b]【{1}区】[-]</label>
+  <label id="5103">点击输入您的评论（最多200个字）</label>
+  <label id="5104">请发表您对该武将的评价</label>
+  <label id="5105">神兵</label>
+  <label id="5106">强化</label>
+  <label id="5107">洗炼</label>
+  <label id="5108">洗炼预览</label>
+  <label id="5109">洗炼神兵，随机改变技能</label>
+  <label id="5110">神兵技能</label>
+  <label id="5111">[9d7144]{0}[-]</label>
+  <label id="5112">[eb6541]{0}[-]</label>
+  <label id="5113">[7d4830]{0}[-][f85a0d]{1}[-]</label>
+  <label id="5114">神兵已满级</label>
+  <label id="5115">无神兵</label>
+  <label id="5116">{0}（未获得）</label>
+  <label id="5117">发表</label>
+  <label id="5118">神兵属性</label>
+  <label id="5119">洗炼神兵，随机改变神兵技能，每次消耗100元宝，是否洗炼神兵？</label>
+  <label id="5120">需要武将{0}转</label>
+  <label id="5121">1小时内不能重复发表武将评价</label>
+  <label id="5122">已装备神兵</label>
+  <label id="5123">装备</label>
+  <label id="5124">已装备</label>
+  <label id="5125">{0}成功装备{1}</label>
+  <label id="5126">神兵说明</label>
+  <label id="5127">1.S级、A级武将有专属神兵。
+ 
+ 2.神兵可通过寻访、战役（3级乡邑开启）获取。
+ 
+ 3.武将穿戴神兵，提升攻防属性，并学会神兵技能。
+ 
+ 4.强化：消耗材料强化神兵，可提高神兵攻防属性，增强神兵技能。
+ 
+ 5.洗炼：消耗元宝洗炼神兵，可改变神兵技能。（点击“洗炼”按钮旁边“问号”按钮，查看所有可洗炼到的神兵技能。）
+ 
+ 6.注意：持续型伤害（如贾诩的中毒、陆逊的燃烧等）不会触发神兵技能（斩杀、压制、噬血、迟滞）效果。
+ </label>
+  <label id="5128">宝物</label>
+  <label id="5129">当前无可用宝物</label>
+  <label id="5130">[F5E7D5]主公，要把[-][ffff00]{0}[-][F5E7D5]赐予{1}吗？[-]</label>
+  <label id="5131">宝物一经赏赐就与武将绑定，只能用稀有度等级更高的宝物来替换</label>
+  <label id="5132">同时收回{0}级宝物{1}x1</label>
+  <label id="5133">稀有度{0}</label>
+  <label id="5134">[532512]当前拥有[-][FE4E02]{0}[-][532512]个[-]</label>
+  <label id="5135">武将没有治理技能，不能装备</label>
+  <label id="5136">[a2794d]拥有{0}[-]</label>
+  <label id="5137">[ff2a00]拥有{0}[-]</label>
+  <label id="5138">[a2794d]等级{0}/{1}[-]</label>
+  <label id="5139">[ff2a00]等级{0}/{1}[-]</label>
+  <label id="5140">[a2794d]转生{0}/{1}[-]</label>
+  <label id="5141">[ff2a00]转生{0}/{1}[-]</label>
+  <label id="5142">宝物赐予成功</label>
+  <label id="5143">领取</label>
+  <label id="5144">当前武将没有装备任何宝物</label>
+  <label id="5145">[a2794d]已装备[-]</label>
+  <label id="5146">获得宝物[ffff00]{0}[-]</label>
+  <label id="5147">[9D7144FF]注意：[-][ff6009]持续型伤害[-][9D7144FF]（如贾诩的中毒、陆逊的燃烧等）不会触发神兵技能（斩杀、压制、噬血、迟滞）效果[-]</label>
+  <label id="5148">家族boss已重置</label>
+  <label id="5149">宝物 {0}</label>
+  
+  <!--好友-->
+  <label id="5200">已发送好友申请</label>
+  <label id="5201">好友列表,好友申请,好友推荐</label>
+  <label id="5202">我的好友: {0}/{1}</label>
+  <label id="5203">可赠送: {0}/{1}次</label>
+  <label id="5204">可收取: {0}/{1}次</label>
+  <label id="5205">在线</label>
+  <label id="5206">一键赠送</label>
+  <label id="5207">一键收取</label>
+  <label id="5208">赠送体力</label>
+  <label id="5209">加为好友</label>
+  <label id="5210">删除好友</label>
+  <label id="5211">删除成功</label>
+  <label id="5212">[ffffff]成功添加[eb5a09]【{0}】[-]到好友列表[-]</label>
+  <label id="5213">当前没有好友！\n赶紧添加好友吧，好友多多，福利多多！</label>
+  <label id="5214">拒绝</label>
+  <label id="5215">同意</label>
+  <label id="5216">没有收到任何好友申请</label>
+  <label id="5217">已赠体力</label>
+  <label id="5218">收取体力</label>
+  <label id="5219">赠送成功</label>
+  <label id="5220">你的好友给你赠送体力，快去收取把</label>
+  <label id="5221">加好友</label>
+  <label id="5222">已申请</label>
+  <label id="5223">换一批</label>
+  <label id="5224">一键同意</label>
+  <label id="5225">一键拒绝</label>
+  <label id="5226">[ffffff][eb5a09]【{0}】[-]同意添加你为好友[-]</label>
+  <label id="5227">添加好友成功</label>
+  <label id="5228">已拒绝所有好友申请</label>
+  <label id="5229">您的好友数量已经达到上限</label>
+  <label id="5230">好友</label>
+  <label id="5231">[ffffff][eb5a09]【{0}】[-]通过了您的好友申请[-]</label>
+  <label id="5232">[ffffff][eb5a09]【{0}】[-]拒绝了您的好友申请[-]</label>
+  <label id="5233">[ffffff]已拒绝该好友申请[-]</label>
+  <label id="5234">离线</label>
+  
+  
+  <!--领地升级引导-->
+  <label id="5300">在主公精明治理下，村庄蒸蒸日上。点击按钮，升级村庄！</label>
+  
+  <!--领地升级引导-->
+  <label id="5400">我们刚获得了孟获，快让他上阵。</label>
+  <label id="5401">孟获属于枪兵系武将，需要变更兵种</label>
+  
+  <!--掠地引导-->
+  <label id="5506">快去尝试新开放的“附属”玩法吧。</label>
+  <label id="5507">附属领地会为主公领地提供大量额外资源哦！通过掠地获得附属领地，附属越多，资源越多！</label>
+  <label id="5508">点击按钮，前往掠夺附属领地吧！</label>
+  <label id="5509">点击选择想要的战利品！</label>
+  <label id="5510">领地升级后，部队士兵人数上限获得提高，让我们先去征兵，补全军队人数。</label>
+  <label id="5511">点击箭头可展开敌军详情。</label>
+  <label id="5512">现在，全军出击！</label>
+  <label id="5513">主公神勇，获得第一个附属！附属领地每小时都会产出资源，主公记得按时来征收资源哦~</label>
+  <label id="5514">这一战我们不仅得到了附属领地，还俘虏一个敌将。</label>
+  <label id="5515">要怎么处置这个俘虏呢？点击这里可以进入俘虏界面。</label>
+  <label id="5516">哈哈，被俘武将的主公向您发出了赎回武将的请求，并奉上了赎金。</label>
+  <label id="5517">释放武将就可以获得赎金了。俘获的武将等级越高、品质越好，赎金就越高哦。</label>
+  <label id="5518">当然，您也可以处决俘虏。处决俘虏可以获得少许勾玉。</label>
+  <label id="5519">被处决的武将需要使用“复活丹”复活哦。</label>
+  <label id="5520">俘虏的命运就全凭主公处置了。那个~~小妹还有事先闪了哈。</label>
+
+  <!--演武场邮件引导-->
+  <label id="5600">恭喜主公获得演武场首胜！请点击“邮件”，领取最高排行奖励。</label>
+  <label id="5601">当主公登上演武场第一名时，可累计获得排行榜奖励多达[ff0044]2440元宝[-]呦！请主公务必要冲击最高演武排行！</label>
+  
+  <!--商店引导-->
+  <label id="5700">集市出售各种资源和道具。寻访和刷新商品有机会遇到商品打5折哦。</label>
+  <label id="5701">看到这个五折标记了吗？这个商品正在打5折哦。还等什么，扫货吧~~</label>
+  
+  <!--体力引导-->
+  <label id="5800">体力快用完了，可以使用[00ff00]体力道具[-]恢复体力哦。</label>
+  <label id="5801">切换到【背包】页签</label>
+  <label id="5802">体力道具带有红点标记，很好认。</label>
+  <label id="5803">吃掉这个叉烧包可以恢复10点体力哦。越高级的体力道具恢复的体力越多。</label>
+  
+  <!--招募引导-->
+  <label id="5900">哎呀~没有空闲人口了。我们可以使用[ff0044]【募民令】[-]快速招募人口。</label>
+  <label id="5901">切换到【背包】页签</label>
+  <label id="5902">点击使用[ff0044]【募民令】[-]。</label>
+  <label id="5903">每使用1枚[ff0044]【募民令】[-]就可以招募500个空闲人口，厉害吧。</label>
+  
+  <!--战役-->
+  <label id="6001">xin(3)|xin(6)|zy|xin(4)</label>
+  <label id="6002">正传</label>
+  <label id="6003">外传</label>
+  <label id="6004">一键扫荡</label>
+  <label id="6005">战役</label>
+  <label id="6006">{0} {1}</label>
+  <label id="6007">可上阵 
+{0}</label>
+  <label id="6008">魏国武将,蜀国武将,吴国武将,群雄武将</label>
+  <label id="6009">{0}
+{1} {2}</label>
+  <label id="6010">[959286]{0}[-]</label>
+  <label id="6011">[faeda4]{0}[-]</label>
+  <label id="6012">战役说明</label>
+  <label id="6013">一、战役
+1.玩家可以体验三国时代的著名战役——黄巾之乱、董卓讨伐战、吕布讨伐战、官渡之战、火烧新野、长坂坡之战。
+
+2.每个战役有2个传记：【正传】扮演胜方势力，挑战败方势力；【外传】扮演败方势力，挑战胜方势力。
+
+3.正传开启条件：通关上一场战役的正传。
+
+4.外传开启条件：通关目标战役的正传。
+
+二、战斗
+1.战斗使用虚拟阵容，武将镜像出战，不影响武将实际使用，不损耗实际兵力。
+
+2.战斗前需要布阵，每个关卡均限定出战部队数量、兵种、兵力，并限制上阵武将国籍（魏、蜀、吴、群雄）。
+
+3.部分关卡有“名将加成”效果：上阵指定名将，获得全军属性加成。
+
+4.每次挑战关卡消耗3点体力，战败返还体力。
+
+5.挑战过程中需要连续进行3场战斗，每场战斗胜利后按医馆等级回复一定兵力，接着进行下一场战斗。
+
+三、扫荡
+1.每天有1次机会扫荡所有已通关的传记，每个传记消耗3点体力。
+
+2.当天通关的传记，当天不可扫荡。</label>
+  <label id="6014">敌方主将</label>
+  <label id="6015">全服首推:</label>
+  <label id="6016">名将加成:</label>
+  <label id="6017">{0}:全军物攻增加{1}%</label>
+  <label id="6018">{0}:全军物防增加{1}%</label>
+  <label id="6019">{0}:全军法攻增加{1}%</label>
+  <label id="6020">{0}:全军法防增加{1}%</label>
+  <label id="6021">{0}:全军速度增加{1}%</label>
+  <label id="6022">开战</label>
+  <label id="6023">首推阵容</label>
+  <label id="6024">虚位以待</label>
+  <label id="6025">已上阵</label>
+  <label id="6026">首推阵容</label>
+  <label id="6027">胜利</label>
+  <label id="6028">开启</label>
+  <label id="6029">{0} {1}</label>
+  <label id="6030">完结</label>
+  <label id="6031">查看</label>
+  <label id="6032">{0} 第{1}关胜利</label>
+  <label id="6033">还有{0}关</label>
+  <label id="6034">医馆回复</label>
+  <label id="6035">第{0}关</label>
+  <label id="6036">[FFE95D]{0} [00FFE5]({1}/3)[-][-]</label>
+  <label id="6037">[984E2C]胜利条件:  第3场战斗存活[ff2f2f]{0}回合[-]即可获胜[-]</label>
+  <label id="6038">[984E2C]胜利条件:  每场战斗在[ff2f2f]{0}回合[-]内全歼敌人[-]</label>
+
+  <label id="6039">{0}回合结束
+您未能消灭全部敌人</label>
+  <label id="6040">{1} {2}</label>
+  <label id="6041">我军出战阵容:{0}</label>
+  <label id="6042">{0}x{1}</label>
+  <label id="6043">(已上阵)</label>
+  <label id="6044">恭喜通关</label>
+  <label id="6045">(明天可扫荡)</label>
+  <label id="6046">开启传记</label>
+  <label id="6047">成功完结</label>
+  <label id="6048">{0} 正传
+{1} 外传</label>
+  
+  <!--战役剧情-->
+  <label id="6101">治极生乱，乱极入治。</label>
+  <label id="6102">东汉末年，持续了二百年之久的太平盛世陷入纷乱。</label>
+  <label id="6103">大贤良师张角率黄巾军在各地起事，百姓生灵涂炭。</label>
+  <label id="6104">值此乱世，涌现出一位英雄，立志兴复汉室。</label>
+  <label id="6105">中山靖王之后——刘玄德，招募义军讨伐黄巾……</label>
+  <label id="6106">东汉末年，政局不稳，外戚专政，宦官专权。</label>
+  <label id="6107">战争持续，花费巨大，徭役繁重，民不聊生。</label>
+  <label id="6108">巨鹿张角，得传《太平要术》，揭竿而起。</label>
+  <label id="6109">苍天已死，黄天当立，岁在甲子，天下大吉，</label>
+  <label id="6110">张角、张宝、张梁三兄弟率领黄巾军开始了对朝廷的讨伐……</label>
+  <label id="6111">东汉末年，朝廷腐败，十常侍把持朝纲。</label>
+  <label id="6112">大将军何进召西凉太守董卓率军进京讨伐十常侍。</label>
+  <label id="6113">董卓进入洛阳后，专擅朝政，废立汉帝，权倾朝野。</label>
+  <label id="6114">曹操欲献七星刀刺杀董卓，失败，逃出洛阳，发出讨伐董卓的檄文。</label>
+  <label id="6115">十八路诸侯响应檄文集结，共同推举袁绍为盟主，讨伐董卓……</label>
+  <label id="6116">西凉董卓，作战粗猛有谋，力建战功</label>
+  <label id="6117">先后参与镇压黄巾起义、凉州之乱等战役，颇著威名。</label>
+  <label id="6118">中平六年，受大将军何进、司隶校尉袁绍所召，率军进京讨伐十常侍。</label>
+  <label id="6119">董卓杀何苗、杀丁原，废少帝、立献帝。</label>
+  <label id="6120">关东军十八路诸侯结为联盟前来讨伐</label>
+  <label id="6121">曹操在兖州时，养父曹嵩打算前来投奔。</label>
+  <label id="6122">曹嵩一行从琅邪郡赶往泰山郡路上，被陶谦部下张闿杀害。</label>
+  <label id="6123">曹操悲痛欲绝，亲率大军赶往徐州征伐陶谦。</label>
+  <label id="6124">曹营后方兖州空虚，吕布乘机夺取。</label>
+  <label id="6125">曹操率军赶回，讨伐吕布……</label>
+  <label id="6126">吕布，原为丁原义子，后受董卓唆使杀害丁原。</label>
+  <label id="6127">司徒王允使用美人连环计，唆使吕布杀董卓。</label>
+  <label id="6128">吕布杀了董卓后，被董卓旧部李傕、郭汜击败，逃出长安。</label>
+  <label id="6129">吕布辗转河北、中原，先后投靠袁术袁绍、张扬、张邈。</label>
+  <label id="6130">恰逢曹操举兵攻打徐州，后方空虚，吕布趁机率兵攻打……</label>
+  <label id="6131">建安元年，曹操迎献帝，迁都许县，自始挟天子以令诸侯，威势大增。</label>
+  <label id="6132">曹操先后击败吕布、袁术，占据了兖州、徐州以及部分豫州、司隶。</label>
+  <label id="6133">建安四年，袁绍最终战胜公孙瓒，据幽州、冀州、青州、并州，尽有河北之地，意欲南向以争天下。</label>
+  <label id="6134">袁绍已无后顾之忧，地广人众，可动员的兵力在十万以上，遂往南发动征伐。</label>
+  <label id="6135">曹操亲率大军前往官渡，与袁绍展开决战……</label>
+  <label id="6136">建安元年，曹操迎献帝，迁都许县，自始挟天子以令诸侯，威势大增。</label>
+  <label id="6137">曹操先后击败吕布、袁术，占据了兖州、徐州以及部分豫州、司隶。</label>
+  <label id="6138">建安四年，袁绍最终战胜公孙瓒，据幽州、冀州、青州、并州，尽有河北之地，意欲南向以争天下。</label>
+  <label id="6139">袁绍已无后顾之忧，地广人众，可动员的兵力在十万以上，遂往南发动征伐。</label>
+  <label id="6140">袁绍能击败曹操，夺走汉天子吗？</label>
+  <label id="6141">刘备乘的卢马越过檀溪，来到水镜先生司马徽的居所。</label>
+  <label id="6142">司马徽对刘备说：“伏龙凤雏，二人得一，可安天下。”</label>
+  <label id="6143">刘备得知伏龙即诸葛亮后，亲往隆中三顾茅庐，请得诸葛亮出山。</label>
+  <label id="6144">恰逢曹操统一北方后，派夏侯惇领兵十万伐南阳新野。</label>
+  <label id="6145">军师诸葛亮在新野设下重重埋伏，等待着曹军到来……</label>
+  <label id="6146">刘备乘的卢马越过檀溪，来到水镜先生司马徽的居所。</label>
+  <label id="6147">司马徽对刘备说：“伏龙凤雏，二人得一，可安天下。”</label>
+  <label id="6148">刘备得知伏龙即诸葛亮后，亲往隆中三顾茅庐，请得诸葛亮出山。</label>
+  <label id="6149">曹操统一北方后，派夏侯惇领兵十万伐南阳新野。</label>
+  <label id="6150">曹操军能否攻破军师诸葛亮所建立的防线……</label>
+  <label id="6151">曹操统一北方后，出兵南下，欲要统一天下。</label>
+  <label id="6152">荆州刘琮不战而降，刘备率部下逃往江夏。</label>
+  <label id="6153">诸葛亮应鲁肃之邀出使东吴，说服孙权与刘备结盟。</label>
+  <label id="6154">孙刘联军以周瑜为大都督，在赤壁集结。</label>
+  <label id="6155">一场决定历史走向的水上战役就此展开……</label>
+  <label id="6156">曹操在陈留起兵，收揽青州黄巾军旧部，号称“青州兵”，作为班底。</label>
+  <label id="6157">先后击败吕布、袁术、陶谦、袁绍，占领了中原、河北之地，统一北方。</label>
+  <label id="6158">天下之大，仅余江东与四川之地未平复。</label>
+  <label id="6159">曹操大军挥兵南下，孙刘联军在赤壁接战。</label>
+  <label id="6160">曹操能否实现统一天下的梦想呢？</label>
+  
+  <!--战役战斗台词-->
+  <label id="6201">听闻大贤良师得了太平圣典，悬壶济世。咱哥儿几个有志青年当响应天师号召，共建太平！</label>
+  <label id="6202">那些胆敢在太平之路上横加阻拦的人，必将受到黄天的审判！ </label>
+  <label id="6203">苍天已死，黄天当立；岁在甲子，天下大吉！ </label>
+  <label id="6204">如今洛阳是俺的地盘，谁也别想走！ </label>
+  <label id="6205">无双上将华雄在此，谁能斩我？！ </label>
+  <label id="6206">给我一盏温酒的时间。 </label>
+  <label id="6207">吕奉先在此，向前一步者，斩！ </label>
+  <label id="6208">董卓凶横无忌，但有义父王允之命，奴家身不由己，不得不从……</label>
+  <label id="6209">哼，董卓横刀夺爱，我吕奉先与他势成水火！ </label>
+  <label id="6210">如今四面楚歌，洛阳已成绝境，我儿奉先何在？ </label>
+  <label id="6211">兖州乃四方必争的冲要之地，吕布若能入主兖州，通过武道达成一统也将成为可能！ </label>
+  <label id="6212">刘贤弟，当初若没有我的辕门射戟，小沛或许早归纪灵所有，现在大哥想借小沛一用，你岂有不借之理？ </label>
+  <label id="6213">吕布若能采用两面互补之计，下邳何至于此！我的智谋既然无法通达天下，那便让我的勇烈流传青史！ </label>
+  <label id="6214">吾乃三国第一人！可以死，不能败！ </label>
+  <label id="6215">夫君，我与你生则同居，死则同穴；所以，抛开一切，用你最强的意志去战斗吧！ </label>
+  <label id="6216">我欲与刘将军共死，纵使你能迫降我，但终有一天我将回到他身边。 </label>
+  <label id="6217">此役你若输了，便助我在官渡打败袁绍。 </label>
+  <label id="6218">我家主公乃四世三公，白脸贼不过是赘阉遗丑，也敢与袁将军争天下？先吃我一矛！ </label>
+  <label id="6219">颜良与我亲如兄弟，如今被曹操所杀，我定要一雪其耻！ </label>
+  <label id="6220">今袁绍军的粮草辎重囤积于乌巢，主公若能亲率轻骑趁夜奇袭，胜可期矣！ </label>
+  <label id="6221">我袁本初占冀、青、并、幽四州，雄踞河北，无人能敌！官渡之战只是中了白脸贼的奸计！今天我要把失去的全拿回来！ </label>
+  <label id="6222">刘备自毁营寨，想必大势已去，无力再战，咱们该乘胜追击，一举拿下！ </label>
+  <label id="6223">刘备有诸葛亮做军师，断不至如此窝囊，恐有伏兵。 </label>
+  <label id="6224">哼！一群鼠辈，凭着雕虫小技也敢与我许褚一争高下？ </label>
+  <label id="6225">这新野城门洞开，杳无人迹，那狡猾的诸葛亮又在使什么把戏？ </label>
+  <label id="6226">常山赵子龙在此，新野火起，尔等已成瓮中之鳖！ </label>
+  <label id="6227">常说“新官上任三把火”，今个我算是见着了！ </label>
+  <label id="6228">吾乃燕人张翼德也，谁敢与我决一死战！ </label>
+  <label id="6229">你们可是来陪我家主公南下打猎？如若不是，那就休怪乐某无情！ </label>
+  <label id="6230">曹……曹公，大火就要烧来了，恳请下令让末将掩护您撤退吧！ </label>
+  <label id="6231">吾携二十万兵马下江陵，舳舻千里，如今却要被周瑜区区三万人马困于此？ </label>
+  <label id="6232">哈哈，刘备虽有智谋，却总比我晚一步。今日既不能将我覆灭于此，他日我必将卷土重来！ </label>
+  <label id="6233">我奉主公之命镇守南郡，如今周瑜来袭，哪位将领愿作先锋？ </label>
+  <label id="6234">只需三百死士，我定为将军奉上周瑜人头！ </label>
+  <label id="6235">想要拿下荆南四郡？先问过我黄汉升的弓答应不答应！ </label>
+  
+  <!--世界Boss-->
+  <label id="6300">神龙</label>
+  <label id="6301">击杀宝箱</label>
+  <label id="6302">[845035]神龙剩余血量：[-][fb0100]{0}%[-]</label>
+  <label id="6303">[845035]神龙消失剩余时间：[-][16b925]{0}[-]</label>
+  <label id="6304">[aa7158]每对神龙造成[-][0676fb]0.01%[-][aa7158]伤害即可获得[-]</label>
+  <label id="6305">挑战</label>
+  <label id="6306">[aa7357]本战斗为模拟战斗，不实际消耗士兵[-]</label>
+  <label id="6307">神龙之力入侵</label>
+  <label id="6308">入侵者挑战为模拟战斗，不消耗士兵</label>
+  <label id="6309">[845035]部队剩余兵量：[-][fb0100]{0}%[-]</label>
+  <label id="6310">[2f85f9]{0}[-][6322fd][{1}服][-]</label>
+  <label id="6311">[aa7158]每击杀[-][0676fb]1%[-][aa7158]的兵量即可获得[-]</label>
+  <label id="6312">{0}元宝</label>
+  <label id="6313">[a97256]距离下一次可挑战还有[-][11c31e]{0}[-]</label>
+  <label id="6314">立即挑战</label>
+  <label id="6315">[3888f4]{0}[-][aa7357]击破了神龙的蛋壳，
+  获得[-][fe6610]{1}[-]</label>
+  <label id="6316">[aa7158]当前可挑战[-]</label>
+  <label id="6317">[f92927]神龙已被[-][3888f4]{0}[-][f92927]击杀[-]</label>
+  <label id="6318">[3888f4]{0}[-][f92927]击杀了神龙[-][864d34]，获得[-][fe6610]击杀宝箱的奖励[-]
+  [864d34]，成为本服的[-][af02ef]神龙使者[-][864d34]，
+  即将奔赴跨服战场[-]</label>
+  <label id="6319">[7c2c06]距离跨服战场开启还有[-]
+  [02be2e]{0}[-]</label>
+  <label id="6320">[aa7357]神龙之力状态：[-][fb723f]部队兵量变为{0}倍[-]</label>
+  <label id="6321">[845035]部队消失剩余时间：[-][16b925]{0}[-]</label>
+  <label id="6322">跨服</label>
+  <label id="6323">[2f85f9]{0}[-][6322fd]【{1}服 {2}】[-][8d4800]:{3}[-]</label>
+  <label id="6324">侵入{0}服</label>
+  <label id="6325">{0}杀</label>
+  <label id="6326">驱逐者</label>
+  <label id="6327">已被{0}服驱逐</label>
+  <label id="6328">您对神龙造成了{0}%伤害，
+  获得以下奖励</label>
+  <label id="6329">第{0}次消除冷却需要花费{1}元宝，是否确认？</label>
+  <label id="6330">击杀神龙即可获得：</label>
+  <label id="6331">您对入侵者造成了{0}%伤害，
+  获得以下奖励</label>
+  <label id="6332">驱逐入侵者即可获得：</label>
+  <label id="6333">驱逐宝箱</label>
+  <label id="6334">神龙挑战阶段已结束</label>
+  <label id="6335">神龙使者入侵阶段已结束</label>
+  <label id="6336">本次挑战获得{0}%的攻防加成</label>
+  
+  <!--战役引导-->
+  <label id="6400">【战役】玩法现已开启，苍茫大地的盛衰兴废由你来主宰！</label>
+  <label id="6401">三国乱世序幕就此掀开，兴复汉室还是响应黄巾？赶快进入第一场战役——黄巾之战！</label>
+  <label id="6402">出战兵种、人数都已点拨完毕，主公可调整部队位置，选择上阵武将。布阵和名将可是获胜的关键哟~</label>
+  
+  <!--手机绑定-->
+  <label id="6500">主公，手机绑定后您可以直接用手机号登陆，同时也方便账号找回。绑定后您还能获得[ff6e00]{0}[-]元宝奖励哦~</label>
+  <label id="6501">绑定</label>
+  <label id="6502">感谢您成功绑定手机号码，在此为您奉上以下奖励</label>
+  <label id="6503">{0}元宝</label>
+  <label id="6504">手机绑定</label>
+
+</labes>
