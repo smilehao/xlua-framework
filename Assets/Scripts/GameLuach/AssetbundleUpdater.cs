@@ -157,6 +157,11 @@ public class AssetbundleUpdater : MonoBehaviour
         // TODO：根据公共包自动设置常驻包
         string assetbundleName = "assetspackage/lua.assetbundle";
         AssetBundleManager.Instance.SetAssetBundleResident(assetbundleName, true);
+        AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_ttf.assetbundle", true);
+        AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_art_ttf.assetbundle", true);
+        AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_comm.assetbundle", true);
+        AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_role.assetbundle", true);
+        AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/shaders.assetbundle", true);
         var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(assetbundleName);
         yield return loader;
         loader.Dispose();

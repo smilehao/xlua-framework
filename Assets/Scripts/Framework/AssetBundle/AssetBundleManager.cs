@@ -340,9 +340,9 @@ namespace AssetBundles
                 if (!isResident || isResident && unloadResident)
                 {
                     assetbundle.Unload(unloadAllLoadedObjects);
+                    RemoveAssetBundleCache(assetbundleName);
                 }
             }
-            RemoveAssetBundleCache(assetbundleName);
         }
 
         public void TryUnloadAssetBundle(string assetbundleName, bool unloadAllLoadedObjects = false)
