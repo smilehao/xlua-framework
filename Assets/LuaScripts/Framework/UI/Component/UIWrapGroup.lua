@@ -38,10 +38,10 @@ local function OnCreate(self, wrap_class, ...)
 	self.unity_scrollrect = self.transform:GetComponentInParent(typeof(CS.UnityEngine.UI.ScrollRect))
 	self.unity_grid = self.transform:GetComponent(typeof(CS.UnityEngine.UI.GridLayoutGroup))
 	self.unity_sizefitter = self.transform:GetComponent(typeof(CS.UnityEngine.UI.ContentSizeFitter))
-	assert(self.unity_scrollrect ~= nil, "No found UnityEngine.UI.ScrollRect!")
-	assert(self.unity_grid ~= nil, "No found UnityEngine.UI.GridLayoutGroup!")
+	assert(not IsNull(self.unity_scrollrect), "No found UnityEngine.UI.ScrollRect!")
+	assert(not IsNull(self.unity_grid), "No found UnityEngine.UI.GridLayoutGroup!")
 	self.unity_grid.enabled = false
-	if self.unity_sizefitter ~= nil then
+	if not IsNull(self.unity_sizefitter) then
 		self.unity_sizefitter.enabled = fasle
 	end
 	
@@ -59,17 +59,13 @@ local function OnCreate(self, wrap_class, ...)
 	-- 通过四角坐标（左下、左上、右上、右下）计算scroll_rect中心点在局部坐标系中的坐标
 	self.rectTransform.anchoredPosition = Vector2.zero
 	local scroll_rect_trans = self.unity_scrollrect.transform:GetComponent(typeof(CS.UnityEngine.RectTransform))
-	-- TODO：
-	--local scroll_world_corners = scroll_rect_trans:GetWorldCorners()
-	--local bottom_left = self.transform:InverseTransformPoint(scroll_world_corners[0])
-	--local top_right = self.transform:InverseTransformPoint(scroll_world_corners[2])
-	local scroll_world_corners = { Vector3(), Vector3(), Vector3(), Vector3()}
+	local scroll_world_corners = { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero}
 	scroll_rect_trans:GetWorldCorners(scroll_world_corners)
 	local bottom_left = self.transform:InverseTransformPoint(scroll_world_corners[1])
 	local top_right = self.transform:InverseTransformPoint(scroll_world_corners[3])
 	
-	self.center = Vector2.New(0, 0)
-	self.center_original = Vector2.New(0, 0)
+	self.center = Vector2.zero
+	self.center_original = Vector2.zero
 	self.center_original.x = (bottom_left.x + top_right.x) / 2
 	self.center_original.y = (bottom_left.y + top_right.y) / 2
 	
@@ -79,7 +75,7 @@ local function OnCreate(self, wrap_class, ...)
 	-- 最大索引
 	self.max_index = 0
 	-- 缓存用
-	self.tmp_vec3 = Vector3.New(0, 0, 0)
+	self.tmp_vec3 = Vector3.zero
 	-- 按钮组
 	self.__btngroup = nil
 	-- 当前选中虚拟索引

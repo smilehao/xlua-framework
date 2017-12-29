@@ -14,7 +14,7 @@ local function OnCreate(self)
 	-- Unity侧原生组件
 	self.unity_uiinput = UIUtil.FindInput(self.transform)
 	
-	if self.unity_uiinput ~= nil and self.gameObject == nil then
+	if not IsNull(self.unity_uiinput) and IsNull(self.gameObject) then
 		self.gameObject = self.unity_uiinput.gameObject
 		self.transform = self.unity_uiinput.transform
 	end
@@ -22,14 +22,14 @@ end
 
 -- 获取文本
 local function GetText(self)
-	if self.unity_uiinput ~= nil then
+	if not IsNull(self.unity_uiinput) then
 		return self.unity_uiinput.text
 	end
 end
 
 -- 设置文本
 local function SetText(self, text)
-	if self.unity_uiinput ~= nil then
+	if not IsNull(self.unity_uiinput) then
 		self.unity_uiinput.text = text
 	end
 end

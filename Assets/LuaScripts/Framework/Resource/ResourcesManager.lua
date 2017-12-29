@@ -19,7 +19,7 @@ local function LoadAsync(self, path, callback)
 	assert(callback ~= nil and type(callback) == "function", "Need to provide a function as callback")
 	coroutine.start(function()
 		local asset = self:CoLoadAsync(path)
-		-- TODO：支持ab加载、考虑是否做资源层缓存
+		-- TODO：判空，支持ab加载、考虑是否做资源层缓存
 		local inst = CS.UnityEngine.GameObject.Instantiate(asset)
 		callback(inst)
 	end)

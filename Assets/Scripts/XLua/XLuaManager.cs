@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AssetBundles;
+using UnityEngine;
 using XLua;
 
 /// <summary>
@@ -91,7 +92,22 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         string scriptPath = Application.dataPath +  "/LuaScripts/" + filepath.Replace(".", "/") + ".lua";
         return GameUtility.SafeReadAllBytes(scriptPath);
 #else
-        // TODO：此处从项目资源管理器加载lua脚本
+        // TODO：资源管理层提供同步加载
+        string scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua.bytes";
+        string assetbundleName = null;
+        string assetName = null;
+        bool status = AssetBundleManager.Instance.MapAssetPath(scriptPath, out assetbundleName, out assetName);
+        if (!status)
+        {
+            Logger.LogError("MapAssetPath failed : " + scriptPath);
+            return null;
+        }
+        var asset = AssetBundleManager.Instance.GetAssetCache(assetName) as TextAsset;
+        if (asset != null)
+        {
+            return asset.bytes;
+        }
+        return null;
 #endif
     }
 

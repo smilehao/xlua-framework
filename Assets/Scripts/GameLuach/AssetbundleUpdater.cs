@@ -33,7 +33,7 @@ public class AssetbundleUpdater : MonoBehaviour
 #if UNITY_EDITOR
         if (AssetBundleConfig.IsEditorMode)
         {
-            StartGame();
+            yield return StartGame();
             yield break;
         }
 #endif
@@ -44,7 +44,7 @@ public class AssetbundleUpdater : MonoBehaviour
         {
             statusText.text = "没有资源需要更新！";
             UnityEngine.Debug.Log("No resources to update...");
-            StartGame();
+            yield return StartGame();
             yield break;
         }
 
@@ -59,7 +59,7 @@ public class AssetbundleUpdater : MonoBehaviour
         statusText.text = "资源更新完成！";
         UnityEngine.Debug.Log("Update finished...");
         yield return UpdateFinish();
-        StartGame();
+        yield return StartGame();
         yield break;
     }
 
@@ -148,10 +148,17 @@ public class AssetbundleUpdater : MonoBehaviour
         yield break;
     }
 
-    void StartGame()
+    IEnumerator StartGame()
     {
+        // TODO：根据公共包自动设置常驻包
+        string assetbundleName = "assetspackage/lua.assetbundle";
+        AssetBundleManager.Instance.SetAssetBundleResident(assetbundleName, true);
+        var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(assetbundleName);
+        yield return loader;
+        loader.Dispose();
         XLuaManager.Instance.StartGame();
         Destroy(gameObject);
+        yield break;
     }
 	
 	void Update () {

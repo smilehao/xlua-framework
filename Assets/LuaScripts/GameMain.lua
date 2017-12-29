@@ -1,15 +1,10 @@
---[[
--- add by wsh 2017-11-29
--- 游戏逻辑入口
---]]
-
--- 游戏逻辑全局模块
+-- 全局模块
 require "Global.Global"
 	
--- 全局模块
-GameMain = {}
+-- 定义为全局模块，整个lua程序的入口类
+GameMain = {};
 
---主入口函数
+--主入口函数。从这里开始lua逻辑
 local function Start()
 	print("GameMain start...")
 	if Config.Debug then
@@ -47,6 +42,7 @@ local function OnApplicationQuit()
 	TimerManager:GetInstance():Dispose()
 end
 
+-- GameMain公共接口，其它的一律为私有接口，只能在本模块访问
 GameMain.Start = Start
 GameMain.OnLevelWasLoaded = OnLevelWasLoaded
 GameMain.OnApplicationQuit = OnApplicationQuit

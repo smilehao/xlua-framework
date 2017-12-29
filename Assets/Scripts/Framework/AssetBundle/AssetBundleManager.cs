@@ -372,6 +372,11 @@ namespace AssetBundles
             return creater;
         }
 
+        public bool MapAssetPath(string assetPath, out string assetbundleName, out string assetName)
+        {
+            return assetsPathMapping.MapAssetPath(assetPath, out assetbundleName, out assetName);
+        }
+
         public ResourceWebRequester RequestAssetAsync(string filePath)
         {
             var creater = ResourceWebRequester.Get();
@@ -395,7 +400,7 @@ namespace AssetBundles
 
             string assetbundleName = null;
             string assetName = null;
-            bool status = assetsPathMapping.MapAssetPath(assetPath, out assetbundleName, out assetName);
+            bool status = MapAssetPath(assetPath, out assetbundleName, out assetName);
             if (!status)
             {
                 UnityEngine.Debug.LogError("No assetbundle at asset path :" + assetPath);

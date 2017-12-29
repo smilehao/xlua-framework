@@ -12,3 +12,8 @@ Assets/LuaScripts/GPATH
 Assets/StreamingAssets/AssetBundles/
 AssetBundles/
 Assets/StreamingAssets/AssetBundles.meta
+*.apk
+Assets/AssetsPackage/Lua/
+Assets/Scripts/XLua/Gen/
+Assets/Scripts/XLua/Gen.meta
+Assets/AssetsPackage/Lua.meta

@@ -73,7 +73,7 @@ local function Activate(self, cmp_name)
 	
 	self.current = nil
 	local cmp = self:GetComponent(cmp_name)
-	if cmp ~= nil and cmp.gameObject ~= nil then
+	if cmp ~= nil and not IsNull(cmp.gameObject) then
 		self.current = cmp
 		cmp:SetActive(true)
 	end
