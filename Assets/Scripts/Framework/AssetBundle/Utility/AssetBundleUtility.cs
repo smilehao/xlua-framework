@@ -64,7 +64,7 @@ namespace AssetBundles
         }
 #endif
         
-        public static string GetPlatformStreamingAssetsFilePath(string assetPath)
+        public static string GetPlatformStreamingAssetsFilePath(string assetPath = null)
         {
 #if UNITY_EDITOR
             var target = EditorUserBuildSettings.activeBuildTarget;
@@ -214,6 +214,8 @@ namespace AssetBundles
                     GameUtility.SafeDeleteFile(allManifest[i]);
                 }
             }
+
+            Debug.Log("Copy platform assetbundles to streaming assets done!");
         }
 #endif
     }

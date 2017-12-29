@@ -109,6 +109,10 @@ namespace AssetBundles
                 UnityEngine.Debug.LogError("New www failed!!!");
                 isOver = true;
             }
+            else
+            {
+                UnityEngine.Debug.Log("Downloading : " + url);
+            }
         }
         
         public override float Progress()

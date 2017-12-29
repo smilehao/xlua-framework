@@ -17,7 +17,7 @@ namespace AssetBundles
         public const bool isDebug = true;
         private const string localSvrAppPath = "Editor/AssetBundle/LocalServer/AssetBundleServer.exe";
         public const string RemoteServerUrl = "http://192.168.1.150:80/AssetBundles/";
-        public const string PlayerBuildName = "AssetbundleDemo";
+        public const string PlayerBuildName = "xluaframework";
         public const string AssetBundlesFolderName = "AssetBundles";
         public const string AssetBundleSuffix = ".assetbundle";
         public const string AssetsFolderName = "AssetsPackage";

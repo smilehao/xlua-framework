@@ -15,6 +15,10 @@ namespace AssetBundles
         const string kBuildIOSAssetbundle = "AssetBundles/Build AssetBundles/For IOS";
         const string kBuildPlayer = "AssetBundles/Build Player/BuildPlayer";
         const string kBuildStandalonePlayer = "AssetBundles/Build Player/BuildStandalonePlayer";
+        const string kToolsClearOutput = "AssetBundles/Tools/Clear Output";
+        const string kToolsClearStreamingAssets = "AssetBundles/Tools/Clear Streaming Assets";
+        const string kToolsClearPersistentAssets = "AssetBundles/Tools/Clear Persistent Assets";
+
 
         const string kCreateAssetbundleForCurrent = "Assets/AssetBundles/Create Assetbundle For Current &#z";
         const string kCreateAssetbundleForChildren = "Assets/AssetBundles/Create Assetbundle For Children &#x";
@@ -96,7 +100,34 @@ namespace AssetBundles
         {
             AssetBundleBuildScript.BuildStandalonePlayer();
         }
-        
+
+        [MenuItem(kToolsClearOutput)]
+        static public void ToolsClearOutput()
+        {
+            string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, AssetBundleUtility.GetCurPlatformName());
+            GameUtility.SafeDeleteDir(outputPath);
+            Debug.Log(string.Format("Clear {0} assetbundle output done!", AssetBundleUtility.GetCurPlatformName()));
+        }
+
+        [MenuItem(kToolsClearStreamingAssets)]
+        static public void ToolsClearStreamingAssets()
+        {
+            string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
+            outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
+            GameUtility.SafeDeleteDir(outputPath);
+            AssetDatabase.Refresh();
+            Debug.Log(string.Format("Clear {0} assetbundle streaming assets done!", AssetBundleUtility.GetCurPlatformName()));
+        }
+
+        [MenuItem(kToolsClearPersistentAssets)]
+        static public void ToolsClearPersistentAssets()
+        {
+            string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
+            outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
+            GameUtility.SafeDeleteDir(outputPath);
+            Debug.Log(string.Format("Clear {0} assetbundle persistent assets done!", AssetBundleUtility.GetCurPlatformName()));
+        }
+
         [MenuItem(kCreateAssetbundleForCurrent)]
         static public void CreateAssetbundleForCurrent()
         {

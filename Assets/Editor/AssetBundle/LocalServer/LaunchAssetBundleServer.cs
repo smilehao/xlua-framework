@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace AssetBundles
 {
@@ -70,12 +72,10 @@ namespace AssetBundles
 		static void Run ()
 		{
 			KillRunningAssetBundleServer();
-            
 			AssetBundleUtility.WriteAssetBundleServerURL();
 
 			string args = string.Format("\"{0}\" {1}", AssetBundleConfig.LocalSvrAppWorkPath, Process.GetCurrentProcess().Id);
-            ProcessStartInfo startInfo = ExecuteInternalMono.GetProfileStartInfoForMono(MonoInstallationFinder.GetMonoInstallation("MonoBleedingEdge"), 
-                "4.0", AssetBundleConfig.LocalSvrAppPath, args , true);
+            ProcessStartInfo startInfo = ExecuteInternalMono.GetProfileStartInfoForMono(MonoInstallationFinder.GetMonoInstallation("MonoBleedingEdge"), GetMonoProfileVersion(), AssetBundleConfig.LocalSvrAppPath, args, true);
             startInfo.WorkingDirectory = AssetBundleConfig.LocalSvrAppWorkPath;
 			startInfo.UseShellExecute = false;
 			Process launchProcess = Process.Start(startInfo);
@@ -88,6 +88,28 @@ namespace AssetBundles
 				instance.mServerPID = launchProcess.Id;
                 UnityEngine.Debug.Log("Local assetbundle server run!");
             }
-		}
-	}
+        }
+
+        static string GetMonoProfileVersion()
+        {
+            string path = Path.Combine(Path.Combine(MonoInstallationFinder.GetMonoInstallation("MonoBleedingEdge"), "lib"), "mono");
+
+            string[] folders = Directory.GetDirectories(path);
+            string[] foldersWithApi = folders.Where(f => f.Contains("-api")).ToArray();
+            float profileVersion = 1.0f;
+
+            for (int i = 0; i < foldersWithApi.Length; i++)
+            {
+                foldersWithApi[i] = foldersWithApi[i].Split(Path.DirectorySeparatorChar).Last();
+                foldersWithApi[i] = foldersWithApi[i].Split('-').First();
+
+                if (float.Parse(foldersWithApi[i]) > profileVersion)
+                {
+                    profileVersion = float.Parse(foldersWithApi[i]);
+                }
+            }
+
+            return profileVersion.ToString();
+        }
+    }
 }

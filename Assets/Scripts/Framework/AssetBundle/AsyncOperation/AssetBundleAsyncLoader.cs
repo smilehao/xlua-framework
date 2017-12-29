@@ -104,7 +104,8 @@ namespace AssetBundles
                     {
                     }
                     //Debug.Log(curFinished);
-                    //AssetBundleManager.Instance.AddAssetbundleAssetsCache(curFinished);
+                    // Unity5.3.5这里有Bug，必须加载被依赖的Asset才能保证正确
+                    AssetBundleManager.Instance.AddAssetbundleAssetsCache(curFinished);
                     waitingList.RemoveAt(i);
                 }
             }

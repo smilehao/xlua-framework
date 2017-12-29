@@ -38,6 +38,10 @@ public class AssetbundleUpdater : MonoBehaviour
         }
 #endif
 
+        //yield return new WaitForSeconds(5);
+        //yield return StartGame();
+        //yield break;
+
         statusText.text = "正在检测资源更新...";
         yield return CheckIfNeededUpdate();
         if (needDownloadList.Count <= 0)
@@ -157,7 +161,6 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return loader;
         loader.Dispose();
         XLuaManager.Instance.StartGame();
-        Destroy(gameObject);
         yield break;
     }
 	

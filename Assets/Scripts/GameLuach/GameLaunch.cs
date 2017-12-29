@@ -47,8 +47,11 @@ public class GameLaunch : MonoBehaviour
     {
         var luanchLayer = GameObject.Find("UIRoot/LuanchLayer");
         go.transform.parent = luanchLayer.transform;
-        go.transform.localPosition = Vector3.zero;
-        go.transform.localScale = Vector3.one;
+        var rectTransform = go.GetComponent<RectTransform>();
+        rectTransform.offsetMax = Vector2.zero;
+        rectTransform.offsetMin = Vector2.zero;
+        rectTransform.localScale = Vector3.one;
+        rectTransform.localPosition = Vector3.zero;
 
         go.AddComponent<AssetbundleUpdater>();
     }
