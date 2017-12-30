@@ -9,6 +9,7 @@ using UnityEditor;
 /// <summary>
 /// add by wsh @ 2017-12-21
 /// 功能：assetbundle管理类，为外部提供统一的资源加载界面、协调Assetbundle各个子系统的运行
+/// 说明：移植自官方项目：https://bitbucket.org/Unity-Technologies/assetbundledemo
 /// 注意：
 /// 1、抛弃Resources目录的使用，官方建议：https://unity3d.com/cn/learn/tutorials/temas/best-practices/resources-folder?playlist=30089
 /// 2、提供Editor和Simulate模式，前者不适用Assetbundle，直接加载资源，快速开发；后者使用Assetbundle，用本地服务器模拟资源更新

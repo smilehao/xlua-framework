@@ -36,11 +36,14 @@ public class AssetbundleUpdater : MonoBehaviour
             yield return StartGame();
             yield break;
         }
+#if UNITY_5_5
+        // 说明：亲测5.5版本的本地服务器在windows上无法正常工作，倒是在手机上是正常的
+        // 另外有人说UnityWebRequest在Unity5.5版本有问题
+        // 反馈：https://bitbucket.org/Unity-Technologies/assetbundledemo/pull-requests/25/feature-unitywebrequest/diff#comment-None
+        yield return StartGame();
+        yield break;
 #endif
-
-        //yield return new WaitForSeconds(5);
-        //yield return StartGame();
-        //yield break;
+#endif
 
         statusText.text = "正在检测资源更新...";
         yield return CheckIfNeededUpdate();
