@@ -296,8 +296,11 @@ namespace AssetBundles
                 for (int i = 0; i < dependancies.Length; i++)
                 {
                     var dependance = dependancies[i];
-                    IncreaseReferenceCount(dependance);
-                    CreateAssetBundleAsync(dependance);
+                    if (!string.IsNullOrEmpty(dependance))
+                    {
+                        IncreaseReferenceCount(dependance);
+                        CreateAssetBundleAsync(dependance);
+                    }
                 }
                 loader.Init(assetbundleName, dependancies);
             }
@@ -319,7 +322,10 @@ namespace AssetBundles
                 for (int i = 0; i < dependancies.Length; i++)
                 {
                     var dependance = dependancies[i];
-                    UnloadAssetBundle(dependance);
+                    if (!string.IsNullOrEmpty(dependance))
+                    {
+                        UnloadAssetBundle(dependance);
+                    }
                 }
             }
             UnloadAssetBundle(loader.assetbundleName);

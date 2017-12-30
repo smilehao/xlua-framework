@@ -45,6 +45,14 @@ public class AssetbundleUpdater : MonoBehaviour
 
         statusText.text = "正在检测资源更新...";
         yield return CheckIfNeededUpdate();
+        // Unity有个Bug会给空的名字，不记得在哪个版本修复了，这里强行过滤下
+        for (int i = needDownloadList.Count - 1; i >= 0; i--)
+        {
+            if (string.IsNullOrEmpty(needDownloadList[i]))
+            {
+                needDownloadList.RemoveAt(i);
+            }
+        }
         if (needDownloadList.Count <= 0)
         {
             UnityEngine.Debug.Log("No resources to update...");
