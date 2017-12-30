@@ -100,13 +100,15 @@ namespace AssetBundles
                     {
                         assetbundle = AssetBundleManager.Instance.GetAssetBundleCache(assetbundleName);
                     }
-#if UNITY_5_3_5 || UNITY_5_3_6 || UNITY_5_3_7
                     // 正常情况下只需要等待所有ab加载，而不需要加载asset：https://unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns?playlist=30089
-                    // 但是Unity5.3中5.3.4以上版本字体加载有Bug，被依赖的字体必须手动提前加载出来
+                    // 但是Unity中很多版本字体加载有Bug，被依赖的字体必须手动提前加载出来（目前只发现Unity5.3.4、Unity5.5没问题）
                     // Bug报告：https://issuetracker.unity3d.com/issues/custom-font-material-is-missing-after-loading-ui-text-prefab-from-an-asset-bundle
-                    // 这个Bug官方不执行修复，所以这里强制把所有依赖的Assets加载出来
-                    AssetBundleManager.Instance.AddAssetbundleAssetsCache(curFinished);
-#endif
+                    // 这个Bug官方不执行修复，所以这里强制把依赖的字体Assets加载出来
+                    // 注意：
+                    // 1、理论上如果仅仅存在2级依赖关系，则导出所有Assets并不会有什么问题，但是没有实际意义
+                    // 2、如果存在多级依赖，则Assets的导出必须等待ab全部加载完毕，会增加代码处理的复杂度
+                    // 3、所以这里暂时只把字体导出，字体不依赖其它ab，不会有问题
+                    AssetBundleManager.Instance.AddAssetbundleAssetsCache(curFinished, ".TTF");
                     waitingList.RemoveAt(i);
                 }
             }

@@ -201,7 +201,7 @@ namespace AssetBundles
             assetCaching[assetName] = asset;
         }
 
-        public void AddAssetbundleAssetsCache(string assetbundleName)
+        public void AddAssetbundleAssetsCache(string assetbundleName, string postfix = null)
         {
             if (!IsAssetBundleLoaded(assetbundleName))
             {
@@ -214,6 +214,10 @@ namespace AssetBundles
             {
                 var assetName = allAssetNames[i];
                 if (IsAssetLoaded(assetName))
+                {
+                    continue;
+                }
+                if (!string.IsNullOrEmpty(postfix) && !assetName.ToLower().EndsWith(postfix))
                 {
                     continue;
                 }

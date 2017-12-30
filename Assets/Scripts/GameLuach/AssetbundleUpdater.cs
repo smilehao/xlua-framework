@@ -35,6 +35,12 @@ public class AssetbundleUpdater : MonoBehaviour
             yield return StartGame();
             yield break;
         }
+#if UNITY_5_5
+        // 说明：亲测在Unity5.5版本本地服务器根本无法连接，倒是在手机上正常
+        UnityEngine.Debug.Log("No support simulate in Unity5.5 in windows...");
+        yield return StartGame();
+        yield break;
+#endif
 #endif
 
         statusText.text = "正在检测资源更新...";
@@ -150,14 +156,19 @@ public class AssetbundleUpdater : MonoBehaviour
     IEnumerator StartGame()
     {
         // TODO：根据公共包自动设置常驻包
-        string assetbundleName = "assetspackage/lua.assetbundle";
-        AssetBundleManager.Instance.SetAssetBundleResident(assetbundleName, true);
+        string luaAssetbundleName = "assetspackage/lua.assetbundle";
+        string loadingAssetbundleName = "assetspackage/ui/prefabs/view/uiloading_prefab.assetbundle";
+        AssetBundleManager.Instance.SetAssetBundleResident(luaAssetbundleName, true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_ttf.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_art_ttf.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_comm.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_role.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/shaders.assetbundle", true);
-        var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(assetbundleName);
+        AssetBundleManager.Instance.SetAssetBundleResident(loadingAssetbundleName, true);
+        var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaAssetbundleName);
+        yield return loader;
+        loader.Dispose();
+        loader = AssetBundleManager.Instance.LoadAssetBundleAsync(loadingAssetbundleName);
         yield return loader;
         loader.Dispose();
         XLuaManager.Instance.StartGame();
