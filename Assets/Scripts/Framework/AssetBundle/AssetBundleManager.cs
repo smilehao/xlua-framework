@@ -20,7 +20,7 @@ using UnityEditor;
 /// 7、随意卸载公共ab包可能导致内存资源重复，最好在切换场景时再手动清理不需要的公共ab包
 /// 8、常驻包（公共ab包）引用计数不为0时手动清理无效，正在等待加载的所有ab包不能强行终止---一旦发起创建就一定要等操作结束，异步过程进行中清理无效
 /// 9、切换场景时最好预加载所有可能使用到的资源，所有加载器用完以后记得Dispose回收，清理GC时注意先释放所有Asset缓存
-/// 10、逻辑层所有Asset路径带文件类型后缀，且是AssetBundleConfig.ResourcesFolderName下的相对路径
+/// 10、逻辑层所有Asset路径带文件类型后缀，且是AssetBundleConfig.ResourcesFolderName下的相对路径，注意：路径区分大小写
 /// TODO：
 /// 1、配置常驻包（公共ab包）列表，自动加载和卸载常驻包===>区分场景常驻包和全局公共包，切换场景时自动卸载场景公共包
 /// 使用说明：
@@ -217,7 +217,7 @@ namespace AssetBundles
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(postfix) && !assetName.ToLower().EndsWith(postfix))
+                if (!string.IsNullOrEmpty(postfix) && !assetName.EndsWith(postfix))
                 {
                     continue;
                 }
