@@ -2039,9 +2039,11 @@ public class Reporter : MonoBehaviour {
             url = System.IO.Path.Combine(streamingAssetsPath, prefFile);
         }
 
+#if !UNITY_2017
         if (Application.platform != RuntimePlatform.OSXWebPlayer && Application.platform != RuntimePlatform.WindowsWebPlayer)
             if (!url.Contains("://"))
                 url = "file://" + url;
+#endif
 
         url = url.Replace("\\","/");
        // float startTime = Time.realtimeSinceStartup;

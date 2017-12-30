@@ -96,20 +96,20 @@ namespace AssetBundles
 
             string[] folders = Directory.GetDirectories(path);
             string[] foldersWithApi = folders.Where(f => f.Contains("-api")).ToArray();
-            float profileVersion = 1.0f;
+            string profileVersion = "0";
 
             for (int i = 0; i < foldersWithApi.Length; i++)
             {
                 foldersWithApi[i] = foldersWithApi[i].Split(Path.DirectorySeparatorChar).Last();
                 foldersWithApi[i] = foldersWithApi[i].Split('-').First();
-
-                if (float.Parse(foldersWithApi[i]) > profileVersion)
+                
+                if (string.Compare(foldersWithApi[i], profileVersion) > 0)
                 {
-                    profileVersion = float.Parse(foldersWithApi[i]);
+                    profileVersion = foldersWithApi[i];
                 }
             }
 
-            return profileVersion.ToString();
+            return profileVersion;
         }
     }
 }
