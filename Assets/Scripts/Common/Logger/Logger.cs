@@ -173,7 +173,11 @@ public class Logger
     {
         get
         {
+#if UNITY_5_5_OR_NEWER
+            return (UnityEngine.Profiling.Profiler.usedHeapSizeLong / 1024 / 1024).ToString() + " mb";
+#else
             return (Profiler.usedHeapSize / 1024 / 1024).ToString() + " mb";
+#endif
         }
     }
 
