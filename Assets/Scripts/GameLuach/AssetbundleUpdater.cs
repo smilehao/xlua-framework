@@ -38,6 +38,7 @@ public class AssetbundleUpdater : MonoBehaviour
         }
 #if UNITY_5_5
         // 说明：亲测5.5版本的本地服务器在windows上无法正常工作，倒是在手机上是正常的
+        UnityEngine.Debug.Log("Local server doesn't work in unity5.5!!!");
         yield return StartGame();
         yield break;
 #endif

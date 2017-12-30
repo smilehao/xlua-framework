@@ -101,7 +101,8 @@ namespace AssetBundles
                         assetbundle = AssetBundleManager.Instance.GetAssetBundleCache(assetbundleName);
                     }
 #if UNITY_5_3_5 || UNITY_5_3_6 || UNITY_5_3_7
-                    // Unity5.3中5.3.4以上版本字体加载有Bug，被依赖的字体必须手动提前加载出来
+                    // 正常情况下只需要等待所有ab加载，而不需要加载asset：https://unity3d.com/cn/learn/tutorials/temas/best-practices/assetbundle-usage-patterns?playlist=30089
+                    // 但是Unity5.3中5.3.4以上版本字体加载有Bug，被依赖的字体必须手动提前加载出来
                     // Bug报告：https://issuetracker.unity3d.com/issues/custom-font-material-is-missing-after-loading-ui-text-prefab-from-an-asset-bundle
                     // 这个Bug官方不执行修复，所以这里强制把所有依赖的Assets加载出来
                     AssetBundleManager.Instance.AddAssetbundleAssetsCache(curFinished);
