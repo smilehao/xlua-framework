@@ -17,3 +17,5 @@ Assets/AssetsPackage/Lua/
 Assets/Scripts/XLua/Gen/
 Assets/Scripts/XLua/Gen.meta
 Assets/AssetsPackage/Lua.meta
+*.csproj
+*.sln
