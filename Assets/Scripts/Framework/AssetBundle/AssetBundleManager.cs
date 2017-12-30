@@ -101,7 +101,8 @@ namespace AssetBundles
             }
 #endif
 
-            // 等待所有请求完成：不等待可能会有问题
+            // 等待所有请求完成
+            // 要是不等待部分Unity很多版本都有各种Bug
             yield return new WaitUntil(() =>
             {
                 return prosessingWebRequester.Count == 0;

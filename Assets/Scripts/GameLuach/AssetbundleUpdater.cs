@@ -38,8 +38,6 @@ public class AssetbundleUpdater : MonoBehaviour
         }
 #if UNITY_5_5
         // 说明：亲测5.5版本的本地服务器在windows上无法正常工作，倒是在手机上是正常的
-        // 另外有人说UnityWebRequest在Unity5.5版本有问题
-        // 反馈：https://bitbucket.org/Unity-Technologies/assetbundledemo/pull-requests/25/feature-unitywebrequest/diff#comment-None
         yield return StartGame();
         yield break;
 #endif
@@ -49,7 +47,6 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return CheckIfNeededUpdate();
         if (needDownloadList.Count <= 0)
         {
-            statusText.text = "没有资源需要更新！";
             UnityEngine.Debug.Log("No resources to update...");
             yield return StartGame();
             yield break;
@@ -57,6 +54,7 @@ public class AssetbundleUpdater : MonoBehaviour
 
         // TODO：下载资源确认弹窗
         statusText.text = "正在更新资源...";
+        slider.normalizedValue = 0f;
         slider.gameObject.SetActive(true);
         totalDownloadCount = needDownloadList.Count;
         finishedDownloadCount = 0;

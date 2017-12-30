@@ -7,7 +7,13 @@ using UnityEngine;
 /// 功能：资源异步请求，本地、远程通杀
 /// 注意：
 /// 1、Unity5.3官方建议用UnityWebRequest取代WWW：https://unity3d.com/cn/learn/tutorials/topics/best-practices/assetbundle-fundamentals?playlist=30089
-/// 2、这里还是采用WWW，因为UnityWebRequest在Unity5.3.5中有Bug，以后升级Unity版本再考虑重构：http://blog.csdn.net/st75033562/article/details/52411197
+/// 2、这里还是采用WWW，因为UnityWebRequest的Bug无数：
+///     1）Unity5.3.5：http://blog.csdn.net/st75033562/article/details/52411197
+///     2）Unity5.5：https://bitbucket.org/Unity-Technologies/assetbundledemo/pull-requests/25/feature-unitywebrequest/diff#comment-None
+///     3）还有各个版本发行说明中关于UnityWebRequest的修复，如：https://unity3d.com/cn/unity/whats-new/unity-5.4.1
+///     4）此外对于LZMA压缩，采用UnityWebRequest好处在于节省内存，性能上并不比WWW优越：https://docs.unity3d.com/530/Documentation/Manual/AssetBundleCompression.html
+/// 3、LoadFromFile(Async)在Unity5.4以上支持streamingAsset目录加载资源，5.3.7和5.4.3以后支持LAMZ压缩，但是没法加载非Assetbundle资源
+/// 4、另外，虽然LoadFromFile(Async)是加载ab最快的API，但是会延缓Asset加载的时间（读磁盘），如果ab尽量预加载，不考虑内存敏感问题，这个API意义就不大
 /// </summary>
 
 namespace AssetBundles
