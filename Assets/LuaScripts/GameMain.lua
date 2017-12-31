@@ -47,7 +47,4 @@ GameMain.Start = Start
 GameMain.OnLevelWasLoaded = OnLevelWasLoaded
 GameMain.OnApplicationQuit = OnApplicationQuit
 
--- 启动
-GameMain.Start()
-
 return GameMain

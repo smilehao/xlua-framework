@@ -63,6 +63,9 @@ namespace AssetBundles
         List<AssetAsyncLoader> prosessingAssetAsyncLoader = new List<AssetAsyncLoader>();
 
 #if UNITY_EDITOR || CLIENT_DEBUG
+#if !CLIENT_DEBUG
+        [BlackList]
+#endif
         // Hotfix测试---用于侧测试资源模块的热修复
         public void TestHotfix()
         {
@@ -571,51 +574,61 @@ namespace AssetBundles
         }
 
 #if UNITY_EDITOR
+        [BlackList]
         public HashSet<string> GetAssetbundleResident()
         {
             return assetbundleResident;
         }
 
+        [BlackList]
         public ICollection<string> GetAssetbundleCaching()
         {
             return assetbundlesCaching.Keys;
         }
 
+        [BlackList]
         public Dictionary<string, ResourceWebRequester> GetWebRequesting()
         {
             return webRequesting;
         }
 
+        [BlackList]
         public Queue<ResourceWebRequester> GetWebRequestQueue()
         {
             return webRequesterQueue;
         }
 
+        [BlackList]
         public List<ResourceWebRequester> GetProsessingWebRequester()
         {
             return prosessingWebRequester;
         }
 
+        [BlackList]
         public List<AssetBundleAsyncLoader> GetProsessingAssetBundleAsyncLoader()
         {
             return prosessingAssetBundleAsyncLoader;
         }
 
+        [BlackList]
         public List<AssetAsyncLoader> GetProsessingAssetAsyncLoader()
         {
             return prosessingAssetAsyncLoader;
         }
 
+        [BlackList]
         public string GetAssetBundleName(string assetName)
         {
             return assetsPathMapping.GetAssetBundleName(assetName);
         }
 
+        [BlackList]
         public int GetAssetCachingCount()
         {
             return assetsCaching.Count;
         }
 
+        [BlackList]
         public Dictionary<string, List<string>> GetAssetCaching()
         {
             var assetbundleDic = new Dictionary<string, List<string>>();
@@ -637,11 +650,13 @@ namespace AssetBundles
             return assetbundleDic;
         }
 
+        [BlackList]
         public int GetAssetbundleRefrenceCount(string assetbundleName)
         {
             return GetReferenceCount(assetbundleName);
         }
 
+        [BlackList]
         public int GetAssetbundleDependenciesCount(string assetbundleName)
         {
             string[] dependancies = manifest.GetAllDependencies(assetbundleName);
@@ -657,6 +672,7 @@ namespace AssetBundles
             return count;
         }
 
+        [BlackList]
         public List<string> GetAssetBundleRefrences(string assetbundleName)
         {
             List<string> refrences = new List<string>();
@@ -700,7 +716,8 @@ namespace AssetBundles
             }
             return refrences;
         }
-        
+
+        [BlackList]
         public List<string> GetWebRequesterRefrences(string assetbundleName)
         {
             List<string> refrences = new List<string>();
@@ -718,6 +735,7 @@ namespace AssetBundles
             return refrences;
         }
 
+        [BlackList]
         public List<string> GetAssetBundleLoaderRefrences(string assetbundleName)
         {
             List<string> refrences = new List<string>();

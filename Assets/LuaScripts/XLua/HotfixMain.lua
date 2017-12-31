@@ -3,7 +3,7 @@
 -- 游戏热修复入口
 --]]
 
-Hotfix = {}
+HotfixMain = {}
 
 -- 需要被加载的热修复模块
 local modules = {
@@ -11,16 +11,23 @@ local modules = {
 }
 
 local function Start()
-	print("Hotfix start...")
+	print("HotfixMain start...")
 	for _,v in ipairs(modules) do
-		reimport(v)
+		local hotfix_module = reimport(v)
+		hotfix_module.Register()
 	end
 end
 
-Hotfix.modules = modules
-Hotfix.Start = Start
+local function Stop()
+	print("HotfixMain stop...")
+	for _,v in ipairs(modules) do
+		local hotfix_module = require(v)
+		hotfix_module.Unregister()
+	end
+end
 
--- 启动
-Hotfix.Start()
+HotfixMain.modules = modules
+HotfixMain.Start = Start
+HotfixMain.Stop = Stop
 
-return Hotfix
+return HotfixMain

@@ -67,9 +67,26 @@ public class XLuaManager : MonoSingleton<XLuaManager>
     // 最简单和安全的方式是另外创建一个虚拟器，所有东西一概重启
     public void Restart()
     {
+        StopHotfix();
         Dispose();
         InitLuaEnv();
         OnInit();
+    }
+
+    void SafeDoString(string scriptContent)
+    {
+        if (luaEnv != null)
+        {
+            try
+            {
+                luaEnv.DoString(scriptContent);
+            }
+            catch (System.Exception ex)
+            {
+                string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
+                Logger.LogError(msg, null);
+            }
+        }
     }
 
     public void StartHotfix(bool restart = false)
@@ -81,12 +98,19 @@ public class XLuaManager : MonoSingleton<XLuaManager>
 
         if (restart)
         {
+            StopHotfix();
             ReloadScript(hotfixMainScriptName);
         }
         else
         {
             LoadScript(hotfixMainScriptName);
         }
+        SafeDoString("HotfixMain.Start()");
+    }
+
+    public void StopHotfix()
+    {
+        SafeDoString("HotfixMain.Stop()");
     }
 
     public void StartGame()
@@ -95,43 +119,33 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         {
             LoadScript(gameMainScriptName);
         }
+        SafeDoString("GameMain.Start()");
     }
     
     public void ReloadScript(string scriptName)
     {
-        try
-        {
-            luaEnv.DoString(string.Format("package.loaded['{0}'] = nil", scriptName));
-        }
-        catch (System.Exception ex)
-        {
-            string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
-            Logger.LogError(msg, null);
-        }
+        SafeDoString(string.Format("package.loaded['{0}'] = nil", scriptName));
         LoadScript(scriptName);
     }
 
     void LoadScript(string scriptName)
     {
-        try
-        {
-            luaEnv.DoString(string.Format("require('{0}')", scriptName));
-        }
-        catch (System.Exception ex)
-        {
-            string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
-            Logger.LogError(msg, null);
-        }
+        SafeDoString(string.Format("require('{0}')", scriptName));
     }
 
     public static byte[] CustomLoader(ref string filepath)
     {
+        string scriptPath = string.Empty;
 #if UNITY_EDITOR
-        string scriptPath = Application.dataPath +  "/LuaScripts/" + filepath.Replace(".", "/") + ".lua";
-        return GameUtility.SafeReadAllBytes(scriptPath);
-#else
-        string scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua.bytes";
-        Logger.Log("Load lua script : " + scriptPath);
+        if (AssetBundleConfig.IsEditorMode)
+        {
+            scriptPath = Application.dataPath + "/LuaScripts/" + filepath.Replace(".", "/") + ".lua";
+            Logger.Log("Load lua script : " + scriptPath);
+            return GameUtility.SafeReadAllBytes(scriptPath);
+        }
+#endif
+
+        scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua.bytes";
         string assetbundleName = null;
         string assetName = null;
         bool status = AssetBundleManager.Instance.MapAssetPath(scriptPath, out assetbundleName, out assetName);
@@ -146,9 +160,8 @@ public class XLuaManager : MonoSingleton<XLuaManager>
             Logger.Log("Load lua script : " + scriptPath);
             return asset.bytes;
         }
-        Logger.LogError("Load lua script failed : " + scriptPath);
+        Logger.LogError("Load lua script failed : " + scriptPath + ", You should preload lua assetbundle first!!!");
         return null;
-#endif
     }
 
     private void Update()

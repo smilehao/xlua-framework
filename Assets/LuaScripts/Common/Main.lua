@@ -29,5 +29,3 @@ Object		= require "Common.Tools.UnityEngine.Object"
 list		= require "Common.Tools.list"
 
 require "Common.Tools.event"
-require "Common.Tools.System.ValueType"
-require "Common.Tools.System.Reflection.BindingFlags"

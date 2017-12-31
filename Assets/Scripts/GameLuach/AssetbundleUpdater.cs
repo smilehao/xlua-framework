@@ -29,6 +29,9 @@ public class AssetbundleUpdater : MonoBehaviour
     int finishedDownloadCount = 0;
 
 #if UNITY_EDITOR || CLIENT_DEBUG
+#if !CLIENT_DEBUG
+        [BlackList]
+#endif
     // Hotfix测试---用于侧测试热更模块的热修复
     public void TestHotfix()
     {
@@ -89,6 +92,7 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return StartUpdate();
 
         statusText.text = "资源更新完成！";
+        slider.normalizedValue = 1.0f;
         Logger.Log("Update finished...");
         yield return UpdateFinish();
         yield return StartGame();
