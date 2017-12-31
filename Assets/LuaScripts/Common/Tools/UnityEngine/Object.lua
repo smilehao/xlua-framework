@@ -1,4 +1,4 @@
--- add by wsh @ 2017-12-27
+-- added by wsh @ 2017-12-27
 
 -- xlua对UntyEngine的Object判空不能直接判nil
 -- https://github.com/Tencent/xLua/blob/master/Assets/XLua/Doc/faq.md

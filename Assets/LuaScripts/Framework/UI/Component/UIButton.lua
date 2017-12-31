@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-08
+-- added by wsh @ 2017-12-08
 -- Lua侧UIButton
 -- 注意：
 -- 1、按钮一般会带有其他的组件，如带一个UIText、或者一个UIImange标识说明按钮功能，所以这里是一个容器类

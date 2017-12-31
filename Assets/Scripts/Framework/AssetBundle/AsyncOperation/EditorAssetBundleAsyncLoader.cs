@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// add by wsh @ 2017.12.22
+/// added by wsh @ 2017.12.22
 /// 功能：assetbundle在simulate模式下的Asset模拟异步加载器 
 /// </summary>
 

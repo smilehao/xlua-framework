@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// add by wsh @ 2017-12-21
+/// added by wsh @ 2017-12-21
 /// 功能：assetbundle管理类，为外部提供统一的资源加载界面、协调Assetbundle各个子系统的运行
 /// 注意：
 /// 1、抛弃Resources目录的使用，官方建议：https://unity3d.com/cn/learn/tutorials/temas/best-practices/resources-folder?playlist=30089
@@ -27,7 +27,7 @@ using UnityEditor;
 /// 2、设置常驻(公共)ab包：SetAssetBundleResident(assebundleName, true)
 /// 2、(预)加载资源：var loader = LoadAssetBundleAsync(assetbundleName)，协程等待加载完毕后Dispose：loader.Dispose()
 /// 3、加载Asset资源：var loader = LoadAssetAsync(assetPath, TextAsset)，协程等待加载完毕后Dispose：loader.Dispose()，第二个参数只在编辑器模式下生效
-/// 4、离开场景清理所有Asset缓存：ClearAssetCache()
+/// 4、离开场景清理所有Asset缓存：ClearAssetCache()，UnloadUnusedAssetBundles(), Resources.UnloadUnusedAssets()
 /// 5、离开场景清理必要的(公共)ab包：TryUnloadAssetBundle()，注意：这里只是尝试卸载，所有引用计数不为0的包（还正在加载）不会被清理
 /// </summary>
 
@@ -44,11 +44,11 @@ namespace AssetBundles
         // 常驻ab包：需要手动添加公共ab包进来，常驻包不会自动卸载（即使引用计数为0），引用计数为0时可以手动卸载
         HashSet<string> assetbundleResident = new HashSet<string>();
         // ab缓存包：所有目前已经加载的ab包，包括临时ab包与公共ab包
-        Dictionary<string, AssetBundle> assetbundleCaching = new Dictionary<string, AssetBundle>();
+        Dictionary<string, AssetBundle> assetbundlesCaching = new Dictionary<string, AssetBundle>();
         // ab缓存包引用计数：卸载ab包时只有引用计数为0时才会真正执行卸载
         Dictionary<string, int> assetbundleRefCount = new Dictionary<string, int>(); 
         // asset缓存：给非公共ab包的asset提供逻辑层的复用
-        Dictionary<string, UnityEngine.Object> assetCaching = new Dictionary<string, UnityEngine.Object>();
+        Dictionary<string, UnityEngine.Object> assetsCaching = new Dictionary<string, UnityEngine.Object>();
         // 加载数据请求：正在prosessing或者等待prosessing的资源请求
         Dictionary<string, ResourceWebRequester> webRequesting = new Dictionary<string, ResourceWebRequester>();
         // 等待处理的资源请求
@@ -115,15 +115,15 @@ namespace AssetBundles
                 return prosessingAssetAsyncLoader.Count == 0;
             });
 
-            ClearAssetCache();
-            foreach (var assetbunle in assetbundleCaching.Values)
+            ClearAssetsCache();
+            foreach (var assetbunle in assetbundlesCaching.Values)
             {
                 if (assetbunle != null)
                 {
                     assetbunle.Unload(false);
                 }
             }
-            assetbundleCaching.Clear();
+            assetbundlesCaching.Clear();
             assetbundleRefCount.Clear();
             assetbundleResident.Clear();
             yield break;
@@ -163,41 +163,41 @@ namespace AssetBundles
 
         public bool IsAssetBundleLoaded(string assetbundleName)
         {
-            return assetbundleCaching.ContainsKey(assetbundleName);
+            return assetbundlesCaching.ContainsKey(assetbundleName);
         }
 
         public AssetBundle GetAssetBundleCache(string assetbundleName)
         {
             AssetBundle target = null;
-            assetbundleCaching.TryGetValue(assetbundleName, out target);
+            assetbundlesCaching.TryGetValue(assetbundleName, out target);
             return target;
         }
 
         protected void RemoveAssetBundleCache(string assetbundleName)
         {
-            assetbundleCaching.Remove(assetbundleName);
+            assetbundlesCaching.Remove(assetbundleName);
         }
 
         protected void AddAssetBundleCache(string assetbundleName, AssetBundle assetbundle)
         {
-            assetbundleCaching[assetbundleName] = assetbundle;
+            assetbundlesCaching[assetbundleName] = assetbundle;
         }
 
         public bool IsAssetLoaded(string assetName)
         {
-            return assetCaching.ContainsKey(assetName);
+            return assetsCaching.ContainsKey(assetName);
         }
 
         public UnityEngine.Object GetAssetCache(string assetName)
         {
             UnityEngine.Object target = null;
-            assetCaching.TryGetValue(assetName, out target);
+            assetsCaching.TryGetValue(assetName, out target);
             return target;
         }
 
         public void AddAssetCache(string assetName, UnityEngine.Object asset)
         {
-            assetCaching[assetName] = asset;
+            assetsCaching[assetName] = asset;
         }
 
         public void AddAssetbundleAssetsCache(string assetbundleName, string postfix = null)
@@ -222,12 +222,36 @@ namespace AssetBundles
                 }
                 var asset = curAssetbundle == null ? null : curAssetbundle.LoadAsset(assetName);
                 AddAssetCache(assetName, asset);
+
+#if UNITY_EDITOR
+                // 说明：在Editor模拟时，Shader要重新指定
+                var go = asset as GameObject;
+                if (go != null)
+                {
+                    var renderers = go.GetComponentsInChildren<Renderer>();
+                    for (int j = 0; j < renderers.Length; j++)
+                    {
+                        var mat = renderers[i].sharedMaterial;
+                        if (mat == null)
+                        {
+                            continue;
+                        }
+
+                        var shader = mat.shader;
+                        if (shader != null)
+                        {
+                            var shaderName = shader.name;
+                            mat.shader = Shader.Find(shaderName);
+                        }
+                    }
+                }
+#endif
             }
         }
 
-        public void ClearAssetCache()
+        public void ClearAssetsCache()
         {
-            assetCaching.Clear();
+            assetsCaching.Clear();
         }
         
         public ResourceWebRequester GetAssetBundleAsyncCreater(string assetbundleName)
@@ -298,12 +322,9 @@ namespace AssetBundles
                     var dependance = dependancies[i];
                     if (!string.IsNullOrEmpty(dependance) && dependance != assetbundleName)
                     {
-                        var doCreate = CreateAssetBundleAsync(dependance);
-                        if (doCreate)
-                        {
-                            // ab缓存对依赖持有的引用
-                            IncreaseReferenceCount(dependance);
-                        }
+                        CreateAssetBundleAsync(dependance);
+                        // ab缓存对依赖持有的引用
+                        IncreaseReferenceCount(dependance);
                     }
                 }
                 loader.Init(assetbundleName, dependancies);
@@ -372,7 +393,7 @@ namespace AssetBundles
             UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
         }
 
-        public void UnloadUnusedAssetBundle(bool unloadAllLoadedObjects = false)
+        public void UnloadUnusedAssetBundles(bool unloadAllLoadedObjects = false)
         {
             bool hasDoUnload = false;
             do
@@ -531,7 +552,7 @@ namespace AssetBundles
 
         public ICollection<string> GetAssetbundleCaching()
         {
-            return assetbundleCaching.Keys;
+            return assetbundlesCaching.Keys;
         }
 
         public Dictionary<string, ResourceWebRequester> GetWebRequesting()
@@ -564,12 +585,17 @@ namespace AssetBundles
             return assetsPathMapping.GetAssetBundleName(assetName);
         }
 
+        public int GetAssetCachingCount()
+        {
+            return assetsCaching.Count;
+        }
+
         public Dictionary<string, List<string>> GetAssetCaching()
         {
             var assetbundleDic = new Dictionary<string, List<string>>();
             List<string> assetNameList = null;
             
-            var iter = assetCaching.GetEnumerator();
+            var iter = assetsCaching.GetEnumerator();
             while (iter.MoveNext())
             {
                 var assetName = iter.Current.Key;
@@ -608,7 +634,7 @@ namespace AssetBundles
         public List<string> GetAssetBundleRefrences(string assetbundleName)
         {
             List<string> refrences = new List<string>();
-            var cachingIter = assetbundleCaching.GetEnumerator();
+            var cachingIter = assetbundlesCaching.GetEnumerator();
             while (cachingIter.MoveNext())
             {
                 var curAssetbundleName = cachingIter.Current.Key;
@@ -631,7 +657,6 @@ namespace AssetBundles
             while (requestingIter.MoveNext())
             {
                 var curAssetbundleName = requestingIter.Current.Key;
-                var webRequster = requestingIter.Current.Value;
                 if (curAssetbundleName == assetbundleName)
                 {
                     continue;

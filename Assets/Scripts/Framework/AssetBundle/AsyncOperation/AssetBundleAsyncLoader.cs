@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// add by wsh @ 2017.12.22
+/// added by wsh @ 2017.12.22
 /// 功能：Assetbundle加载器，给逻辑层使用（预加载），支持协程操作
 /// 注意：
 /// 1、加载器AssetBundleManager只负责调度，创建，不负责回收，逻辑层代码使用完一定要记得回收，否则会产生GC

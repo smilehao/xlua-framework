@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-18
+-- added by wsh @ 2017-12-18
 -- 可更新脚本，等效于带有Unity侧Update、LateUpdate、FixedUpdate函数
 -- 注意：
 -- 1、虽然支持Update、LateUpdate、FixedUpdate更新，但能不用就不用---不要定义这些函数即可，用太多可能对性能有影响

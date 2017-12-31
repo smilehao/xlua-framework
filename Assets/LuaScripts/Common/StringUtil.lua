@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-18
+-- added by wsh @ 2017-12-18
 -- string扩展工具类，对string不支持的功能执行扩展
 --]]
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 
 /// <summary>
-/// add by wsh @ 2017.12.26
+/// added by wsh @ 2017.12.26
 /// 功能：Assetbundle相关的Variant路径映射，每次在构建Assetbunlde完成后需要更新一次映射
 /// 说明：映射规则：每一个带Variant的Assetbundle到定义Assetbundle的文件或者文件夹的映射
 /// </summary>

@@ -5,8 +5,7 @@ using UnityEngine;
 //using System;
 using System.Collections;
 using System.Collections.Generic;
-
-
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Images
@@ -282,7 +281,7 @@ public class Reporter : MonoBehaviour {
 		Sample sample = new Sample();
 		sample.fps = fps ;
 		sample.fpsText = fpsText ;
-		sample.loadedScene = (byte)Application.loadedLevel ;
+        sample.loadedScene = (byte)SceneManager.GetActiveScene().buildIndex;
 		sample.time = Time.realtimeSinceStartup ;
 		sample.memory = gcTotalMemory ;
 		samples.Add( sample );
@@ -301,15 +300,15 @@ public class Reporter : MonoBehaviour {
 			catch( System.Exception e ){
 				Debug.LogException( e );
 			}
-			scenes = new string[ Application.levelCount ];
-			currentScene = Application.loadedLevelName;
+			scenes = new string[SceneManager.sceneCountInBuildSettings ];
+			currentScene = SceneManager.GetActiveScene().name;
 			DontDestroyOnLoad( gameObject );
 #if USE_OLD_UNITY
 			Application.RegisterLogCallback (new Application.LogCallback (CaptureLog));
 			Application.RegisterLogCallbackThreaded (new Application.LogCallback (CaptureLogThread));
 #else
 			//Application.logMessageReceived += CaptureLog ;
-            Application.RegisterLogCallbackThreaded(CaptureLogThread);
+            Application.logMessageReceivedThreaded += CaptureLogThread;
 #endif
 			created = true ;
 			//addSample();
@@ -1817,8 +1816,8 @@ public class Reporter : MonoBehaviour {
 		fpsText = fps.ToString("0.000");
 		gcTotalMemory = (((float)System.GC.GetTotalMemory(false))/1024/1024) ;
 		//addSample();
-		if( string.IsNullOrEmpty( scenes[ Application.loadedLevel ] ))
-			scenes[ Application.loadedLevel ] = Application.loadedLevelName ;
+		if( string.IsNullOrEmpty( scenes[ SceneManager.GetActiveScene().buildIndex ] ))
+			scenes[SceneManager.GetActiveScene().buildIndex] = SceneManager.GetActiveScene().name;
 
 		float elapsed = Time.realtimeSinceStartup - lastUpdate ;
 		fps = 1f / elapsed ;
@@ -1993,8 +1992,8 @@ public class Reporter : MonoBehaviour {
 		if( clearOnNewSceneLoaded )
 			clear();
 
-		currentScene = Application.loadedLevelName ;
-		Debug.Log( "Scene " + Application.loadedLevelName + " is loaded");
+		currentScene = SceneManager.GetActiveScene().name;
+		Debug.Log( "Scene " + SceneManager.GetActiveScene().name + " is loaded");
 	}
 	
 	//save user config

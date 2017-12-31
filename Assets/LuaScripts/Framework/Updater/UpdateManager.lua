@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-18
+-- added by wsh @ 2017-12-18
 -- 更新管理，负责Unity侧Update、LateUpdate、FixedUpdate对Lua脚本的调用
 -- 注意：
 -- 1、别直接用tolua的UpdateBeat、LateUpdateBeat、FixedUpdateBeat，所有需要以上三个更新函数的脚本，都从这里注册。

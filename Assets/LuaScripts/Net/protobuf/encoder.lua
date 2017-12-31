@@ -15,7 +15,7 @@
 --  CREATED:  2010年07月29日 19时30分46秒 CST
 --------------------------------------------------------------------------------
 --
--- add by wsh @ 2017-12-26
+-- added by wsh @ 2017-12-26
 -- 注意：代码已经被重构，不能再简简单单做升级
 
 local string = string
@@ -221,7 +221,7 @@ local function MessageSizer(field_number, is_repeated, is_packed)
 end
 
 local function GroupSizer(...)
-	-- add by wsh @ 2017-12--27
+	-- added by wsh @ 2017-12--27
 	error("not supported yet!!!")
 end
 
@@ -478,7 +478,7 @@ local function MessageEncoder(field_number, is_repeated, is_packed)
 end
 
 local function GroupEncoder(...)
-	-- add by wsh @ 2017-12--27
+	-- added by wsh @ 2017-12--27
 	error("not supported yet!!!")
 end
 

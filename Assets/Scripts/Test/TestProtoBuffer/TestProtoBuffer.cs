@@ -6,9 +6,6 @@ using XLua;
 [Hotfix]
 public class TestProtoBuffer : MonoBehaviour
 {
-    private string script = @"
-        ";
-
     // Use this for initialization
     void Start()
     {

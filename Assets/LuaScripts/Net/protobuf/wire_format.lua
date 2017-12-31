@@ -14,7 +14,7 @@
 --  CREATED:  2010年07月30日 15时59分53秒 CST
 --------------------------------------------------------------------------------
 --
--- add by wsh @ 2017-12-26
+-- added by wsh @ 2017-12-26
 -- 注意：代码已经被重构，不能再简简单单做升级
 
 local pb = require "pb"
@@ -136,7 +136,7 @@ local function MessageSetItemByteSize(field_number, msg)
 end
 
 local function GroupByteSize(...)
-	-- add by wsh @ 2017-12--27
+	-- added by wsh @ 2017-12--27
 	error("not supported yet!!!")
 end
 

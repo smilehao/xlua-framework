@@ -43,8 +43,9 @@ public class IPv6SupportMidleware
 				}
 			}
 		}
-		catch (Exception e)
+		catch (Exception ex)
         {
+            Logger.LogError("getIPType err : " + ex.Message + "\n" + ex.StackTrace);
 		}
 		
 	}

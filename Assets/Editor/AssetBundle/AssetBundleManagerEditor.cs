@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// add by wsh @ 2017.12.29
+/// added by wsh @ 2017.12.29
 /// 功能：Assetbundle编辑器支持，方便调试用
 /// </summary>
 
@@ -323,7 +323,6 @@ public class AssetBundleManagerEditor : Editor
                 var dependence = dependencies[i];
                 if (!string.IsNullOrEmpty(dependence) && dependence != assetbundleName)
                 {
-                    var title = instance.IsAssetBundleLoaded(dependence) ? dependence + "[loaded]" : dependence;
                     DrawAssetbundleItem(dependence, dependence, abItemSate, assetbundleName + dependence, level + 1);
                 }
             }
@@ -388,13 +387,16 @@ public class AssetBundleManagerEditor : Editor
     {
         var instance = AssetBundleManager.Instance;
         var assetCaching = instance.GetAssetCaching();
+        var totalCount = instance.GetAssetCachingCount();
         var iter = assetCaching.GetEnumerator();
         EditorGUILayout.BeginVertical();
+        DrawProperty("Total loaded assets count : ", totalCount.ToString());
         while (iter.MoveNext())
         {
             var assetbundleName = iter.Current.Key;
             var assetNameList = iter.Current.Value;
-            if (DrawHeader(assetbundleName, abItemSate, assetbundleName, false, false))
+            string title = string.Format("{0}[{1}]", assetbundleName, assetNameList.Count);
+            if (DrawHeader(title, abItemSate, assetbundleName, false, false))
             {
                 DrawTextListContent(assetNameList);
             }
@@ -413,7 +415,7 @@ public class AssetBundleManagerEditor : Editor
             var assetbundleName = iter.Current.Key;
             var webRequester = iter.Current.Value;
             string title = string.Format("Sequence : {0} --- {1}", webRequester.Sequence, assetbundleName);
-            DrawAssetbundleItem(assetbundleName, assetbundleName, abItemSate, assetbundleName);
+            DrawAssetbundleItem(title, assetbundleName, abItemSate, assetbundleName);
         }
         EditorGUILayout.EndVertical();
     }
@@ -429,7 +431,7 @@ public class AssetBundleManagerEditor : Editor
             var assetbundleName = iter.Current.assetbundleName;
             var webRequester = iter.Current;
             string title = string.Format("Sequence : {0} --- {1}", webRequester.Sequence, assetbundleName);
-            DrawAssetbundleItem(assetbundleName, assetbundleName, abItemSate, assetbundleName);
+            DrawAssetbundleItem(title, assetbundleName, abItemSate, assetbundleName);
         }
         EditorGUILayout.EndVertical();
     }
@@ -445,7 +447,7 @@ public class AssetBundleManagerEditor : Editor
             var assetbundleName = iter.Current.assetbundleName;
             var webRequester = iter.Current;
             string title = string.Format("Sequence : {0} --- {1}", webRequester.Sequence, assetbundleName);
-            DrawAssetbundleItem(assetbundleName, assetbundleName, abItemSate, assetbundleName);
+            DrawAssetbundleItem(title, assetbundleName, abItemSate, assetbundleName);
         }
         EditorGUILayout.EndVertical();
     }

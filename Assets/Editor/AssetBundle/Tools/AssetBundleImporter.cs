@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 
 /// <summary>
-/// add by wsh @ 2017.12.25
+/// added by wsh @ 2017.12.25
 /// 功能：Assetbundle相关的AssetImporter扩展类，结合AssetImporter与文件系统功能，方便对父、子节点进行操作
 /// 注意：
 /// 1、所有对assetbundle属性的操作，都应该在此类中得到封装

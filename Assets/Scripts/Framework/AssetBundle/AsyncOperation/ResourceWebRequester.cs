@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// add by wsh @ 2017.12.22
+/// added by wsh @ 2017.12.22
 /// 功能：资源异步请求，本地、远程通杀
 /// 注意：
 /// 1、Unity5.3官方建议用UnityWebRequest取代WWW：https://unity3d.com/cn/learn/tutorials/topics/best-practices/assetbundle-fundamentals?playlist=30089
@@ -126,10 +126,6 @@ namespace AssetBundles
             {
                 UnityEngine.Debug.LogError("New www failed!!!");
                 isOver = true;
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Downloading : " + url);
             }
         }
         

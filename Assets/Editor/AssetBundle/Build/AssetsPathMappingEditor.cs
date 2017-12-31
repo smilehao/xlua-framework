@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 
 /// <summary>
-/// add by wsh @ 2017.12.25
+/// added by wsh @ 2017.12.25
 /// 功能：Assetbundle相关的Asset路径映射，每次在构建Assetbunlde完成后需要更新一次映射
 /// </summary>
 

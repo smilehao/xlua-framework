@@ -6,7 +6,7 @@ using XLua;
 public static class GenConfig
 {
     //lua中要使用到C#库的配置，比如C#标准库，或者Unity API，第三方库等。
-    //add by wsh @ 2017-12-27
+    //added by wsh @ 2017-12-27
     //注意：
     //1、Unity API以及Plugin目录下所有库导出均放这来导出
     //2、所有非Plugin目录下的脚本使用标签导出

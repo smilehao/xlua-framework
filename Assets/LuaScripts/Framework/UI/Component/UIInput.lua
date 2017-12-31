@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-08
+-- added by wsh @ 2017-12-08
 -- Lua侧UIInput
 -- 使用方式：
 -- self.xxx_input = self:AddComponent(UIInput, var_arg)--添加孩子，各种重载方式查看UIBaseContainer

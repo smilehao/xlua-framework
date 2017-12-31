@@ -105,50 +105,9 @@ public class Setting {
         }
     }
 
-	public static bool isDebug
-	{
-		get{ return Application.isEditor; }
-	}
-
-    public static bool UseAssetBundle()
-    {
-        return false;//在Resources\UIRes打包前，就不用AssetBundle了
-
-        if (isDebug)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
     public static bool PerformaceDebug()
     {
         // 真机慎用，卡到想死
         return false;
     }
-
-
-	#if UNITY_EDITOR
-	public static string FILEPATH = "file://" + Application.streamingAssetsPath;
-	
-	#elif UNITY_IPHONE
-	public static string FILEPATH = "file://" + Application.streamingAssetsPath;
-	
-    #elif UNITY_ANDROID
-	public static string FILEPATH = Application.streamingAssetsPath;
- 
-    #endif
-
-    #if UNITY_EDITOR
-	public static string PERSISTENT_PATH = "file:///" + Application.persistentDataPath;
-	
-	#elif UNITY_IPHONE
-	public static string PERSISTENT_PATH = "file://" + Application.persistentDataPath;
-	
-    #elif UNITY_ANDROID
-	public static string PERSISTENT_PATH = "file://" + Application.persistentDataPath;
-
-#endif
-
 }

@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-11
+-- added by wsh @ 2017-12-11
 -- table扩展工具类，对table不支持的功能执行扩展
 -- 注意：
 -- 1、所有参数带hashtable的函数，将把table当做哈希表对待

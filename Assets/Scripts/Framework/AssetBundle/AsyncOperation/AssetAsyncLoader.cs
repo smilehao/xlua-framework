@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 
 /// <summary>
-/// add by wsh @ 2017.12.22
+/// added by wsh @ 2017.12.22
 /// 功能：Asset异步加载器，自动追踪依赖的ab加载进度
 /// 说明：一定要所有ab都加载完毕以后再加载asset，所以这里分成两个加载步骤
 /// </summary>

@@ -46,7 +46,7 @@ public class GameLaunch : MonoBehaviour
     void InitAssetbundleUpdater(GameObject go)
     {
         var luanchLayer = GameObject.Find("UIRoot/LuanchLayer");
-        go.transform.parent = luanchLayer.transform;
+        go.transform.SetParent(luanchLayer.transform);
         var rectTransform = go.GetComponent<RectTransform>();
         rectTransform.offsetMax = Vector2.zero;
         rectTransform.offsetMin = Vector2.zero;

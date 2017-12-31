@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 
 /// <summary>
-/// add by wsh @ 2017.12.24
+/// added by wsh @ 2017.12.24
 /// 功能：Assetbundle相关的Editor帮助类，build相关的在BuildScript脚本
 /// </summary>
 

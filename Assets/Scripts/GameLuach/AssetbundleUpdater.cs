@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using AssetBundles;
 
 /// <summary>
-/// add by wsh @ 2017.12.29
+/// added by wsh @ 2017.12.29
 /// 功能：Assetbundle更新器
 /// </summary>
 
@@ -84,6 +84,7 @@ public class AssetbundleUpdater : MonoBehaviour
     IEnumerator GetDownloaderUrl()
     {
         var url = string.Empty;
+#pragma warning disable 0162
         if (AssetBundleConfig.isDebug)
         {
             var request = AssetBundleManager.Instance.RequestAssetAsync(AssetBundleConfig.AssetBundleServerUrlFileName);
@@ -97,6 +98,7 @@ public class AssetbundleUpdater : MonoBehaviour
             // TODO：外网服务器下载url看到时候要不要从服务器拉取
             url = AssetBundleConfig.RemoteServerUrl;
         }
+#pragma warning disable 0162
         UnityEngine.Debug.Log("downloadUrl : " + url);
         yield break;
     }

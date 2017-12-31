@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-08
+-- added by wsh @ 2017-12-08
 -- Lua侧带有选中功能的UIButton，UIButtonGroup需要使用到
 -- 使用方式：一般不直接使用，用来作为基类或者接口具体实现自定制的按钮组件，配合UIButtonGroup使用
 --]]

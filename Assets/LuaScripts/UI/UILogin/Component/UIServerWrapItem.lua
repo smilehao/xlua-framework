@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-11
+-- added by wsh @ 2017-12-11
 -- UILogin模块UILoginView窗口中服务器列表的可复用Item
 --]]
 

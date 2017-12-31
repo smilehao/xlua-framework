@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-01
+-- added by wsh @ 2017-12-01
 -- LuaUtil单元测试
 --]]
 

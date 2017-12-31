@@ -5,7 +5,7 @@ using XLua;
 /// <summary>
 /// 说明：xLua管理类
 /// 
-/// @by wsh 2017-08-30
+/// @by wsh 2017-12-28
 /// </summary>
 
 public class XLuaManager : MonoSingleton<XLuaManager>
@@ -92,7 +92,6 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         string scriptPath = Application.dataPath +  "/LuaScripts/" + filepath.Replace(".", "/") + ".lua";
         return GameUtility.SafeReadAllBytes(scriptPath);
 #else
-        // TODO：资源管理层提供同步加载
         string scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua.bytes";
         string assetbundleName = null;
         string assetName = null;

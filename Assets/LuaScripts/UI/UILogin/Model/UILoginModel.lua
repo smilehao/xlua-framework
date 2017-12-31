@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-01
+-- added by wsh @ 2017-12-01
 -- UILogin模型层
 -- 注意：
 -- 1、成员变量预先在OnCreate、OnEnable函数声明，提高代码可读性

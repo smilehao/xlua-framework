@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-13
+-- added by wsh @ 2017-12-13
 -- Lua侧UICanvas：
 -- 注意：
 -- 1、为了调整UI层级，所以这里的overrideSorting设置为true

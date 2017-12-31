@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-11-30
+-- added by wsh @ 2017-11-30
 -- UI管理系统：提供UI操作、UI层级、UI消息、UI资源加载、UI调度、UI缓存等管理
 -- 注意：
 -- 1、Window包括：Model、Ctrl、View、和Active状态等构成的一个整体概念
@@ -58,7 +58,7 @@ local function __init(self)
 		assert(IsNull(self.layers[layer]), "Aready exist layer : "..layer.Name)
 		local go = CS.UnityEngine.GameObject(layer.Name)
 		local trans = go.transform
-		trans.parent = self.transform
+		trans:SetParent(self.transform)
 		local new_layer = UILayer.New(self, layer.Name)
 		new_layer:OnCreate(layer)
 		self.layers[layer.Name] = new_layer
@@ -163,7 +163,7 @@ local function InnerOpenWindow(self, target, ...)
 			end
 			
 			local trans = go.transform
-			trans.parent = target.Layer.transform
+			trans:SetParent(target.Layer.transform)
 			trans.name = target.Name
 			
 			target.IsLoading = false

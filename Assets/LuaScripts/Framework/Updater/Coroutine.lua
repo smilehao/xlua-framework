@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-19
+-- added by wsh @ 2017-12-19
 -- 协程模块：对Lua协程conroutine进行扩展，使其具有Unity侧协程的特性
 -- 注意：
 -- 1、主线程使用coroutine.start启动协程，协程启动以后，首次挂起时主线程继续往下执行，这里和Unity侧表现是一致的

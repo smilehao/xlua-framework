@@ -326,7 +326,7 @@ public sealed class MessengerHelper : MonoBehaviour {
     }
  
     //Clean up eventTable every time a new level loads.
-    public void OnDisable() {
+    public void OnLevelWasLoaded() {
         Messenger.Cleanup();
     }
 }

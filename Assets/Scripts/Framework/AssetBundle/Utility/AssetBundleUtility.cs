@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.IO;
 
 /// <summary>
-/// add by wsh @ 2017.12.25
+/// added by wsh @ 2017.12.25
 /// 功能： Assetbundle相关的通用静态函数，提供运行时，或者Editor中使用到的有关Assetbundle操作和路径处理的函数
 /// </summary>
 
@@ -147,6 +147,7 @@ namespace AssetBundles
         public static string GetAssetBundleServerURL()
         {
             string downloadURL = string.Empty;
+#pragma warning disable 0162
             if (AssetBundleConfig.isDebug == true)
             {
                 // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
@@ -173,6 +174,7 @@ namespace AssetBundles
             {
                 downloadURL = AssetBundleConfig.RemoteServerUrl;
             }
+#pragma warning disable 0162
             return downloadURL;
         }
         

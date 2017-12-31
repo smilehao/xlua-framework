@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-12-18
+-- added by wsh @ 2017-12-18
 -- Lua侧UISlider
 -- 使用方式：
 -- self.xxx_text = self:AddComponent(UISlider, var_arg)--添加孩子，各种重载方式查看UIBaseContainer

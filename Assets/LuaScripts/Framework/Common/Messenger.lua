@@ -1,5 +1,5 @@
 --[[
--- add by wsh @ 2017-11-28
+-- added by wsh @ 2017-11-28
 -- 消息系统
 -- 使用范例：
 -- local Messenger = require "Framework.Common.Messenger";
