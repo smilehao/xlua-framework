@@ -3,12 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using AssetBundles;
+using XLua;
 
 /// <summary>
 /// added by wsh @ 2017.12.29
 /// 功能：Assetbundle更新器
 /// </summary>
 
+[Hotfix]
+[LuaCallCSharp]
 public class AssetbundleUpdater : MonoBehaviour
 {
     const int MAX_DOWNLOAD_NUM = 5;
@@ -24,12 +27,23 @@ public class AssetbundleUpdater : MonoBehaviour
 
     int totalDownloadCount = 0;
     int finishedDownloadCount = 0;
-    
+
+#if UNITY_EDITOR || CLIENT_DEBUG
+    // Hotfix测试---用于侧测试热更模块的热修复
+    public void TestHotfix()
+    {
+        Logger.Log("********** AssetbundleUpdater : Call TestHotfix in cs...");
+    }
+#endif
+
     void Start () {
         statusText = transform.Find("ContentRoot/LoadingDesc").GetComponent<Text>(); ;
         slider = transform.Find("ContentRoot/SliderBar").GetComponent<Slider>();
         slider.gameObject.SetActive(false);
         StartCoroutine(CheckUpdate());
+#if UNITY_EDITOR || CLIENT_DEBUG
+        TestHotfix();
+#endif
     }
 
     IEnumerator CheckUpdate()
@@ -147,43 +161,38 @@ public class AssetbundleUpdater : MonoBehaviour
 
     IEnumerator UpdateFinish()
     {
-        // 说明：有资源更新时必须重启一下相关模块
-        var request = AssetBundleManager.Instance.DownloadAssetAsync(AssetBundleConfig.AssetsPathMapFileName);
-        yield return request;
-        var filePath = AssetBundleUtility.GetPlatformPersistentDataPath(request.assetbundleName);
-        GameUtility.SafeWriteAllBytes(filePath, request.bytes);
-        request.Dispose();
-
-        request = AssetBundleManager.Instance.DownloadAssetAsync(AssetBundleConfig.VariantsMapFileName);
-        yield return request;
-        filePath = AssetBundleUtility.GetPlatformPersistentDataPath(request.assetbundleName);
-        GameUtility.SafeWriteAllBytes(filePath, request.bytes);
-        request.Dispose();
-
         hostManifest.SaveToDiskCahce();
+
+        // 说明：有资源更新时必须重启一下相关模块
+        // 重启资源管理器
         yield return AssetBundleManager.Instance.Cleanup();
         yield return AssetBundleManager.Instance.Initialize();
 
-        XLuaManager.Instance.StartHotfix(true);
+        // 重启Lua虚拟机
+        string luaAssetbundleName = XLuaManager.Instance.AssetbundleName;
+        AssetBundleManager.Instance.SetAssetBundleResident(luaAssetbundleName, true);
+        var abloader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaAssetbundleName);
+        yield return abloader;
+        abloader.Dispose();
+        XLuaManager.Instance.Restart();
+        XLuaManager.Instance.StartHotfix();
         yield break;
     }
 
     IEnumerator StartGame()
     {
+#if UNITY_EDITOR || CLIENT_DEBUG
+        AssetBundleManager.Instance.TestHotfix();
+#endif
         // TODO：根据公共包自动设置常驻包
-        string luaAssetbundleName = "assetspackage/lua.assetbundle";
         string loadingAssetbundleName = "assetspackage/ui/prefabs/view/uiloading_prefab.assetbundle";
-        AssetBundleManager.Instance.SetAssetBundleResident(luaAssetbundleName, true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_ttf.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/fonts/system_art_ttf.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_comm.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/ui/genaltas/atlas_role.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident("assetspackage/shaders.assetbundle", true);
         AssetBundleManager.Instance.SetAssetBundleResident(loadingAssetbundleName, true);
-        var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaAssetbundleName);
-        yield return loader;
-        loader.Dispose();
-        loader = AssetBundleManager.Instance.LoadAssetBundleAsync(loadingAssetbundleName);
+        var loader = AssetBundleManager.Instance.LoadAssetBundleAsync(loadingAssetbundleName);
         yield return loader;
         loader.Dispose();
         XLuaManager.Instance.StartGame();

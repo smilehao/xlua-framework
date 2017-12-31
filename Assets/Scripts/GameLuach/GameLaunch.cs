@@ -16,13 +16,14 @@ public class GameLaunch : MonoBehaviour
         frameCount = Time.frameCount;
 
         // 启动xlua热修复模块
-        // TODO：根据公共包自动设置常驻包
-        //string luaScriptsPath = "Lua";
-        //var abloader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaScriptsPath);
-        //yield return abloader;
-        //abloader.Dispose();
-        //XLuaManager.Instance.Startup();
-        //XLuaManager.Instance.StartHotfix();
+        XLuaManager.Instance.Startup();
+        string luaAssetbundleName = XLuaManager.Instance.AssetbundleName;
+        AssetBundleManager.Instance.SetAssetBundleResident(luaAssetbundleName, true);
+        var abloader = AssetBundleManager.Instance.LoadAssetBundleAsync(luaAssetbundleName);
+        yield return abloader;
+        abloader.Dispose();
+        XLuaManager.Instance.OnInit();
+        XLuaManager.Instance.StartHotfix();
 
         // 加载UI界面
         var loader = AssetBundleManager.Instance.LoadAssetAsync(luachPrefabPath, typeof(GameObject));

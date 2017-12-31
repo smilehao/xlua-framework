@@ -25,12 +25,19 @@ public class LuaUpdater : MonoBehaviour
 
     public void OnInit(LuaEnv luaEnv)
     {
+#if UNITY_EDITOR
+        sw.Start();
+#endif
+        Restart(luaEnv);
+    }
+
+    public void Restart(LuaEnv luaEnv)
+    {
         luaUpdate = luaEnv.Global.Get<Action<float, float>>("Update");
         luaLateUpdate = luaEnv.Global.Get<Action>("LateUpdate");
         luaFixedUpdate = luaEnv.Global.Get<Action<float>>("FixedUpdate");
-        sw.Start();
     }
-    
+
     void Update()
     {
         if (luaUpdate != null)

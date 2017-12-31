@@ -11,6 +11,7 @@ local modules = {
 }
 
 local function Start()
+	print("Hotfix start...")
 	for _,v in ipairs(modules) do
 		reimport(v)
 	end

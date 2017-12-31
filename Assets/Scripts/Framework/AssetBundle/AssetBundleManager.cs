@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using XLua;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -33,6 +33,8 @@ using UnityEditor;
 
 namespace AssetBundles
 {
+    [Hotfix]
+    [LuaCallCSharp]
     public class AssetBundleManager : MonoSingleton<AssetBundleManager>
     {
         // 最大同时进行的ab创建数量
@@ -59,6 +61,14 @@ namespace AssetBundles
         List<AssetBundleAsyncLoader> prosessingAssetBundleAsyncLoader = new List<AssetBundleAsyncLoader>();
         // 逻辑层正在等待的asset加载异步句柄
         List<AssetAsyncLoader> prosessingAssetAsyncLoader = new List<AssetAsyncLoader>();
+
+#if UNITY_EDITOR || CLIENT_DEBUG
+        // Hotfix测试---用于侧测试资源模块的热修复
+        public void TestHotfix()
+        {
+            Logger.Log("********** AssetBundleManager : Call TestHotfix in cs...");
+        }
+#endif
 
         public IEnumerator Initialize()
         {
@@ -305,6 +315,7 @@ namespace AssetBundles
             return true;
         }
 
+        // 异步请求Assetbundle资源，AB是否缓存取决于是否设置为常驻包，Assets一律缓存，处理依赖
         public BaseAssetBundleAsyncLoader LoadAssetBundleAsync(string assetbundleName)
         {
 #if UNITY_EDITOR

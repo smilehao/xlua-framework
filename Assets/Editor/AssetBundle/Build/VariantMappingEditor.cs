@@ -26,9 +26,9 @@ namespace AssetBundles
             //处理带variants的assetbundle
             foreach (string assetbundle in allVariants)
             {
-                //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如名为banner/lang的assetbundle下：
-                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/Danish/Canvas.prefab
-                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/English/Canvas.prefab
+                //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
+                //Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]/TestVariantPrefab
+                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/[English]/Canvas.prefab
                 //在代码使用的加载路径中，它们被统一处理为
                 //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
                 //所以，在映射中两者分别应该对应

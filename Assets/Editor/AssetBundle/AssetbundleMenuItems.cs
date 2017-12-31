@@ -3,6 +3,15 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// added by wsh @ 2017.12.25
+/// 说明：Assetbundle相关菜单项
+/// TODO：
+/// 1、提供可视化界面的Assetbundle管理，包括依赖、公共包查看，ab添加、移除功能---check Unity5.6官方的AB管理工具好不好用
+/// 2、重构这部分代码，全部功能整合到打包窗口，不用菜单选项了
+/// 3、提供各个渠道历史资源版本AB变化对比工具，让增量更新透明化
+/// </summary>
+
 namespace AssetBundles
 {
     [InitializeOnLoad]
