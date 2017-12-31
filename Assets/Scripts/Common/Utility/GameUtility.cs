@@ -20,7 +20,7 @@ public class GameUtility
     {
         return path.Replace("/", "\\");
     }
-
+    
     public static string FullPathToAssetPath(string full_path)
     {
         full_path = FormatToUnityPath(full_path);
@@ -122,7 +122,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeWriteAllBytes failed! path = {0} with err = {1}", outFile, ex.Message));
+            Logger.LogError(string.Format("SafeWriteAllBytes failed! path = {0} with err = {1}", outFile, ex.Message));
             return false;
         }
     }
@@ -146,7 +146,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeWriteAllLines failed! path = {0} with err = {1}", outFile, ex.Message));
+            Logger.LogError(string.Format("SafeWriteAllLines failed! path = {0} with err = {1}", outFile, ex.Message));
             return false;
         }
     }
@@ -170,7 +170,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeWriteAllText failed! path = {0} with err = {1}", outFile, ex.Message));
+            Logger.LogError(string.Format("SafeWriteAllText failed! path = {0} with err = {1}", outFile, ex.Message));
             return false;
         }
     }
@@ -194,7 +194,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeReadAllBytes failed! path = {0} with err = {1}", inFile, ex.Message));
+            Logger.LogError(string.Format("SafeReadAllBytes failed! path = {0} with err = {1}", inFile, ex.Message));
             return null;
         }
     }
@@ -218,7 +218,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeReadAllLines failed! path = {0} with err = {1}", inFile, ex.Message));
+            Logger.LogError(string.Format("SafeReadAllLines failed! path = {0} with err = {1}", inFile, ex.Message));
             return null;
         }
     }
@@ -242,7 +242,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeReadAllText failed! path = {0} with err = {1}", inFile, ex.Message));
+            Logger.LogError(string.Format("SafeReadAllText failed! path = {0} with err = {1}", inFile, ex.Message));
             return null;
         }
     }
@@ -284,7 +284,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeClearDir failed! path = {0} with err = {1}", folderPath, ex.Message));
+            Logger.LogError(string.Format("SafeClearDir failed! path = {0} with err = {1}", folderPath, ex.Message));
             return false;
         }
     }
@@ -306,7 +306,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeDeleteDir failed! path = {0} whth err: {1}", folderPath, ex.Message));
+            Logger.LogError(string.Format("SafeDeleteDir failed! path = {0} whth err: {1}", folderPath, ex.Message));
             return false;
         }
     }
@@ -330,7 +330,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeDeleteFile failed! path = {0} whth err: {1}", filePath, ex.Message));
+            Logger.LogError(string.Format("SafeDeleteFile failed! path = {0} whth err: {1}", filePath, ex.Message));
             return false;
         }
     }
@@ -358,7 +358,7 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            UnityEngine.Debug.LogError(string.Format("SafeCopyFile failed! formFile = {0}, toFile = {1}, with err = {2}",
+            Logger.LogError(string.Format("SafeCopyFile failed! formFile = {0}, toFile = {1}, with err = {2}",
                 fromFile, toFile, ex.Message));
             return false;
         }

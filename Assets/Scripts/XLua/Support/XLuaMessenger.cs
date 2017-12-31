@@ -54,7 +54,7 @@ public static class XLuaMessenger
     {
         if (!MessageNameTypeMap.ContainsKey(eventType))
         {
-            Debug.LogError(string.Format("You should register eventType : {0} first!", eventType));
+            Logger.LogError(string.Format("You should register eventType : {0} first!", eventType));
             return null;
         }
         return func.Cast(MessageNameTypeMap[eventType]);
@@ -95,7 +95,7 @@ public static class XLuaMessenger
             }
             catch (System.Exception ex)
             {
-                Debug.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}", arg1, arg1.GetType())));
+                Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}", arg1, arg1.GetType())));
                 throw Messenger.CreateBroadcastSignatureException(eventType);
             }
         }
@@ -122,7 +122,7 @@ public static class XLuaMessenger
             }
             catch (System.Exception ex)
             {
-                Debug.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType())));
+                Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType())));
                 throw Messenger.CreateBroadcastSignatureException(eventType);
             }
         }
@@ -151,7 +151,7 @@ public static class XLuaMessenger
             }
             catch (System.Exception ex)
             {
-                Debug.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}, arg3 = {2}, typeof(arg3) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType(), arg3, arg3.GetType())));
+                Logger.LogError(string.Format("{0}:{1}", ex.Message, string.Format("arg1 = {0}, typeof(arg1) = {1}, arg2 = {2}, typeof(arg2) = {3}, arg3 = {2}, typeof(arg3) = {3}", arg1, arg1.GetType(), arg2, arg2.GetType(), arg3, arg3.GetType())));
                 throw Messenger.CreateBroadcastSignatureException(eventType);
             }
         }
@@ -176,7 +176,7 @@ public static class XLuaMessenger
         }
         catch (System.Exception ex)
         {
-            Debug.LogError(string.Format("{0} : {1}", ex.Message, string.Format("Unknow cast type : {0}, valueObj type : {1}", type, valueObj.GetType())));
+            Logger.LogError(string.Format("{0} : {1}", ex.Message, string.Format("Unknow cast type : {0}, valueObj type : {1}", type, valueObj.GetType())));
             return valueObj;
         }
     }

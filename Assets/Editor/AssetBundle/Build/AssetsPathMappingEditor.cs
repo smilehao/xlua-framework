@@ -6,6 +6,7 @@ using UnityEditor;
 /// <summary>
 /// added by wsh @ 2017.12.25
 /// 功能：Assetbundle相关的Asset路径映射，每次在构建Assetbunlde完成后需要更新一次映射
+/// 注意：所有配置文件不用路径映射
 /// </summary>
 
 namespace AssetBundles
@@ -18,7 +19,7 @@ namespace AssetBundles
         public static void BuildPathMapping(BuildTarget target, AssetBundleManifest manifest)
         {
             mappingList.Clear();
-            string rootPath = AssetBundleUtility.GetBuildPlatformOutputPath(target);
+            string rootPath = System.IO.Path.Combine(Application.dataPath, AssetBundleConfig.AssetsFolderName);
             string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.AssetsPathMapFileName);
             
             string[] allAssetbundles = manifest.GetAllAssetBundles();
@@ -84,14 +85,19 @@ namespace AssetBundles
                 }
             }
             mappingList.Sort();
+
             if (!GameUtility.SafeWriteAllLines(outputFilePath, mappingList.ToArray()))
             {
                 Debug.LogError("BuildPathMapping failed!!! try rebuild it again!");
             }
             else
             {
+                AssetDatabase.Refresh();
+                string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
+                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
                 Debug.Log("BuildPathMapping success!!!");
             }
+            AssetDatabase.Refresh();
         }
         
         // 处理所有的Variant：相同Assetbundle，不同Variant只需保留一份不带Variant的映射

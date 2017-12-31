@@ -42,7 +42,7 @@ public class AssetbundleUpdater : MonoBehaviour
         }
 #if UNITY_5_5
         // 说明：亲测在Unity5.5版本本地服务器根本无法连接，倒是在手机上正常
-        UnityEngine.Debug.Log("No support simulate in Unity5.5 in windows...");
+        Logger.Log("No support simulate in Unity5.5 in windows...");
         yield return StartGame();
         yield break;
 #endif
@@ -60,7 +60,7 @@ public class AssetbundleUpdater : MonoBehaviour
         }
         if (needDownloadList.Count <= 0)
         {
-            UnityEngine.Debug.Log("No resources to update...");
+            Logger.Log("No resources to update...");
             yield return StartGame();
             yield break;
         }
@@ -71,11 +71,11 @@ public class AssetbundleUpdater : MonoBehaviour
         slider.gameObject.SetActive(true);
         totalDownloadCount = needDownloadList.Count;
         finishedDownloadCount = 0;
-        UnityEngine.Debug.Log(totalDownloadCount + " resources to update...");
+        Logger.Log(totalDownloadCount + " resources to update...");
         yield return StartUpdate();
 
         statusText.text = "资源更新完成！";
-        UnityEngine.Debug.Log("Update finished...");
+        Logger.Log("Update finished...");
         yield return UpdateFinish();
         yield return StartGame();
         yield break;
@@ -87,7 +87,7 @@ public class AssetbundleUpdater : MonoBehaviour
 #pragma warning disable 0162
         if (AssetBundleConfig.isDebug)
         {
-            var request = AssetBundleManager.Instance.RequestAssetAsync(AssetBundleConfig.AssetBundleServerUrlFileName);
+            var request = AssetBundleManager.Instance.RequestFileAssetAsync(AssetBundleConfig.AssetBundleServerUrlFileName);
             yield return request;
             url = request.text + AssetBundleUtility.GetCurPlatformName() + "/";
             AssetBundleManager.Instance.DownloadUrl = url;
@@ -99,7 +99,7 @@ public class AssetbundleUpdater : MonoBehaviour
             url = AssetBundleConfig.RemoteServerUrl;
         }
 #pragma warning disable 0162
-        UnityEngine.Debug.Log("downloadUrl : " + url);
+        Logger.Log("downloadUrl : " + url);
         yield break;
     }
 
@@ -108,12 +108,12 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return GetDownloaderUrl();
         localManifest = AssetBundleManager.Instance.curManifest;
         hostManifest = new Manifest();
-        var request = AssetBundleManager.Instance.DownloadAssetAsync(hostManifest.ManifestFileName);
+        var request = AssetBundleManager.Instance.DownloadAssetAsync(hostManifest.AssetbundleName);
         yield return request;
         if (!string.IsNullOrEmpty(request.error))
         {
             // TODO：错误弹窗
-            UnityEngine.Debug.LogError("Download host manifest :  " + request.assetbundleName + "\n from url : " + request.url + "\n err : " + request.error);
+            Logger.LogError("Download host manifest :  " + request.assetbundleName + "\n from url : " + request.url + "\n err : " + request.error);
             request.Dispose();
             yield break;
         }
@@ -204,14 +204,14 @@ public class AssetbundleUpdater : MonoBehaviour
             {
                 if (!string.IsNullOrEmpty(request.error))
                 {
-                    UnityEngine.Debug.LogError("Error when downloading file : " + request.assetbundleName + "\n from url : " + request.url + "\n err : " + request.error);
+                    Logger.LogError("Error when downloading file : " + request.assetbundleName + "\n from url : " + request.url + "\n err : " + request.error);
                     hasError = true;
                     needDownloadList.Add(request.assetbundleName);
                 }
                 else
                 {
                     // TODO：更新下载流量
-                    UnityEngine.Debug.Log("Finish downloading file : " + request.assetbundleName + "\n from url : " + request.url);
+                    Logger.Log("Finish downloading file : " + request.assetbundleName + "\n from url : " + request.url);
                     downloadingRequest.RemoveAt(i);
                     finishedDownloadCount++;
                     var filePath = AssetBundleUtility.GetPlatformPersistentDataPath(request.assetbundleName);

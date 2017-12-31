@@ -257,7 +257,7 @@ namespace networks
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError("Got the fucking exception :" + e.Message);
+                    Logger.LogError("Got the fucking exception :" + e.Message);
                 }
                 finally
                 {
@@ -285,7 +285,7 @@ namespace networks
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError("Got the fucking exception :" + e.Message);
+                    Logger.LogError("Got the fucking exception :" + e.Message);
                 }
                 finally
                 {

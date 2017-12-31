@@ -48,13 +48,27 @@ namespace AssetBundles
 
         public AssetsPathMapping()
         {
+            AssetName = AssetBundleUtility.RelativeAssetPathToAbsoluteAssetPath(AssetBundleConfig.AssetsPathMapFileName);
+            AssetbundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(AssetName);
         }
-        
+
+        public string AssetbundleName
+        {
+            get;
+            protected set;
+        }
+
+        public string AssetName
+        {
+            get;
+            protected set;
+        }
+
         public void Initialize(string content)
         {
             if (string.IsNullOrEmpty(content))
             {
-                UnityEngine.Debug.LogError("ResourceNameMap empty!!");
+                Logger.LogError("ResourceNameMap empty!!");
                 return;
             }
 
@@ -70,7 +84,7 @@ namespace AssetBundles
                 string[] splitArr = map.Split(new[] { PATTREN }, System.StringSplitOptions.None);
                 if (splitArr.Length < 2)
                 {
-                    UnityEngine.Debug.LogError("splitArr length < 2 : " + map);
+                    Logger.LogError("splitArr length < 2 : " + map);
                     continue;
                 }
 

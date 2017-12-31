@@ -124,8 +124,12 @@ namespace AssetBundles
             www = new WWW(url);
             if (www == null)
             {
-                UnityEngine.Debug.LogError("New www failed!!!");
+                Logger.LogError("New www failed!!!");
                 isOver = true;
+            }
+            else
+            {
+                Logger.Log("Downloading : " + url);
             }
         }
         
@@ -154,7 +158,7 @@ namespace AssetBundles
 
             if (www != null && !string.IsNullOrEmpty(www.error))
             {
-                UnityEngine.Debug.LogError(www.error);
+                Logger.LogError(www.error);
             }
         }
 

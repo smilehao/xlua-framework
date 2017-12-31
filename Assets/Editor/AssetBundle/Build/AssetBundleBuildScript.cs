@@ -21,8 +21,10 @@ namespace AssetBundles
             {
                 AssetsPathMappingEditor.BuildPathMapping(buildTarget, manifest);
                 VariantMappingEditor.BuildVariantMapping(buildTarget, manifest);
+                BuildPipeline.BuildAssetBundles(outputPath, buildOption, buildTarget);
                 Debug.Log("BuildAssetBundles success!!!");
             }
+            AssetDatabase.Refresh();
         }
 
         public static void BuildPlayer()

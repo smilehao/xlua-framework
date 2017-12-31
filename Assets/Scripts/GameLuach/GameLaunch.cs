@@ -12,7 +12,7 @@ public class GameLaunch : MonoBehaviour
         // 启动资源管理模块
         int frameCount = Time.frameCount;
         yield return AssetBundleManager.Instance.Initialize();
-        UnityEngine.Debug.Log("AssetBundleManager Initialized, use frameCount = " + (Time.frameCount -frameCount));
+        Logger.Log("AssetBundleManager Initialized, use frameCount = " + (Time.frameCount -frameCount));
         frameCount = Time.frameCount;
 
         // 启动xlua热修复模块
@@ -27,7 +27,7 @@ public class GameLaunch : MonoBehaviour
         // 加载UI界面
         var loader = AssetBundleManager.Instance.LoadAssetAsync(luachPrefabPath, typeof(GameObject));
         yield return loader;
-        UnityEngine.Debug.Log("Open luanch window, use frameCount :" + (Time.frameCount - frameCount));
+        Logger.Log("Open luanch window, use frameCount :" + (Time.frameCount - frameCount));
         var prefab = loader.asset as GameObject;
         loader.Dispose();
         if (prefab != null)
@@ -37,7 +37,7 @@ public class GameLaunch : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError("LoadAssetAsync luachPrefabPath err : " + luachPrefabPath);
+            Logger.LogError("LoadAssetAsync luachPrefabPath err : " + luachPrefabPath);
         }
 
         yield break;

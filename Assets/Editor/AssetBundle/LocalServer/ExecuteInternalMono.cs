@@ -78,7 +78,7 @@ namespace AssetBundles
 			}
 			if (UnescapeableChars.IsMatch(input))
 			{
-				UnityEngine.Debug.LogWarning("Cannot escape control characters in string");
+                UnityEngine.Debug.LogWarning("Cannot escape control characters in string");
 				return "\"\"";
 			}
 			if (UnsafeCharsWindows.IsMatch(input))

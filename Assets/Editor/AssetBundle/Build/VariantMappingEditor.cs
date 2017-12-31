@@ -19,8 +19,8 @@ namespace AssetBundles
         public static void BuildVariantMapping(BuildTarget target, AssetBundleManifest manifest)
         {
             mappingList.Clear();
-            string rootPath = AssetBundleUtility.GetBuildPlatformOutputPath(target);
-            string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.VariantsMapFileName);          
+            string rootPath = System.IO.Path.Combine(Application.dataPath, AssetBundleConfig.AssetsFolderName);
+            string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.VariantsMapFileName);
             string[] allVariants = manifest.GetAllAssetBundlesWithVariant();
 
             //处理带variants的assetbundle
@@ -69,8 +69,12 @@ namespace AssetBundles
             }
             else
             {
+                AssetDatabase.Refresh();
+                string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
+                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
                 Debug.Log("BuildVariantMapping success!!!");
             }
+            AssetDatabase.Refresh();
         }
     }
 }

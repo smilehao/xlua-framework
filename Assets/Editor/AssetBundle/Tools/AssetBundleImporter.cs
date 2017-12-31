@@ -16,51 +16,46 @@ namespace AssetBundles
 {
     public class AssetBundleImporter
     {
-        private AssetImporter m_asset_importer = null;
-        private bool m_is_file = false;
-        private DirectoryInfo m_dir_info = null;
-        private FileInfo m_file_info = null;
+        private AssetImporter assetImporter = null;
+        private bool isFile = false;
+        private DirectoryInfo dirInfo = null;
+        private FileInfo fileInfo = null;
         
-        public AssetBundleImporter(AssetImporter asset_import)
+        public AssetBundleImporter(AssetImporter assetImporter)
         {
-            m_asset_importer = asset_import;
-            if (m_asset_importer != null)
+            this.assetImporter = assetImporter;
+            if (this.assetImporter != null)
             {
-                DirectoryInfo dir_info = new DirectoryInfo(m_asset_importer.assetPath);
-                FileInfo file_info = new FileInfo(m_asset_importer.assetPath);
-                if (dir_info.Exists)
+                DirectoryInfo dirInfo = new DirectoryInfo(this.assetImporter.assetPath);
+                FileInfo fileInfo = new FileInfo(this.assetImporter.assetPath);
+                if (dirInfo.Exists)
                 {
-                    m_is_file = false;
-                    m_dir_info = dir_info;
+                    isFile = false;
+                    this.dirInfo = dirInfo;
                 }
-                if (file_info.Exists)
+                if (fileInfo.Exists)
                 {
-                    m_is_file = true;
-                    m_file_info = file_info;
+                    isFile = true;
+                    this.fileInfo = fileInfo;
                 }
             }
         }
         
-        public static AssetBundleImporter GetByAssetImporterInstance(AssetImporter asset_import)
+        public static AssetBundleImporter GetAtPath(string assetPath)
         {
-            return new AssetBundleImporter(asset_import);
-        }
-        
-        public static AssetBundleImporter GetAtPath(string asset_path)
-        {
-            if (string.IsNullOrEmpty(asset_path))
+            if (string.IsNullOrEmpty(assetPath))
             {
                 return null;
             }
-
-            AssetImporter asset_importer = AssetImporter.GetAtPath(asset_path);
-            if (asset_importer == null)
+            
+            AssetImporter assetImporter = AssetImporter.GetAtPath(assetPath);
+            if (assetImporter == null)
             {
                 return null;
             }
             else
             {
-                return new AssetBundleImporter(asset_importer);
+                return new AssetBundleImporter(assetImporter);
             }
         }
         
@@ -68,17 +63,17 @@ namespace AssetBundles
         {
             get
             {
-                if (m_asset_importer == null)
+                if (assetImporter == null)
                 {
                     return false;
                 }
 
-                if (m_is_file && (m_file_info == null || !m_file_info.Exists))
+                if (isFile && (fileInfo == null || !fileInfo.Exists))
                 {
                     return false;
                 }
 
-                if (!m_is_file && (m_dir_info == null || !m_dir_info.Exists))
+                if (!isFile && (dirInfo == null || !dirInfo.Exists))
                 {
                     return false;
                 }
@@ -87,12 +82,11 @@ namespace AssetBundles
             }
         }
         
-        /// </summary>
         public bool IsFile
         {
             get
             {
-                return m_is_file;
+                return isFile;
             }
         }
 
@@ -100,7 +94,7 @@ namespace AssetBundles
         {
             get
             {
-                return m_asset_importer;
+                return assetImporter;
             }
         }
 
@@ -110,7 +104,7 @@ namespace AssetBundles
             {
                 if (IsValid)
                 {
-                    return m_asset_importer.assetBundleName;
+                    return assetImporter.assetBundleName;
                 }
                 else
                 {
@@ -122,23 +116,7 @@ namespace AssetBundles
             {
                 if (IsValid)
                 {
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        //remove root "Assets/"
-                        value = value.Replace("Assets/", "");
-                        //no " "
-                        value = value.Replace(" ", "");
-                        //there should not be any '.' in the assetbundle name
-                        //otherwise the variant handling in client may go wrong
-                        value = value.Replace(".", "_");
-                        //add after suffix ".assetbundle" to the end
-                        value = value + AssetBundleConfig.AssetBundleSuffix;
-                        m_asset_importer.assetBundleName = value;
-                    }
-                    else
-                    {
-                        m_asset_importer.assetBundleName = null;
-                    }
+                    assetImporter.assetBundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(value);
                 }
                 else
                 {
@@ -152,7 +130,7 @@ namespace AssetBundles
             get {
                 if (IsValid)
                 {
-                    return m_asset_importer.assetBundleVariant;
+                    return assetImporter.assetBundleVariant;
                 }
                 else
                 {
@@ -164,9 +142,9 @@ namespace AssetBundles
                 if (IsValid)
                 {
                     //must firstly set assetBundleName,then set assetBundleVariant
-                    if (!string.IsNullOrEmpty(m_asset_importer.assetBundleName))
+                    if (!string.IsNullOrEmpty(assetImporter.assetBundleName))
                     {
-                        m_asset_importer.assetBundleVariant = value;
+                        assetImporter.assetBundleVariant = value;
                     }
                 }
                 else
@@ -180,7 +158,7 @@ namespace AssetBundles
             get {
                 if (IsValid)
                 {
-                    return m_asset_importer.assetPath;
+                    return assetImporter.assetPath;
                 }
                 else
                 {
@@ -189,11 +167,12 @@ namespace AssetBundles
                 }
             } 
         }
+
         public ulong assetTimeStamp { 
             get {
                 if (IsValid)
                 {
-                    return m_asset_importer.assetTimeStamp;
+                    return assetImporter.assetTimeStamp;
                 }
                 else
                 {
@@ -208,7 +187,7 @@ namespace AssetBundles
             get {
                 if (IsValid)
                 {
-                    return m_asset_importer.userData;
+                    return assetImporter.userData;
                 }
                 else
                 {
@@ -219,7 +198,7 @@ namespace AssetBundles
             set {
                 if (IsValid)
                 {
-                    m_asset_importer.userData = value;
+                    assetImporter.userData = value;
                 }
                 else
                 {
@@ -228,18 +207,18 @@ namespace AssetBundles
             }
         }
 
-        public void SaveAndReimport() { m_asset_importer.SaveAndReimport(); }
+        public void SaveAndReimport() { assetImporter.SaveAndReimport(); }
         
-        private string FullPathToAssetPath(string full_path)
+        private string FullPathToAssetPath(string fullPath)
         {
-            string ret_path = GameUtility.FullPathToAssetPath(full_path);
-            if (ret_path.Equals(GameUtility.AssetsFolderName))
+            string retPath = GameUtility.FullPathToAssetPath(fullPath);
+            if (retPath.Equals(GameUtility.AssetsFolderName))
             {
                 return null;
             }
             else
             {
-                return ret_path;
+                return retPath;
             }
         }
         
@@ -250,36 +229,36 @@ namespace AssetBundles
                 return null;
             }
 
-            if (m_is_file)
+            if (isFile)
             {
-                return FullPathToAssetPath(m_file_info.Directory.FullName);
+                return FullPathToAssetPath(fileInfo.Directory.FullName);
             }
             else
             {
-                return FullPathToAssetPath(m_dir_info.Parent.FullName);
+                return FullPathToAssetPath(dirInfo.Parent.FullName);
             }
         }
         
         public AssetBundleImporter GetParent()
         {
-            string parent_path = GetParentAssetPath();
-            return GetAtPath(parent_path);
+            string parentPath = GetParentAssetPath();
+            return GetAtPath(parentPath);
         }
         
         public List<AssetBundleImporter> GetChildren()
         {
-            List<AssetBundleImporter> ret_arr = new List<AssetBundleImporter>();
-            if (!IsValid || m_is_file)
+            List<AssetBundleImporter> arr = new List<AssetBundleImporter>();
+            if (!IsValid || isFile)
             {
-                return ret_arr;
+                return arr;
             }
             
-            DirectoryInfo[] dirs = m_dir_info.GetDirectories();
-            FileInfo[] files = m_dir_info.GetFiles();
+            DirectoryInfo[] dirs = dirInfo.GetDirectories();
+            FileInfo[] files = dirInfo.GetFiles();
             int length = dirs.Length + files.Length;
             if(length == 0)
             {
-                return ret_arr;
+                return arr;
             }
 
             for (int i = 0; i < length; i++)
@@ -297,10 +276,10 @@ namespace AssetBundles
                 if (child != null && child.IsValid)
                 {
                     //说明：文件系统目录下的.cs，.meta文件是无法创建AssetImporter的，这里会自动进行过滤
-                    ret_arr.Add(child);
+                    arr.Add(child);
                 }
             }
-            return ret_arr;
+            return arr;
         }
         
     }

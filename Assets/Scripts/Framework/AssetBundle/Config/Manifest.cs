@@ -14,15 +14,14 @@ namespace AssetBundles
 {
     public class Manifest
     {
-        const string manifestAssetName = "AssetBundleManifest";
+        const string assetName = "AssetBundleManifest";
         AssetBundleManifest manifest = null;
-        string manifestFileName = null;
         byte[] manifestBytes = null;
         string[] emptyStringArray = new string[] { };
         
         public Manifest()
         {
-            manifestFileName = AssetBundleUtility.GetCurPlatformName();
+            AssetbundleName = AssetBundleUtility.GetCurPlatformName();
         }
         
         public AssetBundleManifest assetbundleManifest
@@ -33,33 +32,10 @@ namespace AssetBundles
             }
         }
 
-        public void LoadFromAssetbundle(AssetBundle assetbundle)
+        public string AssetbundleName
         {
-            if (assetbundle == null)
-            {
-                UnityEngine.Debug.LogError("Manifest LoadFromAssetbundle assetbundle null!");
-                return;
-            }
-            manifest = assetbundle.LoadAsset<AssetBundleManifest>(manifestAssetName);
-        }
-
-        public void SaveBytes(byte[] bytes)
-        {
-            manifestBytes = bytes;
-        }
-
-        public bool SaveToDiskCahce()
-        {
-            string path = AssetBundleUtility.GetPlatformPersistentDataPath(manifestFileName);
-            return GameUtility.SafeWriteAllBytes(path, manifestBytes);
-        }
-
-        public string ManifestFileName
-        {
-            get
-            {
-                return manifestFileName;
-            }
+            get;
+            protected set;
         }
         
         public int Length
@@ -69,7 +45,28 @@ namespace AssetBundles
                 return manifest == null ? 0 : manifest.GetAllAssetBundles().Length;
             }
         }
-        
+
+        public void LoadFromAssetbundle(AssetBundle assetbundle)
+        {
+            if (assetbundle == null)
+            {
+                Logger.LogError("Manifest LoadFromAssetbundle assetbundle null!");
+                return;
+            }
+            manifest = assetbundle.LoadAsset<AssetBundleManifest>(assetName);
+        }
+
+        public void SaveBytes(byte[] bytes)
+        {
+            manifestBytes = bytes;
+        }
+
+        public bool SaveToDiskCahce()
+        {
+            string path = AssetBundleUtility.GetPlatformPersistentDataPath(AssetbundleName);
+            return GameUtility.SafeWriteAllBytes(path, manifestBytes);
+        }
+
         public Hash128 GetAssetBundleHash(string name)
         {
             return manifest == null ? default(Hash128) : manifest.GetAssetBundleHash(name);

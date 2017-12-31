@@ -72,8 +72,8 @@ namespace AssetBundles
             manifest = new Manifest();
             assetsPathMapping = new AssetsPathMapping();
             // 说明：同时请求资源可以提高加载速度
-            var manifestRequest = RequestAssetAsync(manifest.ManifestFileName);
-            var pathMapRequest = RequestAssetAsync(AssetBundleConfig.AssetsPathMapFileName);
+            var manifestRequest = RequestAssetBundleAsync(manifest.AssetbundleName);
+            var pathMapRequest = RequestAssetBundleAsync(assetsPathMapping.AssetbundleName);
 
             yield return manifestRequest;
             var assetbundle = manifestRequest.assetbundle;
@@ -82,12 +82,14 @@ namespace AssetBundles
             manifestRequest.Dispose();
 
             yield return pathMapRequest;
-            var mapContent = pathMapRequest.text;
-            pathMapRequest.Dispose();
+            assetbundle = pathMapRequest.assetbundle;
+            var mapContent = assetbundle.LoadAsset<TextAsset>(assetsPathMapping.AssetName);
             if (mapContent != null)
             {
-                assetsPathMapping.Initialize(mapContent);
+                assetsPathMapping.Initialize(mapContent.text);
             }
+            assetbundle.Unload(true);
+            pathMapRequest.Dispose();
             yield break;
         }
 
@@ -204,7 +206,7 @@ namespace AssetBundles
         {
             if (!IsAssetBundleLoaded(assetbundleName))
             {
-                UnityEngine.Debug.LogError("Try to add assets cache from unloaded assetbundle : " + assetbundleName);
+                Logger.LogError("Try to add assets cache from unloaded assetbundle : " + assetbundleName);
                 return;
             }
             var curAssetbundle = GetAssetBundleCache(assetbundleName);
@@ -339,6 +341,45 @@ namespace AssetBundles
             return loader;
         }
 
+        // 从服务器下载Assetbundle资源，不缓存，无依赖
+        public ResourceWebRequester DownloadAssetAsync(string filePath)
+        {
+            if (string.IsNullOrEmpty(DownloadUrl))
+            {
+                Logger.LogError("You should set download url first!!!");
+                return null;
+            }
+
+            var creater = ResourceWebRequester.Get();
+            var url = DownloadUrl + filePath;
+            creater.Init(filePath, url, true);
+            webRequesting.Add(filePath, creater);
+            webRequesterQueue.Enqueue(creater);
+            return creater;
+        }
+
+        // 异步请求非Assetbundle资源，不缓存，无依赖
+        public ResourceWebRequester RequestFileAssetAsync(string filePath)
+        {
+            var creater = ResourceWebRequester.Get();
+            var url = AssetBundleUtility.GetPlatformFileUrl(filePath);
+            creater.Init(filePath, url, true);
+            webRequesting.Add(filePath, creater);
+            webRequesterQueue.Enqueue(creater);
+            return creater;
+        }
+
+        // 异步请求Assetbundle资源，不缓存，无依赖
+        public ResourceWebRequester RequestAssetBundleAsync(string assetbundleName)
+        {
+            var creater = ResourceWebRequester.Get();
+            var url = AssetBundleUtility.GetPlatformFileUrl(assetbundleName);
+            creater.Init(assetbundleName, url, true);
+            webRequesting.Add(assetbundleName, creater);
+            webRequesterQueue.Enqueue(creater);
+            return creater;
+        }
+
         public void UnloadAssetBundleDependencies(string assetbundleName)
         {
             if (manifest != null)
@@ -412,32 +453,6 @@ namespace AssetBundles
             } while (hasDoUnload);
         }
 
-        public ResourceWebRequester DownloadAssetAsync(string filePath)
-        {
-            if (string.IsNullOrEmpty(DownloadUrl))
-            {
-                UnityEngine.Debug.LogError("You should set download url first!!!");
-                return null;
-            }
-
-            var creater = ResourceWebRequester.Get();
-            var url = DownloadUrl + filePath;
-            creater.Init(filePath, url, true);
-            webRequesting.Add(filePath, creater);
-            webRequesterQueue.Enqueue(creater);
-            return creater;
-        }
-
-        public ResourceWebRequester RequestAssetAsync(string filePath)
-        {
-            var creater = ResourceWebRequester.Get();
-            var url = AssetBundleUtility.GetPlatformFileUrl(filePath);
-            creater.Init(filePath, url, true);
-            webRequesting.Add(filePath, creater);
-            webRequesterQueue.Enqueue(creater);
-            return creater;
-        }
-
         public bool MapAssetPath(string assetPath, out string assetbundleName, out string assetName)
         {
             return assetsPathMapping.MapAssetPath(assetPath, out assetbundleName, out assetName);
@@ -459,7 +474,7 @@ namespace AssetBundles
             bool status = MapAssetPath(assetPath, out assetbundleName, out assetName);
             if (!status)
             {
-                UnityEngine.Debug.LogError("No assetbundle at asset path :" + assetPath);
+                Logger.LogError("No assetbundle at asset path :" + assetPath);
                 return null;
             }
 

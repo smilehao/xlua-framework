@@ -104,6 +104,13 @@ namespace AssetBundles
         [MenuItem(kToolsClearOutput)]
         static public void ToolsClearOutput()
         {
+            bool checkClear = EditorUtility.DisplayDialog("ClearOutput Warning",
+                "Clear output assetbundles will force to rebuild all assetbundles, continue ?",
+                "Yes", "No");
+            if (!checkClear)
+            {
+                return;
+            }
             string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, AssetBundleUtility.GetCurPlatformName());
             GameUtility.SafeDeleteDir(outputPath);
             Debug.Log(string.Format("Clear {0} assetbundle output done!", AssetBundleUtility.GetCurPlatformName()));
@@ -112,6 +119,13 @@ namespace AssetBundles
         [MenuItem(kToolsClearStreamingAssets)]
         static public void ToolsClearStreamingAssets()
         {
+            bool checkClear = EditorUtility.DisplayDialog("ClearStreamingAssets Warning",
+                "Clear streaming assets assetbundles will lost the latest player build info, continue ?",
+                "Yes", "No");
+            if (!checkClear)
+            {
+                return;
+            }
             string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
             outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
             GameUtility.SafeDeleteDir(outputPath);
@@ -122,6 +136,14 @@ namespace AssetBundles
         [MenuItem(kToolsClearPersistentAssets)]
         static public void ToolsClearPersistentAssets()
         {
+            bool checkClear = EditorUtility.DisplayDialog("ClearPersistentAssets Warning",
+                "Clear persistent assetbundles will force to update all assetbundles that difference with streaming assets assetbundles, continue ?",
+                "Yes", "No");
+            if (!checkClear)
+            {
+                return;
+            }
+
             string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
             outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
             GameUtility.SafeDeleteDir(outputPath);
@@ -133,28 +155,28 @@ namespace AssetBundles
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                bool check_create = EditorUtility.DisplayDialog("CreateAssetbundleForCurrent Warning",
+                bool checkCreate = EditorUtility.DisplayDialog("CreateAssetbundleForCurrent Warning",
                     "Create assetbundle for cur selected objects will remove assetbundles in their children and parents,continue ?",
                     "Yes", "No");
-                if (!check_create)
+                if (!checkCreate)
                 {
                     return;
                 }
-                Object[] sel_objs = Selection.objects;
-                AssetBundleEditorHelper.CreateAssetbundleForCurrent(sel_objs);
-                List<string> remove_list = AssetBundleEditorHelper.RemoveAssetbundleInParents(sel_objs);
-                remove_list.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(sel_objs));
-                string remove_str = string.Empty;
+                Object[] selObjs = Selection.objects;
+                AssetBundleEditorHelper.CreateAssetbundleForCurrent(selObjs);
+                List<string> removeList = AssetBundleEditorHelper.RemoveAssetbundleInParents(selObjs);
+                removeList.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(selObjs));
+                string removeStr = string.Empty;
                 int i = 0;
-                foreach(string str in remove_list)
+                foreach(string str in removeList)
                 {
-                    remove_str += string.Format("[{0}]{1}\n",++i,str);
+                    removeStr += string.Format("[{0}]{1}\n",++i,str);
                 }
                 Debug.Log(string.Format("CreateAssetbundleForCurrent done!\nRemove list :"+
                     "\n-------------------------------------------\n" +  
                     "{0}" +
                     "\n-------------------------------------------\n",
-                    remove_str));
+                    removeStr));
             }
         }
         
@@ -163,28 +185,28 @@ namespace AssetBundles
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                bool check_create = EditorUtility.DisplayDialog("CreateAssetbundleForChildren Warning",
+                bool checkCreate = EditorUtility.DisplayDialog("CreateAssetbundleForChildren Warning",
                     "Create assetbundle for all chilren files of cur selected objects will remove assetbundles in all children dir,continue ?",
                     "Yes", "No");
-                if (!check_create)
+                if (!checkCreate)
                 {
                     return;
                 }
-                Object[] sel_objs = Selection.objects;
-                AssetBundleEditorHelper.CreateAssetbundleForChildrenFiles(sel_objs);
-                List<string> remove_list = AssetBundleEditorHelper.RemoveAssetbundleInParents(sel_objs);
-                remove_list.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(sel_objs,true,AssetBundleEditorHelper.REMOVE_TYPE.CHILDREN_DIR));
-                string remove_str = string.Empty;
+                Object[] selObjs = Selection.objects;
+                AssetBundleEditorHelper.CreateAssetbundleForChildrenFiles(selObjs);
+                List<string> removeList = AssetBundleEditorHelper.RemoveAssetbundleInParents(selObjs);
+                removeList.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(selObjs,true,AssetBundleEditorHelper.REMOVE_TYPE.CHILDREN_DIR));
+                string removeStr = string.Empty;
                 int i = 0;
-                foreach (string str in remove_list)
+                foreach (string str in removeList)
                 {
-                    remove_str += string.Format("[{0}]{1}\n", ++i, str);
+                    removeStr += string.Format("[{0}]{1}\n", ++i, str);
                 }
                 Debug.Log(string.Format("CreateAssetbundleForChildren done!\nRemove list :" +
                     "\n-------------------------------------------\n" +
                     "{0}" +
                     "\n-------------------------------------------\n",
-                    remove_str));
+                    removeStr));
             }
         }
 
@@ -193,21 +215,21 @@ namespace AssetBundles
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                Object[] sel_objs = Selection.objects;
-                string deps_str = AssetBundleEditorHelper.GetDependencyText(sel_objs, false);
-                string sel_str = string.Empty;
+                Object[] selObjs = Selection.objects;
+                string depsStr = AssetBundleEditorHelper.GetDependencyText(selObjs, false);
+                string selStr = string.Empty;
                 int i = 0;
-                foreach (Object obj in sel_objs)
+                foreach (Object obj in selObjs)
                 {
-                    sel_str += string.Format("[{0}]{1};", ++i, AssetDatabase.GetAssetPath(obj));
+                    selStr += string.Format("[{0}]{1};", ++i, AssetDatabase.GetAssetPath(obj));
                 }
                 Debug.Log(string.Format("Selection({0}) depends on the following assets:" + 
                     "\n-------------------------------------------\n" + 
                     "{1}" + 
                     "\n-------------------------------------------\n",
-                    sel_str,
-                    deps_str));
-                AssetBundleEditorHelper.SelectDependency(sel_objs,false);
+                    selStr,
+                    depsStr));
+                AssetBundleEditorHelper.SelectDependency(selObjs,false);
             }
         }
         
@@ -223,26 +245,36 @@ namespace AssetBundles
             ListAssetbundleDependencis(false);
         }
         
-        static public void ListAssetbundleDependencis(bool is_all)
+        static public void ListAssetbundleDependencis(bool isAll)
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                string local_file_path = Application.dataPath + "/../AssetBundles/" + AssetBundleUtility.GetCurPlatformName() + "/" + AssetBundleUtility.GetCurPlatformName();
+                string localFilePath = AssetBundleUtility.GetBuildPlatformOutputPath(EditorUserBuildSettings.activeBuildTarget);
+                localFilePath = Path.Combine(localFilePath, AssetBundleUtility.GetCurPlatformName());
 
-                Object[] sel_objs = Selection.objects;
-                string deps_str = AssetBundleEditorHelper.GetDependancisTextFormLocal(local_file_path, sel_objs, is_all);
-                string sel_str = string.Empty;
+                Object[] selObjs = Selection.objects;
+                var depsList = AssetBundleEditorHelper.GetDependancisFormBuildManifest(localFilePath, selObjs, isAll);
+                depsList.Sort();
+
+                string depsStr = string.Empty;
                 int i = 0;
-                foreach (Object obj in sel_objs)
+                foreach (string str in depsList)
                 {
-                    sel_str += string.Format("[{0}]{1};", ++i, AssetDatabase.GetAssetPath(obj));
+                    depsStr += string.Format("[{0}]{1}\n", ++i, str);
+                }
+
+                string selStr = string.Empty;
+                i = 0;
+                foreach (Object obj in selObjs)
+                {
+                    selStr += string.Format("[{0}]{1};", ++i, AssetDatabase.GetAssetPath(obj));
                 }
                 Debug.Log(string.Format("Selection({0}) directly depends on the following assetbundles:" +
                     "\n-------------------------------------------\n" +
                     "{1}" +
                     "\n-------------------------------------------\n",
-                    sel_str,
-                    deps_str));
+                    selStr,
+                    depsStr));
             }
         }
     }

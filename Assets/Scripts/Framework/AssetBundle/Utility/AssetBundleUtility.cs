@@ -35,7 +35,7 @@ namespace AssetBundles
                 case BuildTarget.iOS:
                     return "iOS";
                 default:
-                    UnityEngine.Debug.LogError("Error buildTarget!!!");
+                    Logger.LogError("Error buildTarget!!!");
                     return null;
             }
         }
@@ -50,7 +50,7 @@ namespace AssetBundles
                 case RuntimePlatform.IPhonePlayer:
                     return "iOS";
                 default:
-                    UnityEngine.Debug.LogError("Error platform!!!");
+                    Logger.LogError("Error platform!!!");
                     return null;
             }
         }
@@ -77,7 +77,7 @@ namespace AssetBundles
 #elif UNITY_ANDROID
             string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
 #else
-            UnityEngine.Debug.LogError("Unsupported platform!!!");
+            Logger.LogError("Unsupported platform!!!");
 #endif
             outputPath = Path.Combine(outputPath, GetPlatformName(platform));
 #endif
@@ -135,6 +135,30 @@ namespace AssetBundles
             }
         }
 
+        // 注意：这里不处理Variant，且是Assetbundle在Assets中的路径，游戏逻辑层别使用，这里只用于特殊情况
+        public static string AssetBundleAssetPathToAssetBundleName(string assetPath)
+        {
+            if (!string.IsNullOrEmpty(assetPath))
+            {
+                //remove root "Assets/"
+                assetPath = assetPath.Replace("Assets/", "");
+                //no " "
+                assetPath = assetPath.Replace(" ", "");
+                //there should not be any '.' in the assetbundle name
+                //otherwise the variant handling in client may go wrong
+                assetPath = assetPath.Replace(".", "_");
+                //add after suffix ".assetbundle" to the end
+                assetPath = assetPath + AssetBundleConfig.AssetBundleSuffix;
+            }
+            return assetPath.ToLower();
+        }
+
+        // 相对于AssetBundleConfig.AssetsFolderName下的路径转Unity中Asset的绝对路径
+        public static string RelativeAssetPathToAbsoluteAssetPath(string assetPath)
+        {
+            return "Assets/" + AssetBundleConfig.AssetsFolderName + "/" + assetPath;
+        }
+
 #if UNITY_EDITOR
         public static void WriteAssetBundleServerURL()
         {
@@ -163,7 +187,7 @@ namespace AssetBundles
                 ips.Sort();
                 if (ips.Count <= 0)
                 {
-                    UnityEngine.Debug.LogError("Get inter network ip failed!");
+                    Logger.LogError("Get inter network ip failed!");
                 }
                 else
                 {
@@ -178,22 +202,22 @@ namespace AssetBundles
             return downloadURL;
         }
         
-        public static AssetBundleManifest GetManifestFormLocal(string manifest_path)
+        public static AssetBundleManifest GetManifestFormLocal(string manifestPath)
         {
-            FileInfo file_info = new FileInfo(manifest_path);
-            if (!file_info.Exists)
+            FileInfo fileInfo = new FileInfo(manifestPath);
+            if (!fileInfo.Exists)
             {
-                Debug.LogError("You need to build assetbundles first to get assetbundle_dependencis info!");
+                Debug.LogError("You need to build assetbundles first to get assetbundle dependencis info!");
                 return null;
             }
-            byte[] bytes = GameUtility.SafeReadAllBytes(file_info.FullName);
+            byte[] bytes = GameUtility.SafeReadAllBytes(fileInfo.FullName);
             if (bytes == null)
             {
                 return null;
             }
-            AssetBundle asset_bundle = AssetBundle.LoadFromMemory(bytes);
-            AssetBundleManifest manifest = asset_bundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            asset_bundle.Unload(false);
+            AssetBundle assetBundle = AssetBundle.LoadFromMemory(bytes);
+            AssetBundleManifest manifest = assetBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+            assetBundle.Unload(false);
             return manifest;
         }
 

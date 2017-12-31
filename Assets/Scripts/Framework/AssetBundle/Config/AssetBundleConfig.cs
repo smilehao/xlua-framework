@@ -21,8 +21,8 @@ namespace AssetBundles
         public const string AssetBundlesFolderName = "AssetBundles";
         public const string AssetBundleSuffix = ".assetbundle";
         public const string AssetsFolderName = "AssetsPackage";
-        public const string AssetsPathMapFileName = "AssetsMap.txt";
-        public const string VariantsMapFileName = "VariantsMap.txt";
+        public const string AssetsPathMapFileName = "AssetsMap.bytes";
+        public const string VariantsMapFileName = "VariantsMap.bytes";
         public const string AssetBundleServerUrlFileName = "AssetBundleServerUrl.txt";
         public const string VariantMapParttren = "{Variant}";
         public const string CommonMapPattren = ",";
