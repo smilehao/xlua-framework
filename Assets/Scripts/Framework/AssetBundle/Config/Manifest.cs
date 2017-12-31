@@ -5,7 +5,9 @@ using System.IO;
 /// <summary>
 /// add by wsh @ 2017.12.23
 /// 功能：Manifest管理：提供对AssetBundleManifest类的封装
-/// 注意：Unity有个Bug会给空的ab名字，不记得在哪个版本修复了，使用manifest相关接口自行过滤掉空名字
+/// 注意：关于Manifest，Unity有个2个Bug：不记得在哪个版本修复了，这里使用manifest相关接口一律自行过滤掉
+/// 1、可能会给空的ab名字，具体情况未知
+/// 2、可能会包含自身，具体情况未知
 /// </summary>
 
 namespace AssetBundles

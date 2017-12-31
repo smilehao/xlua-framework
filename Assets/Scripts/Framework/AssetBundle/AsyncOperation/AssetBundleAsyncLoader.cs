@@ -15,6 +15,7 @@ namespace AssetBundles
     public class AssetBundleAsyncLoader : BaseAssetBundleAsyncLoader
     {
         static Queue<AssetBundleAsyncLoader> pool = new Queue<AssetBundleAsyncLoader>();
+        static int sequence = 0;
         protected List<string> waitingList = new List<string>();
         protected int waitingCount = 0;
         protected bool isOver = false;
@@ -27,13 +28,18 @@ namespace AssetBundles
             }
             else
             {
-                return new AssetBundleAsyncLoader();
+                return new AssetBundleAsyncLoader(++sequence);
             }
         }
 
         public static void Recycle(AssetBundleAsyncLoader loader)
         {
             pool.Enqueue(loader);
+        }
+
+        public AssetBundleAsyncLoader(int sequence)
+        {
+            Sequence = sequence;
         }
 
         public void Init(string name, string[] dependances)
@@ -59,6 +65,12 @@ namespace AssetBundles
                 }
             }
             waitingCount = waitingList.Count;
+        }
+
+        public int Sequence
+        {
+            get;
+            protected set;
         }
 
         public override bool IsDone()

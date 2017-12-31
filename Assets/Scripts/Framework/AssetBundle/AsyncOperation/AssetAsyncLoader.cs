@@ -13,6 +13,7 @@ namespace AssetBundles
     public class AssetAsyncLoader : BaseAssetAsyncLoader
     {
         static Queue<AssetAsyncLoader> pool = new Queue<AssetAsyncLoader>();
+        static int sequence = 0;
         protected bool isOver = false;
         protected BaseAssetBundleAsyncLoader assetbundleLoader = null;
 
@@ -24,7 +25,7 @@ namespace AssetBundles
             }
             else
             {
-                return new AssetAsyncLoader();
+                return new AssetAsyncLoader(++sequence);
             }
         }
 
@@ -33,12 +34,23 @@ namespace AssetBundles
             pool.Enqueue(creater);
         }
 
+        public AssetAsyncLoader(int sequence)
+        {
+            Sequence = sequence;
+        }
+
         public void Init(string assetName, UnityEngine.Object asset)
         {
             AssetName = assetName;
             this.asset = asset;
             assetbundleLoader = null;
             isOver = true;
+        }
+
+        public int Sequence
+        {
+            get;
+            protected set;
         }
 
         public void Init(string assetName, BaseAssetBundleAsyncLoader loader)

@@ -4,6 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using AssetBundles;
 
+/// <summary>
+/// add by wsh @ 2017.12.29
+/// 功能：Assetbundle更新器
+/// </summary>
+
 public class AssetbundleUpdater : MonoBehaviour
 {
     const int MAX_DOWNLOAD_NUM = 5;
@@ -180,6 +185,7 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return loader;
         loader.Dispose();
         XLuaManager.Instance.StartGame();
+        Destroy(gameObject);
         yield break;
     }
 	

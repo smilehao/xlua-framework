@@ -21,6 +21,7 @@ namespace AssetBundles
     public class ResourceWebRequester : ResourceAsyncOperation
     {
         static Queue<ResourceWebRequester> pool = new Queue<ResourceWebRequester>();
+        static int sequence = 0;
         protected WWW www = null;
         protected bool isOver = false;
 
@@ -32,13 +33,18 @@ namespace AssetBundles
             }
             else
             {
-                return new ResourceWebRequester();
+                return new ResourceWebRequester(++sequence);
             }
         }
 
         public static void Recycle(ResourceWebRequester creater)
         {
             pool.Enqueue(creater);
+        }
+
+        public ResourceWebRequester(int sequence)
+        {
+            Sequence = sequence;
         }
 
         public void Init(string name, string url, bool noCache = false)
@@ -48,6 +54,12 @@ namespace AssetBundles
             this.noCache = noCache;
             www = null;
             isOver = false;
+        }
+
+        public int Sequence
+        {
+            get;
+            protected set;
         }
 
         public bool noCache

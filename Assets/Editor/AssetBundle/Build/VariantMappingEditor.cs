@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 
 /// <summary>
-/// add by wsh @ 2017.12.25
+/// add by wsh @ 2017.12.26
 /// 功能：Assetbundle相关的Variant路径映射，每次在构建Assetbunlde完成后需要更新一次映射
 /// 说明：映射规则：每一个带Variant的Assetbundle到定义Assetbundle的文件或者文件夹的映射
 /// </summary>
@@ -27,10 +27,10 @@ namespace AssetBundles
             foreach (string assetbundle in allVariants)
             {
                 //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如名为banner/lang的assetbundle下：
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/Danish/Canvas.prefab
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/English/Canvas.prefab
+                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/Danish/Canvas.prefab
+                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/English/Canvas.prefab
                 //在代码使用的加载路径中，它们被统一处理为
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
+                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
                 //所以，在映射中两者分别应该对应
                 //Danish
                 //English
@@ -57,13 +57,9 @@ namespace AssetBundles
                 {
                     assetbundlePath = assetbundlePath.Substring(0, assetbundlePath.Length - 1);
                 }
-                //做映射：
                 //由于各个Variant的内部结构必须完全一致，而Load时也必须完全填写，所以这里不需要关注到assetbundle具体的每个资源
                 string nowNode = System.IO.Path.GetFileName(assetbundlePath);
-                string mappingItem = string.Format("{0}{1}{2}",
-                    assetbundle, PATTREN,//assetbundle名称
-                    nowNode//Assetbundle定义所在的目录或者文件名称
-                    );
+                string mappingItem = string.Format("{0}{1}{2}", assetbundle, PATTREN, nowNode);
                 mappingList.Add(mappingItem);
             }
             mappingList.Sort();

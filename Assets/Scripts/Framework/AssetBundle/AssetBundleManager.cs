@@ -9,7 +9,6 @@ using UnityEditor;
 /// <summary>
 /// add by wsh @ 2017-12-21
 /// 功能：assetbundle管理类，为外部提供统一的资源加载界面、协调Assetbundle各个子系统的运行
-/// 说明：移植自官方项目：https://bitbucket.org/Unity-Technologies/assetbundledemo
 /// 注意：
 /// 1、抛弃Resources目录的使用，官方建议：https://unity3d.com/cn/learn/tutorials/temas/best-practices/resources-folder?playlist=30089
 /// 2、提供Editor和Simulate模式，前者不适用Assetbundle，直接加载资源，快速开发；后者使用Assetbundle，用本地服务器模拟资源更新
@@ -263,11 +262,11 @@ namespace AssetBundles
             return count;
         }
 
-        protected void CreateAssetBundleAsync(string assetbundleName)
+        protected bool CreateAssetBundleAsync(string assetbundleName)
         {
             if (IsAssetBundleLoaded(assetbundleName) || webRequesting.ContainsKey(assetbundleName))
             {
-                return;
+                return false;
             }
 
             var creater = ResourceWebRequester.Get();
@@ -277,6 +276,7 @@ namespace AssetBundles
             webRequesterQueue.Enqueue(creater);
             // 创建器持有的引用：创建器对每个ab来说是全局唯一的
             IncreaseReferenceCount(assetbundleName);
+            return true;
         }
 
         public BaseAssetBundleAsyncLoader LoadAssetBundleAsync(string assetbundleName)
@@ -296,10 +296,14 @@ namespace AssetBundles
                 for (int i = 0; i < dependancies.Length; i++)
                 {
                     var dependance = dependancies[i];
-                    if (!string.IsNullOrEmpty(dependance))
+                    if (!string.IsNullOrEmpty(dependance) && dependance != assetbundleName)
                     {
-                        IncreaseReferenceCount(dependance);
-                        CreateAssetBundleAsync(dependance);
+                        var doCreate = CreateAssetBundleAsync(dependance);
+                        if (doCreate)
+                        {
+                            // ab缓存对依赖持有的引用
+                            IncreaseReferenceCount(dependance);
+                        }
                     }
                 }
                 loader.Init(assetbundleName, dependancies);
@@ -314,21 +318,20 @@ namespace AssetBundles
             return loader;
         }
 
-        public void ReleaseAssetBundleAsyncLoader(AssetBundleAsyncLoader loader)
+        public void UnloadAssetBundleDependencies(string assetbundleName)
         {
             if (manifest != null)
             {
-                string[] dependancies = manifest.GetAllDependencies(loader.assetbundleName);
+                string[] dependancies = manifest.GetAllDependencies(assetbundleName);
                 for (int i = 0; i < dependancies.Length; i++)
                 {
                     var dependance = dependancies[i];
-                    if (!string.IsNullOrEmpty(dependance))
+                    if (!string.IsNullOrEmpty(dependance) && dependance != assetbundleName)
                     {
                         UnloadAssetBundle(dependance);
                     }
                 }
             }
-            UnloadAssetBundle(loader.assetbundleName);
         }
 
         protected void UnloadAssetBundle(string assetbundleName, bool unloadResident = false, bool unloadAllLoadedObjects = false)
@@ -353,6 +356,7 @@ namespace AssetBundles
                 {
                     assetbundle.Unload(unloadAllLoadedObjects);
                     RemoveAssetBundleCache(assetbundleName);
+                    UnloadAssetBundleDependencies(assetbundleName);
                 }
             }
         }
@@ -366,6 +370,25 @@ namespace AssetBundles
             }
 
             UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
+        }
+
+        public void UnloadUnusedAssetBundle(bool unloadAllLoadedObjects = false)
+        {
+            bool hasDoUnload = false;
+            do
+            {
+                var iter = assetbundleRefCount.GetEnumerator();
+                while (iter.MoveNext())
+                {
+                    var assetbundleName = iter.Current.Key;
+                    var referenceCount = iter.Current.Value;
+                    if (referenceCount <= 0)
+                    {
+                        UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
+                    }
+                    hasDoUnload = true;
+                }
+            } while (hasDoUnload);
         }
 
         public ResourceWebRequester DownloadAssetAsync(string filePath)
@@ -384,11 +407,6 @@ namespace AssetBundles
             return creater;
         }
 
-        public bool MapAssetPath(string assetPath, out string assetbundleName, out string assetName)
-        {
-            return assetsPathMapping.MapAssetPath(assetPath, out assetbundleName, out assetName);
-        }
-
         public ResourceWebRequester RequestAssetAsync(string filePath)
         {
             var creater = ResourceWebRequester.Get();
@@ -397,6 +415,11 @@ namespace AssetBundles
             webRequesting.Add(filePath, creater);
             webRequesterQueue.Enqueue(creater);
             return creater;
+        }
+
+        public bool MapAssetPath(string assetPath, out string assetbundleName, out string assetName)
+        {
+            return assetsPathMapping.MapAssetPath(assetPath, out assetbundleName, out assetName);
         }
 
         public BaseAssetAsyncLoader LoadAssetAsync(string assetPath, System.Type assetType)
@@ -449,9 +472,9 @@ namespace AssetBundles
                 creater.Update();
                 if (creater.IsDone())
                 {
-                    UnityEngine.Debug.Log(creater.assetbundleName);
                     prosessingWebRequester.RemoveAt(i);
                     webRequesting.Remove(creater.assetbundleName);
+                    UnloadAssetBundle(creater.assetbundleName);
                     if (creater.noCache)
                     {
                         return;
@@ -460,8 +483,6 @@ namespace AssetBundles
                     // 1、避免再次错误加载
                     // 2、如果不存下来加载器将无法判断什么时候结束
                     AddAssetBundleCache(creater.assetbundleName, creater.assetbundle);
-                    //AddAssetbundleAssetsCache(creater.assetbundleName);
-                    UnloadAssetBundle(creater.assetbundleName);
                     creater.Dispose();
                 }
             }
@@ -483,7 +504,7 @@ namespace AssetBundles
                 loader.Update();
                 if (loader.IsDone())
                 {
-                    ReleaseAssetBundleAsyncLoader(loader);
+                    UnloadAssetBundle(loader.assetbundleName);
                     prosessingAssetBundleAsyncLoader.RemoveAt(i);
                 }
             }
@@ -501,5 +522,166 @@ namespace AssetBundles
                 }
             }
         }
+
+#if UNITY_EDITOR
+        public HashSet<string> GetAssetbundleResident()
+        {
+            return assetbundleResident;
+        }
+
+        public ICollection<string> GetAssetbundleCaching()
+        {
+            return assetbundleCaching.Keys;
+        }
+
+        public Dictionary<string, ResourceWebRequester> GetWebRequesting()
+        {
+            return webRequesting;
+        }
+
+        public Queue<ResourceWebRequester> GetWebRequestQueue()
+        {
+            return webRequesterQueue;
+        }
+
+        public List<ResourceWebRequester> GetProsessingWebRequester()
+        {
+            return prosessingWebRequester;
+        }
+
+        public List<AssetBundleAsyncLoader> GetProsessingAssetBundleAsyncLoader()
+        {
+            return prosessingAssetBundleAsyncLoader;
+        }
+
+        public List<AssetAsyncLoader> GetProsessingAssetAsyncLoader()
+        {
+            return prosessingAssetAsyncLoader;
+        }
+
+        public string GetAssetBundleName(string assetName)
+        {
+            return assetsPathMapping.GetAssetBundleName(assetName);
+        }
+
+        public Dictionary<string, List<string>> GetAssetCaching()
+        {
+            var assetbundleDic = new Dictionary<string, List<string>>();
+            List<string> assetNameList = null;
+            
+            var iter = assetCaching.GetEnumerator();
+            while (iter.MoveNext())
+            {
+                var assetName = iter.Current.Key;
+                var assetbundleName = assetsPathMapping.GetAssetBundleName(assetName);
+                assetbundleDic.TryGetValue(assetbundleName, out assetNameList);
+                if (assetNameList == null)
+                {
+                    assetNameList = new List<string>();
+                }
+                assetNameList.Add(assetName);
+                assetbundleDic[assetbundleName] = assetNameList;
+            }
+            return assetbundleDic;
+        }
+
+        public int GetAssetbundleRefrenceCount(string assetbundleName)
+        {
+            return GetReferenceCount(assetbundleName);
+        }
+
+        public int GetAssetbundleDependenciesCount(string assetbundleName)
+        {
+            string[] dependancies = manifest.GetAllDependencies(assetbundleName);
+            int count = 0;
+            for (int i = 0; i < dependancies.Length; i++)
+            {
+                var cur = dependancies[i];
+                if (!string.IsNullOrEmpty(cur) && cur != assetbundleName)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public List<string> GetAssetBundleRefrences(string assetbundleName)
+        {
+            List<string> refrences = new List<string>();
+            var cachingIter = assetbundleCaching.GetEnumerator();
+            while (cachingIter.MoveNext())
+            {
+                var curAssetbundleName = cachingIter.Current.Key;
+                if (curAssetbundleName == assetbundleName)
+                {
+                    continue;
+                }
+                string[] dependancies = manifest.GetAllDependencies(curAssetbundleName);
+                for (int i = 0; i < dependancies.Length; i++)
+                {
+                    var dependance = dependancies[i];
+                    if (dependance == assetbundleName)
+                    {
+                        refrences.Add(curAssetbundleName);
+                    }
+                }
+            }
+
+            var requestingIter = webRequesting.GetEnumerator();
+            while (requestingIter.MoveNext())
+            {
+                var curAssetbundleName = requestingIter.Current.Key;
+                var webRequster = requestingIter.Current.Value;
+                if (curAssetbundleName == assetbundleName)
+                {
+                    continue;
+                }
+
+                string[] dependancies = manifest.GetAllDependencies(curAssetbundleName);
+                for (int i = 0; i < dependancies.Length; i++)
+                {
+                    var dependance = dependancies[i];
+                    if (dependance == assetbundleName)
+                    {
+                        refrences.Add(curAssetbundleName);
+                    }
+                }
+            }
+            return refrences;
+        }
+        
+        public List<string> GetWebRequesterRefrences(string assetbundleName)
+        {
+            List<string> refrences = new List<string>();
+            var iter = webRequesting.GetEnumerator();
+            while (iter.MoveNext())
+            {
+                var curAssetbundleName = iter.Current.Key;
+                var webRequster = iter.Current.Value;
+                if (curAssetbundleName == assetbundleName)
+                {
+                    refrences.Add(webRequster.Sequence.ToString());
+                    continue;
+                }
+            }
+            return refrences;
+        }
+
+        public List<string> GetAssetBundleLoaderRefrences(string assetbundleName)
+        {
+            List<string> refrences = new List<string>();
+            var iter = prosessingAssetBundleAsyncLoader.GetEnumerator();
+            while (iter.MoveNext())
+            {
+                var curAssetbundleName = iter.Current.assetbundleName;
+                var curLoader = iter.Current;
+                if (curAssetbundleName == assetbundleName)
+                {
+                    refrences.Add(curLoader.Sequence.ToString());
+                }
+            }
+            return refrences;
+        }
+#endif
     }
 }
