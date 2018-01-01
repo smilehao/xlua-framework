@@ -63,24 +63,30 @@ namespace AssetBundles
         {
             get
             {
+                bool isValid = true;
                 if (assetImporter == null)
                 {
-                    return false;
+                    isValid = false;
                 }
 
                 if (isFile && (fileInfo == null || !fileInfo.Exists))
                 {
-                    return false;
+                    isValid = false;
                 }
 
                 if (!isFile && (dirInfo == null || !dirInfo.Exists))
                 {
-                    return false;
+                    isValid = false;
                 }
 
-                return true;
+                if (!IsValid)
+                {
+                    Debug.LogError("AssetBundlesImporter is not valid!");
+                }
+                return isValid;
             }
         }
+        
         
         public bool IsFile
         {
@@ -102,15 +108,7 @@ namespace AssetBundles
         {
             get
             {
-                if (IsValid)
-                {
-                    return assetImporter.assetBundleName;
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                    return null;
-                }
+                return IsValid ? assetImporter.assetBundleName : null;
             }
             set
             {
@@ -118,96 +116,62 @@ namespace AssetBundles
                 {
                     assetImporter.assetBundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(value);
                 }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                }
             }
         }
 
         public string assetBundleVariant 
         {
-            get {
-                if (IsValid)
-                {
-                    return assetImporter.assetBundleVariant;
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                    return null;
-                }
+            get
+            {
+                return IsValid ? assetImporter.assetBundleVariant : null;
             }
-            set {
-                if (IsValid)
+            set
+            {
+                //must firstly set assetBundleName,then set assetBundleVariant
+                if (IsValid && !string.IsNullOrEmpty(assetImporter.assetBundleName))
                 {
-                    //must firstly set assetBundleName,then set assetBundleVariant
-                    if (!string.IsNullOrEmpty(assetImporter.assetBundleName))
-                    {
-                        assetImporter.assetBundleVariant = value;
-                    }
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
+                    assetImporter.assetBundleVariant = value;
                 }
             }
         }
 
-        public string assetPath { 
-            get {
-                if (IsValid)
-                {
-                    return assetImporter.assetPath;
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                    return null;
-                }
+        public string assetPath
+        { 
+            get
+            {
+                return IsValid ? assetImporter.assetPath : null;
             } 
         }
 
         public ulong assetTimeStamp { 
-            get {
-                if (IsValid)
-                {
-                    return assetImporter.assetTimeStamp;
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                    return 0L;
-                }
+            get
+            {
+                return IsValid ? assetImporter.assetTimeStamp : 0L;
             }
         }
 
         public string userData
         {
-            get {
-                if (IsValid)
-                {
-                    return assetImporter.userData;
-                }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                    return null;
-                }
+            get
+            {
+                return IsValid ? assetImporter.userData : null;
             }
-            set {
+            set
+            {
                 if (IsValid)
                 {
                     assetImporter.userData = value;
                 }
-                else
-                {
-                    Debug.LogError("AssetBundlesImporter is not valid!");
-                }
             }
         }
 
-        public void SaveAndReimport() { assetImporter.SaveAndReimport(); }
+        public void SaveAndReimport()
+        {
+            if (IsValid)
+            {
+                assetImporter.SaveAndReimport();
+            }
+        }
         
         private string FullPathToAssetPath(string fullPath)
         {

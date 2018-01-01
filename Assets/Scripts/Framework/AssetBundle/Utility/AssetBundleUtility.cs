@@ -135,6 +135,30 @@ namespace AssetBundles
             }
         }
 
+        // 检测AB包所在Asset路径有效性
+        public static bool CheckAssetBundleAssetPathValid(string assetbundleAssetPath)
+        {
+            if (string.IsNullOrEmpty(assetbundleAssetPath))
+            {
+                Debug.LogError("assetbundleAssetPath null!");
+                return false;
+            }
+            
+            if (assetbundleAssetPath.Contains(" "))
+            {
+                Debug.LogError("assetbundleAssetPath contains empty char!");
+                return false;
+            }
+
+            if (assetbundleAssetPath.Contains("."))
+            {
+                Debug.LogError("assetbundleAssetPath contains '.'!");
+                return false;
+            }
+
+            return true;
+        }
+
         // 注意：这里不处理Variant，且是Assetbundle在Assets中的路径，游戏逻辑层别使用，这里只用于特殊情况
         public static string AssetBundleAssetPathToAssetBundleName(string assetPath)
         {
@@ -149,8 +173,9 @@ namespace AssetBundles
                 assetPath = assetPath.Replace(".", "_");
                 //add after suffix ".assetbundle" to the end
                 assetPath = assetPath + AssetBundleConfig.AssetBundleSuffix;
+                return assetPath.ToLower();
             }
-            return assetPath.ToLower();
+            return null;
         }
 
         // 相对于AssetBundleConfig.AssetsFolderName下的路径转Unity中Asset的绝对路径

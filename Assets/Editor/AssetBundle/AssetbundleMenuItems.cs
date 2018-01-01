@@ -165,7 +165,7 @@ namespace AssetBundles
             if (AssetBundleEditorHelper.HasValidSelection())
             {
                 bool checkCreate = EditorUtility.DisplayDialog("CreateAssetbundleForCurrent Warning",
-                    "Create assetbundle for cur selected objects will remove assetbundles in their children and parents,continue ?",
+                    "Create assetbundle for cur selected objects will reset assetbundles which contains this dir, continue ?",
                     "Yes", "No");
                 if (!checkCreate)
                 {
@@ -181,11 +181,14 @@ namespace AssetBundles
                 {
                     removeStr += string.Format("[{0}]{1}\n",++i,str);
                 }
-                Debug.Log(string.Format("CreateAssetbundleForCurrent done!\nRemove list :"+
-                    "\n-------------------------------------------\n" +  
-                    "{0}" +
-                    "\n-------------------------------------------\n",
-                    removeStr));
+                if (removeList.Count > 0)
+                {
+                    Debug.Log(string.Format("CreateAssetbundleForCurrent done!\nRemove list :" +
+                        "\n-------------------------------------------\n" +
+                        "{0}" +
+                        "\n-------------------------------------------\n",
+                        removeStr));
+                }
             }
         }
         
@@ -195,27 +198,30 @@ namespace AssetBundles
             if (AssetBundleEditorHelper.HasValidSelection())
             {
                 bool checkCreate = EditorUtility.DisplayDialog("CreateAssetbundleForChildren Warning",
-                    "Create assetbundle for all chilren files of cur selected objects will remove assetbundles in all children dir,continue ?",
+                    "Create assetbundle for all children of cur selected objects will reset assetbundles which contains this dir, continue ?",
                     "Yes", "No");
                 if (!checkCreate)
                 {
                     return;
                 }
                 Object[] selObjs = Selection.objects;
-                AssetBundleEditorHelper.CreateAssetbundleForChildrenFiles(selObjs);
+                AssetBundleEditorHelper.CreateAssetbundleForChildren(selObjs);
                 List<string> removeList = AssetBundleEditorHelper.RemoveAssetbundleInParents(selObjs);
-                removeList.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(selObjs,true,AssetBundleEditorHelper.REMOVE_TYPE.CHILDREN_DIR));
+                removeList.AddRange(AssetBundleEditorHelper.RemoveAssetbundleInChildren(selObjs, true, false));
                 string removeStr = string.Empty;
                 int i = 0;
                 foreach (string str in removeList)
                 {
                     removeStr += string.Format("[{0}]{1}\n", ++i, str);
                 }
-                Debug.Log(string.Format("CreateAssetbundleForChildren done!\nRemove list :" +
+                if (removeList.Count > 0)
+                {
+                    Debug.Log(string.Format("CreateAssetbundleForChildren done!\nRemove list :" +
                     "\n-------------------------------------------\n" +
                     "{0}" +
                     "\n-------------------------------------------\n",
                     removeStr));
+                }
             }
         }
 
@@ -263,8 +269,12 @@ namespace AssetBundles
 
                 Object[] selObjs = Selection.objects;
                 var depsList = AssetBundleEditorHelper.GetDependancisFormBuildManifest(localFilePath, selObjs, isAll);
-                depsList.Sort();
+                if (depsList == null)
+                {
+                    return;
+                }
 
+                depsList.Sort();
                 string depsStr = string.Empty;
                 int i = 0;
                 foreach (string str in depsList)

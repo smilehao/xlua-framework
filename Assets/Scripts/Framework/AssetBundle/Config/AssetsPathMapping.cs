@@ -9,25 +9,26 @@ using System.IO;
 /// 说明： 映射规则：
 /// 1）对于Asset：Asset加载路径（相对于Assets文件夹）到Assetbundle名与Asset名的映射
 /// 2）对于带有Variant的Assetbundle，做通用替换处理
+/// 注意：Assets路径带文件类型后缀，且区分大小写
 /// 使用说明：
 /// 1）asset加载：
 ///     假定AssetBundleConfig设置为AssetsFolderName = "AssetsPackage"，且：
-///         A）assetbundle名称：assetspackage/materials/newfolder.assetbundle
-///         B）assetbundle中含有资源：1390616300363.jpg与1390616300363.mat
-///         C）Assets路径为：Assets/AssetsPackage/Materials/New Folder/1390616300363.jpg与Assets/AssetsPackage/Materials/New Folder/1390616300363.mat
-///     则代码中需要的加载路径分别为：
-///         Materials/New Folder/1390616300363.jpg与Materials/New Folder/1390616300363.mat
-///     注意：Assets路径带文件类型后缀，且区分大小写
+///         A）assetbundle名称：assetspackage/ui/prefabs/view/uiloading_prefab.assetbundle
+///         B）assetbundle中资源：UILoading.prefab
+///         C）Assets路径为：Assets/AssetsPackage/UI/Prefabs/View/UILoading.prefab
+///     则代码中需要的加载路径为：UI/Prefabs/View/UILoading.prefab
 /// 2）带variant的Assetbundle资源加载：
 ///     假定设置为：
-///         A）assetbundle名称：assetspackage/sampleAssets/tanks/variants/language，定义在以下两个路径
-///             Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/Danish，Variant为danish
-///             Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/English，Variant为english
+///         A）assetbundle名称：assetspackage/ui/prefabs/language，定义在以下两个子路径
+///             Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]，variant = chinese
+///             Assets/AssetsPackage/UI/Prefabs/Language/[English]，variant = english
 ///         B）assetbundle中资源：
-///             Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/Danish/Canvas.prefab
-///             Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/English/Canvas.prefab
-///         C）使用时设置激活的Variant为danish或者english，则代码中需要的加载路径统一为：
-///             Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab（其中"{Variant}" = AssetBundleConfig.VariantMapParttren）
+///             Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]/TestVariant.prefab
+///             Assets/AssetsPackage/UI/Prefabs/Language/[English]/TestVariant.prefab
+///         C）使用时设置激活的Variant为chinese或者english，则代码中需要的加载路径统一为：
+///             Assets/AssetsPackage/UI/Prefabs/TestVariant.prefab===>即variant目录（[Chinese]、[English]）将被忽略，使逻辑层代码不需要关注variant带来的路径差异
+/// TODO：
+/// 1、后续看是否有必要全部把路径处理为小写，因为ToLower有GC分配，暂时不做这方面工作
 /// </summary>
 
 namespace AssetBundles
@@ -89,17 +90,17 @@ namespace AssetBundles
                 }
 
                 ResourcesMapItem item = new ResourcesMapItem();
-                //如：assetspackage/ui/prefab/assetbundleupdaterpanel_prefab.assetbundle
+                // 如：assetspackage/ui/prefab/assetbundleupdaterpanel_prefab.assetbundle
                 item.assetbundleName = splitArr[0];
-                //如：Assets/AssetsPackage/UI/Prefab/AssetbundleUpdaterPanel.prefab
+                // 如：Assets/AssetsPackage/UI/Prefab/AssetbundleUpdaterPanel.prefab
                 item.assetName = splitArr[1];
 
-                //如：Assets/AssetsPackage/
+                // 如：Assets/AssetsPackage/
                 string assetPath = null;
                 string mapHead = string.Format("Assets/{0}/", AssetBundleConfig.AssetsFolderName);
                 if (item.assetName.StartsWith(mapHead))
                 {
-                    //如：UI/Prefab/AssetbundleUpdaterPanel.prefabd
+                    // 如：UI/Prefab/AssetbundleUpdaterPanel.prefabd
                     assetPath = GameUtility.FormatToUnityPath(item.assetName.Replace(mapHead, ""));
                 }
                 

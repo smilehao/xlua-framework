@@ -24,7 +24,7 @@ namespace AssetBundles
         public const string AssetsPathMapFileName = "AssetsMap.bytes";
         public const string VariantsMapFileName = "VariantsMap.bytes";
         public const string AssetBundleServerUrlFileName = "AssetBundleServerUrl.txt";
-        public const string VariantMapParttren = "{Variant}";
+        public const string VariantMapParttren = "Variant";
         public const string CommonMapPattren = ",";
 
 #if UNITY_EDITOR

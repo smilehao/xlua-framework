@@ -23,25 +23,22 @@ namespace AssetBundles
             string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.VariantsMapFileName);
             string[] allVariants = manifest.GetAllAssetBundlesWithVariant();
 
-            //处理带variants的assetbundle
+            // 处理带variants的assetbundle
             foreach (string assetbundle in allVariants)
             {
-                //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
-                //Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]/TestVariantPrefab
-                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/[English]/Canvas.prefab
-                //在代码使用的加载路径中，它们被统一处理为
-                //Assets/AssetsPackage/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
-                //所以，在映射中两者分别应该对应
-                //Danish
-                //English
-                //以便客户端在加载资源时对加载路径进行正确还原
+                // 该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
+                // Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]/TestVariant.prefab
+                // Assets/AssetsPackage/UI/Prefabs/Language/[English]/TestVariant.prefab
+                // 在代码使用的加载路径中，它们被统一处理为
+                // Assets/AssetsPackage/UI/Prefabs/Language/[Variant]/TestVariant.prefab
+                // 这里的variant为chinese、english，在AssetBundleManager中设置启用的variant会自动对路径进行正确还原
                 string[] assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundle);
                 if (assetPaths == null || assetPaths.Length == 0)
                 {
                     UnityEngine.Debug.LogError("Empty assetbundle with variant : " + assetbundle);
                     continue;
                 }
-                //自本节点向上找到Assetbundle所在
+                // 自本节点向上找到Assetbundle所在
                 AssetBundleImporter assetbundleImporter = AssetBundleImporter.GetAtPath(assetPaths[0]);
                 while (assetbundleImporter != null && string.IsNullOrEmpty(assetbundleImporter.assetBundleVariant))
                 {
@@ -57,7 +54,7 @@ namespace AssetBundles
                 {
                     assetbundlePath = assetbundlePath.Substring(0, assetbundlePath.Length - 1);
                 }
-                //由于各个Variant的内部结构必须完全一致，而Load时也必须完全填写，所以这里不需要关注到assetbundle具体的每个资源
+                // 由于各个Variant的内部结构必须完全一致，而Load时也必须完全填写，所以这里不需要关注到assetbundle具体的每个资源
                 string nowNode = System.IO.Path.GetFileName(assetbundlePath);
                 string mappingItem = string.Format("{0}{1}{2}", assetbundle, PATTREN, nowNode);
                 mappingList.Add(mappingItem);
@@ -72,7 +69,7 @@ namespace AssetBundles
                 AssetDatabase.Refresh();
                 string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
                 AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
-                Debug.Log("BuildVariantMapping success!!!");
+                Debug.Log("BuildVariantMapping success...");
             }
             AssetDatabase.Refresh();
         }

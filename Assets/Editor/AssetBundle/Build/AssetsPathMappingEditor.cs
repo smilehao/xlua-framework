@@ -29,11 +29,11 @@ namespace AssetBundles
             List<string> variantWithoutDeplicate = null;
             ProsessVariant(allAssetbundles, allVariants, out assetbundlesWithoutVariant, out variantWithoutDeplicate);
 
-            //处理所有不带variants的assetbundle
+            // 处理所有不带variants的assetbundle
             foreach (string assetbundle in assetbundlesWithoutVariant)
             {
-                //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Scenes/TanksExample.unity
+                // 该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
+                // Assets/AssetsPackage/UI/Prefabs/View/UILoading.prefab
                 string[] assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundle);
                 foreach (string assetPath in assetPaths)
                 {
@@ -41,20 +41,21 @@ namespace AssetBundles
                     mappingList.Add(mappingItem);
                 }
             }
-            //处理带variants的assetbundle（已经去重）
+            // 处理带variants的assetbundle（已经去重）
+            string variant = "[" + AssetBundleConfig.VariantMapParttren + "]";
             foreach (string assetbundle in variantWithoutDeplicate)
             {
-                //该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如名为banner/lang的assetbundle下：
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/Danish/Canvas.prefab
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/English/Canvas.prefab
-                //由于已经去重，以上条目有且仅有一条出现
+                // 该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
+                // Assets/AssetsPackage/UI/Prefabs/Language/[Chinese]/TestVariant.prefab
+                // Assets/AssetsPackage/UI/Prefabs/Language/[English]/TestVariant.prefab
+                // 由于已经去重，以上条目有且仅有一条出现
                 string[] assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundle);
                 if (assetPaths == null || assetPaths.Length == 0)
                 {
                     UnityEngine.Debug.LogError("Empty assetbundle with variant : " + assetbundle);
                     continue;
                 }
-                //自本节点向上找到Assetbundle所在
+                // 自本节点向上找到Assetbundle所在
                 AssetBundleImporter assetbundleImporter = AssetBundleImporter.GetAtPath(assetPaths[0]);
                 while (assetbundleImporter != null && string.IsNullOrEmpty(assetbundleImporter.assetBundleVariant))
                 {
@@ -70,12 +71,10 @@ namespace AssetBundles
                 {
                     assetbundlePath = assetbundlePath.Substring(0, assetbundlePath.Length - 1);
                 }
-                //将分支目录名取代为{Variant}如：
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
-                //Assets/AssetBundleSample/SampleAssets/Tanks/Variants/Language/{Variant}/Canvas.prefab
-                //用此种方式可以统一路径，使加载Assetbundle时的路径与具体激活的variant无关
-                string nowRoot = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(assetbundlePath), AssetBundleConfig.VariantMapParttren);
-                nowRoot = GameUtility.FormatToUnityPath(nowRoot);
+                // 将拿掉[Variant]目录名如：
+                // Assets/AssetsPackage/UI/Prefabs/Language/TestVariant.prefab
+                // 用此种方式可以统一路径，使加载Assetbundle时的路径与具体激活的variant无关
+                string nowRoot = GameUtility.FormatToUnityPath(System.IO.Path.GetDirectoryName(assetbundlePath));
                 foreach (string assetPath in assetPaths)
                 {
                     string nowAsset = assetPath.Replace(assetbundlePath, "");
@@ -95,7 +94,7 @@ namespace AssetBundles
                 AssetDatabase.Refresh();
                 string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
                 AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
-                Debug.Log("BuildPathMapping success!!!");
+                Debug.Log("BuildPathMapping success...");
             }
             AssetDatabase.Refresh();
         }
@@ -104,7 +103,7 @@ namespace AssetBundles
         public static void ProsessVariant(string[] allAssetbundle, string[] allVariants, out List<string> assetbundlesWithoutVariant, out List<string> variantWithoutDeplicate)
         {
             assetbundlesWithoutVariant = new List<string>();
-            //抽取出所有不带Variant的Assetbundle
+            // 抽取出所有不带Variant的Assetbundle
             foreach (string assetbundle in allAssetbundle)
             {
                 if (!System.Array.Exists(allVariants, element => element.Equals(assetbundle)))
@@ -112,13 +111,13 @@ namespace AssetBundles
                     assetbundlesWithoutVariant.Add(assetbundle);
                 }
             }
-            //过滤所有varians后缀
+            // 过滤所有varians后缀
             List<string> variantsProsessed = new List<string>();
             for (int i = 0; i < allVariants.Length; i++)
             {
                 variantsProsessed.Add(RemoveVariantSuffix(allVariants[i]));
             }
-            //过滤所有重复的varians
+            // 过滤所有重复的varians
             List<string> variantsNoDuplicate = new List<string>();
             foreach (string variant in variantsProsessed)
             {
@@ -127,7 +126,7 @@ namespace AssetBundles
                     variantsNoDuplicate.Add(variant);
                 }
             }
-            //取出同Assetbundle名称，不同variant的唯一代表
+            // 取出同Assetbundle名称，不同variant的唯一代表
             variantWithoutDeplicate = new List<string>();
             foreach (string variant in allVariants)
             {

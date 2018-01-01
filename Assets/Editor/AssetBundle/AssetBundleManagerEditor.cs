@@ -8,7 +8,6 @@ using UnityEngine;
 /// 功能：Assetbundle编辑器支持，方便调试用
 /// </summary>
 
-
 [CustomEditor(typeof(AssetBundleManager), true)]
 public class AssetBundleManagerEditor : Editor
 {
@@ -58,6 +57,7 @@ public class AssetBundleManagerEditor : Editor
     
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("DisplayType:", GUILayout.MaxWidth(80f));
         var newSelectedTypeIndex = EditorGUILayout.Popup(selectedTypeIndex, displayTypes);
