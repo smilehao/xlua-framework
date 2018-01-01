@@ -38,7 +38,7 @@ local function TestYield()
 		coroutine.waitforframes(1)
 		local frame_count = Time.frameCount
 		coroutine.waitforframes(15)
-		assert(Time.frameCount == frame_count + 15)
+		assert(Time.frameCount == frame_count + 15, tostring(Time.frameCount).."\t"..tostring(frame_count + 15))
 		frame_count = Time.frameCount
 		-- 用于统计回调次数
 		local cb_count = 0
@@ -86,8 +86,10 @@ local function TestYieldCallback()
 	local async_op = {isDone = false, progress = 0}
 	-- 用于同步
 	local cur = Time.frameCount
+	local wait_frame_count = 50
+	local is_done_frame_count = 0
 	local until_func = function()
-		return Time.frameCount == cur + 20
+		return Time.frameCount == cur + wait_frame_count
 	end
 	-- 启动一个协程驱动异步回调
 	coroutine.start(function()
@@ -97,6 +99,7 @@ local function TestYieldCallback()
 			coroutine.waitforframes(1)
 		end
 		async_op.isDone = true
+		is_done_frame_count = Time.frameCount
 	end)
 	-- 启动对称协程
 	coroutine.start(function()
@@ -115,7 +118,8 @@ local function TestYieldCallback()
 			coroutine.waitforasyncop(async_op, function(co, progress)
 				coroutine.yieldcallback(co, progress)
 			end)
-			assert(Time.frameCount == cur + 20 + cb_count + 1)
+			-- 说明：这里可能会晚一帧，取决于lua定时器管理系统对各个定时器的调用顺序，而目前是随机的
+			assert(Time.frameCount == is_done_frame_count or Time.frameCount == is_done_frame_count + 1)
 			-- yieldbreak测试
 			return coroutine.yieldbreak()
 		end

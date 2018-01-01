@@ -9,8 +9,8 @@ local function Start()
 	print("GameMain start...")
 	if Config.Debug then
 		-- 单元测试
-		--local UnitTest = require "UnitTest.UnitTestMain"
-		--UnitTest.Run()
+		local UnitTest = require "UnitTest.UnitTestMain"
+		UnitTest.Run()
 	end
 	
 	-- 模块启动

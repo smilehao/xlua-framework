@@ -32,7 +32,7 @@ public class AssetbundleUpdater : MonoBehaviour
 #if !CLIENT_DEBUG
         [BlackList]
 #endif
-    // Hotfix测试---用于侧测试热更模块的热修复
+    // Hotfix测试---用于测试热更模块的热修复
     public void TestHotfix()
     {
         Logger.Log("********** AssetbundleUpdater : Call TestHotfix in cs...");

@@ -42,6 +42,8 @@ local function Init(self, delay, func, obj, one_shot, use_frame, unscaled)
 	self.over = false
 	-- 传入对象是否为空
 	self.obj_not_nil = obj and true or false
+	-- 启动定时器时的帧数
+	self.startFrameCount = Time.frameCount
 end
 
 -- Update
@@ -50,10 +52,15 @@ local function Update(self, delta)
 		return
 	end
 	
+	-- 说明：所有定时器从下一帧才开始跑
+	if self.startFrameCount == Time.frameCount then
+		return
+	end
+	
 	self.left = self.left - delta
 	if self.left <= 0 then
 		if self.target.func ~= nil then
-			-- 说明：这里一定要先该状态，后回调
+			-- 说明：这里一定要先改状态，后回调
 			-- 如果回调手动删除定时器又马上再次获取，则可能得到的是同一个定时器，再修改状态就不对了
 			if not self.one_shot then
 				-- 说明：必须把上次计时“欠下”的时间考虑进来，否则会有误差

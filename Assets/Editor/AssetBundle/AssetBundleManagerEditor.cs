@@ -73,6 +73,11 @@ public class AssetBundleManagerEditor : Editor
 
     public void OnRefresh(int selectedTypeIndex)
     {
+        if (!AssetBundleConfig.IsSimulateMode)
+        {
+            return;
+        }
+
         switch (selectedTypeIndex)
         {
             case 0:

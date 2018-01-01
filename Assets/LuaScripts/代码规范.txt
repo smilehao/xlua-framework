@@ -91,8 +91,3 @@
 	4、不要使用cs侧协程，lua这边我已经实现了一套，Unity支持的所有协程功能这里都支持，而且进行了很大的性能优化
 	5、更新频率低的函数（如UI界面倒计时）使用定时器或者协程，尽量不要用Updater
 	6、虽然Lua采用分步GC，不需要太关注GC造成游戏Lag的问题，但是分配、回收频率很高的table，还是要做缓存，参考定时器管理模块
-
-十一：ToLua的一些坑
-	1、lua的Debugger不支持子线程，而lua中的print是通过Debugger实现的
-	2、pb的SerializeToString与ParseFromString接收的是lua中的string，但是在c#侧不能使用string，否则遇到"\0"会被截断，所以从c#侧接口都使用byte[]做参数，c#发送的byte[]在lua侧用Common.Tools.tolstring(bytes)转换为string以后再交给ParseFromString
-	3、wrap文件没有清理，而被wrap的cs文件被修改，则会报错，ToLua菜单消失，此时Generate里面除了DelegateFactory和LuaBinder文件保留并手动修改报错，其余一并删除
