@@ -7,6 +7,8 @@ using UnityEditor;
 /// added by wsh @ 2017.12.25
 /// 功能：Assetbundle相关的Asset路径映射，每次在构建Assetbunlde完成后需要更新一次映射
 /// 注意：所有配置文件不用路径映射
+/// TODO：
+/// 1、暂时不考虑支持variant了
 /// </summary>
 
 namespace AssetBundles

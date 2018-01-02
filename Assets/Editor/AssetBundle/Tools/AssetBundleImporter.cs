@@ -79,7 +79,7 @@ namespace AssetBundles
                     isValid = false;
                 }
 
-                if (!IsValid)
+                if (!isValid)
                 {
                     Debug.LogError("AssetBundlesImporter is not valid!");
                 }
