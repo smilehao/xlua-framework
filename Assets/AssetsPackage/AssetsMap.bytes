@@ -164,12 +164,8 @@ assetspackage/ui/genaltas/atlas_comm.assetbundle,Assets/AssetsPackage/UI/GenAlta
 assetspackage/ui/genaltas/atlas_hyper.assetbundle,Assets/AssetsPackage/UI/GenAltas/Atlas_Hyper/Atlas_Hyper_tp0.png
 assetspackage/ui/genaltas/atlas_login.assetbundle,Assets/AssetsPackage/UI/GenAltas/Atlas_Login/Atlas_Login_tp0.png
 assetspackage/ui/genaltas/atlas_role.assetbundle,Assets/AssetsPackage/UI/GenAltas/Atlas_Role/Atlas_Role_tp0.png
-assetspackage/ui/prefabs/language.assetbundle,Assets/AssetsPackage/UI/Prefabs/Language/TestVariant.prefab
 assetspackage/ui/prefabs/view/uiloading_prefab.assetbundle,Assets/AssetsPackage/UI/Prefabs/View/UILoading.prefab
 assetspackage/ui/prefabs/view/uilogin_prefab.assetbundle,Assets/AssetsPackage/UI/Prefabs/View/UILogin.prefab
 assetspackage/ui/prefabs/view/uiloginserver_prefab.assetbundle,Assets/AssetsPackage/UI/Prefabs/View/UILoginServer.prefab
 assetspackage/ui/prefabs/view/uiluanch_prefab.assetbundle,Assets/AssetsPackage/UI/Prefabs/View/UILuanch.prefab
-wwwwwwwwwwwwwww.assetbundle,Assets/AssetsPackage/UI/Prefabs/Language/New Material.mat
-wwwwwwwwwwwwwww.assetbundle,Assets/AssetsPackage/UI/Prefabs/Language/New Prefab.prefab
-wwwwwwwwwwwwwww.assetbundle,Assets/AssetsPackage/UI/Prefabs/Language/NewBehaviourScript.cs
-wwwwwwwwwwwwwww.assetbundle,Assets/AssetsPackage/UI/Prefabs/Language/NewSurfaceShader.shader
+assetspackage/variantsmap_bytes.assetbundle,Assets/AssetsPackage/VariantsMap.bytes
