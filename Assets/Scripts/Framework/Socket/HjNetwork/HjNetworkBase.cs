@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using CustomDataStruct;
 using System.Threading;
-using UnityEngine;
 
-namespace networks
+namespace Networks
 {
-    public delegate void HjReceivePkgHandle(byte[] buffer);//消息处理委托
-    //public delegate byte[] HjMemAllocator(int len);//内存分配器
-    //public delegate void HjMemCollector(byte[] buffer);//内存回收器
-
     public enum SOCKSTAT
     {
         CLOSED = 0,
@@ -20,8 +15,10 @@ namespace networks
 
     public abstract class HjNetworkBase
     {
-        private HjNetworkEvtHandle mOnConnect = null;
-        private HjNetworkEvtHandle mOnClosed = null;
+        public Action<object, int, string> OnConnect = null;
+        public Action<object, int, string> OnClosed = null;
+        public Action<byte[]> ReceivePkgHandle = null;
+
         private List<HjNetworkEvt> mNetworkEvtList = null;
         private object mNetworkEvtLock = null;
 
@@ -38,7 +35,7 @@ namespace networks
         private volatile bool mReceiveWork = false;
         private List<byte[]> mTempMsgList = null;
         protected IMessageQueue mReceiveMsgQueue = null;
-        private HjReceivePkgHandle mReceivePkgHandle = null;
+        
 
         public HjNetworkBase(int maxBytesOnceSent = 1024 * 512, int maxReceiveBuffer = 1024 * 1024 * 2)
         {
@@ -71,22 +68,7 @@ namespace networks
             mIp = ip;
             mPort = port;
         }
-
-        public void SetOnConnect(HjNetworkEvtHandle handle)
-        {
-            mOnConnect = handle;
-        }
-
-        public void SetOnClosed(HjNetworkEvtHandle handle)
-        {
-            mOnClosed = handle;
-        }
-
-        public void SetPkgHandle(HjReceivePkgHandle handle)
-        {
-            mReceivePkgHandle = handle;
-        }
-
+        
         protected abstract void DoConnect();
         public void Connect()
         {
@@ -112,10 +94,9 @@ namespace networks
             }
             finally
             {
-                if (result != ESocketError.NORMAL && mOnConnect != null)
+                if (result != ESocketError.NORMAL && OnConnect != null)
                 {
-                    HjNetworkEvt _evt = new HjNetworkEvt(this, result, msg, mOnConnect);
-                    AddNetworkEvt(_evt);
+                    ReportSocketConnected(result, msg);
                 }
             }
         }
@@ -124,12 +105,7 @@ namespace networks
         {
             StartAllThread();
             mStatus = SOCKSTAT.CONNECTED;
-            string msg = "Connected successful";
-            if (mOnConnect != null)
-            {
-                HjNetworkEvt _evt = new HjNetworkEvt(this, ESocketError.NORMAL, msg, mOnConnect);
-                AddNetworkEvt(_evt);
-            }
+            ReportSocketConnected(ESocketError.NORMAL, "Connect successfully");
         }
 
         public virtual void StartAllThread()
@@ -173,23 +149,27 @@ namespace networks
             try
             {
                 DoClose();
-
-                int result = ESocketError.ERROR_5;
-                string msg = "Disconnected!";
-                HjNetworkEvt evt = new HjNetworkEvt(this, result, msg, mOnClosed);
-                AddNetworkEvt(evt);
+                ReportSocketClosed(ESocketError.ERROR_5, "Disconnected!");
             }
             catch (Exception e)
             {
-                ReportSocketError(ESocketError.ERROR_4, e.Message);
+                ReportSocketClosed(ESocketError.ERROR_4, e.Message);
             }
         }
-        
-        protected void ReportSocketError(int result, string msg)
+
+        protected void ReportSocketConnected(int result, string msg)
         {
-            if (mOnClosed != null)
+            if (OnConnect != null)
             {
-                AddNetworkEvt(new HjNetworkEvt(this, result, msg, mOnClosed));
+                AddNetworkEvt(new HjNetworkEvt(this, result, msg, OnConnect));
+            }
+        }
+
+        protected void ReportSocketClosed(int result, string msg)
+        {
+            if (OnClosed != null)
+            {
+                AddNetworkEvt(new HjNetworkEvt(this, result, msg, OnClosed));
             }
         }
 
@@ -218,12 +198,12 @@ namespace networks
                 }
                 catch (ObjectDisposedException e)
                 {
-                    ReportSocketError(ESocketError.ERROR_3, e.Message);
+                    ReportSocketClosed(ESocketError.ERROR_3, e.Message);
                     break;
                 }
                 catch (Exception e)
                 {
-                    ReportSocketError(ESocketError.ERROR_4, e.Message);
+                    ReportSocketClosed(ESocketError.ERROR_4, e.Message);
                     break;
                 }
             }
@@ -277,9 +257,9 @@ namespace networks
                     for (int i = 0; i < mTempMsgList.Count; ++i)
                     {
                         var objMsg = mTempMsgList[i];
-                        if (mReceivePkgHandle != null)
+                        if (ReceivePkgHandle != null)
                         {
-                            mReceivePkgHandle(objMsg);
+                            ReceivePkgHandle(objMsg);
                         }
                     }
                 }

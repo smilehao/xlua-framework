@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-
+﻿
 public struct ESocketError
 {
     public const int NORMAL = 0;//正常关闭，在连接前也会关一下

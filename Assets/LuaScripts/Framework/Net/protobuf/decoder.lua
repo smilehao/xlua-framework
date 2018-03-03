@@ -23,11 +23,10 @@ local table = table
 local assert = assert
 local ipairs = ipairs
 local error = error
-local print = print
 
 local pb = require "pb"
-local encoder = require "protobuf.encoder"
-local wire_format = require "protobuf.wire_format"
+local encoder = require "Framework.Net.Protobuf.encoder"
+local wire_format = require "Framework.Net.Protobuf.wire_format"
 
 local _DecodeVarint = pb.varint_decoder
 local _DecodeSignedVarint = pb.signed_varint_decoder

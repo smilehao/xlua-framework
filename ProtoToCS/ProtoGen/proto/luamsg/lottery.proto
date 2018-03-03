@@ -1,0 +1,67 @@
+package lottery;
+
+import 'common.proto';
+
+
+//请求寻访
+message req_xunfang
+{
+	optional int32 xunfang_type =1[default=0];   //1.普通寻访 2.连寻
+}
+
+message rsp_xunfang
+{
+	optional int32 result = 1[default =0];
+	optional int32 xunfang_layer = 2[default = 0];    //当前寻访层数
+	optional int32 xunfang_step = 3[default = 0];     //当前寻访步数
+	optional int32 action = 4[default = 0];           //奖励事件id, 参照lottery.xslx
+	optional int32 xunfang_layer_icon_count = 5[default = 0];  //层级奖励的金币数量
+	repeated common.award_info award_list = 6;        //奖励内容
+	optional int32 robber_type = 7[default = 0];  //robber专用,表示robber类型
+	optional int32 is_goodthing = 8[default = 0]; //1.表示是好东西
+	optional uint32 lottery_item_id = 9[default = 0]; //物品表的下标索引
+}
+
+message one_qa_event
+{
+	message one_option
+	{
+		optional int32 index = 1[default = 0];
+		optional int32 answer_id = 2[default = 0];
+		optional int32 wujiang_id = 3[default = 0];
+	}
+
+	optional int32 event_id = 1[default = 0];
+	optional int32 qa_id = 2[default = 0];
+	optional int32 time = 3[default = 0];
+	repeated one_option option_list = 4;  /// 选项
+}
+
+message ntf_xunfang_events
+{
+	optional int32 events_count = 1[default = 0];
+}
+
+message req_xunfang_events
+{
+
+}
+
+message rsp_xunfang_events
+{
+	optional int32 result = 1[default = 0];
+	repeated one_qa_event qa_event_list = 2;
+}
+
+message req_answer_question
+{
+	optional int32  event_id = 1[default = 0];
+	optional int32  answer_id = 2[default = 0];
+}
+
+message rsp_answer_question
+{
+	optional int32 result = 1[default = 0];
+	optional int32 event_id = 2[default = 0];
+	repeated common.one_item award_list = 3;
+}

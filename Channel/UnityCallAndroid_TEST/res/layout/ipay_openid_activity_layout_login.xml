@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/ipay_openid_margin_15"
+        android:paddingLeft="@dimen/ipay_openid_margin_20"
+        android:paddingRight="@dimen/ipay_openid_margin_20" >
+
+        <LinearLayout
+            android:id="@+id/login_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ipay_openid_margin_12"
+            android:gravity="center_vertical" >
+
+            <CheckBox
+                android:id="@+id/remember_password_checkbox"
+                style="@style/ipay_openid_custom_checkbox_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/ipay_openid_remember_password"
+                android:textColor="@color/ipay_openid_input_disabled_color"
+                android:textSize="@dimen/ipay_openid_text_size_32"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/ipay_openid_forget_password"
+                android:textColor="@color/ipay_openid_textbtn_normal_color"
+                android:textSize="@dimen/ipay_openid_text_size_32" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/login_btn"
+            style="@style/ipay_openid_submit_btn_style"
+            android:text="@string/ipay_openid_login_btn_login" />
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/ipay_openid_margin_30"
+            android:layout_marginRight="@dimen/ipay_openid_margin_30"
+            android:layout_marginTop="@dimen/ipay_openid_margin_15"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/register_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="@string/ipay_openid_register"
+                android:textColor="@drawable/ipay_openid_link_textbtn_selector"
+                android:textSize="@dimen/ipay_openid_text_size_32" />
+
+            <Button
+                android:id="@+id/register_oneclick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ipay_openid_margin_10"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="@string/ipay_openid_register_oneclick"
+                android:textColor="@drawable/ipay_openid_link_textbtn_selector"
+                android:textSize="@dimen/ipay_openid_text_size_32" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

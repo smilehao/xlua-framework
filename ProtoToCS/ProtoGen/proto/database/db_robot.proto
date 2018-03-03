@@ -1,0 +1,18 @@
+package db;
+import 'db_common.proto';
+
+message one_captured_wujiang_list
+{
+	repeated one_captured_wujiang captured_wujiang_list = 13;	//被俘虏的武将列表
+}
+
+message Robot
+{
+	optional uint32 uid = 1[default = 0];	//机器人的UID从1-10000，与玩家UID区分开来
+	optional int32 rank = 2[default = 0];	//机器人的排名，这个是会变化的 
+	optional int32 type = 3[default = 0];	//机器人的配置类型
+	optional string name = 4[default = ''];
+	optional uint32 raid_protect_end_time = 5[default = 0];		//掠地保护截至时间
+	optional int32 manor_level = 6[default = 0];
+	optional one_captured_wujiang_list captured_wujiang_list_obj = 7;
+}

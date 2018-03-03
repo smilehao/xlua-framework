@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ipay_color_value_1"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/ipay_oneclick_title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+    
+	<WebView 
+	    android:id="@+id/common_web"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ipay_openid_margin_20"
+        android:paddingRight="@dimen/ipay_openid_margin_20"
+        android:paddingBottom="@dimen/ipay_openid_margin_15" >
+
+        <LinearLayout
+            android:id="@+id/login_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/login_btn"
+            style="@style/ipay_openid_submit_btn_style"
+            android:text="@string/ipay_openid_login_btn_login" />
+
+        <LinearLayout
+            android:id="@+id/toast_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ipay_openid_margin_10"
+            android:layout_marginTop="@dimen/ipay_openid_margin_5"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/toast_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ipay_openid_agreen_register"
+                android:textColor="@color/ipay_openid_tip_text_color"
+                android:textSize="@dimen/ipay_openid_text_size_26" />
+
+            <TextView
+                android:id="@+id/protocol_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/ipay_openid_text_size_26" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_oneclick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/ipay_openid_register_oneclick"
+            android:textColor="@drawable/ipay_openid_link_textbtn_selector"
+            android:textSize="@dimen/ipay_openid_text_size_32" />
+    </LinearLayout>
+
+</LinearLayout>

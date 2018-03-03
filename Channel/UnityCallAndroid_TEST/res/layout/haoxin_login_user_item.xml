@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff"
+    android:minHeight="30dp" >
+    
+ 	<TextView
+ 	    android:id="@+id/haoxin_login_list_user_name"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_centerVertical="true"
+ 	    android:layout_marginLeft="30dp"
+ 	    android:textColor="#ffaaaaaa"
+ 	    android:textSize="10sp" />
+
+    <RelativeLayout 
+        android:id="@+id/haoxin_login_list_dele"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:clickable="true">
+        
+	    <ImageView 
+	        android:layout_width="22dp"
+	        android:layout_height="22dp"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:contentDescription="@string/haoxin_img_des"
+	        android:background="@drawable/haoxin_list_del"/>
+
+    </RelativeLayout>
+    
+</RelativeLayout>

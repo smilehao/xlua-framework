@@ -1,6 +1,8 @@
 --[[
 -- added by wsh @ 2017-12-01
 -- Lua全局工具类，全部定义为全局函数、变量
+-- TODO:
+-- 1、SafePack和SafeUnpack会被大量使用，到时候看需要需要做记忆表降低GC
 --]]
 
 local unpack = unpack or table.unpack
@@ -32,6 +34,8 @@ end
 
 -- 闭包绑定
 function Bind(self, func, ...)
+	assert(self == nil or type(self) == "table")
+	assert(func ~= nil and type(func) == "function")
 	local params = nil
 	if self == nil then
 		params = SafePack(...)

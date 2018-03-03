@@ -1,0 +1,119 @@
+package buzhen;
+
+import "common.proto";
+
+message ntf_troop_info
+{
+	optional common.one_troop one_troop = 1;
+	optional int32 reason = 2[default = 0];//改变原因,NORMAL = 0,ARRANGE_WUJIANG = 1,ARRANGE_SOLDIER = 2，NEW = 3
+}
+
+message ntf_buzhen_info
+{
+	optional common.one_buzhen one_buzhen = 1;
+	optional int32 reason = 2[default = 0];		//1:改变，2:新增
+}
+
+message req_arrange_buzhen
+{
+	optional int32 buzhen_id = 1[default = 1];
+	optional common.one_buzhen one_buzhen = 2;
+}
+
+message rsp_arrange_buzhen
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_arrange_wujiang
+{
+	optional int32 troop_id = 1[default = 0];
+	repeated int32 wujiang_list = 2;
+}
+
+message rsp_arrange_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_arrange_soldier
+{
+	optional int32 troop_id = 1[default = 0];
+	optional int32 soldier_count = 2[default = 0];
+}
+
+message rsp_arrange_soldier
+{
+	optional int32 result = 1[default = 0];
+}
+
+
+
+message req_levelup_arm_type
+{
+	optional int32 arm_type = 1[default = 0];
+	optional int32 force_auto_blend = 2[default = 1];//是否强制自动合成材料
+}
+
+
+message rsp_levelup_arm_type
+{
+	optional int32 result = 1[default = 0];
+	optional int32 levelup_end_time = 2[default = 0];
+	//repeated common.one_item auto_blend_list = 3;
+}
+
+message req_change_arm_type
+{
+	optional int32 troop_id = 1[default = 0];
+	optional int32 arm_type = 2[default = 0];
+}
+
+message rsp_change_arm_type
+{
+	optional int32 result = 1[default = 0];
+	optional int32 arm_type = 2[default = 0];
+}
+
+message ntf_arm_type_info
+{
+	optional common.one_arm_type arm_type = 1;
+	optional int32 reason = 2[default = 0];
+}
+
+
+message req_finish_levelup
+{
+	optional int32 arm_type = 1[default = 0];
+}
+
+message rsp_finish_levelup
+{
+	optional int32 result = 1[default = 0];
+}
+
+
+message req_exchange_troop
+{
+	optional int32 src_troop_id = 1[default = 0];
+	optional int32 dst_troop_id = 2[default = 0];
+	optional int32 buzhen_id = 3[default = 0];
+}
+
+message rsp_exchange_troop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 src_troop_id = 2[default = 0];
+	optional int32 dst_troop_id = 3[default = 0];
+	optional int32 reason = 4[default = 0];
+}
+
+message req_unlock_new_buzhen
+{
+	optional int32 new_buzhen_id = 1[default = 0];
+}
+
+message rsp_unlock_new_buzhen
+{
+	optional int32 result = 1[default = 0];
+}

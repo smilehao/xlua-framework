@@ -16,9 +16,10 @@ require "Framework.Common.DataClass"
 require "Framework.Common.ConstClass"
 
 -- 创建全局模块
+Config = require "Global.Config"
 Singleton = require "Framework.Common.Singleton"
 Updatable = require "Framework.Common.Updatable"
-Config = require "Global.Config"
+UpdatableSingleton = require "Framework.Common.UpdatableSingleton"
 SortingLayerNames = require "Global.SortingLayerNames"
 Logger = require "Framework.Logger.Logger"
 require "Framework.Updater.Coroutine"
@@ -36,7 +37,6 @@ LangUtil = require "Config.LangUtil"
 -- ui base
 UIUtil = require "Framework.UI.Util.UIUtil"
 UIBaseModel = require "Framework.UI.Base.UIBaseModel"
-UIBaseRecordModel = require "Framework.UI.Base.UIBaseRecordModel"
 UIBaseCtrl = require "Framework.UI.Base.UIBaseCtrl"
 UIBaseComponent = require "Framework.UI.Base.UIBaseComponent"
 UIBaseContainer = require "Framework.UI.Base.UIBaseContainer"
@@ -46,6 +46,7 @@ UIBaseView = require "Framework.UI.Base.UIBaseView"
 UILayer = require "Framework.UI.Component.UILayer"
 UICanvas = require "Framework.UI.Component.UICanvas"
 UIText = require "Framework.UI.Component.UIText"
+UIImage = require "Framework.UI.Component.UIImage"
 UISlider = require "Framework.UI.Component.UISlider"
 UIInput = require "Framework.UI.Component.UIInput"
 UIButton = require "Framework.UI.Component.UIButton"
@@ -66,16 +67,30 @@ UIConfig = require "UI.Config.UIConfig"
 
 -- res
 ResourcesManager = require "Framework.Resource.ResourcesManager"
+GameObjectPool = require "Framework.Resource.GameObjectPool"
 
 -- update & time
 Timer = require "Framework.Updater.Timer"
 TimerManager = require "Framework.Updater.TimerManager"
 UpdateManager = require "Framework.Updater.UpdateManager"
+LogicUpdater = require "GameLogic.Main.LogicUpdater"
 
 -- scenes
 BaseScene = require "Framework.Scene.Base.BaseScene"
 SceneManager = require "Framework.Scene.SceneManager"
 SceneConfig = require "Scenes.Config.SceneConfig"
+
+-- atlas
+AtlasConfig = require "Resource.Config.AtlasConfig"
+AtlasManager = require "Framework.Resource.AtlasManager"
+
+-- effect
+EffectConfig = require "Resource.Config.EffectConfig"
+BaseEffect = require "Framework.Resource.Effect.Base.BaseEffect"
+EffectManager = require "Framework.Resource.Effect.EffectManager"
+
+-- net
+HallConnector = require "Net.Connector.HallConnector"
 
 -- 单例类初始化
 UIManager:GetInstance()
@@ -83,3 +98,6 @@ DataManager:GetInstance()
 ResourcesManager:GetInstance()
 UpdateManager:GetInstance()
 SceneManager:GetInstance()
+AtlasManager:GetInstance()
+LogicUpdater:GetInstance()
+HallConnector:GetInstance()

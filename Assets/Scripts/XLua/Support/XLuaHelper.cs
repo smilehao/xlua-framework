@@ -23,24 +23,6 @@ using XLua;
 
 public static class XLuaHelper
 {
-    [LuaCallCSharp]
-    public static List<Type> LuaCallCSharp = new List<Type>() {
-        // XLuaHelper
-        typeof(XLuaHelper),
-        typeof(Component),
-        typeof(Array),
-        typeof(IList),
-        typeof(IDictionary),
-        typeof(Activator),
-        typeof(Type),
-        typeof(BindingFlags),
-    };
-
-    [CSharpCallLua]
-    public static List<Type> CSharpCallLua = new List<Type>()
-    {
-    };
-
     // 说明：扩展NGUITools.AddMissingComponent方法
     public static Component AddMissingComponent(this GameObject go, Type cmpType)
     {
@@ -159,3 +141,26 @@ public static class XLuaHelper
         }
     }
 }
+
+#if UNITY_EDITOR
+public static class XLuaHelperExporter
+{
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>() {
+        // XLuaHelper
+        typeof(XLuaHelper),
+        typeof(Component),
+        typeof(Array),
+        typeof(IList),
+        typeof(IDictionary),
+        typeof(Activator),
+        typeof(Type),
+        typeof(BindingFlags),
+    };
+
+    [CSharpCallLua]
+    public static List<Type> CSharpCallLua = new List<Type>()
+    {
+    };
+}
+#endif

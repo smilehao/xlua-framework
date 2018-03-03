@@ -16,11 +16,11 @@ local function AddUpdate(self)
 	end
 	if self.LateUpdate ~= nil then
 		self.__lateupdate_handle = BindCallback(self, self.LateUpdate)
-		UpdateManager:GetInstance():AddUpdate(self.__lateupdate_handle)
+		UpdateManager:GetInstance():AddLateUpdate(self.__lateupdate_handle)
 	end
 	if self.FixedUpdate ~= nil then
 		self.__fixedupdate_handle = BindCallback(self, self.FixedUpdate)
-		UpdateManager:GetInstance():AddUpdate(self.__fixedupdate_handle)
+		UpdateManager:GetInstance():AddFixedUpdate(self.__fixedupdate_handle)
 	end
 end
 
@@ -31,11 +31,11 @@ local function RemoveUpdate(self)
 		self.__update_handle = nil
 	end
 	if self.__lateupdate_handle ~= nil then
-		UpdateManager:GetInstance():RemovUpdate(self.__lateupdate_handle)
+		UpdateManager:GetInstance():RemoveLateUpdate(self.__lateupdate_handle)
 		self.__lateupdate_handle = nil
 	end
 	if self.__fixedupdate_handle ~= nil then
-		UpdateManager:GetInstance():RemovUpdate(self.__fixedupdate_handle)
+		UpdateManager:GetInstance():RemoveFixedUpdate(self.__fixedupdate_handle)
 		self.__fixedupdate_handle = nil
 	end
 end

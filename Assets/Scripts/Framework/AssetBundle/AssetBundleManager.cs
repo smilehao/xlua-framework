@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using XLua;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -21,13 +22,13 @@ using UnityEditor;
 /// 9、切换场景时最好预加载所有可能使用到的资源，所有加载器用完以后记得Dispose回收，清理GC时注意先释放所有Asset缓存
 /// 10、逻辑层所有Asset路径带文件类型后缀，且是AssetBundleConfig.ResourcesFolderName下的相对路径，注意：路径区分大小写
 /// TODO：
-/// 1、配置常驻包（公共ab包）列表，自动加载和卸载常驻包===>区分场景常驻包和全局公共包，切换场景时自动卸载场景公共包
+/// 1、区分场景常驻包和全局公共包，切换场景时自动卸载场景公共包
 /// 使用说明：
 /// 1、由Asset路径获取AssetName、AssetBundleName：ParseAssetPathToNames
-/// 2、设置常驻(公共)ab包：SetAssetBundleResident(assebundleName, true)
+/// 2、设置常驻(公共)ab包：SetAssetBundleResident(assebundleName, true)---公共ab包已经自动设置常驻
 /// 2、(预)加载资源：var loader = LoadAssetBundleAsync(assetbundleName)，协程等待加载完毕后Dispose：loader.Dispose()
-/// 3、加载Asset资源：var loader = LoadAssetAsync(assetPath, TextAsset)，协程等待加载完毕后Dispose：loader.Dispose()，第二个参数只在编辑器模式下生效
-/// 4、离开场景清理所有Asset缓存：ClearAssetCache()，UnloadUnusedAssetBundles(), Resources.UnloadUnusedAssets()
+/// 3、加载Asset资源：var loader = LoadAssetAsync(assetPath, TextAsset)，协程等待加载完毕后Dispose：loader.Dispose()
+/// 4、离开场景清理所有Asset缓存：ClearAssetsCache()，UnloadUnusedAssetBundles(), Resources.UnloadUnusedAssets()
 /// 5、离开场景清理必要的(公共)ab包：TryUnloadAssetBundle()，注意：这里只是尝试卸载，所有引用计数不为0的包（还正在加载）不会被清理
 /// </summary>
 
@@ -61,6 +62,12 @@ namespace AssetBundles
         List<AssetBundleAsyncLoader> prosessingAssetBundleAsyncLoader = new List<AssetBundleAsyncLoader>();
         // 逻辑层正在等待的asset加载异步句柄
         List<AssetAsyncLoader> prosessingAssetAsyncLoader = new List<AssetAsyncLoader>();
+
+        public static string ManifestBundleName
+        {
+            get;
+            set;
+        }
 
 #if UNITY_EDITOR || CLIENT_DEBUG
 #if !CLIENT_DEBUG
@@ -103,6 +110,42 @@ namespace AssetBundles
             }
             assetbundle.Unload(true);
             pathMapRequest.Dispose();
+
+            // 设置所有公共包为常驻包
+            var start = DateTime.Now;
+            var allAssetbundleNames = manifest.GetAllAssetBundleNames();
+            foreach (var curAssetbundleName in allAssetbundleNames)
+            {
+                if (string.IsNullOrEmpty(curAssetbundleName))
+                {
+                    continue;
+                }
+
+                int count = 0;
+                foreach (var checkAssetbundle in allAssetbundleNames)
+                {
+                    if (checkAssetbundle == curAssetbundleName || string.IsNullOrEmpty(checkAssetbundle))
+                    {
+                        continue;
+                    }
+
+                    var allDependencies = manifest.GetAllDependencies(checkAssetbundle);
+                    if (Array.IndexOf(allDependencies, curAssetbundleName) >= 0)
+                    {
+                        count++;
+                        if (count >= 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (count >= 2)
+                {
+                    SetAssetBundleResident(curAssetbundleName, true);
+                }
+            }
+            Logger.Log(string.Format("AssetBundleResident Initialize use {0}ms", (DateTime.Now - start).Milliseconds));
             yield break;
         }
 
@@ -116,7 +159,7 @@ namespace AssetBundles
 #endif
 
             // 等待所有请求完成
-            // 要是不等待部分Unity很多版本都有各种Bug
+            // 要是不等待Unity很多版本都有各种Bug
             yield return new WaitUntil(() =>
             {
                 return prosessingWebRequester.Count == 0;
@@ -154,12 +197,15 @@ namespace AssetBundles
 
         public string DownloadUrl
         {
-            get;
-            set;
+            get
+            {
+                return Setting.SERVER_RESOURCE_ADDR;
+            }
         }
         
         public void SetAssetBundleResident(string assetbundleName, bool resident)
         {
+            Logger.Log("SetAssetBundleResident : " + assetbundleName + ", " + resident.ToString());
             bool exist = assetbundleResident.Contains(assetbundleName);
             if (resident && !exist)
             {
@@ -215,8 +261,15 @@ namespace AssetBundles
             assetsCaching[assetName] = asset;
         }
 
-        public void AddAssetbundleAssetsCache(string assetbundleName, string postfix = null)
+        public void AddAssetbundleAssetsCache(string assetbundleName)
         {
+#if UNITY_EDITOR
+            if (AssetBundleConfig.IsEditorMode)
+            {
+                return;
+            }
+#endif
+
             if (!IsAssetBundleLoaded(assetbundleName))
             {
                 Logger.LogError("Try to add assets cache from unloaded assetbundle : " + assetbundleName);
@@ -231,11 +284,9 @@ namespace AssetBundles
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(postfix) && !assetName.EndsWith(postfix))
-                {
-                    continue;
-                }
-                var asset = curAssetbundle == null ? null : curAssetbundle.LoadAsset(assetName);
+
+                var assetPath = AssetBundleUtility.PackagePathToAssetsPath(assetName);
+                var asset = curAssetbundle == null ? null : curAssetbundle.LoadAsset(assetPath);
                 AddAssetCache(assetName, asset);
 
 #if UNITY_EDITOR
@@ -246,7 +297,7 @@ namespace AssetBundles
                     var renderers = go.GetComponentsInChildren<Renderer>();
                     for (int j = 0; j < renderers.Length; j++)
                     {
-                        var mat = renderers[i].sharedMaterial;
+                        var mat = renderers[j].sharedMaterial;
                         if (mat == null)
                         {
                             continue;
@@ -309,7 +360,7 @@ namespace AssetBundles
             }
 
             var creater = ResourceWebRequester.Get();
-            var url = AssetBundleUtility.GetPlatformFileUrl(assetbundleName);
+            var url = AssetBundleUtility.GetAssetBundleFileUrl(assetbundleName);
             creater.Init(assetbundleName, url);
             webRequesting.Add(assetbundleName, creater);
             webRequesterQueue.Enqueue(creater);
@@ -355,8 +406,18 @@ namespace AssetBundles
             return loader;
         }
 
-        // 从服务器下载Assetbundle资源，不缓存，无依赖
-        public ResourceWebRequester DownloadAssetAsync(string filePath)
+        // 从服务器下载网页内容，需提供完整url
+        public ResourceWebRequester DownloadWebResourceAsync(string url)
+        {
+            var creater = ResourceWebRequester.Get();
+            creater.Init(url, url, true);
+            webRequesting.Add(url, creater);
+            webRequesterQueue.Enqueue(creater);
+            return creater;
+        }
+
+        // 从资源服务器下载非Assetbundle资源
+        public ResourceWebRequester DownloadAssetFileAsync(string filePath)
         {
             if (string.IsNullOrEmpty(DownloadUrl))
             {
@@ -372,22 +433,38 @@ namespace AssetBundles
             return creater;
         }
 
-        // 异步请求非Assetbundle资源，不缓存，无依赖
-        public ResourceWebRequester RequestFileAssetAsync(string filePath)
+        // 从资源服务器下载Assetbundle资源，不缓存，无依赖
+        public ResourceWebRequester DownloadAssetBundleAsync(string filePath)
+        {
+            // 如果ResourceWebRequester升级到使用UnityWebRequester，那么下载AB和下载普通资源需要两个不同的DownLoadHandler
+            // 兼容升级的可能性，这里也做一下区分
+            return DownloadAssetFileAsync(filePath);
+        }
+
+        // 本地异步请求非Assetbundle资源
+        public ResourceWebRequester RequestAssetFileAsync(string filePath, bool streamingAssetsOnly = true)
         {
             var creater = ResourceWebRequester.Get();
-            var url = AssetBundleUtility.GetPlatformFileUrl(filePath);
+            string url = null;
+            if (streamingAssetsOnly)
+            {
+                url = AssetBundleUtility.GetStreamingAssetsFilePath(filePath);
+            }
+            else
+            {
+                url = AssetBundleUtility.GetAssetBundleFileUrl(filePath);
+            }
             creater.Init(filePath, url, true);
             webRequesting.Add(filePath, creater);
             webRequesterQueue.Enqueue(creater);
             return creater;
         }
 
-        // 异步请求Assetbundle资源，不缓存，无依赖
+        // 本地异步请求Assetbundle资源，不缓存，无依赖
         public ResourceWebRequester RequestAssetBundleAsync(string assetbundleName)
         {
             var creater = ResourceWebRequester.Get();
-            var url = AssetBundleUtility.GetPlatformFileUrl(assetbundleName);
+            var url = AssetBundleUtility.GetAssetBundleFileUrl(assetbundleName);
             creater.Init(assetbundleName, url, true);
             webRequesting.Add(assetbundleName, creater);
             webRequesterQueue.Enqueue(creater);
@@ -410,18 +487,18 @@ namespace AssetBundles
             }
         }
 
-        protected void UnloadAssetBundle(string assetbundleName, bool unloadResident = false, bool unloadAllLoadedObjects = false)
+        protected bool UnloadAssetBundle(string assetbundleName, bool unloadResident = false, bool unloadAllLoadedObjects = false)
         {
             int count = GetReferenceCount(assetbundleName);
             if (count <= 0)
             {
-                return;
+                return false;
             }
 
             count = DecreaseReferenceCount(assetbundleName);
             if (count > 0)
             {
-                return;
+                return false;
             }
 
             var assetbundle = GetAssetBundleCache(assetbundleName);
@@ -433,26 +510,30 @@ namespace AssetBundles
                     assetbundle.Unload(unloadAllLoadedObjects);
                     RemoveAssetBundleCache(assetbundleName);
                     UnloadAssetBundleDependencies(assetbundleName);
+                    return true;
                 }
             }
+            return false;
         }
 
-        public void TryUnloadAssetBundle(string assetbundleName, bool unloadAllLoadedObjects = false)
+        public bool TryUnloadAssetBundle(string assetbundleName, bool unloadAllLoadedObjects = false)
         {
             int count = GetReferenceCount(assetbundleName);
             if (count > 0)
             {
-                return;
+                return false;
             }
 
-            UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
+            return UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
         }
 
-        public void UnloadUnusedAssetBundles(bool unloadAllLoadedObjects = false)
+        public void UnloadUnusedAssetBundles(bool unloadResident = false, bool unloadAllLoadedObjects = false)
         {
+            int unloadCount = 0;
             bool hasDoUnload = false;
             do
             {
+                hasDoUnload = false;
                 var iter = assetbundleRefCount.GetEnumerator();
                 while (iter.MoveNext())
                 {
@@ -460,9 +541,13 @@ namespace AssetBundles
                     var referenceCount = iter.Current.Value;
                     if (referenceCount <= 0)
                     {
-                        UnloadAssetBundle(assetbundleName, true, unloadAllLoadedObjects);
+                        var result = UnloadAssetBundle(assetbundleName, unloadResident, unloadAllLoadedObjects);
+                        if (result)
+                        {
+                            unloadCount++;
+                            hasDoUnload = true;
+                        }
                     }
-                    hasDoUnload = true;
                 }
             } while (hasDoUnload);
         }
@@ -477,7 +562,7 @@ namespace AssetBundles
 #if UNITY_EDITOR
             if (AssetBundleConfig.IsEditorMode)
             {
-                string path = string.Format("Assets/{0}/{1}", AssetBundleConfig.AssetsFolderName, assetPath);
+                string path = AssetBundleUtility.PackagePathToAssetsPath(assetPath); 
                 UnityEngine.Object target = AssetDatabase.LoadAssetAtPath(path, assetType);
                 return new EditorAssetAsyncLoader(target);
             }

@@ -1,0 +1,231 @@
+package multiplayerfights;
+
+import "common.proto";
+
+message one_member_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 server_id = 2[default = 0];
+	optional string name = 3[default = ''];
+	optional int32 soldier_num = 4[default = 0];
+	optional int32 max_soldier_num = 5[default = 0];
+	optional int32 power = 6[default = 0];
+	optional int32 rank =7[default = 0];
+	optional int32 icon = 8[default = 0];
+}
+
+message one_team_info
+{
+	optional int32 team_id = 1[default = 0];
+	optional int32 win_times = 2[default = 0];
+	optional int32 soldier_num = 3[default = 0];
+	optional int32 max_soldier_num = 4[default = 0];
+	optional int32 power = 5[default = 0];
+	repeated one_member_info member_list = 6;
+	
+	//versus
+	optional int32 score = 7[default = 0];
+	optional uint32 leader_uid = 8[default = 0];
+	optional string leader_name = 9[default = ''];
+	optional int32 leader_server_id = 10[default = 0];
+}
+
+message one_team_brief
+{
+	optional int32 team_id = 1[default = 0];
+	optional int32 win_times = 2[default = 0];
+	optional int32 soldier_num = 3[default = 0];
+	optional int32 max_soldier_num = 4[default = 0];
+	optional int32 power = 5[default = 0];
+	
+	//versus
+	optional int32 score = 6[default = 0];
+	optional uint32 leader_uid = 7[default = 0];
+	optional string leader_name = 8[default = ''];
+	optional int32 leader_server_id = 9[default = 0];
+}
+
+message one_fighting_brief
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 server_id = 2[default = 0];
+	optional string name = 3[default = ''];
+	optional int32 icon = 4[default = 0];
+	optional int32 soldier_num = 5[default = 0];
+	optional int32 max_soldier_num = 6[default = 0];
+	optional int32 power = 7[default = 0];
+	optional one_team_brief team = 8;
+}
+
+message one_fight_report
+{
+	optional string video_id = 1[default = ''];
+	optional int32 win_uid = 2[default = 0];
+	optional one_fighting_brief left_fighter = 3;
+	optional one_fighting_brief right_fighter = 4;
+	optional int32 whoami = 5[default = 0];	//我的uid
+}
+
+message one_team_report
+{
+	optional int32 win_team = 1[default = 0];
+	optional one_team_brief left_team = 2;
+	optional one_team_brief right_team = 3;
+	repeated string video_list = 4;
+	optional int32 whoami = 5[default = 0];	//我的team_id
+}
+
+message one_result_report
+{
+	optional int32 result = 1[default = 0];//0:未出结果，1:输，2：胜
+	optional int32 win_times = 2[default = 0];
+}
+
+message one_versus_report
+{
+	optional int32 versus_id = 1[default = 0];
+	optional uint32 report_time = 2[default = 0];
+	optional one_team_report team_report = 3;
+	repeated one_fight_report report_list = 4;
+	optional one_result_report result_report = 5;
+}
+
+
+
+message rank_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 server_id = 2[default = 0];
+	optional string name = 3[default = ''];
+	optional int32 icon = 4[default = 0];
+	optional int32 rank = 5[default = 0];
+	optional int32 win_times = 6[default = 0];
+}
+
+message req_match_fight
+{
+
+	//follow is useless for client
+	optional int32 buzhen_id = 1[default = 0];
+	optional int32 win_times = 2[default = 0];
+	optional int32 die_recover_pnt = 3[default = 0];
+	optional string fighter_text = 4[default = ''];
+	optional common.one_user_brief user_brief = 5;
+}
+
+message rsp_match_fight
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 took_award_flag = 2[default = 0];
+}
+
+message ntf_match_result
+{
+	optional int32 reason = 1[default = 0];	//仅当status为6时有用（1：战败退场，2：终极胜利）
+	optional int32 status = 2[default = 0];	//0未匹配，1匹配组队中，2匹配对手，3等待战斗，4战斗中，5等待下一场，6结束
+	optional int32 team_id = 3[default = 0];
+	optional uint32 start_time = 4[default = 0];
+	repeated one_member_info member_list = 5;
+	optional int32 team_win_times = 6[default = 0];
+}
+
+
+message req_match_info
+{
+}
+
+message rsp_match_info
+{
+	optional int32 result = 1[default = 0];
+	optional int32 status = 2[default = 0];//0未匹配，1匹配组队中，2匹配对手，3等待战斗，4战斗中，5等待下一场
+	//optional int32 is_open = 3[default = 0];//乱斗是否开放
+	optional int32 start_time = 4[default = 0];
+	
+	optional int32 rest_match_times = 5[default = 0];
+	optional int32 match_cost = 6[default = 0];
+	optional int32 win_times = 7[default = 0];
+	optional int32 today_win_times = 8[default = 0];
+	optional uint32 took_award_flag = 9[default = 0];
+	
+	optional one_team_info team = 10;
+	optional one_versus_report news = 11;
+	optional one_member_info self_info = 12;//未组队时，把自己的信息放里面
+}
+
+message ntf_news_report
+{
+	optional int32 reason = 1[default = 0];
+	optional one_versus_report new_report = 2;
+}
+
+message req_all_report
+{
+}
+
+message rsp_all_report
+{
+	optional int32 result = 1[default = 0];
+	repeated one_versus_report report_list = 2;
+}
+
+message req_take_award
+{
+	optional int32 index = 1[default = 0];
+	optional bool  b_take_all = 2[default = false];
+}
+
+message rsp_take_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 index = 2[default = 0];
+	optional uint32 took_award_flag = 3[default =0];
+	repeated common.award_info award_list = 4;	//礼包道具列表
+	optional bool  b_take_all = 5[default = false];
+}
+
+
+message req_rank_list
+{
+}
+
+message rsp_rank_list
+{
+	optional int32 result = 1[default = 0];
+	repeated rank_info rank_list = 2;
+	optional int32 self_win_times = 3;
+}
+
+message req_test_multiplayerfights
+{
+}
+message rsp_test_multiplayerfights
+{
+	optional int32 result = 1[default=0];
+}
+
+message ntf_multiplayerfights_open_info
+{
+	optional int32 is_open = 1[default = 0];
+	optional int32 reason = 2[default = 0];//1:国战没开启，2：主建筑等级不够, 3: 模块未开启
+}
+
+
+//follow is used for serversvr->crosssvr
+message req_user_match_status
+{
+	optional int32 target_uid = 1[default = 0];
+}
+
+message rsp_user_match_status
+{
+	optional int32 result = 1[default = 0];
+	optional int32 target_uid = 2[default = 0];
+	optional int32 status = 3[default = 0];//0未匹配，1匹配组队中，2匹配对手，3等待战斗，4战斗中，5等待下一场
+}
+
+message ntf_start_versus
+{
+	optional int32 round = 1[default = 0];
+	optional uint32 time = 2[default = 0];
+	optional uint32 versus_id = 3[default = 0];
+}

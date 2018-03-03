@@ -9,6 +9,12 @@ local UIWindowNames = {
 	UILoginServer = "UILoginServer",
 	-- 场景加载模块
 	UILoading = "UILoading",
+	-- Tip窗口
+	UINoticeTip = "UINoticeTip",
+	-- TestMain
+	UITestMain = "UITestMain",
+	-- BattleMain
+	UIBattleMain = "UIBattleMain",
 }
 
 return ConstClass("UIWindowNames", UIWindowNames)

@@ -24,7 +24,7 @@ local getmetatable = getmetatable
 local table = table
 local ipairs = ipairs
 local tostring = tostring
-local descriptor = require "protobuf.descriptor"
+local descriptor = require "Framework.Net.Protobuf.descriptor"
 
 local function format(buffer)
     local len = string.len( buffer )	

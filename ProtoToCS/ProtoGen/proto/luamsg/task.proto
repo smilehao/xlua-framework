@@ -1,0 +1,77 @@
+package task;
+
+import "common.proto";
+
+message one_condition
+{
+	optional int32 type = 1[default = 0];
+	optional int32 curr_progress = 2[default = 0];
+	optional int32 cfg_progress = 3[default = 0];
+}
+
+message req_curr_task
+{
+}
+
+message rsp_curr_task
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_curr_task curr_task_list = 2;
+}
+
+message req_commit_task
+{
+	optional int32 task_id = 1[default = 0];
+}
+
+message rsp_commit_task
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+	optional int32 curr_task_id = 3[default = 0];
+}
+
+message ntf_task_state
+{
+	optional int32 task_id = 1[default = 0];
+	optional int32 task_state = 2[default = 0];
+}
+
+message ntf_task_progress_chg
+{
+	optional int32 task_id = 1[default = 0];
+	optional int32 curr_progress = 2[default = 0];
+	optional int32 task_state = 3[default = 0];
+	optional int32 reason = 4[default = 0];//客户用来区分是否寻访（1：来自寻访）
+}
+
+message req_new_manor_owner_task_info
+{
+	
+}
+message rsp_new_manor_owner_task_info
+{
+	optional int32 result = 1[default = 0];
+	repeated one_condition condition_list = 2;
+	repeated common.one_item item_list = 3;
+	optional int32 status = 4[default = 0];	//1:不可领取 2:可领取 3:已领取
+	optional int32 index = 5[default = 0];
+	optional int32 max_index = 6[default = 0];
+}
+
+message req_take_new_manor_owner_task_award
+{
+
+}
+
+message rsp_take_new_manor_owner_task_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+	optional int32 close = 3[default = 0];// 
+}
+
+message ntf_show_manor_task
+{
+	optional int32 show = 1[default = 0];// 1:显示，0：不显示
+}

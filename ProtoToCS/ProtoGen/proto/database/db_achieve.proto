@@ -1,0 +1,279 @@
+package db;
+
+import 'db_common.proto';
+
+message one_activity
+{
+	optional int32 id = 1[default = 0];	//活动ID
+	optional int32 progress = 2[default = 0];	//今天的进度
+	optional int32 take_award = 3[default = 0];	//是否已经领取过奖励,0是不可领取,1是可领取，2是已经领取过了
+}
+
+message one_sign_award_info
+{
+	optional int32 this_month_taken_times = 1[default = 0];	//这个月已经领取的次数
+	optional int32 this_month_any_day_start_time = 2[default = 0];
+	optional int32 today_vip_double_flag = 3[default = 0];
+	optional int32 last_taking_time = 4[default = 0];	//最后一次领取的时间
+}
+
+message one_act
+{
+	message one_common_record
+	{
+		message one_single_charge_entry
+		{
+			optional int32 money = 1[default = 0];
+			optional int32 charge_times = 2[default = 0];
+			optional int32 award_taken_times = 3[default = 0];
+		}
+		
+		message single_charge_record
+		{
+			optional int32 day_id = 1[default = 0];
+			repeated one_single_charge_entry charge_list = 2;
+		}
+		
+		message one_day_single_charge
+		{
+			optional int32 day_id = 1[default = 0];
+			optional int32 money = 2[default = 0];
+			optional int32 taken = 3[default = 0];
+		}
+				
+		message consume_record
+		{
+			optional int32 time = 1[default = 0];
+			optional int32 consume_yuanbao = 2[default = 0];	//消费的元宝
+			optional int32 return_yuanbao = 3[default = 0];		//返还的元宝
+		}
+		
+		message time_count_limit_exchange_entry
+		{
+			optional int32 vip_level = 1[default = 0];
+			optional int32 award_taken_times = 2[default = 0];
+		}
+		
+		message time_limit_charge
+		{
+			optional int32 item_id = 1[default = 0];
+			optional int32 count = 2[default = 0];
+		}
+		
+		message drop_exchange_entry
+		{
+			optional int32 tag_index = 1[default = 0];
+			optional int32 award_taken_times = 2[default = 0];
+		}
+		
+		message jubaopen_record
+		{
+			message one_day_award
+			{
+				message one_item_award
+				{
+					optional int32 item_id = 1[default = 0];
+					optional int32 count = 2[default = 0];
+				}
+				optional int32 t_day = 1[default = 0];
+				repeated one_item_award day_award_list = 2;
+				optional int32 award_flag = 3[default = 0];//当天是否领奖
+			}
+			optional int32 baopen_id = 1[default = 0];	//购买的宝盆id
+			repeated one_day_award baopen_award_list = 2;
+			optional int32 total_recharge = 3[default = 0];
+		}
+		
+		message shenbing_lottery_draw
+		{
+			optional int32 curr_team = 1[default = 1];//当前组 默认第一组
+			optional int32 curr_round = 2[default = 1];//当前组 轮次 默认第一轮
+			optional int32 has_lottery_times =3[default = 0];//已抽奖次数
+		}
+		
+		message hufu_baoxiang_record
+		{
+			optional int32 type = 1[default = 0];
+			optional int32 index = 2[default = 0];
+			optional int32 has_taken = 3[default = 0];
+			optional int32 can_open_time = 4[default = 0];
+		}
+		message hufu_baoxiang_award_record
+		{
+			message one_award
+			{
+				optional int32 award_id = 1[default = 0];//奖励id 道具或武将等id
+				optional int32 award_count = 2[default = 0];//总共奖励个数
+				optional int32 award_times = 3[default = 0];//奖励次数
+			}
+			optional int32 type = 1[default = 0];
+			repeated one_award taken_award_list = 2;
+		}
+				
+		optional int32 curr_value = 1[default = 0];
+		optional uint32 award_flag = 2[default = 0];
+		optional int32 last_login_time = 3[default = 0];
+		repeated int32 vip_bought_list = 4;	//vip购买列表
+		repeated one_single_charge_entry single_charge_list = 5;	//单笔充值记录
+		repeated consume_record consume_record_list = 6;	//消费元宝返还元宝记录
+		optional jubaopen_record jubaopen_record_data = 7;	//聚宝盆奖励信息
+		repeated single_charge_record continue_single_charge_list = 10;	//连续单笔充值记录
+		optional int32 last_charge_time = 11[default = 0];
+		repeated time_count_limit_exchange_entry time_count_exchange_list = 12;
+		repeated drop_exchange_entry drop_exchange_list = 13;
+		repeated one_day_single_charge charge_gift_7d_list = 14;	//7天 充值好礼
+		optional time_limit_charge time_limit_charge_info = 15;		//限时充值
+		repeated hufu_baoxiang_record hufu_baoxiang_list = 16; //虎符宝箱
+		optional shenbing_lottery_draw shenbing_lottery = 17;//神兵抽奖
+		repeated hufu_baoxiang_award_record hufu_baoxiang_award_list = 18; //虎符宝箱开箱奖励
+	}
+
+	optional uint32 act_id = 1[default = 0];
+	optional int32 act_type = 2[default = 0];
+	optional one_common_record act_record = 3;
+	optional int32 taken_all = 4[default = 0]; //领取了所有的奖励
+	optional int32 param1 = 5[default = 0];
+}
+
+message one_act_mgr
+{
+	repeated one_act act_list = 2;
+	repeated uint32 read_act_id_list = 3;	//客户端已经浏览过的活动id
+}
+
+message one_opensvr_act
+{
+	message one_common_record
+	{				
+		optional int32 curr_value = 1[default = 0];
+		optional uint32 award_flag = 2[default = 0];
+		optional int32 last_charge_time = 11[default = 0];
+	
+		message one_charge_gift
+		{
+			optional int32 day_id = 1[default = 0];
+			optional int32 charge_gold = 2[default = 0];
+			optional int32 award_taken = 3[default = 0];
+		}
+	}
+
+	optional uint32 act_id = 1[default = 0];
+	optional int32 act_type = 2[default = 0];
+	optional one_common_record act_record = 3;
+	optional int32 taken_all = 4[default = 0]; //领取了所有的奖励
+	optional int32 param1 = 5[default = 0];
+}
+
+message opensvr_act_mgr
+{
+	repeated one_opensvr_act act_list = 1;
+}
+
+message one_curr_task
+{
+	optional int32 task_id = 1[default = 0];
+	optional int32 curr_progress = 2[default = 0];
+	optional int32 task_state    =3[default =0];
+}
+
+message one_finished_task
+{
+	optional int32 task_id = 1[default = 0];
+}
+
+message fuli_online
+{
+	optional int32 online_secs = 1[default = 0];
+	optional uint32 taken_entry = 2[default = 0];
+	optional uint32 last_update_time = 3[default = 0];
+}
+
+message fuli_login
+{
+	optional int32 total_login_days = 1[default = 0];
+	optional uint32 taken_flag = 2[default = 0];	//按位操作，第一位表示第一条，第二位表示第二条
+}
+
+message fuli_manor_level
+{
+	optional uint32 taken_flag = 1[default = 0];
+}
+
+message fuli_fund
+{
+	optional int32 is_invested = 1[default = 0];    //0 未激活  1激活
+	optional uint32 taken_flag = 2[default = 0];
+}
+
+message fuli_consume_rebate
+{
+	optional uint32 taken_flag = 2[default = 0];
+}
+
+message fuli_wujiang_friendship
+{
+	optional uint32 taken_flag = 2[default = 0];
+}
+
+message fuli_yueka_group_buy
+{
+	optional uint32 taken_flag = 2[default = 0];
+}
+
+message fuli_sign
+{
+	optional int32 login_days = 1[default = 0];
+	optional uint32 taken_flag = 2[default = 0];
+}
+
+message fuli_day_gift
+{
+	optional uint32 invested_flag = 1[default = 0];
+	optional uint32 taken_flag = 2 [default  =0];
+}
+
+message fuli_accumulation_charge
+{
+	optional uint32 taken_flag = 1[default = 0];
+}
+
+message act_turntable
+{
+	optional int32 lottery_num = 1[default = 0];
+	optional int32 award_flag1 = 2[default = 0];
+	optional int32 award_flag2 = 3[default = 0];
+	optional int32 award_flag3 = 4[default = 0];
+	optional int32 award_id = 5[default = 0];
+	optional int32 award_num = 6[default = 0];
+	optional int32 award_flag4 = 7[default = 0];
+	optional int32 best_goods_taken_times = 8[default = 0]; //抽中次数
+	optional int32 total_lottery_times = 9[default = 0];
+	optional int32 act_id = 10[default = 0];
+}
+
+message Achieve
+{
+	optional int32 daily_flag = 1[default = 0];	//日常标记,0表示午餐，1表示晚餐，2表示领过军令
+	repeated one_activity activity_list = 2; //日常活动记录
+	optional one_sign_award_info sign_info = 3;//签到奖励 
+	optional one_act_mgr act_mgr_info = 4; //活动数据
+	repeated one_curr_task curr_task_list = 5;				// 当前任务列表
+	repeated one_finished_task finished_task_list = 6; 	// 已完成的任务列表	
+	optional fuli_online online_fuli = 7;
+	optional fuli_login login_fuli = 8;
+	optional fuli_manor_level manor_level_fuli = 10;	
+	optional fuli_fund grow_fund_fuli = 11;
+	optional fuli_fund luxury_fund_fuli = 12;
+	optional fuli_fund king_fund_fuli   = 13;
+	optional fuli_consume_rebate consume_rebate_fuli = 14;
+	optional fuli_wujiang_friendship wujiang_friendship_fuli = 15;
+	optional fuli_yueka_group_buy yueka_group_buy_fuli = 16;
+	optional fuli_day_gift day_gift_fuli = 17;
+	optional int32 daily_box_open = 18[default = 0];//当天日常宝箱开箱记录0:未达到开箱条件1：达到条件但未开 2：已开
+	optional int32 daily_box_cond = 19[default = 1];//日常宝箱开箱条件
+	optional int32 daily_box_id = 20[default = 1];//日常宝箱id
+	optional act_turntable turntable_info = 21;	//转盘活动
+	optional int32 daily_random_task_id = 22[default = 0];	//记录日常的随机任务
+	optional fuli_accumulation_charge accumulation_charge_fuli = 29;
+
+}

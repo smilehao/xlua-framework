@@ -122,6 +122,85 @@ local function TestDataClassWriteErr()
 	inst1.bbb = 11
 end
 
+local function TestDataClassNew()
+	local Data = DataClass("Data",{
+		number = 0,
+		bool = false,
+		string = "",
+		table = {},
+		func = function() end,
+		__init = function(self, number_value, bool_value, string_value, table_value, func_value)
+			self.number = number_value
+			self.bool = bool_value
+			self.string = string_value
+			self.table = table_value
+			self.func = func_value
+		end
+	})
+	
+	local tableTest = {1, 2}
+	local funcTest = function() end
+	local inst1 = Data.New(111, true, "111", tableTest, funcTest)
+	assert(inst1.__cname == "Data")
+	assert(inst1.number == 111)
+	assert(inst1.bool == true)
+	assert(inst1.string == "111")
+	assert(inst1.table == tableTest)
+	assert(inst1.table[1] == 1)
+	assert(inst1.table[2] == 2)
+	assert(inst1.func == funcTest)
+	
+	local Data2 = DataClass("Data2", nil, Data)
+	local inst2 = Data2.New(222, true, "222", tableTest, funcTest)
+	assert(inst2.__cname == "Data2")
+	assert(inst2.number == 222)
+	assert(inst2.bool == true)
+	assert(inst2.string == "222")
+	assert(inst2.table == tableTest)
+	assert(inst2.table[1] == 1)
+	assert(inst2.table[2] == 2)
+	assert(inst2.func == funcTest)
+	
+	local Data3 = DataClass("Data3", {}, Data)
+	local inst3 = Data3.New(333, true, "333", tableTest, funcTest)
+	assert(inst3.__cname == "Data3")
+	assert(inst3.number == 333)
+	assert(inst3.bool == true)
+	assert(inst3.string == "333")
+	assert(inst3.table == tableTest)
+	assert(inst3.table[1] == 1)
+	assert(inst3.table[2] == 2)
+	assert(inst3.func == funcTest)
+	
+	local Data4 = DataClass("Data4", { 
+		newAdd = "NewAdd",
+		__init = function(self, number_value, bool_value, string_value, table_value, func_value, newAdd_value)
+			self.newAdd = newAdd_value
+		end
+	}, Data)
+	local inst4 = Data4.New(444, true, "444", tableTest, funcTest)
+	assert(inst4.__cname == "Data4")
+	assert(inst4.number == 444)
+	assert(inst4.bool == true)
+	assert(inst4.string == "444")
+	assert(inst4.table == tableTest)
+	assert(inst4.table[1] == 1)
+	assert(inst4.table[2] == 2)
+	assert(inst4.func == funcTest)
+	assert(inst4.newAdd == false)
+	
+	local inst5 = Data4.New(555, true, "555", tableTest, funcTest, "inst5")
+	assert(inst5.__cname == "Data4")
+	assert(inst5.number == 555)
+	assert(inst5.bool == true)
+	assert(inst5.string == "555")
+	assert(inst5.table == tableTest)
+	assert(inst5.table[1] == 1)
+	assert(inst5.table[2] == 2)
+	assert(inst5.func == funcTest)
+	assert(inst5.newAdd == "inst5")
+end
+
 local function TestConstClass()
 	local Const = ConstClass("Const", {
 		aaa = 1
@@ -160,11 +239,11 @@ local function Run()
 	TestDataClass()
 	assert(pcall(TestDataClassReadErr) == false, "TestDataClassReadErr failed!")
 	assert(pcall(TestDataClassWriteErr) == false, "TestDataClassWriteErr failed!")
+	TestDataClassNew()
 	TestConstClass()
 	assert(pcall(TestConstClassWriteErr1) == false, "TestConstClassWriteErr1 failed!")
 	assert(pcall(TestConstClassWriteErr2) == false, "TestConstClassWriteErr2 failed!")
 	assert(pcall(TestConstClassReadErr) == false, "TestConstClassReadErr failed!")
-	print("ClassTest Pass!")
 end
 
 return {

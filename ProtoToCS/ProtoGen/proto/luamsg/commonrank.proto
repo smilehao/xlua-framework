@@ -1,0 +1,68 @@
+package commonrank;
+
+
+message one_world_boss_rank
+{
+	optional uint32 uid = 1[default = 0];
+	optional string name = 3[default = ''];
+	optional string use_icon = 4[default = ''];	//正在使用的头像
+	optional string guild_name = 5[default = ''];
+	optional int32 level = 6[default = 0];
+	optional int32 kill_time = 7[default = 0];
+	optional int32 harm_num = 8[default = 0];	//伤害总量
+}
+
+message one_user_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 top_floor = 2[default = 0]; //挑战到第几层
+	optional string user_name = 3[default = ''];  //主公名号
+	optional int32 use_icon = 4[default = 0];	  //正在使用的头像
+	optional int32 user_level = 5[default = 0];	  //玩家等级
+	optional string guild_name = 6[default = ''];
+	optional int32 rank = 7[default = 0]; //名次
+}
+
+message req_world_boss_rank
+{
+}
+
+message rsp_world_boss_rank
+{
+	optional int32 result = 1[default = 0];
+	optional int32 my_rank = 2[default = 0];
+	repeated one_world_boss_rank rank_list = 3;
+}
+
+message req_world_boss_rank_yesterday
+{
+}
+
+message rsp_world_boss_rank_yesterday
+{
+	optional int32 result = 1[default = 0];
+	repeated one_world_boss_rank rank_list = 2;
+	optional int32 my_rank = 3[default = 0];
+}
+
+message req_camps_rank
+{
+}
+
+message rsp_camps_rank
+{
+	optional int32 result = 1[default = 0];
+	repeated one_user_info rank_list = 2;
+	optional int32 my_rank = 3[default = 0]; //名次 0 未上榜
+}
+
+message req_qianrenzhan_rank
+{
+}
+
+message rsp_qianrenzhan_rank
+{
+	optional int32 result = 1[default = 0];
+	repeated one_user_info rank_list = 2;
+	optional int32 my_num = 3[default = 0]; //
+}

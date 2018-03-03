@@ -245,7 +245,7 @@ namespace AssetBundles
         
         public static List<string> GetDependancisFormBuildManifest(string manifestPath, Object[] objects,bool isAll = true)
         {
-            AssetBundleManifest manifest = AssetBundleUtility.GetManifestFormLocal(manifestPath);
+            AssetBundleManifest manifest = PackageUtils.GetManifestFormLocal(manifestPath);
             if (manifest == null)
             {
                 return null;
@@ -300,21 +300,10 @@ namespace AssetBundles
                 Debug.LogError("importer null or not valid!");
                 return;
             }
-
-            // set the assetPath as assetbundle name
-            string assetPath = importer.assetPath.Replace("Assets/", "");
-            // 处理variant
-            string[] slices = assetPath.Split('/');
-            string sliceEnd = slices[slices.Length - 1].Trim();
-            string variant = null;
-            if (sliceEnd.StartsWith("[") && sliceEnd.EndsWith("]"))
-            {
-                variant = (sliceEnd.Substring(1, sliceEnd.Length - 2));
-                assetPath = string.Join("/", slices, 0, slices.Length - 1);
-            }
-
-            importer.assetBundleName = assetPath.ToLower();
-            importer.assetBundleVariant = variant != null ? variant.ToLower() : null;
+            
+            // TODO：处理variant
+            importer.assetBundleName = importer.assetPath;
+            //importer.assetBundleVariant = null;
         }
         
         public static void CreateAssetbundleForChildren(string assetPath)

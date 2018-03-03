@@ -1,0 +1,198 @@
+package shop;
+
+message shop_goods
+{
+	optional int32 item_id = 1[default = 0];	//出售的道具ID
+	optional int32 count = 2[default = 0];	//出售的道具数量
+	optional int32 currency = 3[default = 0];	//货币类型，0为金钱，1为元宝, 2为演武勋章, 3为家族勋章
+	optional int32 price = 4[default = 0];	//对应的价格
+	optional int32 sold_out = 5[default = 0];	//是否售罄,0是否，1是售罄
+	optional int32 goods_rebate = 6[default = 0];//打折力度
+}
+
+message req_query_shop_list
+{
+
+}
+
+//特殊商店商品数据结构
+//message special_shop_goods
+//{
+//	optional int32 item_id = 1[default = 0];	//出售的道具ID
+//	optional int32 count = 2[default = 0];	//出售的道具数量
+//	optional int32 price = 4[default = 0];	//对应的价格
+//	optional int32 sold_out = 5[default = 0];	//是否售罄,0是否，1是售罄
+//}
+
+//演武场商店
+message req_arena_shop_list
+{
+
+}
+
+message rsp_arena_shop_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 today_refresh_count = 2[default = 0];	//今天剩余的刷新次数
+	repeated shop_goods shop_goods_list = 3;	//商店列表
+	optional int32 is_refresh_goods = 4[default = 0];//0为未刷新，1为已刷新
+	optional int32 shop_refresh_cost = 5[default = 0];//刷新消耗元宝数
+}
+
+message req_buy_from_arena_shop
+{
+	optional int32 goods_index = 1[default = 0];	//购买的道具的位置索引，0-5
+}
+
+message rsp_buy_from_arena_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 item_id = 2[default = 0];
+	optional int32 count =3 [default = 0];
+	optional int32 goods_index = 4[default = 0];
+}
+
+message req_refresh_arena_shop
+{
+
+}
+
+message rsp_refresh_arena_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 refresh = 2[default = 1];	//重新刷新界面 
+}
+
+
+//家族商店
+message req_guild_shop_list
+{
+
+}
+
+message rsp_guild_shop_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 today_refresh_count = 2[default = 0];	//今天的剩余刷新次数
+	repeated shop_goods shop_goods_list = 3;	//商店列表
+	optional int32 is_refresh_goods = 4[default = 0];//0为未刷新，1为已刷新
+	optional int32 shop_refresh_cost = 5[default = 0];//刷新消耗元宝数
+}
+
+message req_buy_from_guild_shop
+{
+	optional int32 goods_index = 1[default = 0];	//购买的道具的位置索引，0-5
+}
+
+message rsp_buy_from_guild_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 goods_index = 2[default = 0];
+	optional int32 item_id = 3[default = 0];
+	optional int32 count = 4[default = 0];
+}
+message req_refresh_guild_shop
+{
+
+}
+
+message rsp_refresh_guild_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 refresh = 2[default = 1];	//重新刷新界面 
+}
+
+
+//集市
+message req_fairmarket_shop_list
+{
+}
+
+message rsp_fairmarket_shop_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 today_refresh_count = 2[default = 0];
+	repeated shop_goods shop_goods_list = 3;
+	optional int32 is_refresh_goods = 4[default = 0];
+	optional int32 shop_refresh_cost = 5[default = 0];//刷新消耗元宝数
+	//optional int32 today_free_refresh_count = 5[default = 0];
+}
+
+message req_refresh_fairmarket_shop
+{
+}
+message rsp_refresh_fairmarket_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 refresh =2[default = 1];	//重新刷新界面
+}
+
+message req_buy_from_fairmarket_shop
+{
+	optional int32 goods_index = 1[default=0];//购买的道具的位置索引，0-5
+}
+message rsp_buy_from_fairmarket_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 goods_index = 2[default = 0];
+	optional int32 item_id = 3[default = 0];
+	optional int32 count = 4[default = 0];
+}
+
+
+
+//游商<=>黑市
+message req_blackmarket_shop_list
+{
+
+}
+
+message rsp_blackmarket_shop_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 today_refresh_count = 2[default = 0];	//今天的剩余刷新次数
+	repeated shop_goods shop_goods_list = 3;	//珍品列表
+	repeated shop_goods shop_goods_list2 = 4;	//普通列表
+	optional int32 is_refresh_goods = 5[default = 0];//0为未刷新，1为已刷新
+	optional int32 shop_refresh_cost = 6[default = 0];//刷新消耗元宝数
+	optional int32 today_buy_count = 7[default = 0]; // 今天剩余购买的次数
+}
+
+message req_buy_from_blackmarket_shop
+{
+	optional int32 goods_index = 1[default = 0];	//购买的道具的位置索引，0-8为珍品列表，9-17为士兵列表
+}
+
+message rsp_buy_from_blackmarket_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 goods_index = 2[default = 0];
+	optional int32 item_id = 3[default = 0];
+	optional int32 count = 4[default = 0];
+	optional int32 today_buy_count = 5[default = 0]; // 今天剩余购买的次数
+}
+message req_refresh_blackmarket_shop
+{
+
+}
+message rsp_refresh_blackmarket_shop
+{
+	optional int32 result = 1[default = 0];
+	optional int32 refresh = 2[default = 1];	//重新刷新界面
+	optional int32 today_refresh_count = 3[default = 0]; //今天剩余刷新的次数
+	optional int32 today_buy_count = 4[default = 0]; //今天剩余购买的次数
+	optional int32 shop_refresh_cost = 5[default = 0];//刷新消耗元宝数
+}
+
+message ntf_blackmarket_shop_show 
+{
+	optional int32 blackmarket_show_time = 1[default = 0];//-1为永久显示黑市，大于0为黑市结束的时间
+	optional int32 is_first_show = 2[default = 0];//0为非第一次出现，1第一次出现
+	optional int32 reason = 3[default = 0];	//客户用来区分是否寻访（1：来自寻访）
+}
+
+message ntf_fairmarket_rebate_chg
+{
+	optional int32 is_rebate = 1[default = 0];//1：全打折，0：不全打折
+	optional int32 reason = 2[default = 0];
+}

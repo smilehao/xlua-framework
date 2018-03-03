@@ -1,0 +1,1007 @@
+package kingdomwar;
+import "common.proto";
+//import "inner_battle.proto";
+//import "battle.proto";
+
+
+message grid_brief /// 地格总览
+{
+    optional int32 grid_id = 1[default = 0]; /// 地格id
+    optional uint32 occ_guildid= 2[default = 0]; /// 占领者家族id  occ == occupant
+    optional one_guild_brief occ_guild_brief = 6; 
+
+    optional int32 fight_status = 5[default = 0];  /// 战斗状态
+
+    optional int32 level = 7[default = 0];
+}
+
+message world_map_overview /// 地图总览
+{
+    repeated grid_brief grids = 1;
+}
+
+message one_donation_progress
+{
+    optional int32 item_id = 1[default = 0];
+    optional int32 num = 2[default = 0];
+    optional int32 maxnum = 3[default = 0];
+}
+
+message one_item
+{
+    optional int32 item_id = 1[default = 0];
+    optional int32 num = 2[default = 0];
+}
+
+message one_donation_record
+{
+    optional int32 type = 1[default = 0]; ///0:捐献， 1:地块升级
+    optional uint32 uid = 2[default = 0];
+    optional string user_name = 3[default = ""];
+    optional int32 job = 4[default = 0];
+    optional int32 grid_id = 10[default = 0];
+    optional string grid_name = 5[default = ""];
+    optional int32 grid_level = 6[default = 0];
+    optional int32 donate_item_id = 7[default = 0];
+    optional int32 donate_item_num = 8[default = 0];
+    optional int32 donate_time = 9[default = 0];
+}
+
+message one_guild_brief
+{
+	optional int32 gid = 1[default = 0];
+	optional int32 icon = 2[default = 0];
+	optional int32 flag_icon = 3[default = 0];
+	optional string name = 4[default = ''];
+	optional int32 level = 5[default = 0];
+	optional string master_name = 6[default = ''];
+	optional uint32 master_uid = 8[default = 0];
+    optional int32 server_id = 7[default = 0];
+}
+
+message one_state_lord_brief /// 州牧
+{
+    optional common.one_user_brief lord_brief = 1;
+    optional one_guild_brief lord_guild_brief = 3;
+    optional int32 state_id = 2[default = 0]; 
+    optional bool is_new = 4[default = false];
+}
+
+message one_declare_info
+{
+    optional int32 grid_id = 1[default = 0];
+    optional int32 declare_guild_id = 2[default  = 0];
+    optional int32 declare_time = 4[default = 0];
+    optional one_guild_brief declare_guild_brief = 3;
+}
+
+message one_battle_result
+{
+    optional int32 result = 1[default = 0];  /// 0: 进攻方成功, 1: 进攻方失败， 2： 进攻方失败(未能战斗)
+    optional int32 grid_id = 2[default = 0];
+    optional int32 def_guild_id = 3[default = 0];
+    optional one_guild_brief def_guild_brief = 4;
+    optional int32 atk_guild_id = 5[default = 0];
+    optional one_guild_brief atk_guild_brief = 6;
+}
+message one_fighter_brief
+{
+    optional uint32 uid = 1[default = 0];
+    optional uint32 guild_id = 2[default = 0];
+    optional uint32 server_id = 3[default = 0];
+    optional string name = 4[default = ""];
+    optional string guild_name = 5[default = ""];
+    optional int32  user_type = 6[default = 0];   /// 0 玩家， 1 黄巾军， 2 守军 
+}
+message one_fight_record
+{
+    optional one_fighter_brief atker = 1;
+    optional one_fighter_brief defer = 2;
+    optional bool is_atker_win = 3[default = false];
+    optional string battle_id = 4[default = ""];
+}
+
+message one_guild_info
+{
+    optional int32 guild_id = 1[default = 0];
+    optional one_guild_brief brief = 2;
+    repeated int32 occupy_list = 3; /// 占地情况
+
+    optional int32 occ_grid_num = 10[default = 0];
+    optional int32 occ_city_num = 11[default = 0];
+
+    repeated one_declare_info declare_list = 4; /// 宣战情况, 宣战阶段有效 
+    repeated one_declare_info bedeclared_list = 5; /// 被宣战情况, 宣战阶段有效 
+
+    ///战斗结果，休战阶段有效
+    repeated one_battle_result battle_list = 6; /// 战斗结果
+}
+
+//message one_user_brief
+//{
+//    optional uint32 uid = 1[default = 0];
+//    optional uint32 guild_id = 2[default = 0];
+//    optional uint32 guild_name = 3[default = 0];
+//    optional int32 vip_level = 4[default = 0];
+//    optional int32 fight_power = 5[default = 0];
+//}
+//
+message one_user_info
+{
+    optional uint32 uid = 1[default = 0];
+
+    /// 出兵信息  宣战阶段有效
+    optional int32  buzhen_id = 2[default = 0];
+    optional int32  buzhen_grid = 3[default = 0]; 
+}
+
+message one_user_formation
+{
+    optional uint32 uid = 1[default = 0];
+    optional string name = 2[default = ""];
+    optional uint32 power = 3[default = 0];
+    optional int32  buzhen_id = 4[default = 0];
+}
+
+message one_guild_fight_formation
+{
+    optional int32 guild_id = 1[default = 0];
+    optional uint32 total_power = 2[default = 0];
+    optional int32 grid_id = 3[default = 0];
+    optional int32 atk_buff = 7[default = 0];
+    optional int32 decalre_before_hours = 8[default = 0];
+    optional int32 occ_grid_num = 10[default = 0];
+    optional int32 occ_city_num = 11[default = 0];
+    optional one_guild_brief guild_brief = 12; 
+    repeated one_user_formation formations = 4;
+}
+
+message one_kill_rank_info
+{
+    optional int32 world_rank = 1[default = 0]; 
+    optional uint32 uid = 2[default = 0];
+    optional string name = 5[default = ""];
+    optional int32 power = 3[default = 0];
+    optional int32 kill_num = 4 [default = 0];
+    optional int32 server_id = 6 [default = 0];
+    optional int32 icon = 7 [default = 0];
+    optional string guild_name = 8 [default = ""];
+}
+
+message one_season_cfg
+{
+    optional int32 war_season = 1[default = 0];
+    repeated int32 speacial_output = 2;  /// 当季特产(产量最高前8的物品类型)
+}
+
+message one_award_item
+{
+    optional int32 item_id = 1[default = 0];
+    optional int32 item_num = 2[default = 0];
+}
+
+message kingdomwar_base_info
+{
+    optional int32 war_year = 1[default = 0];   
+    optional int32 war_season = 2[default = 0];
+    optional int32 war_day = 3[default = 0];
+    optional int32 day_status = 4[default = 0];     /// 处于当天的哪个状态  1 宣战 2攻城 3休战
+}
+
+message kingdomwar_cfg_info
+{
+    optional one_season_cfg curr_season_cfg = 1;
+    optional int32 cfg_min_world_level = 10[default = 0];
+    optional int32 cfg_min_usr_manor_level = 11[default = 0];
+    optional int32 cfg_guild_max_declare_num = 2[default = 0];
+    optional int32 cfg_max_send_troops_num = 3[default = 0];
+    optional int32 cfg_need_boat_factor = 4[default = 0]; //出兵需要战船的计算系数
+}
+
+message ntf_kingdomwar_base_info /// 
+{
+    optional int32 war_year = 1[default = 0];   
+    optional int32 war_season = 2[default = 0];
+    optional int32 war_day = 3[default = 0];
+    optional int32 day_status = 4[default = 0];     /// 处于当天的哪个状态
+
+    optional int32 cfg_min_world_level = 10[default = 0];
+    optional int32 cfg_min_usr_manor_level = 11[default = 0];
+
+    optional bool is_war_start = 5[default = false];
+}
+
+message ntf_kingdomwar_baseinfo_received  /// gamesvr to crossvr
+{
+    optional int32 day_status = 4[default = 0];     /// 处于当天的哪个状态
+}
+
+message req_test_kingdomwar
+{
+    //optional inner_battle.req_inner_battle battle_req = 1;
+}
+
+message rsp_test_kingdomwar
+{
+    optional int32 result = 1 [default = 0];
+}
+
+message req_gamesvr_register
+{
+    repeated int32 server_list = 1;
+    optional int32 server_world_level = 2[default = 0];
+    optional uint32 server_open_time = 3[default = 0];
+}
+
+message rsp_gamesvr_register
+{
+    optional int32 result = 1 [default = 0];
+}
+
+message req_declare_grid
+{
+    optional int32 grid_id = 1[default = 0];  
+
+    /// 以下内容服务器补充
+    optional int32 guild_id = 2[default = 0];
+    optional one_guild_brief guild_brief = 3;
+    optional int32 doyen = 4[default = 0];
+    optional int32 server_id = 5[default = 0];
+    ///optional bool  is_cancel = 6[default = false];
+}
+
+message rsp_declare_grid
+{
+    optional int32 result = 1 [default = 0];
+    optional int32 grid_id = 2 [default = 0];
+}
+
+/// 出兵
+message req_send_troops
+{
+    message fighter
+    {
+        optional int32 buzhen_id = 1[default = 0];
+        optional string fighter_text = 3[default = ""];
+        optional int32 fighter_power = 6[default = 0];  /// 阵容的战力
+    }
+
+    optional int32 grid_id = 1[default = 0];
+    optional bool is_cancel = 5[default = false];
+    repeated int32 buzhen_ids = 20;
+    optional bool is_own_grid = 22[default = false];;
+
+    optional int32 buzhen_id = 2[default = 0];  /// 待删
+    /// 下面的数据不用客户端填
+    repeated fighter buzhen_fighters = 21;
+    optional string fighter_text = 3[default = ""];
+    optional int32 fighter_power = 6[default = 0];  /// 阵容的战力
+    optional float die_recover_pnt = 7[default = 0];  /// 医馆恢复百分数
+    optional int32 guild_id = 4[default = 0];
+    optional int32 fighter_server_id = 8[default = 0];
+    optional common.one_user_brief user_brief = 9;
+    repeated common.one_item items = 10;
+    optional int32 total_soldier_num = 11[default = 0];  /// 总兵量
+}
+
+message rsp_send_troops
+{
+    optional int32 result = 1 [default = 0];
+    optional int32 grid_id = 5 [default = 0];
+    optional bool is_cancel = 2 [default = false];
+    repeated int32 buzhen_ids = 7;
+    optional bool is_own_grid = 22[default = false];
+    repeated one_buzhen_info all_buzhen_list = 6;
+
+    optional int32 cfg_need_boat_factor = 12[default = 0];  /// 
+    optional int32 min_water_distance = 13[default = 0];  /// 
+}
+
+message wujiang_carry_skill_info
+{
+	optional int32 skill_id = 1[default = 0];
+	optional int32 use_times = 2[default = 0];
+}
+message group_carry_attr
+{
+	optional int32 nuqi = 1[default = 0];
+	optional int32 pos = 2[default = 0];
+}
+message user_battle_statistics
+{
+	message wujiang_in_battle
+	{
+		optional int32 wujiangid = 1[default = 0];
+		optional int32 level = 2[default = 0];
+		optional int32 zhuansheng = 3;
+		
+		repeated wujiang_carry_skill_info carry_skill_info_list = 10;  //记录一些技能的使用数据 
+	}
+	message lose_army
+	{
+		optional int32 armyid = 1[default = 0];
+		optional int32 lose_num = 2[default = 0];
+		optional int32 left_num = 3[default = 0];
+		optional int32 army_type = 4[default = 0];
+		repeated wujiang_in_battle wujiang_list= 5;
+		optional int32 army_level = 6[default = 0];
+		optional int32 recover_num = 7[default = 0];
+		optional bool  is_dead = 8[default = false];
+		
+		optional group_carry_attr carry_attr = 9;  //一些需要保存的战斗中的属性
+
+		optional int32 world_boss_shape = 10[default = 0]; ///0: 蛋 1: 龙
+
+		optional int32 groupid = 20;
+	}
+	optional uint32 uid = 1[default = 0];
+	repeated lose_army lose_army_info = 2;
+	optional int32 manor_level = 3[default = 0];
+	optional int32 vip_level = 4[default = 0];
+	//repeated int32 wujiang_id_list = 4;
+	//repeated wujiang_in_battle wujiang_list= 5;
+    optional int32 buzhen_id = 200[default = 0];
+}
+
+message req_send_troops_back  // crosssvr -> gamesvr
+{
+    optional uint32 guild_id = 1[default = 0];
+    repeated user_battle_statistics stat_list = 2;
+}
+
+message rsp_send_troops_back // gamesvr -> crosssvr
+{
+    optional int32 result = 1 [default = 0];
+    optional uint32 guild_id = 3[default = 0];
+    //optional uint32 uid_list = 2 [default = 0];
+}
+
+message req_pannel_info
+{
+    /// 以下服务器补充, 客户端不用填数据
+    optional common.one_user_brief user_brief = 1;
+}
+
+message server_buff_info
+{
+    optional int32 count_days = 1 [default = 0];  /// 计算天数
+    optional int32 fade_days = 2 [default = 0];   /// 衰减天数
+    optional float fight_buff = 3 [default = 0];  /// 战斗buff数值
+    optional float recover_buff = 4 [default = 0]; /// 恢复buff数值
+
+    optional bool has_buff = 7 [default = true]; /// 是否有buff
+
+    optional int32 dist_id = 8 [default = 0];  /// 本服id
+    optional int32 first_dist_id = 9 [default = 0];  /// 首服id
+}
+
+message one_buzhen_info
+{
+    optional int32 buzhen_id = 1 [default = 0]; 
+    optional int32 buzhen_grid = 2 [default = 0]; /// 请求消息的玩家的布阵信息
+}
+
+message rsp_pannel_info
+{
+    optional int32 result = 1 [default = 0];
+    optional world_map_overview map_overview = 2;  /// 地图总览 
+    optional one_guild_info guild_info = 3;
+    optional kingdomwar_base_info base_info = 6;
+    optional kingdomwar_cfg_info cfg_info= 7;
+    optional uint32 this_season_output_time = 8; /// 当季产出时间
+
+    optional int32 buzhen_id = 4 [default = 0];   /// 待删
+    optional int32 buzhen_grid = 5 [default = 0]; /// 待删 请求消息的玩家的布阵信息
+
+    optional server_buff_info buff_info = 9; ///buff
+    optional bool can_take_buff = 10[default = false];  /// 玩家是否能领取buff
+    optional bool has_take_buff = 11[default = false];  /// 玩家是否已领取buff
+    optional bool has_season_report = 12[default = false]; /// 是否有季报(周报)
+    repeated one_buzhen_info all_buzhen_list = 13;  /// 玩家已经出兵的信息
+    optional int32 curr_stat_left_time = 14 [default = 0];  /// 当前阶段剩余时间 
+}
+
+message req_buff_info
+{
+
+}
+
+message rsp_buff_info
+{
+    optional int32 result = 1 [default = 0];
+    optional uint32 uid = 2 [default = 0];
+    optional server_buff_info buff_info = 9; ///buff
+    optional bool can_take_buff = 10[default = false];  /// 请求者玩家是否能领取buff
+    optional bool has_take_buff = 11[default = false];  /// 请求者玩家是否已领取buff
+}
+
+message req_take_buff
+{
+
+}
+
+message rsp_take_buff
+{
+    optional int32 result = 1[default = 0];
+    optional bool has_take_buff = 11[default = false];  /// 玩家是否已领取buff
+}
+
+message req_close_pannel
+{
+
+}
+
+message rsp_close_pannel
+{
+
+    optional int32 result = 1 [default = 0];
+}
+
+message req_grid_info
+{
+    optional int32 grid_id = 1[default = 0];
+}
+
+message rsp_grid_info
+{
+    optional int32 result = 1 [default = 0];
+    optional grid_brief brief = 2;
+    repeated one_declare_info bedeclared_list = 3; /// 被宣战列表
+    optional one_battle_result battle_result = 4;  /// 简要的战斗结果 
+
+    optional int32 defender_num = 5[default = 0];
+    optional int64 sum_defender_power = 6[default = 0];
+}
+
+message req_grid_fight_formation  /// 查看攻守阵容
+{
+    optional int32 grid_id = 1[default = 0];
+}
+
+message rsp_grid_fight_formation
+{
+    optional int32 result = 5[default = 0];
+    optional int32 grid_id = 1[default = 0];
+    optional one_guild_fight_formation def_formation = 2;
+    repeated one_guild_fight_formation atk_formations = 3;
+    optional uint64 atk_formation_power = 4; /// 进攻方总战力
+    optional int32 def_buff = 6[default = 0];
+}
+
+message req_grid_battle_detail
+{
+    optional int32 grid_id = 1[default = 0];
+}
+
+message rsp_grid_battle_detail
+{
+    optional int32 result = 1[default = 0];
+    optional int32 grid_id = 2[default = 0];
+    repeated one_fight_record fight_record = 3;
+    optional uint64 atk_total_power = 4[default = 0];
+    optional uint64 def_total_power = 5[default = 0];
+}
+
+message req_today_news  /// 今日战况
+{
+
+}
+
+message rsp_today_news 
+{
+    optional int32 result = 1 [default = 0];
+    repeated one_declare_info declare_news = 2;  /// 宣战和战斗阶段有效
+    repeated one_battle_result battle_news = 3;  /// 休战阶段有效
+}
+
+
+message req_kill_rank_info
+{
+
+}
+
+message rsp_kill_rank_info
+{
+    optional int32 result = 3[default = 0];
+    repeated one_kill_rank_info kill_rank_in_guild = 1;
+    repeated one_kill_rank_info kill_rank_in_world = 2;
+}
+
+message req_send_season_output /// 产出   crosssvr --> gamesvr
+{
+    optional int32 grid_id = 1[default = 0];
+    optional string grid_name = 2[default = ""];
+    optional uint32 guild_id = 3[default = 0];
+    optional int32 season = 4[default = 0];
+    repeated uint32 join_uids = 6;
+    repeated one_award_item awards = 5;
+	optional int32 year = 7[default = 0];
+}
+
+message rsp_send_season_output
+{
+    optional int32 result = 1[default = 0];
+    optional int32 grid_id = 2[default = 0];
+}
+
+message req_send_state_season_award
+{
+    optional int32 state_id = 1[default = 0];
+    optional string state_name = 2[default = ""];
+    optional uint32 guild_id = 3[default = 0];
+    optional int32 season = 4[default = 0];
+    repeated one_award_item awards = 5;
+	optional int32 year = 7[default = 0];
+}
+
+message rsp_send_state_season_award
+{
+    optional int32 result = 1[default = 0];
+    optional int32 state_id = 2[default = 0];
+}
+
+message req_kingdomwar_gm
+{
+    optional string cmd = 1[default = ""];
+    optional int32  param1 = 2[default = 0];
+    optional int32  param2 = 3[default = 0];
+    optional int32  param3 = 4[default = 0];
+    optional uint32 uid = 5[default = 0];
+}
+
+message rsp_kingdomwar_gm
+{
+    optional int32 result = 1 [default = 0];
+}
+
+message ntf_entry_day_status
+{
+    optional int32 entry_status = 4[default = 0];
+
+    optional int32 war_year = 1[default = 0];   
+    optional int32 war_season = 2[default = 0];
+    optional int32 war_day = 3[default = 0];
+}
+
+message ntf_grid_declare_info
+{
+    optional one_declare_info declare_info = 1;
+
+    optional one_guild_brief bedeclared_guild_brief = 5;
+    optional string grid_name = 6[default = ""];
+}
+
+message ntf_one_fight_result
+{
+    optional uint32 winner_uid = 1[default = 0];
+    optional common.one_user_brief atk_user_brief = 2;
+    optional common.one_user_brief def_user_brief = 3;
+    optional int32 grid_id = 4[default = 0];
+    optional string battle_id = 5[default = ""];
+}
+
+message ntf_one_guild_fight_result
+{
+    optional uint32 winner_guild_id = 1[default = 0];
+    optional int32 grid_id = 2[default = 0];
+    optional one_guild_brief atk_guild_brief = 3;
+    optional one_guild_brief def_guild_brief = 4;
+}
+
+message ntf_one_grid_fight_result
+{
+    optional int32 grid_id = 1[default = 0];
+    optional uint32 winner_guild_id = 2[default = 0];
+    optional one_guild_brief def_guild_brief = 3;
+    repeated one_guild_brief atk_guild_brief_list = 4;
+}
+
+message ntf_grid_occupied_info
+{
+
+}
+
+message ntf_guild_occupy_info
+{
+    optional uint32 guild_id = 1 [default = 0];
+    repeated int32 occ_grids = 4;  /// 完整的占领列表
+}
+
+message req_player_login_check_red_point  /// 服务器内部使用 gamesvr --> crosssvr
+{
+    optional uint32 last_logout_time = 1[default = 0];
+}
+
+message rsp_player_login_check_red_point
+{
+    optional int32 result = 1[default = 0]; // 0表示没有消息
+}
+
+/// =============================== chat ===================================================
+message one_chat_user
+{
+    optional uint32 uid = 1 [default = 0];
+    optional string name = 3 [default = ""];
+    optional int32  icon = 6 [default = 0];
+    optional uint32 server_id = 2 [default = 0];
+    optional int32  vip_level = 7 [default = 0];
+
+    //optional uint32 guild_id = 4 [default = 0];
+    optional string guild_name = 5 [default = ""];
+}
+
+message chat_content
+{
+    optional string content = 1 [default = ""];
+    optional uint32 time = 2    [default = 0];
+}
+
+message one_chat_item
+{
+    optional one_chat_user from_user = 1;
+    optional one_chat_user to_user = 2;
+
+    optional chat_content content = 3; 
+}
+
+message one_private_chat
+{
+    optional int32 chat_id = 1 [default = 0];
+    optional one_chat_user from_user = 2;
+    optional one_chat_user to_user = 3;
+    repeated chat_content content_list = 4;
+}
+
+
+message req_all_chat_info
+{
+
+}
+
+message rsp_all_chat_info
+{
+    optional int32 result = 3;
+    repeated one_chat_item  world_chat_list = 1;    /// 世界聊天
+    repeated one_chat_item  private_chat_list = 2;    /// 私聊聊天
+
+    //repeated one_private_chat chat_list = 2;
+    //optional uint32 last_check_time = 3[default = 0];
+}
+
+message req_chat
+{
+    optional uint32 touid = 4 [default = 0]; /// 为0时表示为世界聊天
+    optional string content = 3 [default = ""];
+
+    optional common.one_user_brief from_user_brief = 5; /// 发送者的user 信息
+}
+
+message rsp_chat
+{
+    optional int32 result = 1 [default = 0];
+    optional uint32 time = 2 [default = 0];
+
+    /// 下面这两个为服务器内部使用
+    optional int32 chat_type = 3[default = 0];  /// 0 表示世界聊天， 1表示私聊
+    optional one_chat_item chat_item = 4 ;
+}
+
+message req_chat_inner
+{
+    optional uint32 touid = 4 [default = 0]; /// 为0时表示为世界聊天
+    optional string content = 3 [default = ""];
+
+
+    optional common.one_user_brief from_user_brief = 5; /// 发送者的user 信息
+    optional int32 event_id = 6 [default = 0]; /// 
+}
+
+message rsp_chat_inner
+{
+    optional int32 result = 1 [default = 0];
+    optional uint32 time = 2 [default = 0];
+
+    /// 下面这两个为服务器内部使用
+    optional int32 chat_type = 3[default = 0];  /// 0 表示世界聊天， 1表示私聊
+    optional one_chat_item chat_item = 4 ;
+
+    optional int32 event_id = 5 [default = 0]; /// 
+}
+
+message ntf_one_chat_item
+{
+
+    optional int32 chat_type = 1[default = 0];  /// 0 表示世界聊天， 1表示私聊
+    optional one_chat_item chat_item = 2 ;
+
+    optional int32 event_id = 3 [default = 0]; /// 私聊才有
+    /// 下面不需要了
+    //optional int32 chat_id = 1 [default = 0];  /// 0 表示世界聊天
+}
+/// =============================== chat end ===================================================
+
+message ntf_update_gamesvr_world_level
+{
+    repeated int32 server_list = 1;
+    optional int32 world_level = 2[default = 0];
+}
+
+message ntf_update_guild_info
+{
+	optional int32 guild_id = 1[default = 0];
+	optional int32 level = 2[default = 0];
+	optional string name = 3[default = ""];
+	optional int32 flag_icon = 4[default = 0];
+	optional int32 icon = 5[default = 0];
+	optional string master_name = 6[default = ""];
+	optional int32 master_uid = 7[default = 0];
+    optional int32 server_id = 8[default = 0];
+}
+
+message ntf_update_user_info
+{
+    optional common.one_user_brief user_brief = 1;
+
+	//optional int32 uid = 1[default = 0];
+	//optional int32 guild_id = 2[default = 0];
+	//optional int32 manor_level = 3[default = 0];
+	//optional string name = 4[default = ""];
+	//optional int32 icon = 5[default = 0];
+	//optional int32 vip_level = 6[default = 0];
+}
+
+message ntf_remove_user_from_kingdomwar
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 guild_id = 2[default = 0];
+}
+
+
+message one_rank_award
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 rank = 2[default = 0];
+	repeated one_award_item award_list = 3;
+}
+
+message ntf_send_kingdongwar_rank_award
+{
+	optional int32 svr_id = 1[default = 0];
+	repeated one_rank_award svr_all_rank_award = 2;
+}
+
+message test_ntf_cross_send_award
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 rank = 2[default = 0];
+}
+
+message req_update_users_guilds
+{
+    repeated uint32 uid_list = 1;
+    repeated uint32 guild_id_list = 2;
+}
+
+message rsp_update_users_guilds
+{
+    optional int32 result = 1[default = 0];
+    repeated common.one_user_brief user_brief_list = 2;
+    repeated one_guild_brief guild_brief_list = 3;
+}
+
+message req_grid_donation_info
+{
+    optional int32 grid_id = 1[default = 0];
+}
+
+message rsp_grid_donation_info
+{
+    optional int32 result = 1[default = 0];
+    optional int32 grid_id = 2[default = 0];
+    optional int32 level = 7[default = 0];
+    repeated one_donation_progress donation_info = 3; 
+
+    optional int32 today_donate_times = 4[default = 0];
+    optional int32 max_donate_times = 5[default = 0];
+    optional int32 donate_num_per_time = 6[default = 0];
+}
+
+message req_donate_grid
+{
+    optional int32 grid_id = 1[default = 0];
+    optional int32 item_id = 2[default = 0];
+}
+message rsp_donate_grid
+{
+    optional int32 result = 1[default = 0];
+    optional int32 grid_id = 2[default = 0];
+    repeated one_donation_progress donation_info = 3; 
+    optional int32 today_donate_times = 4[default = 0];
+
+    optional int32 reward_id = 20[default = 0]; /// 服务器使用
+    optional int32 reward_num = 21[default = 0];
+}
+
+message ntf_grid_levelup
+{
+    optional int32 grid_id = 1[default = 0];
+    optional int32 level = 2[default = 0];
+    optional string grid_name = 3[default = ""];
+
+    optional one_guild_brief guild_brief = 6;
+    optional uint32 last_donate_uid = 7[default = 0];
+}
+
+message req_guild_donate_record /// 自己家族的捐献日志
+{
+}
+
+message rsp_guild_donate_record
+{
+    optional int32 result = 1[default = 0];
+    repeated one_donation_record records = 2;
+}
+
+message req_reduct_item
+{
+    optional int32 item_id = 1[default = 0];
+    optional int32 num = 2[default = 0];
+    optional int32 reason = 3[default = 0];
+    optional uint32 uid = 4[default = 0];
+    repeated common.one_item items = 5;
+}
+
+message rsp_reduct_item
+{
+    optional int32 result = 1[default = 0];
+    optional int32 item_id = 2[default = 0];
+    optional int32 num = 3[default = 0];
+    optional int32 reason = 4[default = 0];
+    optional uint32 uid = 5[default = 0];
+    repeated common.one_item items = 6;
+}
+
+message guild_season_record
+{
+    optional one_guild_brief guild_brief = 1;
+    repeated int32 declared_grids = 2;
+    optional int32 send_troop_num = 3[default = 0];
+    optional int32 send_soldier_num = 4[default = 0];
+    optional int32 occ_grid_num = 5[default = 0];
+    optional int32 old_occ_grid_num = 6[default = 0];
+    repeated int32 lord_state = 7;
+    optional uint32 guild_id = 8[default = 0];
+    optional int32 fight_count = 9[default = 0];
+    optional int32 kill_soldier_num = 10[default = 0];
+    optional int32 die_soldier_num = 11[default = 0];
+}
+
+message user_season_record
+{
+    optional common.one_user_brief user_brief = 1;
+    optional uint32 uid = 2[default = 0];
+    optional int32 send_soldier_num = 3[default = 0];
+    optional float send_soldier_rank_ratio = 4[default = 0];
+    optional int32 kill_soldier_num = 5[default = 0];
+    optional float kill_soldier_rank_ratio = 6[default = 0];
+    optional int32 die_soldier_num = 7[default = 0];
+    optional int32 fight_count = 8[default = 0];
+}
+
+message req_season_record
+{
+}
+
+message guild_grids_diff
+{
+    optional int32 guild_id = 1[default = 0];
+    repeated int32 old_grids = 2;
+    repeated int32 new_grids = 3;
+}
+
+message rsp_season_record
+{
+    optional int32 result = 1[default = 0];
+
+    optional guild_season_record own_guild_season_record = 2; 
+    optional user_season_record  own_season_record = 3;
+    optional uint32 begin_time = 4[default = 0];
+    optional uint32 end_time = 5[default = 0];
+
+    // user
+    optional common.one_user_brief user_max_kill = 10;
+    optional int32 user_max_kill_num = 11[default = 0];
+
+    // guild
+    optional one_guild_brief guild_max_soldier = 50;  /// 出兵最多
+    optional int32 guild_max_soldier_num = 51[default = 0];
+    optional one_guild_brief guild_max_kill = 52;  /// 歼敌最多
+    optional int32 guild_max_kill_num = 53[default = 0];
+
+    optional one_guild_brief guild_max_new_occ = 54;  /// 扩张最多
+    optional int32 guild_max_new_occ_num = 55[default = 0];
+    optional guild_grids_diff guild_max_new_occ_diff = 60;
+
+    optional one_guild_brief guild_max_lost_grid = 56;  /// 失地最多
+    optional int32 guild_max_lost_grid_num = 57[default = 0];
+    optional guild_grids_diff guild_max_lost_diff = 61;
+
+    repeated one_guild_brief new_guilds = 58;
+    repeated one_state_lord_brief new_state_lords = 59;
+
+    // grid
+    optional int32 grid_max_soldier_in = 100[default = 0]; // 最多集结士兵地块
+    optional int32 max_soldier_in_num = 101[default = 0];
+
+    optional int32 grid_max_soldier_die = 102[default = 0]; // 最多阵亡士兵的地块
+    optional int32 max_soldier_die_num = 103[default = 0];
+    optional int32 grid_max_soldier_die_fight_count = 104[default = 0]; // 最多阵亡士兵的地块 的战斗次数
+}
+
+message req_guild_output_info
+{
+    optional uint32 guild_id = 1[default = 0];
+}
+message rsp_guild_output_info
+{
+    message grid_output
+    {
+        optional int32 grid_id = 1[default = 0];
+        repeated common.one_item items = 2;
+        optional int32 level = 3;
+    }
+    optional int32 result = 1[default = 0];
+    optional uint32 guild_id = 2[default = 0];
+    optional one_guild_brief guild_brief = 3; 
+    repeated grid_output grid_output_list = 4;
+}
+
+message ntf_kingdomwar_state_lord_info
+{
+    repeated one_state_lord_brief all_stat_lord_info = 1;
+}
+
+message req_mijing_info
+{
+    optional int32 mijing_id = 1[default = 0];
+}
+
+message rsp_mijing_info
+{
+    optional int32 result = 1[default = 0];
+    optional int32 has_send_type = 2[default = 0];
+}
+
+message req_explore_mijing
+{
+    optional int32 mijing_id = 1[default = 0];
+    optional int32 type = 2[default = 0];
+
+    // 以下不用客户端填
+    optional one_item need_item = 20;
+}
+
+message rsp_explore_mijing
+{
+    optional int32 result = 1[default = 0];
+    optional int32 mijing_id = 2[default = 0];
+    optional int32 type = 3[default = 0];
+
+    optional one_item need_item = 20;
+}
+
+message ntf_mijing_explore_result
+{
+    optional uint32 uid = 1[default = 0];
+    optional int32 mijing_id = 2[default = 0];
+    optional int32 type = 3[default = 0];
+    optional string mijing_name = 4[default = ""];
+    repeated one_item normal_awards = 5;
+    repeated one_item speacial_awards = 6;
+    optional one_item back_item = 7;
+}
+
+message ntf_mijing_explore_all_finished
+{
+
+}

@@ -1,0 +1,32 @@
+package video;
+import "common.proto";
+
+message video_addition_info
+{
+	optional common.battle_settle settle = 1;
+}
+
+message req_video
+{
+	optional string video_id = 1[default = ''];
+	optional int32  video_type = 2[default = 0]; // 0 其它， 1 跨服国战, 2 
+}
+
+message rsp_video
+{
+	optional int32 result = 1[default = 0];	//0成功，-1没有该录像
+	optional bytes video_stream = 2[default = ''];
+	optional bytes addition_stream = 3[default = '']; //video_addition_info
+}
+
+message req_video_brief
+{
+	optional string video_id = 1[default = ''];
+	optional int32  video_type = 2[default = 0]; // 0 一般, 1 跨服国战, 2 跨服乱斗
+}
+
+message rsp_video_brief
+{
+	optional int32 result = 1[default = 0];	//0成功，-1没有该录像
+	optional bytes brief_stream = 2[default = ''];
+}

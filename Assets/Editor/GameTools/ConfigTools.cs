@@ -7,30 +7,20 @@ public class ConfigTools : EditorWindow
 {
     private static string xlsxFolder = string.Empty;
     private static string protoFolder = string.Empty;
-    private static string saveFile = Application.persistentDataPath + "/_configFolder.txt";
 
     private bool xlsxGenLuaFinished = false;
     private bool protoGenLuaFinished = false;
 
-    [MenuItem("Tools/GenLuaConfig")]
+    static ConfigTools()
+    {
+        ReadPath();
+    }
+
+    [MenuItem("Tools/LuaConfig")]
     static void Init()
     {
         GetWindow(typeof(ConfigTools));
-    }
-
-    private void OnEnable()
-    {
-        if (File.Exists(saveFile))
-        {
-            using (FileStream fs = File.OpenRead(saveFile))
-            {
-                using (StreamReader sr = new StreamReader(fs))
-                {
-                    xlsxFolder = sr.ReadLine();
-                    protoFolder = sr.ReadLine();
-                }
-            }
-        }
+        ReadPath();
     }
 
     private void OnGUI()
@@ -238,13 +228,15 @@ public class ConfigTools : EditorWindow
         SavePath();
     }
 
-    private void SavePath()
+    static private void SavePath()
     {
-        FileStream configFile = new FileStream(saveFile, FileMode.Create, FileAccess.Write);
-        StreamWriter configSW = new StreamWriter(configFile);
-        configSW.WriteLine(xlsxFolder);
-        configSW.WriteLine(protoFolder);
-        configSW.Close();
-        configFile.Close();
+        EditorPrefs.SetString("xlsxFolder", xlsxFolder);
+        EditorPrefs.SetString("protoFolder", protoFolder);
+    }
+
+    static private void ReadPath()
+    {
+        xlsxFolder = EditorPrefs.GetString("xlsxFolder");
+        protoFolder = EditorPrefs.GetString("protoFolder");
     }
 }

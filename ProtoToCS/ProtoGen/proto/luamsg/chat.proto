@@ -1,0 +1,343 @@
+package chat;
+
+message req_world_speak
+{
+	optional string words = 1[default = ''];//发言内容
+	optional int32 event_id = 2[default = 0];	//事件ID类型
+}
+
+message rsp_world_speak
+{
+	optional int32 result = 1[default = 0];
+	optional int32 remain_world_speak_times = 2[default = 0];
+	optional int32 event_id = 3[default = 0];	//事件ID类型
+}
+
+message one_chat_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 use_icon = 2[default = 0];	//使用的头像
+	optional int32 level = 3[default = 0];	//等级
+	optional string user_name = 4[default = ''];
+	optional string words = 6[default = ''];
+	optional string guild_name = 7[default = ''];
+	optional int32 sex = 8[default = 0];
+	optional int32 event_id = 9[default = 0];	//事件ID类型
+	optional uint32 from_uid = 10[default = 0];  //发送者的uid
+	optional int32 dist_id = 11[default = 0];  /// 对方的dist_id
+	optional uint32 to_uid = 12[default = 0];  //
+}
+
+message one_chat_user
+{
+	optional uint32 uid = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32  dist_id = 3[default = 0]; ///
+}
+
+message ntf_world_speak
+{
+	optional one_chat_info chat_info = 1;
+}
+
+message req_private_speak
+{
+	optional string words = 1[default = ''];//发言内容
+	optional uint32 target_uid = 2[default = 0];
+	optional int32 event_id = 3[default = 0];	//事件ID类型
+	optional string target_name = 4[default = ''];
+	optional int32 speak_type = 5[default = 0];//聊天的类型1为按名字查找类型
+}
+
+message rsp_private_speak
+{
+	optional int32 result = 1[default = 0];//0代表发送成功，-1代表玩家不在线
+	optional uint32 uid = 2[default = 0];
+	optional int32 level = 3[default = 0];	//等级
+	optional string user_name = 4[default = ''];
+	optional string words = 6[default = ''];
+	optional string guild_name = 7[default = ''];
+	optional int32 dist_id = 8[default = 0];
+}
+
+message ntf_private_speak
+{
+	optional one_chat_info chat_info = 1;
+}
+
+message one_blacklist_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 use_icon = 2[default = 0];	//使用的头像
+	optional int32 level = 3[default = 0];	//等级
+	optional string user_name = 4[default = ''];
+}
+
+message req_get_blacklist
+{
+
+}
+
+message rsp_get_blacklist
+{
+	optional int32 result = 1[default = 0];
+	repeated one_blacklist_info blacklist = 2;
+}
+
+message req_add_blacklist
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message rsp_add_blacklist
+{
+	optional int32 result = 1[default = 0];//0表示成功，-1表示人数上限已经满了,-2表示没有这个玩家
+	optional one_blacklist_info blacklist_info = 2;
+}
+
+message req_del_blacklist
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message rsp_del_blacklist
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 uid = 2[default = 0];
+}
+
+message req_guild_speak
+{
+	optional string words = 1[default = ''];//发言内容
+	optional int32 event_id = 2[default = 0];	//事件ID类型
+}
+
+message rsp_guild_speak
+{
+	optional int32 result = 1[default = 0];
+}
+
+message ntf_guild_speak
+{
+	optional one_chat_info chat_info = 1;
+}
+
+message one_player
+{
+	optional string name = 1[default = ''];
+}
+
+//公告相关
+message one_special_award
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+
+message one_wujiang
+{
+	optional int32 wujiang_id = 1[default = 0];
+	optional int32 star = 2[default = 0]; 
+	optional int32 juexing_id = 3[default = 0];
+}
+
+message one_guild
+{
+	optional int32 guild_level = 1[default = 0];
+	optional string guild_name = 2[default = ''];
+}
+
+message sever_notice//服公告
+{
+	optional string msgbody = 1[default = ''];
+}
+
+message get_wujiang
+{
+	optional one_player player1 = 1;
+	optional one_wujiang wujiang1 = 2;
+}
+
+message kill_boss
+{
+	optional one_player player1 = 1;
+	optional int32 take_time = 2[default = 0];
+	optional int32 boss_id = 3[default = 0];
+}
+
+message guild_levelup
+{
+	optional one_player player1 = 1;
+	optional one_guild guild = 2;
+}
+
+message today_arena
+{
+	optional one_player player1 = 1;
+}
+
+message warlords_kill
+{
+	optional string name = 1[default = '']; //玩家名
+	optional string guild_name = 2[default = '']; //军团名
+	optional uint32 war_id = 3[default = 0]; //副本id
+	optional int32 awards =  4[default = 0]; //击杀奖励 元宝
+}
+
+message warlords_occupy
+{
+	optional string guild_name = 1[default = '']; //军团名
+	optional uint32 war_id = 2[default = 0]; //副本id
+}
+
+message ntf_special_speak
+{
+	optional int32 msgtype = 1[default = 0];//公告类型
+	optional sever_notice sever_notice = 2;//停服公告
+	optional get_wujiang get_wujiang = 3;//获得武将公告
+	optional kill_boss kill_boss = 4;//杀死世界boss公告
+	optional guild_levelup guild_levelup = 5;//军团等级提升公告
+	optional today_arena today_arena = 6;//竞技场登顶公告
+	optional warlords_kill warlords_kill = 7;//群雄逐鹿击杀公告
+	optional warlords_occupy warlords_occupy = 8;//群雄逐鹿军团占领公告
+	optional get_wujiang get_dianjiang_wujiang = 9;//获得点将武将公告
+	optional string plain_words = 10;//直接显示文字
+}
+
+message jion_guild
+{
+	optional one_player player1 = 1;
+}
+message exit_guild
+{
+	optional one_player player1 = 1;
+}
+message post_deploy_guild
+{
+	optional one_player player1 = 1;
+	optional string old_post =2;
+	optional string curr_post = 3;
+}
+message post_rename
+{
+	optional one_player player1 = 1;
+	optional string old_name = 2[default = ''];
+	optional string curr_name = 3[default = ''];
+}
+message change_apply_condition
+{
+	optional one_player player1 = 1;
+	optional int32 jion_type = 2[default = 0];//验证类型，0需要验证，1不需要验证,2不允许加入
+	optional int32 need_level = 3[default = 0];//需要的等级
+}
+message allot_item
+{
+	optional one_player player1 = 1;
+	optional int32 item_id = 2;
+}
+message war_item
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+message get_war_item
+{
+	optional one_player player1 = 1;
+	repeated war_item war_item_list = 2;
+}
+message guild_called
+{
+	optional int32 left_time = 1[default = 0];
+	optional string user_name = 2[default = ""];
+	optional int32 city_id = 3[default = 0];
+}
+
+message ntf_guild_special_speak
+{
+	optional int32 msgtype = 1[default = 0];//公告类型
+	optional jion_guild jion_guild = 2;//加入军团公告
+	optional exit_guild exit_guild = 3;
+	optional post_deploy_guild post_deploy_guild = 4;
+	optional post_rename post_rename = 5;
+	optional change_apply_condition change_apply_condition = 6;
+	optional allot_item allot_item = 7;
+	optional get_war_item get_war_item = 8;
+	optional guild_called guild_called = 9;
+}
+
+message ntf_ban_speak
+{
+	optional int32 if_ban_speak = 1[default = 0];//1为被禁言，0为未被禁言
+	optional int32 ban_speak_time = 2[default = 0];//被禁言时间
+}
+
+message one_last_speak
+{
+	optional one_chat_info chat_info = 1;
+	optional int32 time = 2[default = 0];
+}
+message req_guild_last_ten_speak
+{
+
+}
+message rsp_guild_last_ten_speak
+{
+	optional int32 result = 1[default = 0];
+	repeated one_last_speak msg_list = 2;
+}
+message req_world_last_ten_speak
+{
+
+}
+message rsp_world_last_ten_speak
+{
+	optional int32 result = 1[default = 0];
+	repeated one_last_speak msg_list = 2;
+}
+
+message req_complaint
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message rsp_complaint
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_private_last_speak
+{
+
+}
+
+message rsp_private_last_speak
+{
+	optional int32 result = 1[default = 0];
+	repeated one_last_speak msg_list = 2;
+	repeated one_chat_user user_list = 3;  //私聊人员名单
+}
+
+// 通知有离线消息
+message ntf_have_message
+{
+	repeated uint32 user_list = 1;
+}
+
+// 请求离线消息
+message req_leave_message
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message rsp_leave_message
+{
+	message one_leave_message
+	{
+		optional uint32 uid = 1[default = 0];
+		optional string content = 2[default = ''];
+		optional int32 time = 3[default = 0];
+	}
+	
+	optional int32 result = 1[default = 0];
+	repeated one_leave_message leave_message_list = 2;
+}

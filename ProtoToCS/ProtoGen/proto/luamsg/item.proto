@@ -1,0 +1,114 @@
+package item;
+
+import "common.proto";
+
+message req_item_list
+{
+
+}
+
+message rsp_item_list
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_item item_list = 2;
+}
+
+
+message notify_item_chg
+{
+	repeated common.one_item chg_item_list = 1;	//改变的道具列表
+	optional int32 reason = 2[default = 0];		//1:生产，。。。
+}
+
+//道具合成
+message req_item_blend
+{
+	optional int32 recipe_id = 1[default = 0];	//配方ID
+}
+
+message rsp_item_blend
+{
+	optional int32 result = 1[default = 0];//0成功，-1代表材料不足，-2金币不够
+	optional int32 recipe_id = 2[default = 0];
+}
+
+//合成单元
+message one_item_blend
+{
+	optional int32 recipe_id = 1[default = 0];//配方id
+	optional int32 count = 2[default = 0];//合成数量	
+}
+
+//道具列表合成
+message req_item_list_blend
+{
+	repeated one_item_blend item_blend_list = 1;	//合成列表
+}
+
+message rsp_item_list_blend
+{
+	optional int32 result = 1[default = 0];//0成功，-1代表材料不足
+}
+
+//武将信物分解
+message req_xinwu_breakup
+{
+	optional int32 item_id = 1[default = 0];//欲分解的信物ID
+	optional int32 count = 2[default = 0];	//分解的信物数量
+}
+
+message rsp_xinwu_breakup
+{
+	optional int32 result = 1[default = 0];
+	optional int32 count = 2[default = 0];	//分解的信物数量
+	optional int32 jinghua = 3[default = 0];	//得到的精华
+	optional int32 item_id = 4[default = 0];//欲分解的信物ID
+}
+
+//装备碎片分解
+message req_equip_breakup
+{
+	optional int32 item_id = 1[default = 0];//欲分解的信物ID
+	optional int32 count = 2[default = 0];	//分解的信物数量
+}
+
+message rsp_equip_breakup
+{
+	optional int32 result = 1[default = 0];
+	optional int32 count = 2[default = 0];	//分解的数量
+	optional int32 intensify = 3[default = 0];	//得到的强化值
+	optional int32 item_id = 4[default = 0];//分解的ID
+}
+
+message req_use
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 1];
+}
+
+message rsp_use
+{
+	optional int32 result = 1[default = 0];
+	optional int32 count = 2[default = 1];
+	repeated common.award_info award_list = 3;
+	optional int32 item_id = 4[default = 0];
+}
+
+message req_exchange
+{
+	optional int32 type = 1[default = 0];	// 1:战魂 2:元宝
+	optional int32 item_id = 2[default = 0];
+	optional int32 count = 3[default = 0];
+}
+
+message rsp_exchange
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+
+message ntf_unlock_item_chg
+{
+	repeated int32 unlock_item_list = 1;//建筑解锁的道具列表
+}

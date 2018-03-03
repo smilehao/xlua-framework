@@ -1,0 +1,12 @@
+package ui;
+
+message ntf_show_errcode
+{
+	optional int32 result = 1[default = 0];
+}
+
+message ntf_show_message
+{
+	optional string message = 1[default =''];
+	optional int32 msg_type = 2[default = 0];//0飘字，1弹框
+}

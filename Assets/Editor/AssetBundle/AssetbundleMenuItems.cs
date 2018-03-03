@@ -14,55 +14,84 @@ using System.IO;
 
 namespace AssetBundles
 {
+    // unity editor启动和运行时调用静态构造函数
     [InitializeOnLoad]
     public class AssetBundleMenuItems
     {
         //%:ctrl,#:shift,&:alt
         const string kSimulateMode = "AssetBundles/Switch Model/Simulate Mode";
         const string kEditorMode = "AssetBundles/Switch Model/Editor Mode";
-        const string kBuildAndoridAssetbundle = "AssetBundles/Build AssetBundles/For Andorid";
-        const string kBuildIOSAssetbundle = "AssetBundles/Build AssetBundles/For IOS";
-        const string kBuildPlayer = "AssetBundles/Build Player/BuildPlayer";
-        const string kBuildStandalonePlayer = "AssetBundles/Build Player/BuildStandalonePlayer";
-        const string kToolsClearOutput = "AssetBundles/Tools/Clear Output";
-        const string kToolsClearStreamingAssets = "AssetBundles/Tools/Clear Streaming Assets";
-        const string kToolsClearPersistentAssets = "AssetBundles/Tools/Clear Persistent Assets";
-
+        const string kToolRunAllCheckers = "AssetBundles/Run All Checkers";
+        const string kToolBuildForCurrentSetting = "AssetBundles/Build For Current Setting";
+        const string kToolsCopyAssetbundles = "AssetBundles/Copy To StreamingAssets";
+        const string kToolsOpenOutput = "AssetBundles/Open Current Output";
+        const string kToolsOpenPerisitentData = "AssetBundles/Open PersistentData";
+        const string kToolsClearOutput = "AssetBundles/Clear Current Output";
+        const string kToolsClearStreamingAssets = "AssetBundles/Clear StreamingAssets";
+        const string kToolsClearPersistentAssets = "AssetBundles/Clear PersistentData";
 
         const string kCreateAssetbundleForCurrent = "Assets/AssetBundles/Create Assetbundle For Current &#z";
         const string kCreateAssetbundleForChildren = "Assets/AssetBundles/Create Assetbundle For Children &#x";
         const string kAssetDependencis = "Assets/AssetBundles/Asset Dependencis &#h";
         const string kAssetbundleAllDependencis = "Assets/AssetBundles/Assetbundle All Dependencis &#j";
         const string kAssetbundleDirectDependencis = "Assets/AssetBundles/Assetbundle Direct Dependencis &#k";
-
-        // unity editor启动和运行时调用
+        
         static AssetBundleMenuItems()
         {
-            // 1、模拟模式下在电脑上模拟手机资源更新过程，如果需要更新最新ab，需要手动构建；如果根本没有ab，则构建一次
-            // 2、模拟模式下需要用到streamingAsset，没有资源则拷贝一次，之后总是从本地服务器下载ab到persistentDataPath
-            var platformName = AssetBundleUtility.GetCurPlatformName();
-            var outputManifest = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, platformName);
-            outputManifest = Path.Combine(outputManifest, platformName);
+            CheckSimulateModelEnv();
+        }
+
+        static void CheckSimulateModelEnv()
+        {
+            if (!AssetBundleConfig.IsSimulateMode)
+            {
+                return;
+            }
+
+            var buildTargetName = PackageUtils.GetCurPlatformName();
+            var channelName = PackageUtils.GetCurSelectedChannel().ToString();
+            var outputManifest = PackageUtils.GetCurBuildSettingOutputManifestPath();
+            bool hasBuildAssetBundles = false;
             if (!File.Exists(outputManifest))
             {
-                AssetBundleBuildScript.BuildAssetBundles();
+                bool checkBuild = EditorUtility.DisplayDialog("Build AssetBundles Warning",
+                    string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\nContinue ?", buildTargetName, channelName),
+                    "Confirm", "Cancel");
+                if (!checkBuild)
+                {
+                    ToggleEditorMode();
+                    return;
+                }
+
+                hasBuildAssetBundles = true;
+                BuildPlayer.BuildAssetBundlesForCurSetting();
             }
-            var streamingManifest = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
-            streamingManifest = Path.Combine(streamingManifest, platformName);
-            streamingManifest = Path.Combine(streamingManifest, platformName);
-            if (!File.Exists(streamingManifest))
+            
+            var streamingManifest = PackageUtils.GetCurBuildSettingStreamingManifestPath();
+            if (hasBuildAssetBundles || !File.Exists(streamingManifest))
             {
-                AssetBundleUtility.CopyPlatformAssetBundlesToStreamingAssets();
-                AssetDatabase.Refresh();
+                bool checkCopy = EditorUtility.DisplayDialog("Copy AssetBundles To StreamingAssets Warning",
+                    string.Format("Copy AssetBundles to streamingAssets folder for : \n\nplatform : {0} \nchannel : {1} \n\nContinue ?", buildTargetName, channelName),
+                    "Confirm", "Cancel");
+                if (!checkCopy)
+                {
+                    ToggleEditorMode();
+                    return;
+                }
+
+                PackageUtils.CopyCurSettingAssetBundlesToStreamingAssets();
             }
             LaunchAssetBundleServer.CheckAndDoRunning();
         }
         
-        [MenuItem(kEditorMode)]
+        [MenuItem(kEditorMode, false)]
         public static void ToggleEditorMode()
         {
-            AssetBundleConfig.IsEditorMode = !AssetBundleConfig.IsEditorMode;
-            LaunchAssetBundleServer.CheckAndDoRunning();
+            if (AssetBundleConfig.IsSimulateMode)
+            {
+                AssetBundleConfig.IsEditorMode = true;
+                LaunchAssetBundleServer.CheckAndDoRunning();
+            }
         }
 
         [MenuItem(kEditorMode, true)]
@@ -75,8 +104,12 @@ namespace AssetBundles
         [MenuItem(kSimulateMode)]
         public static void ToggleSimulateMode()
         {
-            AssetBundleConfig.IsSimulateMode = !AssetBundleConfig.IsSimulateMode;
-            LaunchAssetBundleServer.CheckAndDoRunning();
+            if (AssetBundleConfig.IsEditorMode)
+            {
+                AssetBundleConfig.IsSimulateMode = true;
+                CheckSimulateModelEnv();
+                LaunchAssetBundleServer.CheckAndDoRunning();
+            }
         }
 
         [MenuItem(kSimulateMode, true)]
@@ -86,46 +119,85 @@ namespace AssetBundles
             return true;
         }
 
-        [MenuItem(kBuildAndoridAssetbundle)]
-        static public void BuildAndoridAssetBundles()
+        [MenuItem(kToolRunAllCheckers)]
+        static public void ToolRunAllCheckers()
         {
-            AssetBundleBuildScript.BuildAssetBundles(BuildTarget.Android);
-        }
-        
-        [MenuItem(kBuildIOSAssetbundle)]
-        static public void BuildIOSAssetBundles()
-        {
-            AssetBundleBuildScript.BuildAssetBundles(BuildTarget.iOS);
-        }
-        
-        [MenuItem(kBuildPlayer)]
-        static public void BuildPlayer()
-        {
-            AssetBundleBuildScript.BuildPlayer();
-        }
-        
-        [MenuItem(kBuildStandalonePlayer)]
-        static public void BuildStandalonePlayer()
-        {
-            AssetBundleBuildScript.BuildStandalonePlayer();
+            var buildTargetName = PackageUtils.GetCurPlatformName();
+            var channelName = PackageUtils.GetCurSelectedChannel().ToString();
+            bool checkCopy = EditorUtility.DisplayDialog("Run Checkers Warning",
+                string.Format("Run Checkers for : \n\nplatform : {0} \nchannel : {1} \n\nContinue ?", buildTargetName, channelName),
+                "Confirm", "Cancel");
+            if (!checkCopy)
+            {
+                return;
+            }
+
+            CheckAssetBundles.Run();
         }
 
-        [MenuItem(kToolsClearOutput)]
+        [MenuItem(kToolBuildForCurrentSetting, false, 1100)]
+        static public void ToolBuildForCurrentSetting()
+        {
+            var buildTargetName = PackageUtils.GetCurPlatformName();
+            var channelName = PackageUtils.GetCurSelectedChannel().ToString();
+            bool checkCopy = EditorUtility.DisplayDialog("Build AssetBundles Warning",
+                string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\nContinue ?", buildTargetName, channelName),
+                "Confirm", "Cancel");
+            if (!checkCopy)
+            {
+                return;
+            }
+
+            PackageTool.BuildAssetBundlesForCurrentChannel();
+        }
+
+        [MenuItem(kToolsCopyAssetbundles, false, 1101)]
+        static public void ToolsToolsCopyAssetbundles()
+        {
+            var buildTargetName = PackageUtils.GetCurPlatformName();
+            var channelName = PackageUtils.GetCurSelectedChannel().ToString();
+            bool checkCopy = EditorUtility.DisplayDialog("Copy AssetBundles To StreamingAssets Warning",
+                string.Format("Copy AssetBundles to streamingAssets folder for : \n\nplatform : {0} \nchannel : {1} \n\nContinue ?", buildTargetName, channelName),
+                "Confirm", "Cancel");
+            if (!checkCopy)
+            {
+                return;
+            }
+
+            PackageUtils.CopyCurSettingAssetBundlesToStreamingAssets();
+        }
+
+        [MenuItem(kToolsOpenOutput, false, 1201)]
+        static public void ToolsToolsOpenOutput()
+        {
+            string outputPath = PackageUtils.GetCurBuildSettingOutputPath();
+            EditorUtils.ExplorerFolder(outputPath);
+        }
+
+        [MenuItem(kToolsOpenPerisitentData, false, 1202)]
+        static public void ToolsOpenPerisitentData()
+        {
+            EditorUtils.ExplorerFolder(Application.persistentDataPath);
+        }
+
+        [MenuItem(kToolsClearOutput, false, 1302)]
         static public void ToolsClearOutput()
         {
+            var buildTargetName = PackageUtils.GetCurPlatformName();
+            var channelName = PackageUtils.GetCurSelectedChannel().ToString();
             bool checkClear = EditorUtility.DisplayDialog("ClearOutput Warning",
-                "Clear output assetbundles will force to rebuild all assetbundles, continue ?",
+                string.Format("Clear output assetbundles will force to rebuild all : \n\nplatform : {0} \nchannel : {1} \n\n continue ?", buildTargetName, channelName),
                 "Yes", "No");
             if (!checkClear)
             {
                 return;
             }
-            string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, AssetBundleUtility.GetCurPlatformName());
+            string outputPath = PackageUtils.GetCurBuildSettingOutputPath();
             GameUtility.SafeDeleteDir(outputPath);
-            Debug.Log(string.Format("Clear {0} assetbundle output done!", AssetBundleUtility.GetCurPlatformName()));
+            Debug.Log(string.Format("Clear done : ", outputPath));
         }
 
-        [MenuItem(kToolsClearStreamingAssets)]
+        [MenuItem(kToolsClearStreamingAssets, false, 1303)]
         static public void ToolsClearStreamingAssets()
         {
             bool checkClear = EditorUtility.DisplayDialog("ClearStreamingAssets Warning",
@@ -136,13 +208,12 @@ namespace AssetBundles
                 return;
             }
             string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
-            outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
-            GameUtility.SafeDeleteDir(outputPath);
+            GameUtility.SafeClearDir(outputPath);
             AssetDatabase.Refresh();
-            Debug.Log(string.Format("Clear {0} assetbundle streaming assets done!", AssetBundleUtility.GetCurPlatformName()));
+            Debug.Log(string.Format("Clear {0} assetbundle streaming assets done!", PackageUtils.GetCurPlatformName()));
         }
 
-        [MenuItem(kToolsClearPersistentAssets)]
+        [MenuItem(kToolsClearPersistentAssets, false, 1301)]
         static public void ToolsClearPersistentAssets()
         {
             bool checkClear = EditorUtility.DisplayDialog("ClearPersistentAssets Warning",
@@ -154,9 +225,8 @@ namespace AssetBundles
             }
 
             string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
-            outputPath = Path.Combine(outputPath, AssetBundleUtility.GetCurPlatformName());
             GameUtility.SafeDeleteDir(outputPath);
-            Debug.Log(string.Format("Clear {0} assetbundle persistent assets done!", AssetBundleUtility.GetCurPlatformName()));
+            Debug.Log(string.Format("Clear {0} assetbundle persistent assets done!", PackageUtils.GetCurPlatformName()));
         }
 
         [MenuItem(kCreateAssetbundleForCurrent)]
@@ -264,8 +334,7 @@ namespace AssetBundles
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                string localFilePath = AssetBundleUtility.GetBuildPlatformOutputPath(EditorUserBuildSettings.activeBuildTarget);
-                localFilePath = Path.Combine(localFilePath, AssetBundleUtility.GetCurPlatformName());
+                string localFilePath = PackageUtils.GetCurBuildSettingOutputManifestPath();
 
                 Object[] selObjs = Selection.objects;
                 var depsList = AssetBundleEditorHelper.GetDependancisFormBuildManifest(localFilePath, selObjs, isAll);

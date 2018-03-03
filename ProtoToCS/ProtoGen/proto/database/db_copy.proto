@@ -1,0 +1,7 @@
+package db;
+import 'db_common.proto';
+
+
+message Copy
+{
+}

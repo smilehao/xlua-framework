@@ -1,0 +1,230 @@
+package battle;
+
+
+message group_role
+{
+	optional int32 groupid = 1[default = 0];	
+	optional int32 fightingrole_id = 2[default = 0];	
+}
+
+message fighting_skill_info
+{
+	optional int32 skillid = 1[default = 0];
+	optional bool  fire_success = 3[default = true]; /// 是否成功施放
+	repeated int32 target_groupids = 2;
+	optional int32 overlay_num = 4[default = 0];  /// 叠加次数，有叠加功能技能的才有效
+	optional int32 wujiangid = 5[default = 0];    /// 神兵技能需要武将id才能区分
+}
+
+message attr_chang_info
+{
+	optional int32 attr_type = 1[default = 0];		
+	optional int32 reason 	 = 2[default = 0];
+	optional int32 oldval    = 3[default = 0];
+	optional int32 detaval   = 4[default = 0];  //变化值
+	optional int32 restval	 = 5[default = 0];  //剩余值
+	optional int32 effect_id = 6[default = 0];  // 显示效果id
+	optional int32 giver_sillid = 7[default = 0];  
+	optional int32 total_hp = 8[default = 0];
+	optional int32 total_remain_hp = 9[default = 0];
+
+	optional int32 baseval	 = 10[default = 0];  //基础值   武将属性会用到
+	optional int32 wujiangid = 11[default = 0];  //武将id   武将属性会用到
+	optional int32 hurttype = 12[default = 0];
+}
+
+message status_giver
+{
+	optional int32 groupid = 1[default = 0];
+	optional int32 skillid = 2[default = 0];
+	optional int32 roleid = 3[default = 0];  //  武将id
+}
+
+message one_status
+{
+	optional int32 status_index = 1[default = 0];  /// status 的索引
+	//optional int32 statustype = 5[default = 0];	  /// status类型 枚举
+	//optional int32 left_xingdongzhi = 2[default = 0];
+	optional int32 status_action = 3[default = 0]; 	/// 1: on, 2: update, 3:off, 4 : 抵挡 , 5 :被清除
+	optional status_giver statusgiver = 7;
+	optional int32 status_effect_id = 8[default = 0];
+	optional uint32 buff_flag = 9[default = 0]; ///效果类型(集合)
+	optional int32 buff_value = 10[default = 0]; ///效果当前值（>0:提升，<0:降低）
+	optional int32 buff_direct_chg = 11[default = 0]; ///实际产生的效果值（仅在update时设置）
+
+	repeated int32 targets = 12;
+	repeated int32 target_wujiang_list = 13;	/// 有些状态会作用到具体武将上(目前只有沉默状态), 为空时表示这个部队的所有武将
+}
+
+message action_effect
+{
+	optional group_role owner_info = 1; 
+	repeated attr_chang_info attr_chginfo = 3;			
+	repeated one_status statusinfo = 4;
+	optional int32  	keyframe = 5[default = 0];	/// 关键帧， 从0开始
+}
+
+message group_transform
+{
+	optional int32 groupid = 1[default = 0];	
+	optional int32 sharp = 2[default = 0];
+	optional int32 oldsharp = 3[default = 0];
+}
+
+message one_action
+{
+	optional int32 action_index = 8[default = 0];
+	optional group_role maker_info = 1; 		/// 动作主人
+	optional int32		action_type       = 3 [default = 0]; ///  1: 技能  2: 更新 3：回合结束 4: 其它 5: group变形
+	optional fighting_skill_info useskill_info = 4;  		/// 技能信息
+	repeated action_effect   effect_list = 5;	
+	optional int32		left_total_remain_hp = 6[default = 0];	/// 左方总剩余血量
+	optional int32		right_total_remain_hp = 7[default = 0];	/// 右方总剩余血量
+	optional int32   	perform_type = 9[default = 0];			/// 执行时机
+	repeated one_action shenbing_action = 10;
+	optional group_transform transform = 11;
+}
+
+message one_round
+{
+	message round_cd_info
+	{
+		optional int32 groupid = 1[default = 0];
+		optional int32 cd_before = 2[default = 0];
+		optional int32 cd_after  = 3[default = 0];
+	}
+	repeated one_action actionlist = 1; 	
+	optional int32 total_track_move_xingdongzhi = 2; /// 累计行动  
+	optional round_cd_info round_cd = 3; 
+}
+
+message fighting_role
+{
+	optional int32 roleid = 1[default = 0];	
+	optional int32 level = 2[default = 0];
+	optional int32 num = 3[default = 0];
+	optional int32 maxnum = 14[default = 0];
+	//repeated skill_info skilllist = 4;
+	repeated int32 skilllist = 4;
+	optional int32 wuli = 5[default = 0];			/// 武力
+	optional int32 zhili = 6[default = 0];			/// 智力
+	optional int32 tongshuai =7[default = 0]; 		/// 统率
+	optional int32 rolejob = 8[default = 0];			/// 兵种
+	optional int32 zhuansheng = 9[default = 0];		/// zhuangsheng
+
+	optional int32 shenbing_level = 20[default = 0];
+	optional int32 shenbing_skillid = 21[default = 0];
+	optional int32 shenbing_id = 22[default = 0];
+	
+	optional float gem_add_skill_prob = 40[default = 0];
+}
+
+message fighting_attr_info     /// 战斗属性， 一般是二级属性
+{
+	optional int32 attrtype = 1[default = 0];
+	optional int32 attrval  = 2[default = 0]; 
+}
+
+message group_carry_attr
+{
+	optional int32 nuqi = 1[default = 0];
+	optional int32 pos = 2[default = 0];
+}
+
+
+message group_info
+{
+	optional int32 groupid = 1[default = 0];  /// 
+	repeated fighting_role fightingrole_info = 2; 
+	repeated fighting_attr_info attrlist = 3;
+
+	optional int32 armyid = 4[default = 0];	//部队ID， 业务逻辑使用
+	
+	optional bool is_dead_in_battle = 5[default = false];  /// 是否在战斗中被击退
+	optional group_carry_attr carry_attr = 6;
+	optional int32 shape = 7;  ///如果是神龙boss 表示 boss形态
+	optional int32 round_cd = 8; /// 回合cd， 目前只有神龙boss有用到
+}
+
+message battle_prebattle_buff
+{
+	optional float add_phyatk_ratio = 1[default = 0];	/// 攻防增加比例
+	optional float add_phydef_ratio = 2[default = 0];
+	optional float add_magicatk_ratio = 3[default = 0];
+	optional float add_magicdef_ratio = 4[default = 0];
+	optional float world_level = 5[default = 0];
+	optional float add_speed_ratio = 6[default = 0];
+}
+
+message user_formation_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32  total_hp = 4[default = 0];
+	optional int32  total_remain_hp = 5[default = 0];
+	repeated group_info grouplist = 3;
+	optional int32 manor_level = 6[default = 0];
+	optional int32  icon = 7[default = 0];
+	optional int32 vip_level = 8[default = 0];
+
+	optional battle_prebattle_buff prebattle_buff_info = 9;
+}
+
+message user_battle_statistics
+{
+	message wujiang_in_battle
+	{
+		optional int32 wujiangid = 1[default = 0];
+		optional int32 level = 2[default = 0];
+		optional int32 zhuansheng = 3;
+	}
+	message lose_army
+	{
+		optional int32 armyid = 1[default = 0];
+		optional int32 lose_num = 2[default = 0];
+		optional int32 left_num = 3[default = 0];
+		optional int32 army_type = 4[default = 0];
+		repeated wujiang_in_battle wujiang_list= 5;
+		optional int32 army_level = 6[default = 0];
+		optional bool  is_dead = 8[default = false];
+
+		optional group_carry_attr carry_attr = 9;  //一些需要保存的战斗中的属性
+		optional int32 world_boss_shape = 10[default = 0]; ///0: 蛋 1: 龙
+
+		optional int32 groupid = 20;
+	}
+	optional uint32 uid = 1[default = 0];
+	repeated lose_army lose_army_info = 2;
+	optional int32 manor_level = 3[default = 0];
+	optional int32 vip_level = 4[default = 0];
+
+	optional int32  total_hp = 10[default = 0];
+	optional int32  total_remain_hp = 11[default = 0];
+}
+/// 战斗统计
+message statistics_info
+{
+	optional uint32 winneruid = 1[default = 0];
+
+	optional user_battle_statistics leftstatistic = 2;
+	optional user_battle_statistics Righttatistic = 3;
+	optional float total_round = 4[default = 0];
+	optional float round_limit = 5[default = 0];
+}
+
+
+message battle_info
+{
+	optional string battleid = 1[default = ''];
+	optional int32 battle_svr_version = 6[default = 0];
+	repeated one_round movelist = 2;	
+	optional user_formation_info leftformation = 3;
+	optional user_formation_info rightformation = 4;
+	optional statistics_info statisinfo = 5; 
+	optional int32 battle_type = 7[default = 0];
+	optional int32 limit_max_track_xingdongzhi = 8[default = 0];  // 本场战斗限制最大累计行动值, 为0 时表示不限制
+	optional int32 cfg_xingdong_width = 9[default = 0];   // 行动槽宽度, 最大回合数 = limit_max_track_xingdongzhi/cfg_xingdong_width 
+	optional int32 cfg_dragon_round_cd = 10[default = 0];
+	optional uint64 battle_seed = 20[default = 0];
+}
+

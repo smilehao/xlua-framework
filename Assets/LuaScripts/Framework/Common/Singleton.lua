@@ -14,6 +14,10 @@ local function __delete(self)
 	rawset(self._class_type, "Instance", nil)
 end
 
+-- 只是用于启动模块
+local function Startup(self)
+end
+
 -- 不要重写
 local function GetInstance(self)
 	if rawget(self, "Instance") == nil then
@@ -30,6 +34,7 @@ end
 
 Singleton.__init = __init
 Singleton.__delete = __delete
+Singleton.Startup = Startup
 Singleton.GetInstance = GetInstance
 Singleton.Destory = Destory
 

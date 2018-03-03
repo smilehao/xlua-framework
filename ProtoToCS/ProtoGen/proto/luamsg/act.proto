@@ -1,0 +1,458 @@
+package act;
+
+import "common.proto";
+
+message one_act_award
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+}
+
+message one_act_record
+{
+	message one_act_tag
+	{
+		optional string tag_name = 1[default = ''];	//标签名
+		optional string progress = 2[default = '']; //完成进度
+		repeated one_act_award award_list = 3;	//奖励列表
+		optional int32 price = 4[default = 0];	//购买价格
+		optional int32 btn_status = 5[default = 0];	//按钮状态:[0:不可领取][1:可领取][2:前往充值][3:购买按钮,4:已领取,5:已售罄][6:购买月票][7:可以分享,8:不可以分享][9:可以兑换,10:不可以兑换]
+		optional int32 param1 = 6[default = 0];
+		optional int32 param2 = 7[default = 0];
+		repeated one_act_award expend_list = 8;	//消耗道具列表
+		optional int32 ori_price = 9[default = 0];	//原价
+	}
+	
+	message consume_return_yuanbao_data
+	{
+		message one_label
+		{
+			optional string day = 1[default = ''];	//日期
+			optional string name1 = 2[default = ''];	//累计消费
+			optional string name2 = 3[default = ''];	//获得返利
+			optional int32 consume_yuanbao = 4[default = 0];	//消费元宝数
+			optional int32 return_yuanbao = 5[default = 0];	//返还元宝数	
+		}
+		
+		optional int32 total_return_yuanbao = 1[default = 0];	
+		repeated one_label label_list = 2;
+		optional int32 min_num_of_consume_retrun = 3[default = 0]; //达到返还规则消费的最低元宝数
+		optional int32 return_ratio = 4[default = 0];  //返还比例	
+		optional int32 label_list_pos = 5;//今日消费在label_list位置 
+	}
+	
+	//夺宝奇兵
+	message duobaoqibin
+	{
+		optional int32 box_type = 1[default = 0];
+		optional int32 start_time = 2[default = 0];
+		optional int32 end_time = 3[default = 0];
+		optional int32 status = 4[default = 0];	//是否购买
+		optional int32 curr_value = 5[default = 0];	//购买金额
+		optional int32 limit = 6[default = 0];
+		repeated one_act_award award_list = 7;	//奖励item
+	}
+	
+	message time_limit_charge
+	{
+		message rank_award_tag
+		{
+			optional string tag_name = 1[default = ''];	//标签名
+			repeated one_act_award award_list = 2;	//奖励列表
+		}
+		message score_rank_tag
+		{
+			optional string tag_name = 1[default = ''];	//标签名
+			optional string progress = 2[default = '']; //完成进度
+		}
+		
+		repeated rank_award_tag rank_award_list = 1;
+		repeated score_rank_tag score_rank_list = 2;
+		repeated one_act_award my_award_list = 3;	//自己的奖励列表
+	}
+	
+	optional uint32 act_id = 1[default = 0];
+	optional int32 act_type = 2[default = 0];
+	optional int32 start_time = 3[default = 0];	//开始时间
+	optional int32 end_time = 4[default = 0];	//结束时间
+	optional string act_name = 5[default = ''];	//活动名称
+	optional string act_content = 6[default = ''];
+	optional string act_rules = 7[default = ''];	//活动规则
+	optional int32 act_bg = 8[default = 0];	//背景编号
+	repeated one_act_tag tag_list = 9;	//活动的标签列表
+
+	optional int32 param1 = 12[default = 0];			//(年兽	0表示不显示,1表示显示; 诸葛亮抽奖 1表示显示红点)
+	optional int32 param3 = 13[default = 0];	//
+	optional consume_return_yuanbao_data consume_return_yuanbao = 15; //消费元宝返还元宝活动
+	optional int32 rank = 20[default = 0];	//排名
+	optional int32 param2 = 21[default = 0];			//
+	repeated duobaoqibin duobaoqibin_list = 22;	//夺宝奇兵
+	optional time_limit_charge time_limit_charge_info = 23;		//限时充值
+	optional int32 param4 = 24[default = 0]; //聚宝盆充值截止时间
+	
+}
+
+message req_act_list
+{
+	repeated uint32 cached_act_id_list = 1;	//客户端已经缓存过的活动id
+}
+
+message rsp_act_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_act_record act_list = 2;	//活动列表
+	repeated uint32 red_tips_list = 3;	//红点提示活动列表
+}
+
+message req_read_list
+{
+	repeated uint32 read_act_id_list = 1;	//客户端已经浏览过的活动id
+}
+
+message rsp_read_list
+{
+	optional int32 result = 1[default = 0];
+	repeated uint32 red_tips_list = 2;	//红点提示活动列表
+}
+
+message req_take_award
+{
+	optional uint32 act_id = 1[default = 0];
+	optional int32 tag_index = 2[default = 0];	//标签序号，从1开始
+	optional int32 param1 = 3[default = 0];
+}
+
+message rsp_take_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 tag_index = 2[default = 0];	//标签序号，从1开始
+	repeated common.award_info award_list = 3;	//奖励
+	optional uint32 act_id = 4[default = 0];
+}
+
+message ntf_act_chg
+{
+	optional one_act_record act_info = 1;	//变化了的活动
+}
+
+message ntf_7d_act_chg
+{
+	optional one_act_record act_info = 1;	//变化了的活动
+}
+
+message req_act_share
+{
+	optional int32 share_type = 1[default = 0];
+	optional int32 cond = 2[default = 0];
+	optional uint32 act_id = 3[default = 0];
+}
+message rsp_act_share
+{
+	optional int32 result = 1[default = 0];
+}
+message ntf_red_spot
+{
+	repeated int32 act_type_list = 1;
+}
+
+message req_buy_jubaopen
+{
+	optional int32 buy_baopen_id = 1[default = 0]; //从左至右宝盆id分别为1,2,3
+}
+
+message rsp_buy_jubaopen
+{
+	optional int32 result = 1[default = 0];
+}
+
+
+message req_turntable_interface
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_turntable_interface
+{
+	message leiji_award
+	{
+		optional int32 award_num=1[default = 0];		//领奖条件
+		repeated common.one_item award_list = 2;          //宝箱奖励
+		optional int32 btn_status=3[default = 0];	//按钮	
+	}
+	optional int32 result = 1[default = 0];	
+	optional int32 act_id = 2[default = 0];
+	optional int32 act_end_time=3;
+	repeated common.one_item lottery_list=5;	//抽奖奖品列表
+	optional int32 once_yuanbao=6;//抽一次元宝
+	optional int32 ten_yuanbao=7;//抽十次元宝
+	optional int32 lottery_num=8;//今日累计转动次数
+	repeated leiji_award leiji_award_list=9;//抽奖累计奖励列表
+	optional int32 vip_level = 11[default = 0];
+	optional int32 act_status = 12[default = 0];// 12:未开始  其他：开始
+	repeated int32 goodthing_index_list = 13;//好东西 lottery_list中的index
+	optional string xinwu_info = 14[default = ''];
+}
+
+message req_turntable_lottery
+{
+	optional int32 lottery_num=1;
+}
+
+message rsp_turntable_lottery
+{
+	optional int32 result = 1[default = 0];
+	optional int32 lottery_pos = 2[default = 0];//抽一次奖指向位置位置从1开始  -1表示抽十次
+	repeated common.award_info award_list = 3;		//抽十次得到的奖励列表
+	repeated int32 goodthing_index_list = 4;//好东西 在award_list中的index
+	optional string xinwu_info = 5[default = ''];
+}
+
+message req_once_lottery_award
+{
+}
+
+message rsp_once_lottery_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_data=2;//抽一次得到的奖励物品
+}
+
+message req_get_today_lottery_award
+{
+	optional int32 tag_index=1;//1,2,3分别为抽奖次数从小到大奖励
+}
+
+message rsp_get_today_lottery_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 tag_index = 2;//1,2,3分别为抽奖次数从小到大奖励
+}
+
+message req_duobaoqibin_record
+{
+	optional int32 box_type = 1[default = 0];	//1:神秘宝箱，2：华贵宝箱，3：绝世宝箱
+}
+
+message duobaoqibin_record_info
+{
+	message join_info
+	{
+		optional common.one_user_brief joiner_info = 1;
+		optional int32 join_price = 2[default = 0];
+		optional int32 award_status = 3[default = 0];	//0:未获奖，1：已获奖
+	}
+	optional int32 rand = 1[default = 0];
+	repeated join_info joiner_list = 2;
+	optional int32 start_time = 3[default = 0];
+	optional int32 end_time = 4[default = 0];
+}
+
+message rsp_duobaoqibin_record
+{
+	repeated duobaoqibin_record_info record_list = 1;	
+	optional int32 result = 2[default = 0];
+}
+
+message req_wujiang_growing_interface
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_wujiang_growing_interface
+{
+	message wujiang_growing
+	{
+		message one_wujiang_cond 
+		{
+			optional int32 wujiang_id = 1[default = 0];
+			optional int32 wujiang_level = 2[default = 0];
+			optional int32 wujiang_zhuansheng = 3[default = 0];
+		}
+		repeated one_wujiang_cond wujiang_cond_list = 1;
+		optional int32 status = 2[default = 0];
+		repeated one_act_award award_list = 3;	//奖励列表
+	}
+	optional int32 result = 1[default = 0];	
+	optional wujiang_growing wujiang_growing_act = 2;
+	optional int32 act_id = 3[default = 0];
+}
+
+message shenbing_lottery_draw
+{
+	optional int32 left_times = 1[default = 0];
+	repeated one_act_award award_list = 2;	//奖励列表
+	repeated one_act_award cost_list = 3;	//消耗列表
+	optional int32 reset_arm_type_need_times = 4[default = 0];//更换兵种再抽次数
+	optional int32 arm_type = 5[default = 0];
+}
+
+message req_shenbing_lottery_draw_interface
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_shenbing_lottery_draw_interface
+{
+	optional int32 result = 1[default = 0];	
+	optional shenbing_lottery_draw shenbing_lottery_draw_act = 2;
+	optional int32 act_id = 3[default = 0];
+}
+
+message req_shenbing_lottery_draw
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_shenbing_lottery_draw
+{
+	optional int32 result = 1[default = 0];
+	optional int32 lottery_index = 2[default = 0];//抽中序号
+	repeated common.award_info award_data=3;//抽到的奖励物品
+}
+
+message req_hufu_baoxiang_interface
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_hufu_baoxiang_interface
+{
+	message hufu_baoxiang
+	{
+		message one_hufubaoxiang
+		{
+			optional int32 type = 1[default = 0];
+			optional int32 index = 2[default = 0];
+			optional int32 can_open_time = 3[default = 0];
+			optional string tag_str = 4[default = ""];
+			optional int32 hold_time = 5[default = 0];
+		}
+		repeated one_hufubaoxiang hufu_baoxiang_list = 1;
+	}
+	optional int32 result = 1[default = 0];	
+	optional hufu_baoxiang hufu_baoxiang_act = 2;
+	optional int32 act_id = 3[default = 0];
+	optional int32 one_hufu_can_clear_seconds = 4[default = 600]; //1个虎符能消除秒数
+	optional float one_yuanbao_exchange_hufu_count = 5[default = 1];//1个元宝对应虎符数
+}
+
+message req_open_hufu_baoxiang
+{
+	optional int32 baoxiang_index = 1[default = 0];
+	optional int32 open_method = 2[default = 0];//1:箱子时间到开 2:消耗虎符开 3:虎符不足扣元宝开 
+}
+
+message rsp_open_hufu_baoxiang
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_data=2;//开到的奖励物品
+}
+
+message req_jitian_interface
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_jitian_interface
+{
+	optional int32 result = 1[default = 0];	
+	repeated one_act_award award_list = 2;	//奖励列表
+	repeated one_act_award cost_list = 3;	//消耗列表
+	optional int32 act_id = 4[default = 0];
+	optional int32 max_times = 5[default = 0];
+	optional int32 left_times = 6[default = 0];
+}
+
+message req_jitian
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_jitian
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list= 2;//奖励物品
+	optional int32 multiple = 3[default = 1];
+}
+
+//////////////////////////////////////////////////////////////////
+
+
+message req_sevenday_list
+{
+	repeated uint32 cached_act_id_list = 1;	//客户端已经缓存过的活动id
+}
+
+message rsp_sevenday_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 curr_day = 2[default = 0];	//现在是开服后的第几天
+	repeated one_act_record act_list = 3;	//活动列表
+	repeated uint32 red_tips_list = 4;	//红点提示活动列表
+}
+
+
+message req_take_sevenday_ranking_award
+{
+	optional int32 act_id = 1[default = 0];
+}
+
+message rsp_take_sevenday_ranking_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 act_id = 2[default = 0];
+	optional int32 btn_status = 3[default = 0];
+	optional int32 act_status = 4[default = 0];
+	repeated common.award_info award_list = 5;	//奖励
+}
+
+message one_personal_sevenday_act
+{
+	message one_act_tag
+	{
+		optional int32 entry = 1[default = 0];
+		optional string tag_name = 2[default = ''];	//标签名
+		optional string right_tag = 3[default = '']; //完成进度
+		repeated one_act_award award_list = 4;	//奖励列表
+		optional int32 price = 5[default = 0];	//购买价格
+		optional int32 btn_status = 6[default = 0];	//按钮状态:[0:不可领取][1:可领取][2:前往充值][3:购买按钮,4:已领取,5:已售罄][6:购买月票][7:可以分享,8:不可以分享][9:可以兑换,10:不可以兑换]
+	}
+	optional int32 day = 1[default = 0];
+	optional int32 act_id = 2[default = 0];
+	optional string act_name = 3[default = ''];
+	repeated one_act_tag tag_list = 4;
+	optional int32 act_type = 5[default = 0];
+}
+
+message req_personal_sevenday_list
+{
+
+}
+
+message rsp_personal_sevenday_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 curr_day = 2[default = 0];	//现在是开服后的第几天
+	repeated one_personal_sevenday_act personal_sevenday_act_list = 3;
+	optional int32 act_end_time = 4[default = 0];
+	optional int32 award_end_time = 5[default = 0];
+}
+
+message req_take_personal_sevenday_award
+{
+	optional int32 act_id = 2[default = 0];
+	optional int32 entry = 3[default = 0];
+}
+
+message rsp_take_personal_sevenday_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;	//奖励
+}
+
+message ntf_personal_sevenday_chg
+{
+	optional one_personal_sevenday_act personal_sevenday_act = 1;
+}
+
+

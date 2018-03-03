@@ -17,10 +17,10 @@ using XLua;
 public static class XLuaMessenger
 {
     // 说明：
-    //		1）有可能在Lua侧使用的消息最好在此处映射
-    //      2）有要求高效率运作的消息最好在此处映射
-    //      3）如果不做映射，则使用反射机制，灵活，但是效率低，还要注意IOS代码裁剪
-	//		4）在Lua侧以某种方式添加监听的消息也一定要以对应的方式在Lua侧移除
+    // 1）有可能在Lua侧使用的消息最好在此处映射
+    // 2）有要求高效率运作的消息最好在此处映射
+    // 3）如果不做映射，则使用反射机制，灵活，但是效率低，还要注意IOS代码裁剪
+	// 4）在Lua侧以某种方式添加监听的消息也一定要以对应的方式在Lua侧移除
 
     public static Dictionary<string, Type> MessageNameTypeMap = new Dictionary<string, Type>() {
         // UIArena测试模块
@@ -30,25 +30,6 @@ public static class XLuaMessenger
         //{ MessageName.MN_ARENA_BOX, typeof(Callback<int>) },//反射测试
         //{ MessageName.MN_ARENA_CLEARDATA, typeof(Callback) },
     };
-    
-    [LuaCallCSharp]
-    public static List<Type> LuaCallCSharp = new List<Type>() {
-        // XLuaMessenger
-        typeof(XLuaMessenger),
-        typeof(MessageName),
-
-        // UIArena回调消息中的参数类型
-        //typeof(ArenaPanelData),
-        //typeof(List<ArenaRivalData>),
-    };
-
-    [CSharpCallLua]
-    public static List<Type> CSharpCallLua1 = new List<Type>() {
-    };
-
-    // 由映射表自动导出
-    [CSharpCallLua]
-    public static List<Type> CSharpCallLua2 = Enumerable.Where(MessageNameTypeMap.Values, type => typeof(Delegate).IsAssignableFrom(type)).ToList();
 
     public static Delegate CreateDelegate(string eventType, LuaFunction func)
     {
@@ -181,3 +162,30 @@ public static class XLuaMessenger
         }
     }
 }
+
+#if UNITY_EDITOR
+public static class XLuaMessengerExporter
+{
+#if UNITY_EDITOR
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>() {
+        // XLuaMessenger
+        typeof(XLuaMessenger),
+        typeof(MessageName),
+
+        // UIArena回调消息中的参数类型
+        //typeof(ArenaPanelData),
+        //typeof(List<ArenaRivalData>),
+    };
+
+    [CSharpCallLua]
+    public static List<Type> CSharpCallLua1 = new List<Type>()
+    {
+    };
+
+    // 由映射表自动导出
+    [CSharpCallLua]
+    public static List<Type> CSharpCallLua2 = Enumerable.Where(XLuaMessenger.MessageNameTypeMap.Values, type => typeof(Delegate).IsAssignableFrom(type)).ToList();
+#endif
+}
+#endif

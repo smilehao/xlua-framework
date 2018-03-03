@@ -24,7 +24,7 @@ local function OnCreate(self)
 	self.timer_action = function(self)
 		self.loading_text:SetText(circulator())
 	end
-	self.timer = TimerManager:GetInstance():AddTimer(1, self.timer_action , self)
+	self.timer = TimerManager:GetInstance():GetTimer(1, self.timer_action , self)
 	self.timer:Start()
 end
 

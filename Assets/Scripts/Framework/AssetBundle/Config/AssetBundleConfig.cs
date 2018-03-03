@@ -14,19 +14,17 @@ namespace AssetBundles
 {
     public class AssetBundleConfig
     {
-        public const bool isDebug = true;
-        private const string localSvrAppPath = "Editor/AssetBundle/LocalServer/AssetBundleServer.exe";
-        public const string RemoteServerUrl = "http://192.168.1.150:80/AssetBundles/";
-        public const string PlayerBuildName = "xluaframework";
+        public const string localSvrAppPath = "Editor/AssetBundle/LocalServer/AssetBundleServer.exe";
         public const string AssetBundlesFolderName = "AssetBundles";
         public const string AssetBundleSuffix = ".assetbundle";
         public const string AssetsFolderName = "AssetsPackage";
+        public const string ChannelFolderName = "Channel";
         public const string AssetsPathMapFileName = "AssetsMap.bytes";
         public const string VariantsMapFileName = "VariantsMap.bytes";
         public const string AssetBundleServerUrlFileName = "AssetBundleServerUrl.txt";
         public const string VariantMapParttren = "Variant";
         public const string CommonMapPattren = ",";
-
+        
 #if UNITY_EDITOR
         public static string AssetBundlesBuildOutputPath
         {

@@ -19,14 +19,14 @@ local server_select_btn_path = "ContentRoot/SvrRoot/SvrSelectBtn"
 local login_btn_path = "ContentRoot/LoginBtn"
 
 -- 以下为测试用的组件路径
-local test_uieffect1_path = "ef_ui_pet_rank_yellow_test"
-local test_uieffect2_1_path = "ef_ui_TaskFinish/ani/ani_font1/p_font1/xingxing_01"
-local test_uieffect2_2_path = "ef_ui_TaskFinish/ani/ani_font2/p_font2/xingxing_02"
-local test_uieffect2_3_path = "ef_ui_TaskFinish/ani/ani_font3/p_font3/xingxing_03"
-local test_uieffect2_4_path = "ef_ui_TaskFinish/ani/ani_font4/p_font4/xingxing_04"
+local test_uieffect1_path = "TestEffect1"
+local test_uieffect2_path = "TestEffect2"
+local test_uieffect2_1_path = "TestEffect2/ef_ui_TaskFinish/ani/ani_font1/p_font1/xingxing_01"
+local test_uieffect2_2_path = "TestEffect2/ef_ui_TaskFinish/ani/ani_font2/p_font2/xingxing_02"
+local test_uieffect2_3_path = "TestEffect2/ef_ui_TaskFinish/ani/ani_font3/p_font3/xingxing_03"
+local test_uieffect2_4_path = "TestEffect2/ef_ui_TaskFinish/ani/ani_font4/p_font4/xingxing_04"
 local test_content_canvas_path = "ContentRoot"
 local test_bottom_canvas_path = "BottomRoot"
-local test_uieffect2_canvas_path = "ef_ui_TaskFinish"
 local test_top_canvas_path = "TopRoot"
 
 -- 以下为定时器、更新函数、协程测试用的组件路径
@@ -58,15 +58,22 @@ local function OnCreate(self)
 	self.login_btn:SetOnClick(self, ClickOnLoginBtn)
 	
 	-- 以下为UI特效层级测试代码
-	self:AddComponent(UIEffect, test_uieffect1_path, 1)
+	local effect1_config = EffectConfig.UIPetRankYellow
+	local effect2_config = EffectConfig.UITaskFinish
+	self.test_effect1 = self:AddComponent(UIEffect, test_uieffect1_path, 1, effect1_config)
+	self.test_effect2 = self:AddComponent(UIEffect, test_uieffect2_path, 2, effect2_config, function()
+		if not IsNull(self.test_effect2.effect.gameObject) then
+			self.test_effect2.effect.transform.name = "ef_ui_TaskFinish"
+			self:AddComponent(UIEffect, test_uieffect2_1_path, 2)
+			self:AddComponent(UIEffect, test_uieffect2_2_path, 4)
+			self:AddComponent(UIEffect, test_uieffect2_3_path, 4)
+			self:AddComponent(UIEffect, test_uieffect2_4_path, 6)
+		end
+	end)
 	self:AddComponent(UICanvas, test_content_canvas_path, 2)
 	self:AddComponent(UICanvas, test_bottom_canvas_path, 1)
-	self:AddComponent(UIEffect, test_uieffect2_1_path, 2)
-	self:AddComponent(UICanvas, test_uieffect2_canvas_path, 3)
-	self:AddComponent(UIEffect, test_uieffect2_2_path, 4)
-	self:AddComponent(UIEffect, test_uieffect2_3_path, 4)
+	self:AddComponent(UICanvas, test_uieffect2_path, 3)
 	self:AddComponent(UICanvas, test_top_canvas_path, 5)
-	self:AddComponent(UIEffect, test_uieffect2_4_path, 6)
 	
 	-- 以下为计时器、更新函数、协程的测试代码
 	self.timer_value = 0
@@ -81,7 +88,7 @@ local function OnCreate(self)
 		self.timer_value = self.timer_value + 1
 		self.test_timer_text:SetText(tostring(self.timer_value))
 	end
-	self.timer = TimerManager:GetInstance():AddTimer(1, self.timer_action , self)
+	self.timer = TimerManager:GetInstance():GetTimer(1, self.timer_action , self)
 	-- 启动定时器
 	self.timer:Start()
 	-- 启动协程

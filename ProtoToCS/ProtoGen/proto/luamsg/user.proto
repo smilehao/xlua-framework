@@ -1,0 +1,339 @@
+package user;
+
+import "common.proto";
+
+message user_info
+{
+	optional string name = 2[default = ''];
+	optional int32 manor_level = 3[default = 0];
+	optional int32 yuanbao = 6[default = 0];
+	optional int32 use_icon = 7[default =0];//玩家头像
+	optional uint32 protect_end_time = 8[default = 0];	//免战结束时间
+	optional int32 stamina_limit = 10[default = 0];	//体力上限
+	optional int32 hongdian_flag = 11[default = 0];	//红点
+	optional int32 vip_level = 17[default = 0];
+	optional int32 vip_exp = 19[default = 0];
+	optional int32 game_time = 25[default = 0];	//服务器游戏时间，秒
+	optional int32 capture_wujiang_count = 27[default = 0];	//俘虏武将数量
+	optional uint32 guild_id = 29[default = 0];	//家族ID
+	optional int32 today_buy_stamina_count = 30[default = 0];
+	optional uint32 lord_uid = 31[default = 0];
+	optional string lord_name = 32[default = ''];
+	optional uint32 guide_flags = 34[default = 0];//新手指引的标记
+	optional uint32 guide_flags_ex = 38[default = 0];//新手指引的标记
+	optional uint32 uid = 36[default =0];
+	optional int32 remain_world_speak_times = 37[default = 0];
+	optional int32 create_time = 47[default = 0];
+	optional int32 slave_count = 48[default = 0];	//附属数量
+	optional int32 slave_limit = 49[default = 0];	//附属上限
+	optional int32 total_people = 52[default =0];    //总人口
+	optional int32 people_limit = 53[default = 0];		//人口上限
+	optional int32 half_price_count = 54[default = 0];  //半价卷数量
+	optional int32 viplevelgift_taken_flag = 55 [default = 0];	//vip等级特权礼包标志
+	optional int32 first_recharge_award_status = 56 [default = 0];	//首充礼包状态
+	optional int32 robber_count = 57[default = 0];
+	optional int32 boss_count  = 58[default = 0];
+	optional int32 power = 59[default = 0];	//所有部队的战力和
+	optional int32 fanrong = 60[default = 0];	//所有建筑等级的和
+	optional int32 last_blackmarket_show_end_time = 61[default = 0];//表示最近一次游商结束显示的时间（-1：表示永久显示黑市）
+	optional int32 people_recover = 62[default = 0];	//人口生产/每分钟
+	optional int32 captured_wujiang_count = 63[default = 0];	//被俘虏武将数量
+	optional int32 killed_wujiang_count = 64[default = 0];	//斩杀及被斩杀武将数量
+	optional int32 show_manor_task = 65[default = 0];//显示新手领主任务
+	optional int32 guild_level = 66[default = 0];//家族等级
+	optional uint32 occupied_villages_time = 67[default = 0];//这个是占领时的起始时间点
+	optional string phone_num = 68[default = ""];
+	optional int32 guild_job = 69[default = 0]; ///1 族长， 2 长老, 3 成员
+}
+
+message req_all_user_data
+{
+	optional string app_version = 1[default = ''];
+	optional string res_version = 2[default = ''];
+	optional int32 reason = 3[default = 0];		//1:login  2:crossday
+}
+
+//服务器不返回这条协议，直接返回多个模块数据的回包
+message rsp_all_user_data
+{
+	optional int32 result = 1[default = 0];
+	optional user_info base_info = 2;
+	repeated common.one_wujiang wujiang_list = 3;
+	repeated common.one_item item_list = 4;
+	repeated common.one_building building_list = 5;
+	optional common.game_setting setting = 6;
+	repeated common.one_buzhen buzhen_list = 7;
+	repeated common.one_arm_type arm_type_list = 8;
+	repeated common.one_troop troop_list = 9;
+	repeated common.one_curr_task task_list = 10;
+	repeated common.one_be_captured_wujiang be_captured_wujiang_list = 11;
+	repeated int32 unlock_item_list = 12;//建筑解锁道具
+}
+
+message req_query_user_brief
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32  type = 2[default = 0];  // 0: 本服 , 1 跨服
+}
+
+message rsp_query_user_brief
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_user_brief user_brief_info = 2;
+	optional int32 building_rank = 3[default = 0];
+	optional int32 building_total_level = 4[default = 0];
+	optional int32 famouswujiang_rank = 5[default = 0];
+	optional int32 famouswujiang = 6[default = 0];
+	optional int32 warscore_rank  = 7[default = 0];
+	optional int32 war_score = 8[default = 0];
+	optional int32 arena_rank = 9[default = 0];
+	optional int32 arena_score = 10[default = 0];
+	optional int32 slave_count = 11[default = 0]; // 附属
+	optional int32 total_people = 12[default = 0]; // 人口
+	optional string guild_name = 13[default = ''];//军团昵称
+	optional int32 gid = 14[default = 0];	//军团id
+	optional string juewei_name = 15[default = ''];//爵位
+	optional int32 fanrong = 16[default = 0];	//繁荣
+	optional bool  is_local_server = 17[default = true];
+	optional int32 can_show_friend = 18[default = 0];  // 1.显示好友相关
+}
+
+message req_query_user_brief_from_cross
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32  type = 2[default = 0];  // 0: 本服 , 1 跨服
+}
+
+message rsp_query_user_brief_from_cross
+{
+	optional int32 result = 1[default = 0];
+	optional rsp_query_user_brief info = 2;
+}
+
+message req_query_guild_brief
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message rsp_query_guild_brief
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_guild_brief guild_brief_info = 2;
+	optional int32 building_rank = 3[default = 0];
+	optional int32 building_total_level = 4[default = 0];
+	optional int32 famouswujiang_rank = 5[default = 0];
+	optional int32 famouswujiang = 6[default = 0];
+	optional int32 war_score_rank = 7[default = 0];
+	optional int32 war_score = 8[default = 0];
+}
+
+message req_heartbeat
+{
+	optional int32 last_mail_time = 1[default = 0];
+	optional int32 last_heart_time = 2[default = 0];
+}
+
+message rsp_heartbeat
+{
+	optional int32 result = 1[default = 0];
+	optional int32 game_time = 2[default = 0];	//服务器游戏时间，秒
+	optional uint32 module_switch = 3[default = 0];	//模块开关
+
+	optional int32 hongdian_flag = 6[default = 0];//红点标记
+	optional uint32 effect_flags = 7[default = 0];	//主城特效
+	optional int32 is_crossday = 8[default = 0];		//是否跨天
+}
+
+message ntf_money_chg
+{
+	optional int32 yuanbao = 2[default = 0];	//当前的元宝
+	optional int32 reason = 3[default = 0];
+}
+
+//通知玩家属性变化
+message ntf_user_info_chg
+{
+	optional user_info base_info = 1;
+}
+
+//
+message ntf_user_vip_level_chg
+{
+	optional int32 vip_level = 1[default = 0];
+	optional int32 vip_exp = 2[default = 0];
+}
+
+//购买体力
+message req_buy_stamina
+{
+
+}
+message rsp_buy_stamina
+{
+	optional int32 result = 1[default = 0];
+	optional int32 get_stamina = 2[default = 0];//购买了多少
+	optional int32 today_buy_stamina_count = 3[default = 0];
+}
+
+message req_create_user
+{
+	optional string name = 2[default = ''];	//玩家名字
+}
+
+message rsp_create_user
+{
+	optional int32 result = 1[default = 0];	//0成功，401是名字有敏感词，400是名字已经存在
+	optional string name = 3[default = ''];	//玩家名字
+	optional int32 use_icon = 4[default = 0];
+}
+
+message req_random_name
+{
+}
+message rsp_random_name
+{
+	optional int32 result = 1[default = 0];
+	optional string name = 2[default = ''];
+}
+
+//改名
+message req_change_name
+{
+	optional string name = 2[default = ''];	//新名字
+}
+
+message rsp_change_name
+{
+	optional int32 result = 1[default = 0];	//0成功，401是名字有敏感词，400是名字已经存在
+	optional string name = 2[default = ''];	//新名字
+}
+
+
+//请求可用头像框列表
+message req_head_icon_box_list
+{
+
+}
+
+message rsp_head_icon_box_list
+{
+	optional int32 result = 1[default = 0];
+	repeated int32 icon_box_list = 2;	//可用的头像框列表
+}
+
+//请求可用头像列表
+message req_head_icon_list
+{
+
+}
+
+message rsp_head_icon_list
+{
+	optional int32 result = 1[default = 0];
+	repeated int32 icon_list = 2;	//可用的头像列表
+}
+
+//使用头像
+message req_use_head_icon
+{
+	optional int32 use_icon = 1[default = 0];//使用的头像id
+}
+
+message rsp_use_head_icon
+{
+	optional int32 result = 1[default = 0];
+	optional int32 use_icon = 2[default = 0];//使用的头像id
+}
+
+message req_set_guide_flags
+{
+	optional uint32 flags = 1[default = 0];
+}
+
+message rsp_set_guide_flags
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 curr_flags = 2[default = 0];
+}
+
+message ntf_guide_flags_chg
+{
+	optional uint32 guide_flags = 1[default = 0];	//新手指引的标志变化
+	optional uint32 guide_flags_ex = 2[default = 0];
+}
+
+message ntf_server_notice
+{
+	optional string server_notice = 1[default = ''];
+}
+
+message ntf_normal_server_notice
+{
+	optional string server_notice = 1[default = ''];
+}
+
+message ntf_people_chg
+{	
+	optional int32 result = 1[default = 0];
+	optional int32 total_people = 3[default = 0];
+	optional int32 reason = 4[default = 0];
+}
+
+message ntf_redpoint_list
+{
+	optional int32 reason = 1[default = 0];
+	repeated int32 redpoint_list = 2;
+}
+
+message one_assistant
+{
+	optional int32 assistant_id = 1[default = 0];
+	optional int32 assistant_param1 = 2[default = 0];
+}
+
+message req_assistant_info
+{
+	optional int32 last_fairmarket_show_end_time = 1[default = 0];// 最后一次关闭集市界面时间
+}
+
+message rsp_assistant_info
+{
+	optional int32 result = 1[default = 0];
+	repeated one_assistant assistant_list = 2;
+	
+}
+
+//记录序章进度
+message req_set_prologue_flags
+{
+	optional uint32 flags = 1[default = 0];
+}
+
+message rsp_set_prologue_flags
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 curr_flags = 2[default = 0];
+}
+
+message req_check_has_sensitive_words
+{
+	optional string all_words = 1[default = ''];
+}
+
+message rsp_check_has_sensitive_words
+{
+	optional int32 result = 1[default = 0];
+	optional string replaced_words = 2[default = ''];
+}
+
+message req_bind_phone_num
+{
+	optional string phone_num = 1[default = ''];
+}
+
+message rsp_bind_phone_num
+{
+	optional int32 result = 1[default = 0];
+	optional int32 yuanbao_count = 2[default = 0];
+
+}

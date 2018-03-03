@@ -1,0 +1,44 @@
+package login;
+
+message req_get_uid
+{
+	optional string plat_token = 1[default = ''];
+	optional string plat_account = 2[default = ''];
+	optional int32 from_svrid = 3[default = 1];
+	optional string device_id = 4[default = ''];	//玩家的设备id
+	optional string device_model = 5[default = ''];	//玩家的设备型号
+	optional string mobile_type = 6[default = ''];	//mobile_type  
+	optional string game_id = 7[default = ''];	//  game_id
+	optional string app_ver = 8[default = ''];	//应用版本
+	optional string package_id = 9[default = ''];		// package_id
+	optional string real_app_ver = 10[default = ''];
+	optional string res_ver = 11[default = ''];	//资源版本
+}
+
+message rsp_get_uid
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 uid = 2[default = 0];
+	optional int32 is_new = 3[default = 0];
+	optional int32 game_time = 4[default = 0];	//服务器游戏时间，秒
+	optional bytes check_params = 5[default = ''];
+	optional int32 check_result = 6[default = 0];//-1账号验证失败，-2禁止登录（params:int表示到期时间)
+}
+
+message req_login
+{
+	optional int32 flag = 1[default = 0];
+	optional uint32 dist_id = 2[default = 0];  /// 服区 
+}
+
+message rsp_login
+{
+	optional int32 result = 1[default = 0];//登录失败，请重试
+	optional int32 game_time = 2[default = 0];	//服务器游戏时间，秒
+}
+
+//通知玩家退出
+message ntf_logout
+{
+	optional int32 reason = 1[default = 0];	//0表示异地登录
+}

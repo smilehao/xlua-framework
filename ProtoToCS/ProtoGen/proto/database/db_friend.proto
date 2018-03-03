@@ -1,0 +1,35 @@
+package db;
+
+message one_friend_info
+{
+	optional uint32 uid = 1[default = 0];	// 好友id
+	optional int32  intimacy = 2[default = 0]; //亲密度
+}
+
+message one_apply_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 apply_time = 2[default = 0];		// 申请时间
+	optional int32 is_view = 3[default = 0];		// 是否查看
+}
+
+message one_award_stamina_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 give_time = 2[default = 0];
+	optional int32 award_state = 3[default = 0];	// 领取状态
+}
+
+message one_black_info
+{
+	optional uint32 uid = 1[default = 0];
+}
+
+message Friend
+{
+	repeated one_friend_info friend_list = 1;					// 好友列表
+	repeated one_apply_info apply_list = 2;						// 申请好友列表(别人请求加我)
+	repeated one_award_stamina_info award_stamina_list = 3;		// 别人赠送体力列表
+	repeated one_black_info black_list = 4;						// 黑名单列表
+	optional int32 is_close_apply = 5[default = 0];				// 是否关闭申请(0: 不关闭 1：关闭)
+}

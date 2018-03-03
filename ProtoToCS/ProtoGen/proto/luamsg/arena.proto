@@ -1,0 +1,110 @@
+package arena;
+import 'battle.proto';
+import 'common.proto';
+
+//单个对手的信息
+message one_rival_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 rank = 2[default = 0];	//排名
+	optional int32 power = 3[default = 0];
+	repeated common.one_troop_brief troop_brief_list = 4;	//出战的部队
+	optional string use_name = 5[default = ''];	//玩家名字
+	optional int32 manor_level = 6[default = 0];	//主公等级
+	optional int32 vip_level = 7[default = 0];	//主公等级
+	optional int32 user_icon = 8[default = 0];
+	optional int32 win_times = 9[default = 0];
+	repeated common.one_arm_type arm_type_list = 10;
+	optional string guild_name = 11[default = ''];//家族名
+}
+
+//宝箱单元
+message one_baoxiang_info
+{
+	optional int32 id = 1[default = 0];	
+	optional int32 open_condition = 2[default = 0];	//开箱条件:挑战次数
+	repeated common.one_item award_item_list = 3;	//奖励的道具
+	optional int32 is_open = 4[default = 0];//是否已经开箱 1：已开 0：未开
+}
+//演武场个人面板
+message req_personal_panel
+{
+}
+message rsp_personal_panel
+{
+	optional int32 result = 1[default = 0];
+	repeated one_rival_info rival_list = 2;	//对手的信息
+	optional int32 win_times = 3[default = 0];	//胜利次数
+	optional int32 rank = 4[default = 0];	//当前自己的排名	
+	optional int32 today_arena_times = 5[default = 0];//今日已挑战竞技场的次数
+	optional int32 arena_times_limit = 6[default = 0];//当前竞技场次数限制
+	optional int32 remain_buy_arena_times = 7[default = 0];//当前剩余的购买次数
+	repeated one_baoxiang_info baoxiang_info_list = 8;//宝箱列表
+	repeated common.one_item daily_award_item_list = 9;	//每日排行榜奖励的道具	
+	optional int32 buy_cost = 10[default = 0];//当前购买价格
+	optional int32 shop_red_point = 11[default = 0]; //商店红点
+}
+
+//领取宝箱奖励
+message req_take_box_award
+{
+	optional int32 id = 1[default = 0];	//宝箱ID
+}
+
+message rsp_take_box_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 box_id = 2[default = 0];
+	repeated common.one_item award_item_list = 3;	//礼包道具列表
+}
+
+
+message req_enter_arena
+{
+	optional uint32 rival_uid = 1[default = 0];
+}
+
+message rsp_enter_arena
+{
+	optional int32 result = 1[default = 0];
+//	optional int32 is_winning = 2[default = 0];	//1代表胜利，0则否
+//	optional int32 prev_rank = 3[default = 0];	//之前的排名
+//	optional int32 curr_rank = 4[default = 0];	//当前的排名
+//	optional int32 prev_highest_rank = 5[default = 0];
+//	optional int32 curr_highest_rank = 6[default = 0];
+//	optional int32 today_arena_win_times = 7[default = 0];
+	optional int32 award_yuanbao = 8[default = 0];	//这个只在最高排名有超越的情况下才会有
+//	optional int32 self_lose_soldier = 9[default = 0];//自己损兵
+//	optional int32 rival_lose_soldier = 10[default = 0];//对手损兵
+	optional bytes video_stream = 11[default = ''];	//录像流
+	optional common.battle_settle settle = 12;
+}
+
+//重置对手
+message req_reset_rival
+{
+}
+
+message rsp_reset_rival
+{
+	optional int32 result = 1[default = 0];
+	repeated one_rival_info rival_list = 2;	//对手的信息
+}
+
+message req_buy_arena_times //购买演武场次数请求
+{
+
+}
+
+message rsp_buy_arena_times //购买演武场次数响应
+{
+	optional int32 result = 1[default = 0];
+	optional int32 today_arena_times = 2[default = 0];
+	optional int32 arena_times_limit = 3[default = 0];
+	optional int32 remain_buy_arena_times = 4[default = 0];
+}
+
+message ntf_rival_fight_result
+{
+	optional int32 is_win = 1[default = 0];//0为失败，1为胜利
+}

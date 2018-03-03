@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
+using XLua;
 
 /// <summary>
 /// added by wsh @ 2017.12.22
@@ -10,6 +9,8 @@ using System;
 
 namespace AssetBundles
 {
+    [Hotfix]
+    [LuaCallCSharp]
     public class AssetAsyncLoader : BaseAssetAsyncLoader
     {
         static Queue<AssetAsyncLoader> pool = new Queue<AssetAsyncLoader>();

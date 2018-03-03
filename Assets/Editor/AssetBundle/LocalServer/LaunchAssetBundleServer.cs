@@ -3,6 +3,9 @@ using UnityEditor;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Collections.Generic;
+using System.Net.Sockets;
 
 namespace AssetBundles
 {
@@ -72,7 +75,7 @@ namespace AssetBundles
 		static void Run ()
 		{
 			KillRunningAssetBundleServer();
-			AssetBundleUtility.WriteAssetBundleServerURL();
+			WriteAssetBundleServerURL();
 
 			string args = string.Format("\"{0}\" {1}", AssetBundleConfig.LocalSvrAppWorkPath, Process.GetCurrentProcess().Id);
             ProcessStartInfo startInfo = ExecuteInternalMono.GetProfileStartInfoForMono(MonoInstallationFinder.GetMonoInstallation("MonoBleedingEdge"), GetMonoProfileVersion(), AssetBundleConfig.LocalSvrAppPath, args, true);
@@ -110,6 +113,53 @@ namespace AssetBundles
             }
 
             return profileVersion;
+        }
+
+        public static string GetStreamingAssetBundleServerUrl()
+        {
+            string assetBundleServerUrl = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
+            assetBundleServerUrl = Path.Combine(assetBundleServerUrl, AssetBundleConfig.AssetBundleServerUrlFileName);
+            return assetBundleServerUrl;
+        }
+
+        public static void WriteAssetBundleServerURL()
+        {
+            var path = GetStreamingAssetBundleServerUrl();
+            GameUtility.SafeWriteAllText(path, GetAssetBundleServerURL());
+            AssetDatabase.Refresh();
+        }
+
+        public static void ClearAssetBundleServerURL()
+        {
+            var path = GetStreamingAssetBundleServerUrl();
+            GameUtility.SafeDeleteFile(path);
+            AssetDatabase.Refresh();
+        }
+
+        public static string GetAssetBundleServerURL()
+        {
+            string downloadURL = string.Empty;
+            // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
+            var ips = new List<string>();
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    ips.Add(ip.ToString());
+                }
+            }
+            ips.Sort();
+            if (ips.Count <= 0)
+            {
+                Logger.LogError("Get inter network ip failed!");
+            }
+            else
+            {
+                downloadURL = "http://" + ips[0] + ":7888/";
+                downloadURL = downloadURL + PackageUtils.GetCurPlatformChannelPath() + "/";
+            }
+            return downloadURL;
         }
     }
 }

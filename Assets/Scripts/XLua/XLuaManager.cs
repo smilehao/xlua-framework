@@ -1,4 +1,5 @@
 ﻿using AssetBundles;
+using System.IO;
 using UnityEngine;
 using XLua;
 
@@ -13,9 +14,12 @@ using XLua;
 /// @by wsh 2017-12-28
 /// </summary>
 
+[Hotfix]
+[LuaCallCSharp]
 public class XLuaManager : MonoSingleton<XLuaManager>
 {
-    const string luaAssetbundleAssetName = "lua";
+    public const string luaAssetbundleAssetName = "Lua";
+    public const string luaScriptsFolder = "LuaScripts";
     const string commonMainScriptName = "Common.Main";
     const string gameMainScriptName = "GameMain";
     const string hotfixMainScriptName = "XLua.HotfixMain";
@@ -25,17 +29,30 @@ public class XLuaManager : MonoSingleton<XLuaManager>
     protected override void Init()
     {
         base.Init();
-        string path = AssetBundleUtility.RelativeAssetPathToAbsoluteAssetPath(luaAssetbundleAssetName);
-        AssetbundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(path);
+        string path = AssetBundleUtility.PackagePathToAssetsPath(luaAssetbundleAssetName);
+        AssetbundleName = AssetBundleUtility.AssetBundlePathToAssetBundleName(path);
         InitLuaEnv();
+    }
+
+    public bool HasGameStart
+    {
+        get;
+        protected set;
+    }
+
+    public LuaEnv GetLuaEnv()
+    {
+        return luaEnv;
     }
 
     void InitLuaEnv()
     {
         luaEnv = new LuaEnv();
+        HasGameStart = false;
         if (luaEnv != null)
         {
             luaEnv.AddLoader(CustomLoader);
+            luaEnv.AddBuildin("pb", XLua.LuaDLL.Lua.LoadPb);
         }
         else
         {
@@ -74,7 +91,7 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         OnInit();
     }
 
-    void SafeDoString(string scriptContent)
+    public void SafeDoString(string scriptContent)
     {
         if (luaEnv != null)
         {
@@ -119,8 +136,9 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         if (luaEnv != null)
         {
             LoadScript(gameMainScriptName);
+            SafeDoString("GameMain.Start()");
+            HasGameStart = true;
         }
-        SafeDoString("GameMain.Start()");
     }
     
     public void ReloadScript(string scriptName)
@@ -137,16 +155,18 @@ public class XLuaManager : MonoSingleton<XLuaManager>
     public static byte[] CustomLoader(ref string filepath)
     {
         string scriptPath = string.Empty;
+        filepath = filepath.Replace(".", "/") + ".lua";
 #if UNITY_EDITOR
         if (AssetBundleConfig.IsEditorMode)
         {
-            scriptPath = Application.dataPath + "/LuaScripts/" + filepath.Replace(".", "/") + ".lua";
-            Logger.Log("Load lua script : " + scriptPath);
+            scriptPath = Path.Combine(Application.dataPath, luaScriptsFolder);
+            scriptPath = Path.Combine(scriptPath, filepath);
+            //Logger.Log("Load lua script : " + scriptPath);
             return GameUtility.SafeReadAllBytes(scriptPath);
         }
 #endif
 
-        scriptPath = "Lua/" + filepath.Replace(".", "/") + ".lua.bytes";
+        scriptPath = string.Format("{0}/{1}.bytes", luaAssetbundleAssetName, filepath);
         string assetbundleName = null;
         string assetName = null;
         bool status = AssetBundleManager.Instance.MapAssetPath(scriptPath, out assetbundleName, out assetName);
@@ -158,7 +178,7 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         var asset = AssetBundleManager.Instance.GetAssetCache(assetName) as TextAsset;
         if (asset != null)
         {
-            Logger.Log("Load lua script : " + scriptPath);
+            //Logger.Log("Load lua script : " + scriptPath);
             return asset.bytes;
         }
         Logger.LogError("Load lua script failed : " + scriptPath + ", You should preload lua assetbundle first!!!");
@@ -178,6 +198,22 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         }
     }
 
+    private void OnLevelWasLoaded()
+    {
+        if (luaEnv != null && HasGameStart)
+        {
+            SafeDoString("GameMain.OnLevelWasLoaded()");
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (luaEnv != null && HasGameStart)
+        {
+            SafeDoString("GameMain.OnApplicationQuit()");
+        }
+    }
+
     public override void Dispose()
     {
         if (luaUpdater != null)
@@ -186,7 +222,16 @@ public class XLuaManager : MonoSingleton<XLuaManager>
         }
         if (luaEnv != null)
         {
-            luaEnv.Dispose();
+            try
+            {
+                luaEnv.Dispose();
+                luaEnv = null;
+            }
+            catch (System.Exception ex)
+            {
+                string msg = string.Format("xLua exception : {0}\n {1}", ex.Message, ex.StackTrace);
+                Logger.LogError(msg, null);
+            }
         }
     }
 }

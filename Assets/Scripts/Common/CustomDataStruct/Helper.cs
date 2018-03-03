@@ -6,13 +6,9 @@ namespace CustomDataStruct
 {
     static public class Helper
     {
-#pragma warning disable 0414
-        static CustomDataStructHelper helper =
-            (new GameObject("CustomDataStructHelper")).AddComponent<CustomDataStructHelper>();
-#pragma warning restore 0414
-
         static public void Startup()
-        { 
+        {
+            CustomDataStructHelper.Instance.Startup();
         }
 
         static public void Cleanup()
@@ -71,7 +67,7 @@ namespace CustomDataStruct
         }
     }
 
-    sealed class CustomDataStructHelper : MonoBehaviour
+    sealed class CustomDataStructHelper : MonoSingleton<CustomDataStructHelper>
     {
 #if UNITY_EDITOR
         const float LOG_INTERVAL = 1.0f;
@@ -114,7 +110,7 @@ namespace CustomDataStruct
         }
 #endif
 
-        public void OnDisable()
+        public void OnLevelWasLoaded()
         {
             Helper.Cleanup();
         }

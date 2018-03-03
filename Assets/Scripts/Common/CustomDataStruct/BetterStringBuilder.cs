@@ -12,6 +12,7 @@ using System.Collections.Generic;
 ///     4）对于启用全局缓存的，同时开启本地缓存能够以内存换取极大部分的本地命中，提升效率
 ///     5）在Append、Insert非char、string类型和Replace string类型时效率会比StringBuilder低，追求效率的地方慎用
 ///     6）某些方法使用不当仍然会有GC，这些方法在函数体前均有说明，使用时注意
+///     7）lua侧是不需要这个类的，Lua语言本身就都字符串做了缓存
 /// 
 /// TODO：
 ///     1）优化Append、Insert非char、string类型和Replace string类型时的效率

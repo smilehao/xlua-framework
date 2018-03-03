@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/ipay_openid_height_50"
+    android:background="@color/ipay_openid_title_background" >
+
+    <RelativeLayout
+        android:id="@+id/title_bar_layout_back"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="@dimen/ipay_openid_margin_16"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/iv_left_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ipay_openid_title_back"
+            android:background="@drawable/ipay_openid_title_imagebutton_bg"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dialog_master_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_left_button_back"
+            android:text="@string/ipay_openid_master_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ipay_openid_text_size_38"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/dialog_title_right_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/ipay_openid_margin_16"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:background="@drawable/ipay_openid_title_imagebutton_bg"
+        android:src="@drawable/ipay_openid_title_close_normal"
+        android:visibility="visible" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/ipay_openid_divid_line_h"
+        android:layout_alignParentBottom="true"
+        android:background="@color/ipay_openid_divid_line" />
+
+</RelativeLayout>

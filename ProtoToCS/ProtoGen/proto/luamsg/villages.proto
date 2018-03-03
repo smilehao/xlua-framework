@@ -1,0 +1,122 @@
+package villages;
+
+import 'common.proto';
+
+message one_fight_record
+{
+	optional int32 result_type = 1[default = 0];//1：攻击方胜利，2：攻击方失败，3：防守方胜利，4：防守方失败
+	optional string video_id = 2[default = ''];
+	optional string others_name = 3[default = ''];
+	optional int32 lost_soldier = 4[default = 0];
+	optional int32 capture_wujiang_id = 5[default = 0];		//俘虏武将ID
+	optional int32 capture_wujiang_level =  6[default = 0];	//俘虏武将level
+}
+
+message one_other_record
+{
+	optional uint32 village_id = 5[default = 0]; 
+	//optional uint32 occupied_time = 6[default = 0];
+	optional uint32 used_time = 7[default = 0];//生产了多长时间
+	optional common.one_item resource = 8;
+}
+
+message one_village_record
+{
+	optional uint32 record_id = 1[default = 0];
+	optional uint32 record_time = 2[default = 0];
+	optional int32 record_type = 3[default = 0];//1-6
+	optional one_fight_record fight_record = 4;
+	optional one_other_record other_record = 5;
+}
+
+message one_village_info
+{
+	optional uint32 village_id = 1[default = 0];
+	optional int32 pos = 2[default = 0];
+	optional int32 icon = 3[default = 0];
+	optional int32 resource_id = 4[default = 0];
+	optional int32 level = 5[default = 0];
+	optional int32 capability = 6[default = 0];
+	optional int32 min_manor_level_limit = 7[default = 0];
+	optional uint32 protect_end_time = 8[default = 0];
+	//optional int32 max_occupy_time = 9[default = 0];	//放入gamesetting
+	
+	optional uint32 occupied_time = 10[default = 0];
+	optional common.one_user_brief owner_brief = 11;
+	optional int32 power = 12[default = 0];
+	optional int32 jianta_atk_percent = 13[default = 0];
+	optional int32 chengqiang_def_percent = 14[default = 0];
+	optional string atlas = 15[default = ''];
+}
+
+
+
+message req_villages_plane_info
+{
+}
+
+message rsp_villages_plane_info
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_village_brief village_list = 2;
+	optional int32 rest_refresh_times = 3[default = 0];
+	optional int32 max_refresh_times = 4[default = 0];
+	optional int32 refresh_cost = 5[default = 0];
+	optional int32 redpoint_on_record = 6[default = 0];
+}
+
+message req_villages_refresh
+{
+}
+
+message rsp_villages_refresh
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_village_info
+{
+	optional int32 pos = 1[default = 0];
+}
+
+message rsp_village_info
+{
+	optional int32 result = 1[default = 0];
+	optional int32 occupied_village_times = 2[default = 0];
+	optional int32 max_occupy_village_times = 3[default = 0];
+	//optional int32 stamina_cost = 4[default = 0];	//放入gamesetting
+	optional one_village_info village_info = 5;
+	optional int32 occupied_village_count = 6[default = 0];
+	optional int32 left_village_count = 7[default = 0];
+}
+
+message ntf_village_info_chg
+{
+	optional int32 reason = 1[default = 0];//1:得到，2/3/4：失去（替换/超时/被抢） 
+	optional common.one_village_brief village_brief = 2;
+}
+
+
+message req_village_history_record
+{
+}
+
+message rsp_village_history_record
+{
+	optional int32 result = 1[default = 0];
+	repeated one_village_record village_record = 2;
+}
+
+
+message req_village_attack
+{
+	optional int32 pos = 1[default = 0];
+	optional int32 buzhen_id = 2[default = 0];
+}
+
+message rsp_village_attack
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}

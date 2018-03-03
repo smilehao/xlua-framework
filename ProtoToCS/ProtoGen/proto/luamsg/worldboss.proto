@@ -1,0 +1,170 @@
+package worldboss;
+import "common.proto";
+
+message one_worldboss
+{
+	optional float boss_soldier_percent = 1[default = 0]; //（分度值0.01%，不足0.01向上取0.01）
+	optional int32 kill_atker_times = 2[default = 0];//boss击杀攻击者次数
+	optional string killer_name = 3[default = ''];
+	optional string broken_user_name = 4[default = ''];//破蛋者名字
+	optional int32 boss_close_time = 5[default = 0]; 
+}
+
+message one_player_worldboss
+{	
+	optional float boss_soldier_percent = 1[default = 0]; //（分度值0.01%，不足0.01向上取0.01）
+	optional int32 kill_atker_times = 2[default = 0];//boss击杀攻击者次数
+	optional int32 boss_close_time = 3[default = 0]; 
+	
+	optional int32 src_svr_id = 4[default = 0];//来源服务器id
+	optional int32 dst_svr_id = 5[default = 0]; //侵入服务器id
+	optional int32 can_be_atked = 6[default = 0]; //1可被攻击
+	
+	optional common.one_user_brief player_brief_info = 7;
+	optional common.one_user_brief killer_brief_info = 8;
+	
+	optional float buff = 9[default = 0];//双攻双防buff
+}
+
+message personal_info
+{
+	optional int32 next_can_atk_time = 1[default = 0];//下一次可攻击时间
+	optional int32 clear_cd_times = 2[default = 0];//清除cd次数
+	optional int32 clear_cd_need_yuanbao_count = 3[default = 0];//清除cd需要元宝数
+}
+
+message req_worldboss_pannel //客户端
+{	
+
+}
+
+message rsp_worldboss_pannel //客户端
+{	
+	optional int32 result = 1[default = 0];
+	optional one_worldboss single_worldboss = 2;
+	optional personal_info personal_atk_info = 3;
+}
+
+message req_cross_worldboss_pannel //客户端
+{	
+	optional int32 own_svr_id = 1[default = 0];
+	optional int32 tar_svr_id = 2[default = 0];
+}
+
+message rsp_cross_worldboss_pannel //客户端
+{	
+	optional int32 result = 1[default = 0];
+	optional one_player_worldboss single_worldboss = 2;
+	optional personal_info personal_atk_info = 3;
+}
+
+message req_all_cross_worldboss_pannel //客户端
+{	
+	optional int32 own_svr_id = 1[default = 0];
+}
+
+message rsp_all_cross_worldboss_pannel //客户端
+{	
+	optional int32 result = 1[default = 0];
+	repeated one_player_worldboss player_worldboss_list = 2;
+}
+
+message ntf_show_worldboss
+{
+	optional int32 worldboss_type = 1[default = 0];//世界boss类型 1本服，2跨服, 3预告
+	optional int32 worldboss_close_time = 2[default = 0];//关闭时间
+}
+
+message req_attack_worldboss //客户端以及服务器
+{
+
+}
+
+message rsp_attack_worldboss //客户端以及服务器
+{	
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}
+
+message req_attack_playerboss //客户端以及服务器
+{
+	optional int32 tar_svr_id = 1[default = 0];//客户端
+	//客户端不需要填写
+	optional int32 svr_id = 2[default = 0];//gamesvr2cross
+	optional string fighter_text = 3[default = ""];
+
+}
+
+message rsp_attack_playerboss //客户端以及服务器
+{	
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}
+
+
+message req_ntf_crosssvr_kill_worldboss //
+{
+	optional int32 svr_id = 1[default = 0];
+	optional int32 dist_id = 2[default = 0];
+	optional int32 killer_uid = 3[default = 0];
+	optional string killer_user_name = 4[default = ""];
+	optional int32 killer_use_icon = 5[default = 0];
+	optional string fighter_text = 6[default = ""]; 
+}
+message rsp_ntf_crosssvr_kill_worldboss
+{	
+	optional int32 result = 1[default = 0];
+}
+
+message playerboss_info
+{	
+	optional int32 src_svr_id = 1[default = 0];
+	optional int32 src_dist_id = 2[default = 0];
+	optional string playerboss_name = 3[default = ""];
+	optional int32 dst_svr_id = 4[default = 0];
+	optional int32 dst_dist_id = 5[default = 0];
+	optional float boss_soldier_percent = 6[default = 0];
+}
+
+message ntf_worldboss_status //crosssvr2gamesvr status change ntf
+{	
+	optional int32 status = 1[default = 0];
+	optional int32 end_time = 2[default = 0];
+	optional int32 param1 = 3[default = 0];//跨服阶段 用此字段
+	optional int32 cross_time = 4[default = 0];//跨服时间
+	repeated playerboss_info playerboss_info_list = 5;
+}
+
+message ntf_gamesvr_zoumadeng
+{
+	optional int32 type = 1[default = 0];
+	optional int32 param1 = 2[default = 0];
+	optional int32 param2 = 3[default = 0];
+	optional string string1 = 4[default = ""];
+	optional string string2 = 5[default = ""];
+	optional int32 param3 = 6[default = 0];
+	optional string string3 = 7[default = ""];
+}
+
+message ntf_gamesvr_playerboss_end
+{
+	optional int32 playerboss_svr_id = 1[default = 0];
+    optional int32 playerboss_dist_id = 2[default = 0];
+    optional int32 playerboss_uid = 3[default = 0];
+    optional int32 kill_count = 4[default = 0];
+    optional int32 dst_svr_id = 5[default = 0];
+    optional int32 dst_dist_id = 6[default = 0];
+    optional int32 gamesvr_kill_playerboss_count = 7[default = 0]; //本服玩家击杀 入侵者个数
+	repeated int32 dead_playerboss_svr_id_list = 8;//跨服阶段 被杀的入侵者svr_id_list
+	optional int32 killer_dist_id = 9[default = 0];
+	optional string killer_name = 10[default = ""];
+	optional bool playerboss_is_alive = 11[default = false]; //
+}
+
+message ntf_change_crosssvr
+{
+	optional int32 type = 1[default = 0];
+	optional int32 param1 = 2[default = 0];
+}

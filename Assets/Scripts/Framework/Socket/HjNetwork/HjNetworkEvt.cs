@@ -1,14 +1,15 @@
-﻿namespace networks
-{
-    public delegate void HjNetworkEvtHandle(object sender, int result, string msg);
+﻿using System;
 
+namespace Networks
+{
     public struct HjNetworkEvt
     {
         public object sender;
         public int result;
         public string msg;
-        public HjNetworkEvtHandle evtHandle;
-        public HjNetworkEvt(object sender, int result, string msg, HjNetworkEvtHandle evtHandle)
+        public Action<object, int, string> evtHandle;
+
+        public HjNetworkEvt(object sender, int result, string msg, Action<object, int, string> evtHandle)
         {
             this.sender = sender;
             this.result = result;

@@ -1,0 +1,67 @@
+package db;
+
+import 'db_common.proto';
+
+
+message one_world_important_event
+{
+	optional int32 event_type = 1[default = 0];
+	optional int32 event_time = 2[default = 0];
+	optional string name1 = 3[default = ""]; 	// 行为人1名字
+	optional string name2 = 4[default = ""];	// 行为人2名字
+	optional string name3 = 5[default = ""];	// 行为人3名字
+	optional string strparam1 = 6[default = ""];	// 附加参数1
+	optional int32 intparam1= 7[default = 0];		// 附加int参数1
+}
+
+
+message duobaoqibin
+{
+	message joiner_info
+	{
+		optional uint32 uid = 1[default = 0];
+		optional int32 value = 2[default = 0];
+		optional int32 award_status = 3[default = 0];	//0:未获奖，1已获奖
+	}
+	
+	message record_info
+	{
+		optional int32 start_time = 1[default = 0];
+		optional int32 end_time = 2[default = 0];
+		repeated joiner_info joiner_list = 3;		//购买者名单
+		optional int32 last_value = 4;			//结算时的金额
+		optional int32 rand = 5[default = 0];	//第几轮
+	}
+	
+	optional int32 box_type = 1[default = 0];
+	optional int32 curr_rand = 2[default = 0];	//当前是第几轮
+	optional int32 start_time = 3[default = 0];	//开始时间
+	repeated record_info record_list = 4;
+	repeated joiner_info joiner_list = 5;		//参与玩家
+	optional int32 curr_value = 6[default = 0];	//金额
+}
+
+message explore_team_info
+{
+	optional int32  team_id = 1[default = 0];
+	optional int32  status = 2[default = 0];
+	optional uint32 update_time = 3;
+}
+
+message ext_param_msg
+{
+	optional string var_str = 1[default = ''];
+	repeated one_world_important_event world_important_event_list = 5;
+	repeated duobaoqibin duobaoqibin_list = 8;
+	repeated explore_team_info explore_team_list = 9;	
+	repeated int32 shenbing_id_list = 10;
+}
+
+message Svrdata
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 int1 = 2[default = 0];
+	optional int32 int2 = 3[default = 0];
+	optional int32 int3 = 4[default = 0];
+	optional ext_param_msg param_msg = 5;
+}

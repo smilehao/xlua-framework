@@ -1,0 +1,10 @@
+package testbattle;
+
+message req_test_battle
+{
+}
+
+message rsp_test_battle
+{
+	optional int32 result = 1[default = 0];
+}

@@ -7,21 +7,35 @@
 local ClassTest = require "UnitTest.ClassTest"
 local SingletonTest = require "UnitTest.SingletonTest"
 local MessengerTest = require "UnitTest.MessengerTest"
---local ProtobufTest = require "UnitTest.ProtobufTest"
+local ProtobufTest = require "UnitTest.ProtobufTest"
 local LoggerTest = require "UnitTest.LoggerTest"
 local LuaUtilTest = require "UnitTest.LuaUtilTest"
 local TableUtilTest = require "UnitTest.TableUtilTest"
 local CoroutineTest = require "UnitTest.CoroutineTest"
+local StringTest = require "UnitTest.StringTest"
+
+local function LoopRunTimes(unitTests, times)
+	for i = 1,times do
+		--print("-------------------LoopUnitTest["..i.."]-------------------")
+		for _,test in pairs(unitTests) do
+			test.Run()
+		end
+		coroutine.waitforframes(1)
+		--collectgarbage()
+		--print("use mem : "..collectgarbage("count").."KB")
+	end
+end
 
 local function Run()
 	ClassTest.Run()
 	SingletonTest.Run()
 	MessengerTest.Run()
-	--ProtobufTest.Run()
+	ProtobufTest.Run()
 	LoggerTest.Run()
 	LuaUtilTest.Run()
 	TableUtilTest.Run()
-	CoroutineTest.Run()
+	StringTest.Run()
+	coroutine.start(LoopRunTimes, {CoroutineTest}, 1000)
 end
 
 return {

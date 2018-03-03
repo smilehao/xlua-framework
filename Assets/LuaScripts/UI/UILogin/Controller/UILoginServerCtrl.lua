@@ -5,7 +5,7 @@
 
 local UILoginServerCtrl = BaseClass("UILoginServerCtrl", UIBaseCtrl)
 
-function SetSelectedServer(self, svr_id)
+local function SetSelectedServer(self, svr_id)
 	-- 合法性校验
 	if svr_id == nil then
 		-- TODO：错误弹窗
@@ -21,7 +21,7 @@ function SetSelectedServer(self, svr_id)
 	ClientData:GetInstance():SetLoginServerID(svr_id)
 end
 
-function CloseSelf(self)
+local function CloseSelf(self)
 	UIManager:GetInstance():CloseWindow(UIWindowNames.UILoginServer)
 end
 

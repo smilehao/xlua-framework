@@ -22,20 +22,15 @@ public class CoroutineRunner : MonoBehaviour
     }
 }
 
-public static class CoroutineConfig
+#if UNITY_EDITOR
+public static class CoroutineRunnerExporter
 {
     [LuaCallCSharp]
-    public static List<Type> LuaCallCSharp
-    {
-        get
-        {
-            return new List<Type>()
-            {
+    public static List<Type> LuaCallCSharp = new List<Type>() {
                 typeof(WaitForSeconds),
                 typeof(WaitForEndOfFrame),
                 typeof(WaitForFixedUpdate),
                 typeof(WWW),
-            };
-        }
-    }
+        };
 }
+#endif

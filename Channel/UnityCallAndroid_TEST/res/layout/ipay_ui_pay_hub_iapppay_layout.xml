@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ipay_transparent_75" 
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
+    <RelativeLayout
+        android:layout_width="290dip"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/ipay_margin_26"
+        android:background="@drawable/ipay_bg"
+        android:layout_gravity="center"
+         >
+        <include
+            android:id="@+id/v_title_bar_aipay"
+            layout="@layout/ipay_ui_title_bar_mini" />
+		<ScrollView android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/v_title_bar_aipay"
+		    >
+        <LinearLayout
+            android:id="@+id/rl_feeinfo_aipay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ipay_color_value_1"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_wares_price_aipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ipay_margin_25"
+                android:text="￥30.00"
+                android:textColor="@color/ipay_color_value_8_3"
+                android:textSize="@dimen/ipay_text_size_20" />
+
+            <TextView
+                android:id="@+id/tv_wares_name_aipay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ipay_margin_15"
+                android:layout_marginLeft="@dimen/ipay_margin_10"
+                android:layout_marginRight="@dimen/ipay_margin_10"
+                android:gravity="center"
+                android:text="友宝乐事薯片烤肉味 40g"
+                android:textColor="@color/ipay_color_value_6"
+                android:textSize="@dimen/ipay_text_size_14" />
+
+            <LinearLayout
+                android:id="@+id/ll_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ipay_margin_15"
+                android:layout_marginLeft="@dimen/ipay_margin_16"
+                android:layout_marginRight="@dimen/ipay_margin_16"
+                android:layout_marginTop="@dimen/ipay_margin_25"
+                android:background="@color/ipay_transparent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/tv_password_tip"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ipay_margin_10"
+                    android:gravity="center"
+                    android:text="本交易满足免密条款，可在收银台中心修改设置"
+                    android:textColor="@color/ipay_color_value_4"
+                    android:textSize="@dimen/ipay_text_size_12"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/button_submit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ipay_height_50"
+                    android:background="@drawable/ipay_common_btn_bg_color"
+                    android:text="确认支付"
+                    android:textColor="@drawable/ipay_common_btn_text_color"
+                    android:textSize="@dimen/ipay_text_size_14"
+                    android:visibility="visible" />
+
+                <com.iapppay.ui.widget.PasswordEditText
+                    android:id="@+id/myEditText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/ipay_height_50"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="numberPassword"
+                    android:maxLength="6"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+        </LinearLayout>
+	  </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>

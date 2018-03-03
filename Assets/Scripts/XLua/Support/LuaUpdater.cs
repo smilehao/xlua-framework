@@ -4,6 +4,7 @@ using System.Diagnostics;
 using UnityEngine;
 using XLua;
 
+[Hotfix]
 public class LuaUpdater : MonoBehaviour
 {
     Action<float, float> luaUpdate = null;
@@ -114,9 +115,9 @@ public class LuaUpdater : MonoBehaviour
     }
 }
 
-public static class LuaUpdaterExport
+#if UNITY_EDITOR
+public static class LuaUpdaterExporter
 {
-    [ReflectionUse]
     [CSharpCallLua]
     public static List<Type> CSharpCallLua = new List<Type>()
     {
@@ -125,3 +126,4 @@ public static class LuaUpdaterExport
         typeof(Action<float, float>),
     };
 }
+#endif

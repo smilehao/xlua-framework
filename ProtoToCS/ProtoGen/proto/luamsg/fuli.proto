@@ -1,0 +1,95 @@
+package fuli;
+
+import "common.proto";
+
+// fuli_id
+// 1在线奖励  2登录奖励  3领地升级  4成长基金 5豪华基金 6至尊基金  7消费返利  8武将情义  9月卡团购   --吃鸡腿，礼包码
+
+message one_fuli_entry
+{
+	optional string desc = 1[default = ''];
+	optional int32 status = 2[default = 0];		//0不可领取，1可领取，2已领取
+	repeated common.award_info award_list = 3;
+	optional int32 e_param1 = 5[default = 0];		//1在线奖励:剩余秒数(-1:未开始)，4消费返利:累计消费元宝
+	optional int32 e_param2 = 6[default = 0];
+	repeated int32 e_param_list = 7;
+	optional int32 condition = 8[default = 0];	//达成条件 
+	optional int32 index = 9[default = 0];		//序号
+}
+
+message one_fuli
+{
+	optional int32 fuli_id = 2[default = 0];
+	repeated one_fuli_entry entry_list = 3;
+	optional int32 f_param1 = 4[default = 0];	//福利的参数，福利9月卡团购:购买人数； 对于福利4,5,6是否已购买和可购买 (0表示不可购买，1表示可购买，2已购买)
+	optional int32 f_param2 = 5[default = 0];   //4,5,6基金购买所需要的VIP等级
+	optional int32 f_param3 = 6[default = 0];   //4,5,6基金购买所需要的元宝数量
+}
+
+
+message ntf_fuli_info
+{
+	repeated one_fuli fuli_info_list = 2;
+}
+
+message req_fuli_list
+{
+}
+
+message rsp_fuli_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_fuli fuli_list = 2;		//1-6
+	optional int32 dining_flag = 3[default = 0];	//吃饭标记，与上0x1表示已经吃过早饭，0x2已经吃过晚饭
+	optional int32 open_gift_code = 4[default = 0];	//1开放礼包码，0不开放
+}
+
+message req_get_fuli_award
+{
+	optional int32 fuli_id = 1[default = 0];
+	optional int32 entry_index = 2[default =0];
+}
+
+message rsp_get_fuli_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+
+//请求购买基金
+message req_buy_fund
+{
+	optional int32 fuli_id = 1[default =0];  //4.成长基金 5. 豪华基金 6.至尊基金
+}
+
+message rsp_buy_fund
+{
+	optional int32 result = 1[default =0];
+}
+
+//请求吃饭
+message req_dining
+{
+
+}
+
+message rsp_dining
+{
+	optional int32 result = 1[default = 0];
+	optional int32 get_stamina = 2[default = 0];	//得到的体力
+	optional int32 dining_flag = 3[default = 0];	//当前的吃饭标记
+}
+
+
+//请求兑换
+message req_fuli_exchange
+{
+	optional string gift_code = 1[default = ''];	//兑换码
+}
+
+message rsp_fuli_exchange
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}

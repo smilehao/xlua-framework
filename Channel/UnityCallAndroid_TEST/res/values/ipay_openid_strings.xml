@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- openID主标题 -->
+    <string name="ipay_openid_master_title">爱贝游戏</string>
+    <!-- 通用字符串 -->
+    <string name="ipay_openid_certain">确定</string>
+    <string name="ipay_openid_cancel">取消</string>
+    <string name="ipay_openid_user_cancel">用户取消</string>
+    <string name="ipay_openid_has_known">知道了</string>
+    <string name="ipay_openid_request_outtimes">已超过当日限制次数，请3小时后再试</string>
+    <string name="ipay_openid_no_response">请求失败，请稍后重试</string>
+    <!-- login -->
+    <string name="ipay_openid_login_username">用户名</string>
+    <string name="ipay_openid_login_password">密   码</string>
+    <string name="ipay_openid_forget_password">忘记密码</string>
+    <string name="ipay_openid_remember_password">记住密码</string>
+    <string name="ipay_openid_username_input_hint">4-24位英文或数字</string>
+    <string name="ipay_openid_password_input_hint">6-16位英文或数字</string>
+    <string name="ipay_openid_login_tip_login">请输入您的爱贝帐号和密码</string>
+    <string name="ipay_openid_login_tip_order_register">为保障您的交易安全，同时提高交易额度，请先完成注册</string>
+    <string name="ipay_openid_login_tip_register">你已支付成功！为保障银行卡信息安全，支持更高支付额度，请完成设置</string>
+    <string name="ipay_openid_login_title_tv_login">用户登录</string>
+    <string name="ipay_openid_login_title_tv_register">注册账号</string>
+    <string name="ipay_openid_login_btn_complete">完成</string>
+    <string name="ipay_openid_login_btn_login">登录</string>
+    <string name="ipay_openid_login_success">登录成功</string>
+    <string name="ipay_openid_login_fail">登录失败</string>
+    <string name="ipay_openid_logout_success">注销成功</string>
+    <string name="ipay_openid_welcome_back">欢迎回来，</string>
+    <string name="ipay_openid_not_username">未知用户名</string>
+    <!-- 注册页 -->
+    <string name="ipay_openid_register">注册</string>
+    <string name="ipay_openid_register_oneclick">一键注册</string>
+    <string name="ipay_openid_agreen_login">点击"登录"，表示您已同意</string>
+    <string name="ipay_openid_agreen_register">点击"注册"，表示您已同意</string>
+    <string name="ipay_openid_user_agreenment">《爱贝用户注册协议》</string>
+    <string name="ipay_openid_user_agreenment_title">用户注册协议</string>
+    <string name="ipay_openid_register_success">注册成功</string>
+    <!-- 找回密码页 -->
+    <string name="ipay_openid_find_password">找回密码</string>
+    <string name="ipay_openid_has_bind_phone">已绑定手机号，</string>
+    <string name="ipay_openid_verifycode">验证码</string>
+    <string name="ipay_openid_verifycode_input_hint">6位数字</string>
+    <string name="ipay_openid_get_verifycode">获取验证码</string>
+    <string name="ipay_openid_submit_verifycode">提交验证码</string>
+    <string name="ipay_openid_unbind_phone_notice">该用户名未绑定手机号，如有疑问请联系客服解决\n客服电话：</string>
+    <string name="ipay_openid_bind_phone_soon">立即绑定</string>
+    <string name="ipay_openid_isgetting">正在获取，请稍后...</string>
+    <string name="ipay_openid_isChecking">正在提交请求，请稍后...</string>
+    <string name="ipay_openid_set_new_password">校验通过，请重置密码</string>
+    <string name="ipay_openid_account_changed_hint">用户名发生变化，请重新获取验证码</string>
+    <!-- 设置中心页 -->
+    <string name="ipay_openid_setting_center">用户中心</string>
+    <string name="ipay_openid_login_notice">您尚未登录，请先登录</string>
+    <string name="ipay_openid_login_soon">立即登录</string>
+    <string name="ipay_openid_server_phone">客服电话：</string>
+    <string name="ipay_openid_server_phone_number">4007888580</string>
+    <!-- 修改用户名页 -->
+    <string name="ipay_openid_modify_username">修改用户名</string>
+    <string name="ipay_openid_new_username">新用户名</string>
+    <string name="ipay_openid_new_username_same_with_old">新旧用户名一致，请重新输入</string>
+    <string name="ipay_openid_username_modify_success">用户名修改成功，请重新登录</string>
+    <!-- 修改密码页 -->
+    <string name="ipay_openid_modify_password">修改密码</string>
+    <string name="ipay_openid_new_password">新密码</string>
+    <string name="ipay_openid_certain_password">密码确认</string>
+    <string name="ipay_openid_certain_password_error">两次输入的新密码不一致，请检查后再试</string>
+    <string name="ipay_openid_password_modify_success">密码修改成功，请重新登录</string>
+    <string name="ipay_openid_new_password_same_old">新旧密码一致，请重新输入</string>
+    <!-- 绑定手机号 -->
+    <string name="ipay_openid_bind_phone">绑定手机</string>
+    <string name="ipay_openid_bind">绑定</string>
+    <string name="ipay_openid_phone">手机号</string>
+    <string name="ipay_openid_bind_notice">将用户名与手机号绑定，以便及时找回密码</string>
+    <string name="ipay_openid_phone_edit_hint">请输入真实手机</string>
+    <string name="ipay_openid_verify_edit_hint">请输入6位数字验证码</string>
+    <string name="ipay_openid_not_receive_verifycode">无法收到短信验证码？</string>
+    <string name="ipay_openid_not_receive_verifycode_tip">1、尝试重新获取\n2、联系手机号归属运营商咨询</string>
+    <string name="ipay_openid_not_receive_verifycode_tip1">1、尝试重新获取</string>
+    <string name="ipay_openid_not_receive_verifycode_tip2">2、联系手机号归属运营商咨询</string>
+    <string name="ipay_openid_not_bind_phone_notice">您尚未绑定手机号，将无法快速找回密码，是否现在绑定？</string>
+    <string name="ipay_openid_bind_soon">立即绑定</string>
+    <string name="ipay_openid_cancel_this_bind">暂不绑定</string>
+    <string name="ipay_openid_not_remind">不再提醒</string>
+    <string name="ipay_openid_bind_success">绑定成功</string>
+    <string name="ipay_openid_bind_phone_changed">输入的手机号发生改变，请重新获取验证码</string>
+    <!-- 解绑手机号 -->
+    <string name="ipay_openid_unbind_phone">解绑手机</string>
+    <string name="ipay_openid_unbind">解绑</string>
+    <string name="ipay_openid_unbind_success">解绑成功</string>
+    <string name="ipay_openid_unbind_notice">解绑后您将无法找回密码，确定要继续解绑吗？</string>
+    <string name="ipay_openid_unbind_continue">仍然解绑</string>
+
+    <string name="ipay_openid_exit">退出登录</string>
+    <string name="ipay_openid_version">当前版本号：</string>
+</resources>

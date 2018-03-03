@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#00000000"
+    android:gravity="center" >
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:background="@drawable/haoxin_wait_bg_x"
+        android:gravity="center_vertical"
+        android:minHeight="100dp"
+        android:minWidth="150dp" >
+
+        <TextView
+            android:id="@+id/haoxin_wait_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:maxWidth="180dp"
+            android:text="@string/haoxin_wait_desc"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ff000000"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/haoxin_wait_btn_cancel"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/haoxin_wait_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/haoxin_btn1_x"
+            android:text="@string/haoxin_wait_btn_text"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+</RelativeLayout>

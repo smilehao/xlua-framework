@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/sdkbg"
+    android:orientation="vertical" >
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:columnCount="1" >
+
+        <Button
+            android:id="@+id/haoxin_register_btn_return"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/haoxin_btn_return_x"
+            android:gravity="center"
+            android:padding="0.0dip"
+            android:textColor="#ffffffff"
+            android:textSize="18.0sp" />
+
+        <TextView
+            android:id="@+id/textViewFindPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_row="0"
+            android:text="@string/haoxin_register_title"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
+
+    </GridLayout>
+    
+    <LinearLayout
+        android:id="@+id/haoxin_register_layout_container"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.12"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/haoxin_register_layout_user"
+                android:layout_width="fill_parent"
+                android:layout_height="40.0dip"
+                android:background="@drawable/input_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:padding="2.0dip" >
+
+                <LinearLayout
+                    android:id="@+id/haoxin_register_layout_user_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/haoxin_reg_icon_user"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/haoxin_img_des"
+                        android:src="@drawable/haoxin_user" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/haoxin_register_edit_user"
+                    android:layout_width="fill_parent"
+                    android:layout_height="38.0dip"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/haoxin_register_layout_user_icon"
+                    android:background="@null"
+                    android:hint="@string/haoxin_login_user_hint"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:nextFocusForward="@+id/haoxin_register_edit_password"
+                    android:padding="0.0dip"
+                    android:textColor="#ff000000"
+                    android:textColorHint="#ffa9a9a9"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/haoxin_register_layout_password"
+                android:layout_width="fill_parent"
+                android:layout_height="40.0dip"
+                android:background="@drawable/input_bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal"
+                android:padding="2.0dip" >
+
+                <LinearLayout
+                    android:id="@+id/haoxin_register_layout_psw_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/haoxin_reg_icon_psw"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/haoxin_img_des"
+                        android:src="@drawable/haoxin_psw" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/haoxin_register_edit_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="38.0dip"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/haoxin_register_layout_psw_icon"
+                    android:background="@null"
+                    android:hint="@string/haoxin_login_password_hint"
+                    android:inputType="textPassword"
+                    android:padding="0.0dip"
+                    android:textColor="#ff000000"
+                    android:textColorHint="#ffa9a9a9"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/haoxin_register_btn_register"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/haoxin_btn2_x"
+            android:gravity="center"
+            android:padding="0.0dip"
+            android:text="@string/haoxin_login_register"
+            android:textColor="#ffffffff"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

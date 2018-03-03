@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Linq;
+using XLua;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// added by wsh @ 2017.12.25
 /// 功能：通用静态方法
 /// </summary>
 
+[Hotfix]
 public class GameUtility
 {
     public const string AssetsFolderName = "Assets";
@@ -15,12 +19,12 @@ public class GameUtility
     {
         return path.Replace("\\", "/");
     }
-    
+
     public static string FormatToSysFilePath(string path)
     {
         return path.Replace("/", "\\");
     }
-    
+
     public static string FullPathToAssetPath(string full_path)
     {
         full_path = FormatToUnityPath(full_path);
@@ -37,7 +41,7 @@ public class GameUtility
         return Path.GetExtension(path).ToLower();
     }
 
-    public static string[] GetSpecifyFilesInFolder(string path, string[] extensions = null)
+    public static string[] GetSpecifyFilesInFolder(string path, string[] extensions = null, bool exclude = false)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -47,6 +51,11 @@ public class GameUtility
         if (extensions == null)
         {
             return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+        }
+        else if (exclude)
+        {
+            return Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
+                .Where(f => !extensions.Contains(GetFileExtension(f))).ToArray();
         }
         else
         {
@@ -89,7 +98,7 @@ public class GameUtility
             Directory.CreateDirectory(dir_info.FullName);
         }
     }
-    
+
     public static void CheckDirAndCreateWhenNeeded(string folderPath)
     {
         if (string.IsNullOrEmpty(folderPath))
@@ -102,7 +111,7 @@ public class GameUtility
             Directory.CreateDirectory(folderPath);
         }
     }
-    
+
     public static bool SafeWriteAllBytes(string outFile, byte[] outBytes)
     {
         try
@@ -126,7 +135,7 @@ public class GameUtility
             return false;
         }
     }
-    
+
     public static bool SafeWriteAllLines(string outFile, string[] outLines)
     {
         try
@@ -150,7 +159,7 @@ public class GameUtility
             return false;
         }
     }
-    
+
     public static bool SafeWriteAllText(string outFile, string text)
     {
         try
@@ -174,7 +183,7 @@ public class GameUtility
             return false;
         }
     }
-    
+
     public static byte[] SafeReadAllBytes(string inFile)
     {
         try
@@ -222,7 +231,7 @@ public class GameUtility
             return null;
         }
     }
-    
+
     public static string SafeReadAllText(string inFile)
     {
         try
@@ -246,7 +255,7 @@ public class GameUtility
             return null;
         }
     }
-    
+
     public static void DeleteDirectory(string dirPath)
     {
         string[] files = Directory.GetFiles(dirPath);
@@ -265,7 +274,7 @@ public class GameUtility
 
         Directory.Delete(dirPath, false);
     }
-    
+
     public static bool SafeClearDir(string folderPath)
     {
         try
@@ -274,7 +283,7 @@ public class GameUtility
             {
                 return true;
             }
-            
+
             if (Directory.Exists(folderPath))
             {
                 DeleteDirectory(folderPath);
@@ -288,7 +297,7 @@ public class GameUtility
             return false;
         }
     }
-    
+
     public static bool SafeDeleteDir(string folderPath)
     {
         try
@@ -297,7 +306,7 @@ public class GameUtility
             {
                 return true;
             }
-            
+
             if (Directory.Exists(folderPath))
             {
                 DeleteDirectory(folderPath);
@@ -306,11 +315,11 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            Logger.LogError(string.Format("SafeDeleteDir failed! path = {0} whth err: {1}", folderPath, ex.Message));
+            Logger.LogError(string.Format("SafeDeleteDir failed! path = {0} with err: {1}", folderPath, ex.Message));
             return false;
         }
     }
-    
+
     public static bool SafeDeleteFile(string filePath)
     {
         try
@@ -320,7 +329,7 @@ public class GameUtility
                 return true;
             }
 
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return true;
             }
@@ -330,11 +339,35 @@ public class GameUtility
         }
         catch (System.Exception ex)
         {
-            Logger.LogError(string.Format("SafeDeleteFile failed! path = {0} whth err: {1}", filePath, ex.Message));
+            Logger.LogError(string.Format("SafeDeleteFile failed! path = {0} with err: {1}", filePath, ex.Message));
             return false;
         }
     }
-    
+
+    public static bool SafeRenameFile(string sourceFileName, string destFileName)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(sourceFileName))
+            {
+                return false;
+            }
+
+            if (!File.Exists(sourceFileName))
+            {
+                return true;
+            }
+            File.SetAttributes(sourceFileName, FileAttributes.Normal);
+            File.Move(sourceFileName, destFileName);
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Logger.LogError(string.Format("SafeRenameFile failed! path = {0} with err: {1}", sourceFileName, ex.Message));
+            return false;
+        }
+    }
+
     public static bool SafeCopyFile(string fromFile, string toFile)
     {
         try
@@ -349,7 +382,7 @@ public class GameUtility
                 return false;
             }
             CheckFileAndCreateDirWhenNeeded(toFile);
-            if(File.Exists(toFile))
+            if (File.Exists(toFile))
             {
                 File.SetAttributes(toFile, FileAttributes.Normal);
             }
@@ -364,3 +397,13 @@ public class GameUtility
         }
     }
 }
+
+#if UNITY_EDITOR
+public static class GameUtilityExporter
+{
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>(){
+            typeof(GameUtility),
+        };
+}
+#endif

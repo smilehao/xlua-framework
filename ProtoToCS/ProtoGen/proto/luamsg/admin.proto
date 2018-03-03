@@ -1,0 +1,11 @@
+package admin;
+
+//执行GM命令
+message req_exec_cmd
+{
+	optional string cmd = 1[default = ''];
+}
+message rsp_exec_cmd
+{
+	optional int32 result = 1[default = 0];
+}

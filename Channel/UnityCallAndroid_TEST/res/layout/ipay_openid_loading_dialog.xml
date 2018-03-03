@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  android:background="@color/ipay_oneclick_303030" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="120dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/ipay_openid_transparent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dialog_msg_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/ipay_openid_ffffff"
+        android:textSize="@dimen/ipay_openid_text_size_16" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ipay_openid_shape_progress_bg" >
+
+        <ProgressBar
+            android:id="@+id/loading_progress_bar"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/ipay_openid_loading" />
+
+        <TextView
+            android:id="@+id/dialog_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="@dimen/ipay_openid_margin_10"
+            android:layout_toRightOf="@id/loading_progress_bar"
+            android:text="@string/ipay_openid_isChecking"
+            android:textColor="@color/ipay_openid_text_gray"
+            android:textSize="@dimen/ipay_openid_text_size_26" />
+    </RelativeLayout>
+
+</LinearLayout>

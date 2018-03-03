@@ -1,13 +1,15 @@
-﻿using System;
+﻿//#define LOG_SEND_BYTES
+//#define LOG_RECEIVE_BYTES
+using System;
 using System.Net.Sockets;
 using CustomDataStruct;
 using System.Threading;
 using System.Collections.Generic;
 using XLua;
 
-namespace networks
+namespace Networks
 {
-    [LuaCallCSharp]
+    [Hotfix]
     public class HjTcpNetwork : HjNetworkBase
     {
         private Thread mSendThread = null;
@@ -44,6 +46,7 @@ namespace networks
                 mClientSocket.EndConnect(ia);
                 OnConnected();
             }, null);
+            mStatus = SOCKSTAT.CONNECTING;
         }
         
         protected override void DoClose()
@@ -117,12 +120,12 @@ namespace networks
                 }
                 catch (ObjectDisposedException e)
                 {
-                    ReportSocketError(ESocketError.ERROR_1, e.Message);
+                    ReportSocketClosed(ESocketError.ERROR_1, e.Message);
                     break;
                 }
                 catch (Exception e)
                 {
-                    ReportSocketError(ESocketError.ERROR_2, e.Message);
+                    ReportSocketClosed(ESocketError.ERROR_2, e.Message);
                     break;
                 }
                 finally
@@ -144,42 +147,84 @@ namespace networks
 
         protected override void DoReceive(StreamBuffer streamBuffer, ref int bufferCurLen)
         {
-            // 组包、拆包
-            int start = 0;
-            streamBuffer.ResetStream();
-            while (true)
+            try
             {
-                if (bufferCurLen < sizeof(int))
-                {
-                    break;
-                }
-
+                // 组包、拆包
                 byte[] data = streamBuffer.GetBuffer();
-                int msgLen = BitConverter.ToInt32(data, start);
-                if (bufferCurLen < msgLen + sizeof(int))
+                int start = 0;
+                streamBuffer.ResetStream();
+                while (true)
                 {
-                    break;
+                    if (bufferCurLen - start < sizeof(int))
+                    {
+                        break;
+                    }
+
+                    int msgLen = BitConverter.ToInt32(data, start);
+                    if (bufferCurLen < msgLen + sizeof(int))
+                    {
+                        break;
+                    }
+
+                    // 提取字节流，去掉开头表示长度的4字节
+                    start += sizeof(int);
+                    var bytes = streamBuffer.ToArray(start, msgLen);
+#if LOG_RECEIVE_BYTES
+                    var sb = new System.Text.StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        sb.AppendFormat("{0}\t", bytes[i]);
+                    }
+                    Logger.Log("HjTcpNetwork receive bytes : " + sb.ToString());
+#endif
+                    mReceiveMsgQueue.Add(bytes);
+
+                    // 下一次组包
+                    start += msgLen;
                 }
 
-                // 提取字节流，去掉开头表示长度的4字节
-                start += sizeof(int);
-                mReceiveMsgQueue.Add(streamBuffer.ToArray(start, msgLen));
-
-                // 下一次组包
-                start += msgLen;
+                if (start > 0)
+                {
+                    bufferCurLen -= start;
+                    streamBuffer.CopyFrom(data, start, 0, bufferCurLen);
+                }
             }
-
-            if (start > 0)
+            catch (Exception ex)
             {
-                bufferCurLen -= start;
-                streamBuffer.CopyFrom(streamBuffer.GetBuffer(), start, 0, bufferCurLen);
+                Logger.LogError(string.Format("Tcp receive package err : {0}\n {1}", ex.Message, ex.StackTrace));
             }
         }
 
         public override void SendMessage(byte[] msgObj)
         {
+#if LOG_SEND_BYTES
+            var sb = new System.Text.StringBuilder();
+            for (int i = 0; i < msgObj.Length; i++)
+            {
+                sb.AppendFormat("{0}\t", msgObj[i]);
+            }
+            Logger.Log("HjTcpNetwork send bytes : " + sb.ToString());
+#endif
             mSendMsgQueue.Add(msgObj);
             mSendSemaphore.ProduceResrouce();
         }
     }
+
+#if UNITY_EDITOR
+    public static class HjTcpNetworkExporter
+    {
+        [LuaCallCSharp]
+        public static List<Type> LuaCallCSharp = new List<Type>()
+        {
+            typeof(HjTcpNetwork),
+        };
+
+        [CSharpCallLua]
+        public static List<Type> CSharpCallLua = new List<Type>()
+        {
+            typeof(Action<object, int, string>),
+            typeof(Action<byte[]>),
+        };
+    }
+#endif
 }

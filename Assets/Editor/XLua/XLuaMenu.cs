@@ -2,42 +2,39 @@
 using UnityEditor;
 using System.IO;
 using Debug = UnityEngine.Debug;
+using AssetBundles;
 
 [InitializeOnLoad]
 public static class XLuaMenu
 {
-    static void CopyLuaBytesFiles(string sourceDir, string destDir, bool appendext = true, string searchPattern = "*.lua", SearchOption option = SearchOption.AllDirectories)
+    [MenuItem("XLua/Copy Lua Files To AssetsPackage", false, 51)]
+    public static void CopyLuaFilesToAssetsPackage()
     {
-        if (!Directory.Exists(sourceDir))
+        string destination = Path.Combine(Application.dataPath, AssetBundleConfig.AssetsFolderName);
+        destination = Path.Combine(destination, XLuaManager.luaAssetbundleAssetName);
+        string source = Path.Combine(Application.dataPath, XLuaManager.luaScriptsFolder);
+        GameUtility.SafeDeleteDir(destination);
+
+        FileUtil.CopyFileOrDirectoryFollowSymlinks(source, destination);
+
+        var notLuaFiles = GameUtility.GetSpecifyFilesInFolder(destination, new string[] { ".lua" }, true);
+        if (notLuaFiles != null && notLuaFiles.Length > 0)
         {
-            return;
+            for (int i = 0; i < notLuaFiles.Length; i++)
+            {
+                GameUtility.SafeDeleteFile(notLuaFiles[i]);
+            }
         }
 
-        string[] files = Directory.GetFiles(sourceDir, searchPattern, option);
-        int len = sourceDir.Length;
-
-        if (sourceDir[len - 1] == '/' || sourceDir[len - 1] == '\\')
+        var luaFiles = GameUtility.GetSpecifyFilesInFolder(destination, new string[] { ".lua" }, false);
+        if (luaFiles != null && luaFiles.Length > 0)
         {
-            --len;
-        }         
-
-        for (int i = 0; i < files.Length; i++)
-        {
-            string str = files[i].Remove(0, len);
-            string dest = destDir + "/" + str;
-            if (appendext) dest += ".bytes";
-            string dir = Path.GetDirectoryName(dest);
-            Directory.CreateDirectory(dir);
-            File.Copy(files[i], dest, true);
+            for (int i = 0; i < luaFiles.Length; i++)
+            {
+                GameUtility.SafeRenameFile(luaFiles[i], luaFiles[i] + ".bytes");
+            }
         }
-    }
 
-
-    [MenuItem("XLua/Copy Lua files to AssetsPackage", false, 51)]
-    public static void CopyLuaFilesToRes()
-    {
-        string destDir = Application.dataPath + "/AssetsPackage/Lua";
-        CopyLuaBytesFiles(Application.dataPath + "/LuaScripts", destDir);
         AssetDatabase.Refresh();
         Debug.Log("Copy lua files over");
     }

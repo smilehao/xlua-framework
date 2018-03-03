@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using XLua;
 
 /// <summary>
 /// added by wsh @ 2017.12.22
@@ -18,6 +18,8 @@ using UnityEngine;
 
 namespace AssetBundles
 {
+    [Hotfix]
+    [LuaCallCSharp]
     public class ResourceWebRequester : ResourceAsyncOperation
     {
         static Queue<ResourceWebRequester> pool = new Queue<ResourceWebRequester>();
@@ -129,7 +131,7 @@ namespace AssetBundles
             }
             else
             {
-                Logger.Log("Downloading : " + url);
+                //Logger.Log("Downloading : " + url);
             }
         }
         

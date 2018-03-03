@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--item android:drawable="@drawable/ipay_openid_confirm_pressed" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/ipay_openid_confirm_normal" android:state_enabled="true" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ipay_openid_confirm_disable" android:state_enabled="false" android:state_pressed="true"/>
+    <item android:drawable="@drawable/ipay_openid_confirm_disable" android:state_enabled="false" android:state_pressed="false"/>
+    <item android:drawable="@drawable/ipay_openid_confirm_normal"/-->
+    
+    <item android:drawable="@color/ipay_openid_textbtn_disable_color" android:state_enabled="false" />
+    <item android:drawable="@color/ipay_openid_textbtn_pressed_color" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@color/ipay_openid_textbtn_pressed_color" android:state_enabled="true" android:state_focused="true"/>
+    <item android:drawable="@color/ipay_openid_textbtn_normal_color"/>
+</selector>

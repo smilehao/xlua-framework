@@ -1,0 +1,145 @@
+package inner_battle;
+
+
+message wujiang_carry_skill_info
+{
+	optional int32 skill_id = 1[default = 0];
+	optional int32 use_times = 2[default = 0];
+}
+
+message user_battle_statistics
+{
+	message wujiang_in_battle
+	{
+		optional int32 wujiangid = 1[default = 0];
+		optional int32 level = 2[default = 0];
+		optional int32 zhuansheng = 3;
+		
+		repeated wujiang_carry_skill_info carry_skill_info_list = 10;  //记录一些技能的使用数据 
+	}
+	message lose_army
+	{
+		optional int32 armyid = 1[default = 0];
+		optional int32 lose_num = 2[default = 0];
+		optional int32 left_num = 3[default = 0];
+		optional int32 army_type = 4[default = 0];
+		repeated wujiang_in_battle wujiang_list= 5;
+		optional int32 army_level = 6[default = 0];
+		optional int32 recover_num = 7[default = 0];
+		optional bool  is_dead = 8[default = false];
+		
+		optional group_carry_attr carry_attr = 9;  //一些需要保存的战斗中的属性
+
+		optional int32 world_boss_shape = 10[default = 0]; ///0: 蛋 1: 龙
+
+		optional int32 groupid = 20;
+	}
+	optional uint32 uid = 1[default = 0];
+	repeated lose_army lose_army_info = 2;
+	optional int32 manor_level = 3[default = 0];
+	optional int32 vip_level = 4[default = 0];
+	//repeated int32 wujiang_id_list = 4;
+	//repeated wujiang_in_battle wujiang_list= 5;
+}
+/// 战斗统计
+message statistics_info
+{
+	optional uint32 winneruid = 1[default = 0];
+
+	optional user_battle_statistics leftstatistic = 2;
+	optional user_battle_statistics righttatistic = 3;
+	optional float total_round = 4[default = 0];
+	optional float round_limit = 5[default = 0];
+}
+
+message inner_fighting_role
+{
+	optional int32 roleid = 1[default = 0];	
+	optional int32 level = 2[default = 0];
+	optional int32 num = 3[default = 0];
+	optional int32 maxnum = 14[default = 0];
+	repeated int32 skilllist = 4;
+
+	optional int32 zhuansheng = 13[default = 0];
+	optional int32 wuli = 5[default = 0];			/// 武力
+	optional int32 zhili = 6[default = 0];			/// 智力
+	optional int32 tongshuai =7[default = 0]; 		/// 统率
+	optional int32 rolejob = 8[default = 0];			/// 兵种
+
+	optional int32 phy_atk = 9[default = 0];			/// 物攻
+	optional int32 phy_def = 10[default = 0];		/// 物防
+	optional int32 magic_atk = 11[default = 0];		/// 法攻
+	optional int32 magic_def = 12[default = 0];		/// 法防
+	
+	optional int32 shenbing_level = 20[default = 0];
+	optional int32 shenbing_skillid = 21[default = 0];
+	optional int32 shenbing_id = 22[default = 0];
+	
+	repeated wujiang_carry_skill_info carry_skill_info_list = 30;
+
+	optional float gem_add_skill_prob = 40[default = 0];
+}
+
+message group_carry_attr
+{
+	optional int32 nuqi = 1[default = 0];
+	optional int32 pos = 2[default = 0];
+}
+
+message world_boss_info
+{
+	optional int32 world_boss_shape = 1[default = 0]; ///0: 蛋 1: 龙
+	optional float turn_pnt = 2[default = 0.0]; /// 变龙血量百分比
+}
+
+message inner_group_info
+{
+	optional int32 pos = 1[default = 0];  /// 战场中的位置
+	repeated inner_fighting_role fightingrole_list = 2;
+	optional int32 armyid = 3[default = 0];	//部队ID
+	optional group_carry_attr carry_attr = 4;
+	optional float xuanyuan_round = 5[default = 0];//已方眩晕回合数
+	optional world_boss_info world_boss = 6;
+}
+
+message battle_prebattle_buff
+{
+	optional float add_phyatk_ratio = 1[default = 0];	/// 攻防增加比例
+	optional float add_phydef_ratio = 2[default = 0];
+	optional float add_magicatk_ratio = 3[default = 0];
+	optional float add_magicdef_ratio = 4[default = 0];
+	optional float world_level = 5[default = 0];
+	optional float add_speed_ratio = 6[default = 0];
+}
+
+message inner_user_formation_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32  icon = 4[default = 0];
+	repeated inner_group_info grouplist = 3;
+	optional int32 manor_level = 5[default = 0];
+	optional int32 vip_level = 6[default = 0];
+
+	optional battle_prebattle_buff prebattle_buff_info = 7;
+}
+
+message req_inner_battle
+{
+	optional int32 battle_type = 1[default = 0];
+	optional inner_user_formation_info leftformation = 3;
+	optional inner_user_formation_info rightformation = 4;
+	optional float round_limit = 5[default = 0]; /// 回合限制
+	optional uint32 battle_seed = 19[default = 0];  /// 调试使用
+}
+
+
+message rsp_inner_battle
+{
+	optional int32 result = 3[default = 0];			/// 0 表示没有错误
+	optional string battleid = 1[default = ''];
+	optional bytes video = 2[default = ''];		///message battle_info 的序列信息, 给客户端用
+	optional statistics_info statisinfo = 5; 
+}
+
+

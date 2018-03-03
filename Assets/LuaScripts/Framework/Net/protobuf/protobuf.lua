@@ -31,15 +31,15 @@ local tostring = tostring
 local type = type
 
 local pb = require "pb"
-local wire_format = require "protobuf.wire_format"
-local type_checkers = require "protobuf.type_checkers"
-local encoder = require "protobuf.encoder"
-local decoder = require "protobuf.decoder"
-local listener_mod = require "protobuf.listener"
-local containers = require "protobuf.containers"
-local descriptor = require "protobuf.descriptor"
+local wire_format = require "Framework.Net.Protobuf.wire_format"
+local type_checkers = require "Framework.Net.Protobuf.type_checkers"
+local encoder = require "Framework.Net.Protobuf.encoder"
+local decoder = require "Framework.Net.Protobuf.decoder"
+local listener_mod = require "Framework.Net.Protobuf.listener"
+local containers = require "Framework.Net.Protobuf.containers"
+local descriptor = require "Framework.Net.Protobuf.descriptor"
 local FieldDescriptor = descriptor.FieldDescriptor
-local text_format = require "protobuf.text_format"
+local text_format = require "Framework.Net.Protobuf.text_format"
 local _M = {}
 
 local function make_descriptor(name, descriptor, usable_key)

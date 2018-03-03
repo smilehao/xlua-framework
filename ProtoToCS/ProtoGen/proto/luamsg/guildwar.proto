@@ -1,0 +1,215 @@
+package guildwar;
+
+import "common.proto";
+
+message one_player_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional string name = 2[default = ''];
+	optional int32  icon = 3[default = 0];
+	optional int32  power = 4[default = 0];
+	optional int32  pos = 5[default= 0]; //战场位置
+	optional int32  curr_hp = 6[default = 0];  //当前血量
+	optional int32  max_hp = 7[default = 0];  //最大血量
+}
+
+//一场战斗
+message one_fighting_info
+{
+	optional int32 uid1 = 1[default = 0];
+	optional int32 uid2 = 2[default = 0];
+	optional string user_name1 = 3[default = ''];
+	optional string user_name2 = 4[default = ''];
+	optional int32 winner = 5[default = 0];
+	optional string video_id = 6[default = ''];
+	optional uint32 result_time = 7[default =0];
+}
+
+message one_camp_result
+{
+	optional int32  result_time = 1[default = 0];
+	optional int32  is_win = 2[default = 0]; //是否赢了
+
+}
+
+message one_camp_battle
+{
+	optional int32 camp_type = 1[default = 0];
+	repeated one_fighting_info fighting_list =2;
+}
+
+//阵营信息
+message one_camp_info
+{
+	optional int32 type       = 1[default = 0];  //1.左军  2.右军  4.中军
+	optional int32 curr_count = 2[default = 0]; //当前人数
+	optional int32 max_count  = 3[default = 0]; //总人数
+	repeated one_player_info  player_list = 4;
+	optional uint32 fighting_uid = 5[default =0]; // 正在出战的玩家uid 0表示无人出战  
+}
+
+message  one_war_report
+{
+	optional int32  guild_id1    = 1[default = 0];
+	optional int32  guild_id2    = 2[default = 0];
+	optional string guild_name1 = 3[default = ''];
+	optional string guild_name2 = 4[default = ''];
+	optional int32 camp_type1 = 5[default = 0];
+	optional int32 camp_type2 = 6[default = 0];
+	optional int32 report_type = 7[default = 0];   // 1.我方击败敌方   2.敌方击败我方  3.我方胜利 4.敌方胜利
+	optional uint32 report_time = 8[default = 0];  
+	optional int32  deploy_status = 9[default = 0];    //1.我方未部署  2.敌方未部署
+}
+
+//军团信息
+message guildwar_guild_info
+{
+	optional int32  gid       = 1[default = 0];    //0表示轮空
+	optional string name      = 2[default = ''];
+	optional int32  icon      = 3[default = 0];
+	optional int32  flag_icon = 4[default = 0];
+	optional int32  power     = 5[default = 0]; //总战斗力
+	optional int32  buff      = 6[default = 0]; //攻防加成
+	repeated one_camp_info    camp_list = 7;
+}
+
+message guildwar_matched_guilds
+{
+	optional int32  index = 1[default = 0];
+	repeated guildwar_guild_info guild_info_list = 2;  	
+	optional int32  winner = 3[default = 0]; //这一场的胜方
+}
+
+//一场家族战的信息
+message one_round_award_info
+{
+	optional int32 round =      1[default = 0];  
+	repeated common.award_info  award_list = 2;
+}
+
+//历史家族战冠军信息
+message history_winner_info
+{
+	optional guildwar_guild_info guild_info = 1;
+	optional uint32 history_time = 2[default = 0];  //夺冠时间
+}
+
+//查看活动面板
+message req_panel
+{
+
+}
+
+message rsp_panel
+{
+	optional int32 result = 1[default = 0];	//0正常
+	optional int32 progress = 2[default = 0];	//家族战进程, 1[未开始] 2[16/8比赛] 3[8/4比赛]  4[4/2比赛] 5[2/1比赛] 7[本周比赛结束]
+	optional int32 game_status = 3[default = 0];		//1.未开始  2.部署阶段 3.开战阶段  5.结束阶段
+	optional int32 own_status  = 4[default = 0];            //1.没有资格  2.可报名 3.已报名
+	optional int32 game_round = 5[default = 0];             //当前比赛轮数
+	optional int32 match_start_hour = 6[default = 0];	//比赛开始时间
+	optional int32 match_time = 7[default = 2000];	//比赛的绝对时间
+	optional guildwar_guild_info self_guild_info = 8;     //自己的家族对战信息
+	optional guildwar_guild_info enemy_guild_info = 9;   //对手的家族信息
+	optional int32 curr_joiner_count = 10[default = 0]; //当前报名人数
+	optional int32 max_joiner_count = 11[default = 0];  //最大报名人数
+	optional int32 self_camp_type = 12[default = 0]; //自己所在的阵营
+	optional int32 self_buzhen_id = 13[default = 0]; //自己出战的阵营
+	repeated one_war_report   report_list = 14;    //简易战报
+	optional uint32 refresh_time  = 15[default = 0]; //下一次刷新时间
+	optional int32 best_round  = 16[default = 0]; //获取家族最佳成绩        
+	optional int32 deploy_start_time = 17[default = 0];  //报名开始时间 
+	optional int32 matched_id = 18[default = 0];  //自己家族如果在比赛的 比赛id
+}
+
+//请求战场信息
+message req_guildwar_fighting_info
+{
+	optional int32 index = 1[default = 0];    //0或者不传表示自己当前对战信息
+}
+
+message rsp_guildwar_fighting_info
+{
+	optional int32 result =1[default = 0];
+	optional int32 index  = 2[default = 0];  //0表示自己
+	optional int32 beat_count = 3[default = 0]; //歼敌数
+	optional int32 beat_troop = 4[default = 0]; //歼灭部队数
+	optional guildwar_guild_info guild_info_first = 5;     //蓝色方
+	optional guildwar_guild_info guild_info_second = 6;   //红色方
+	repeated one_camp_battle battle_list = 7;   //对战表
+	optional uint32 refresh_time  = 8[default = 0];
+	optional int32 resurgence_count = 9[default = 0]; //可以复活的次数
+	repeated one_war_report   report_list = 14;    //简易战报
+	optional int32    fighting_type = 15[default = 0];
+}
+
+//请求家族战信息
+message req_guildwar_game_info
+{
+
+}
+
+message rsp_guildwar_game_info
+{
+	optional int32 result = 1[default = 0];
+	optional int32 progress = 2[default = 0];
+	optional int32 match_start_hour = 3[default = 2000];	//比赛开始时间
+	repeated guildwar_matched_guilds guilds_matched_list = 4;
+	repeated one_round_award_info  round_award_list = 5;  
+	repeated history_winner_info    winner_list = 6;
+	repeated int32                  join_list = 7;
+}
+
+
+message req_join_fight
+{
+	optional int32 camp_type = 1[default = 0]; //1.左军  2.右军 4.中军
+}
+
+message rsp_join_fight
+{
+	optional int32 result = 1[default = 0];
+	optional int32 buzhen_id = 2[default = 0];
+}
+
+message req_quit_fight
+{
+
+}
+
+message rsp_quit_fight
+{
+	optional int32 result = 1[default = 0];
+}
+
+//复活
+message req_resurgence_fight
+{
+	optional int32 buzhen_id = 1[default = 0];
+	optional int32 camp_type = 2[default = 0]; //1.左军  2.右军  4.中军
+}
+
+message rsp_resurgence_fight
+{
+	optional int32 result = 1[default = 0];
+	optional int32 buzhen_id = 2[default = 0];
+}
+
+
+message ntf_guildwar_status
+{
+	optional int32 progress = 2[default = 0];	//家族战进程, 1[未开始] 2[16/8比赛] 3[8/4比赛]  4[4/2比赛] 5[2/1比赛] 7[本周比赛结束]
+	optional int32 game_status = 3[default = 0];		//当前比赛的状态 2部署阶段
+}
+
+
+message req_camp_detail
+{
+	optional int32 camp_type = 1[default = 0];
+}
+
+message rsp_camp_detail
+{
+	optional int32 result = 1[default = 0];
+	repeated one_player_info player_list  = 2;
+}

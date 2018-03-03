@@ -9,7 +9,7 @@ function ConstClass(classname, const_tb, super)
 	assert(type(classname) == "string" and #classname > 0)
     local cls
     if super then
-        cls = DeepClone(super)
+        cls = DeepCopy(super)
     else
         cls = {}
     end
@@ -21,6 +21,10 @@ function ConstClass(classname, const_tb, super)
 	end
 	
     cls.__cname = classname
+	cls.__tostring = function(self)
+		return table.dump(self, true, 2)
+	end
+	
 	if Config.Debug then
 		-- 访问限制
 		cls.__index = function(tb, key)

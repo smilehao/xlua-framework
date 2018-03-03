@@ -24,7 +24,7 @@ local ipairs = ipairs
 local assert =assert
 
 local pb = require "pb"
-local wire_format = require "protobuf.wire_format"
+local wire_format = require "Framework.Net.Protobuf.wire_format"
 
 local function _VarintSize(value)    
     if value <= 0x7f then return 1 end

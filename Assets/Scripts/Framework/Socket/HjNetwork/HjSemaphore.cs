@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 
-namespace networks
+namespace Networks
 {
     class HjSemaphore
     {
@@ -59,7 +55,6 @@ namespace networks
                 //释放锁，并唤醒等待队列中的线程使其进入就绪队列
                 Monitor.Pulse(this);
             }
-            
         }
     }
 }

@@ -1,0 +1,14 @@
+package exchange;
+
+import "common.proto";
+
+message req_exchange
+{
+	optional string gift_code = 1[default = ''];	//兑换码
+}
+
+message rsp_exchange
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}

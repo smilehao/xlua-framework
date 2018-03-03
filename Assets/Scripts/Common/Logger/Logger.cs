@@ -42,7 +42,7 @@ public class Logger
     public static void LogToMainThread(string s, params object[] p)
     {
         string msg = (p != null && p.Length > 0 ? string.Format(s, p) : s);
-        LoggerHelper.instance.LogToMainThread(LoggerHelper.LOG_TYPE.LOG, msg);
+        LoggerHelper.Instance.LogToMainThread(LoggerHelper.LOG_TYPE.LOG, msg);
     }
 
     [Conditional("UNITY_EDITOR")]
@@ -71,7 +71,7 @@ public class Logger
     public static void LogErrorToMainThread(string s, params object[] p)
     {
         string msg = (p != null && p.Length > 0 ? string.Format(s, p) : s);
-        LoggerHelper.instance.LogToMainThread(LoggerHelper.LOG_TYPE.LOG_ERR, msg);
+        LoggerHelper.Instance.LogToMainThread(LoggerHelper.LOG_TYPE.LOG_ERR, msg);
     }
 
 

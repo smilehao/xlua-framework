@@ -1,46 +1,21 @@
 using UnityEngine;
-using System.Collections.Generic;
-#if UNITY_EDITOR
-using UnityEditor;
-using System.Net;
-using System.Net.Sockets;
-#endif
+using XLua;
 using System.IO;
 
 /// <summary>
 /// added by wsh @ 2017.12.25
 /// 功能： Assetbundle相关的通用静态函数，提供运行时，或者Editor中使用到的有关Assetbundle操作和路径处理的函数
+/// TODO：
+/// 1、做路径处理时是否考虑引入BetterStringBuilder消除GC问题
+/// 2、目前所有路径处理不支持variant，后续考虑是否支持
 /// </summary>
 
 namespace AssetBundles
 {
+    [Hotfix]
+    [LuaCallCSharp]
     public class AssetBundleUtility
     {
-        public static string GetCurPlatformName()
-        {
-#if UNITY_EDITOR
-            return GetPlatformName(EditorUserBuildSettings.activeBuildTarget);
-#else
-			return GetPlatformName(Application.platform);
-#endif
-        }
-
-#if UNITY_EDITOR
-        public static string GetPlatformName(BuildTarget buildTarget)
-        {
-            switch (buildTarget)
-            {
-                case BuildTarget.Android:
-                    return "Android";
-                case BuildTarget.iOS:
-                    return "iOS";
-                default:
-                    Logger.LogError("Error buildTarget!!!");
-                    return null;
-            }
-        }
-#endif
-        
         private static string GetPlatformName(RuntimePlatform platform)
         {
             switch (platform)
@@ -54,24 +29,12 @@ namespace AssetBundles
                     return null;
             }
         }
-        
-#if UNITY_EDITOR
-        public static string GetBuildPlatformOutputPath(BuildTarget target)
-        {
-            string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, GetPlatformName(target));
-            GameUtility.CheckDirAndCreateWhenNeeded(outputPath);
-            return outputPath;
-        }
-#endif
-        
-        public static string GetPlatformStreamingAssetsFilePath(string assetPath = null)
+       
+        public static string GetStreamingAssetsFilePath(string assetPath = null)
         {
 #if UNITY_EDITOR
-            var target = EditorUserBuildSettings.activeBuildTarget;
             string outputPath = Path.Combine("file://" + Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
-            outputPath = Path.Combine(outputPath, GetPlatformName(target));
 #else
-            var platform = Application.platform;
 #if UNITY_IPHONE || UNITY_IOS
             string outputPath = Path.Combine("file://" + Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
 #elif UNITY_ANDROID
@@ -79,7 +42,6 @@ namespace AssetBundles
 #else
             Logger.LogError("Unsupported platform!!!");
 #endif
-            outputPath = Path.Combine(outputPath, GetPlatformName(platform));
 #endif
             if (!string.IsNullOrEmpty(assetPath))
             {
@@ -87,85 +49,63 @@ namespace AssetBundles
             }
             return outputPath;
         }
-        
-        public static string GetPlatformPersistentFilePath(string assetPath = null)
-        {
-            return "file://" + GetPlatformPersistentDataPath(assetPath);
-        }
 
-        public static string GetPlatformPersistentDataPath(string assetPath = null)
+        public static string GetStreamingAssetsDataPath(string assetPath = null)
         {
-#if UNITY_EDITOR
-            var target = EditorUserBuildSettings.activeBuildTarget;
-            string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
-            outputPath = Path.Combine(outputPath, GetPlatformName(target));
+            string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
             if (!string.IsNullOrEmpty(assetPath))
             {
                 outputPath = Path.Combine(outputPath, assetPath);
             }
+            return outputPath;
+        }
+
+        public static string GetPersistentFilePath(string assetPath = null)
+        {
+            return "file://" + GetPersistentDataPath(assetPath);
+        }
+
+        public static string GetPersistentDataPath(string assetPath = null)
+        {
+            string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
+            if (!string.IsNullOrEmpty(assetPath))
+            {
+                outputPath = Path.Combine(outputPath, assetPath);
+            }
+#if UNITY_EDITOR
             return GameUtility.FormatToSysFilePath(outputPath);
 #else
-            var platform = Application.platform;
-            string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
-            outputPath = Path.Combine(outputPath, GetPlatformName(platform));
-            if (!string.IsNullOrEmpty(assetPath))
-            {
-                outputPath = Path.Combine(outputPath, assetPath);
-            }
             return outputPath;
 #endif
         }
 
-        public static bool CheckPlatformPersistentFileExsits(string filePath)
+        public static bool CheckPersistentFileExsits(string filePath)
         {
-            var path = GetPlatformPersistentDataPath(filePath);
+            var path = GetPersistentDataPath(filePath);
             return File.Exists(path);
         }
 
         // 注意：这个路径是给WWW读文件使用的url，如果要直接磁盘写persistentDataPath，使用GetPlatformPersistentDataPath
-        public static string GetPlatformFileUrl(string filePath)
+        public static string GetAssetBundleFileUrl(string filePath)
         {
-            if (CheckPlatformPersistentFileExsits(filePath))
+            if (CheckPersistentFileExsits(filePath))
             {
-                return GetPlatformPersistentFilePath(filePath);
+                return GetPersistentFilePath(filePath);
             }
             else
             {
-                return GetPlatformStreamingAssetsFilePath(filePath);
+                return GetStreamingAssetsFilePath(filePath);
             }
         }
-
-        // 检测AB包所在Asset路径有效性
-        public static bool CheckAssetBundleAssetPathValid(string assetbundleAssetPath)
-        {
-            if (string.IsNullOrEmpty(assetbundleAssetPath))
-            {
-                Debug.LogError("assetbundleAssetPath null!");
-                return false;
-            }
-            
-            if (assetbundleAssetPath.Contains(" "))
-            {
-                Debug.LogError("assetbundleAssetPath contains empty char!");
-                return false;
-            }
-
-            if (assetbundleAssetPath.Contains("."))
-            {
-                Debug.LogError("assetbundleAssetPath contains '.'!");
-                return false;
-            }
-
-            return true;
-        }
-
-        // 注意：这里不处理Variant，且是Assetbundle在Assets中的路径，游戏逻辑层别使用，这里只用于特殊情况
-        public static string AssetBundleAssetPathToAssetBundleName(string assetPath)
+        
+        public static string AssetBundlePathToAssetBundleName(string assetPath)
         {
             if (!string.IsNullOrEmpty(assetPath))
             {
-                //remove root "Assets/"
-                assetPath = assetPath.Replace("Assets/", "");
+                if (assetPath.StartsWith("Assets/"))
+                {
+                    assetPath = AssetsPathToPackagePath(assetPath);
+                }
                 //no " "
                 assetPath = assetPath.Replace(" ", "");
                 //there should not be any '.' in the assetbundle name
@@ -177,97 +117,30 @@ namespace AssetBundles
             }
             return null;
         }
-
-        // 相对于AssetBundleConfig.AssetsFolderName下的路径转Unity中Asset的绝对路径
-        public static string RelativeAssetPathToAbsoluteAssetPath(string assetPath)
+        
+        public static string PackagePathToAssetsPath(string assetPath)
         {
             return "Assets/" + AssetBundleConfig.AssetsFolderName + "/" + assetPath;
         }
 
-#if UNITY_EDITOR
-        public static void WriteAssetBundleServerURL()
+        public static bool IsPackagePath(string assetPath)
         {
-            string assetBundleServerUrl = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
-            assetBundleServerUrl = Path.Combine(assetBundleServerUrl, GetCurPlatformName());
-            assetBundleServerUrl = Path.Combine(assetBundleServerUrl, AssetBundleConfig.AssetBundleServerUrlFileName);
-            GameUtility.SafeWriteAllText(assetBundleServerUrl, GetAssetBundleServerURL());
+            string path = "Assets/" + AssetBundleConfig.AssetsFolderName + "/";
+            return assetPath.StartsWith(path);
         }
-
-        public static string GetAssetBundleServerURL()
+        
+        public static string AssetsPathToPackagePath(string assetPath)
         {
-            string downloadURL = string.Empty;
-#pragma warning disable 0162
-            if (AssetBundleConfig.isDebug == true)
+            string path = "Assets/" + AssetBundleConfig.AssetsFolderName + "/";
+            if (assetPath.StartsWith(path))
             {
-                // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
-                var ips = new List<string>();
-                var host = Dns.GetHostEntry(Dns.GetHostName());
-                foreach (IPAddress ip in host.AddressList)
-                {
-                    if (ip.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        ips.Add(ip.ToString());
-                    }
-                }
-                ips.Sort();
-                if (ips.Count <= 0)
-                {
-                    Logger.LogError("Get inter network ip failed!");
-                }
-                else
-                {
-                    downloadURL = "http://" + ips[0] + ":7888/";
-                }
+                return assetPath.Substring(path.Length);
             }
             else
             {
-                downloadURL = AssetBundleConfig.RemoteServerUrl;
+                Debug.LogError("Asset path is not a package path!");
+                return assetPath;
             }
-#pragma warning disable 0162
-            return downloadURL;
         }
-        
-        public static AssetBundleManifest GetManifestFormLocal(string manifestPath)
-        {
-            FileInfo fileInfo = new FileInfo(manifestPath);
-            if (!fileInfo.Exists)
-            {
-                Debug.LogError("You need to build assetbundles first to get assetbundle dependencis info!");
-                return null;
-            }
-            byte[] bytes = GameUtility.SafeReadAllBytes(fileInfo.FullName);
-            if (bytes == null)
-            {
-                return null;
-            }
-            AssetBundle assetBundle = AssetBundle.LoadFromMemory(bytes);
-            AssetBundleManifest manifest = assetBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
-            assetBundle.Unload(false);
-            return manifest;
-        }
-
-        public static void CopyPlatformAssetBundlesToStreamingAssets()
-        {
-            var target = EditorUserBuildSettings.activeBuildTarget;
-            string source = GetBuildPlatformOutputPath(target);
-
-            string outputPath = Path.Combine(Application.streamingAssetsPath, AssetBundleConfig.AssetBundlesFolderName);
-            GameUtility.SafeClearDir(outputPath);
-
-            string destination = Path.Combine(outputPath, GetPlatformName(target));
-            FileUtil.CopyFileOrDirectoryFollowSymlinks(source, destination);
-
-            var allManifest = GameUtility.GetSpecifyFilesInFolder(destination, new string[] { ".manifest" });
-            if (allManifest != null && allManifest.Length > 0)
-            {
-                for (int i = 0; i < allManifest.Length; i++)
-                {
-                    GameUtility.SafeDeleteFile(allManifest[i]);
-                }
-            }
-
-            Debug.Log("Copy platform assetbundles to streaming assets done!");
-        }
-#endif
     }
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/ipay_openid_margin_20"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_master_title"
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ipay_openid_input_text_color"
+            android:textSize="@dimen/ipay_openid_text_size_32" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ipay_openid_frame_body_bg"
+            android:orientation="vertical"
+            >
+            <!-- android:paddingLeft="7dip"  -->
+
+            <LinearLayout
+                android:id="@+id/card_no_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <EditText
+                    android:id="@+id/cardNumberEditText"
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@null"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyz"
+                    android:gravity="center_vertical"
+                    android:imeOptions="flagNoExtractUi"
+                    android:singleLine="true"
+                    android:textColor="@color/ipay_openid_input_text_color"
+                    android:textColorHint="@color/ipay_openid_input_hint_color"
+                    android:textSize="@dimen/ipay_openid_text_size_32" />
+
+                <ImageView
+                    android:id="@+id/clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ipay_openid_edittext_clear_normal"
+                    android:paddingRight="4dp" />
+
+                <TextView
+                    android:id="@+id/help_text_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/ipay_openid_textbtn_selector"
+                    android:textSize="@dimen/ipay_openid_text_size_32"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/focus_state_line"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="1.2dp"
+        android:background="@drawable/ipay_openid_collect_layout_state_bg" />
+
+    <TextView
+        android:id="@+id/tv_tip_value"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ipay_openid_tip_text_color"
+            android:textSize="@dimen/ipay_openid_text_size_26" 
+        android:visibility="gone" />
+
+</LinearLayout>

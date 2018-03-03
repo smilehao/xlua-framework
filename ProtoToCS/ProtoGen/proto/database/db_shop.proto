@@ -1,0 +1,50 @@
+package db;
+
+message shop_goods
+{
+	optional int32 item_id = 1[default = 0];	//出售的道具ID
+	optional int32 count = 2[default = 0];	//出售的道具数量
+	optional int32 currency = 3[default = 0];	//货币类型，0为金钱，1为元宝
+	optional int32 price = 4[default = 0];	//对应的价格
+	optional int32 sold_out = 5[default = 0];	//是否售罄
+	optional int32 goods_rebate = 6[default = 0];//打折力度
+}
+
+//message special_shop_goods
+//{
+//	optional int32 item_id = 1[default = 0];	//出售的道具ID
+//	optional int32 count = 2[default = 0];	//出售的道具数量
+//	optional int32 price = 4[default = 0];	//对应的价格
+//	optional int32 sold_out = 5[default = 0];	//是否售罄
+//}
+
+message Shop
+{	
+	// 竞技场商店
+	repeated shop_goods arena_shop_goods_list = 1;	//竞技场商店
+	optional int32 arena_today_refresh_count = 2[default = 0];	//竞技场今天刷新的次数
+	optional int32 arena_last_refresh_time = 3[default = 0];	//最后一次刷新竞技场商店的时间
+
+	// 军团商店
+	repeated shop_goods guild_shop_goods_list = 4;	//竞技场商店
+	optional int32 guild_today_refresh_count = 5[default = 0];	//竞技场今天刷新的次数
+	optional int32 guild_last_refresh_time = 6[default = 0];	//最后一次刷新军团商店的时间
+	
+	//黑市商人
+	repeated shop_goods blackmarket_shop_goods_list = 7;	//黑市商人 
+	repeated shop_goods blackmarket_shop_goods_list2 = 8;	//第二栏商品列表
+	optional int32 blackmarket_today_refresh_count = 9[default = 0];	//黑市商人今天刷新的次数
+	optional int32 blackmarket_last_refresh_time = 10[default = 0];	//最后一次刷新黑市商人商店的时间
+	//optional int32 last_blackmarket_show_time = 11[default = 0];//上一次出现黑市商人的时间
+	optional int32 blackmarket_show_end_time = 11[default = 0];//黑市商人显示截止的时间
+	optional int32 blackmarket_buy_times = 12[default = 0];	//游商购买次数
+	//optional int32 blackmarket_show_times = 12[default = 0];//出现黑市商人的次数
+	//optional int32 blackmarket_today_free_refresh_count = 13[default = 0]; // 今天免费刷新黑市商人的次数
+	
+	//集市商店
+	repeated shop_goods fairmarket_shop_goods_list = 14;	//集市商店
+	optional int32 fairmarket_today_refresh_count = 15[default=0];	//集市商店今天刷新的次数
+	optional int32 fairmarket_last_refresh_time = 16[default=0];	//最后一次刷新集市商店的时间
+	//optional int32 fairmarket_today_free_refresh_count = 17[default=0];	//今天已经免费刷新集市的次数
+	
+}

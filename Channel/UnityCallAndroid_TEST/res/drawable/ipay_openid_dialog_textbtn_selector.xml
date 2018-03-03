@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">  
+    <!--item android:state_enabled="true" android:state_pressed="true" android:drawable="@color/ipay_openid_dialog_btn_focus_color"></item>
+    <item android:state_enabled="true" android:state_selected="true" android:drawable="@color/ipay_openid_dialog_btn_focus_color"></item>
+    <item android:drawable="@android:color/transparent"></item-->  
+    
+    <item android:state_pressed="true"><shape>
+            <solid android:color="@color/ipay_openid_dialog_btn_focus_color" />
+            <corners android:radius="3dip" />
+            <padding android:left="10dp" android:right="10dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape></item>
+    <item android:state_focused="true"><shape>
+            <solid android:color="@color/ipay_openid_dialog_btn_focus_color" />
+            <corners android:radius="5dip" />
+            <padding android:left="10dp" android:right="10dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape></item>
+    <item><shape>
+            <solid android:color="@android:color/transparent" />
+        </shape></item>
+        
+</selector> 

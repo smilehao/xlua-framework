@@ -1,0 +1,9 @@
+package crossgm;
+
+message ntf_inner_gm
+{
+	optional int32 p1 = 1[default = 0];
+	optional int32 p2 = 2[default = 0];
+	optional int32 p3 = 3[default = 0];
+	optional string cmd = 4[default = ''];
+}

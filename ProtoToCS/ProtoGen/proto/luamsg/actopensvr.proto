@@ -1,0 +1,112 @@
+package actopensvr;
+
+import "common.proto";
+
+// 七天冲榜协议
+	message one_sevenday_ranking
+	{
+		message rank_detail_info
+		{
+			optional common.one_user_brief rank_user_brief = 1;
+			optional int32 rank = 2[default = 0];
+			optional string user_progress = 3[default = ""];
+			repeated common.award_info rank_award_list = 4;
+		}
+		
+		optional int32 rank_type = 1[default = 0];				// 排行榜类型
+		repeated rank_detail_info rank_info_list = 2;			// 排行奖励详细信息
+		optional string my_progress = 3[default = ""];			// 当前进度
+		optional int32 btn_status = 4[default = 0];				// 按钮状态
+		optional int32 act_status = 5[default = 0];				// 活动状态
+		optional int32 day = 6[default = 0];					// 哪一天
+		optional string act_name = 7[default = ''];				// 名称
+		optional string rule = 8[default = ''];					// 规则
+		optional int32 real_start_time = 9[default = 0];		// 活动真正开始时间
+		optional int32 real_end_time = 10[default = 0];			// 活动真正结束时间
+	}
+
+message one_act_record
+{
+	message one_act_award
+	{
+		optional int32 item_id = 1[default = 0];
+		optional int32 count = 2[default = 0];
+	}
+
+	message one_act_tag
+	{
+		optional string tag_name = 1[default = ''];	//标签名
+		optional string progress = 2[default = '']; //完成进度
+		repeated one_act_award award_list = 3;	//奖励列表
+		optional int32 price = 4[default = 0];	//购买价格
+		optional int32 btn_status = 5[default = 0];	//按钮状态:[0:不可领取][1:可领取][2:前往充值][3:购买按钮,4:已领取,5:已售罄][6:购买月票][7:可以分享,8:不可以分享][9:可以兑换,10:不可以兑换]
+		optional int32 param1 = 6[default = 0];
+		optional int32 param2 = 7[default = 0];
+		repeated one_act_award expend_list = 8;	//消耗道具列表
+		optional int32 ori_price = 9[default = 0];	//原价
+	}
+		
+	optional uint32 act_id = 1[default = 0];
+	optional int32 act_type = 2[default = 0];
+	optional int32 start_time = 3[default = 0];	//开始时间
+	optional int32 end_time = 4[default = 0];	//结束时间
+	optional string act_name = 5[default = ''];	//活动名称
+	optional string act_content = 6[default = ''];
+	optional string act_rules = 7[default = ''];	//活动规则
+	optional int32 act_bg = 8[default = 0];	//背景编号
+	repeated one_act_tag tag_list = 9;	//活动的标签列表
+	optional int32 show_day_id = 10;	//出现在第几天
+	optional int32 param1 = 12[default = 0];			//
+	optional int32 sel_bg = 13[default = 0];	//选择框背景图
+	optional int32 rank = 20[default = 0];	//排名
+	optional int32 param2 = 21[default = 0];			//
+}
+
+message req_act_list
+{
+	repeated uint32 cached_act_id_list = 1;	//客户端已经缓存过的活动id
+}
+
+message rsp_act_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_act_record act_list = 2;	//活动列表
+	repeated uint32 red_tips_list = 3;	//红点提示活动列表
+}
+
+message req_read_list
+{
+	repeated uint32 read_act_id_list = 1;	//客户端已经浏览过的活动id
+}
+
+message rsp_read_list
+{
+	optional int32 result = 1[default = 0];
+	repeated uint32 red_tips_list = 2;	//红点提示活动列表
+}
+
+message req_take_award
+{
+	optional uint32 act_id = 1[default = 0];
+	optional int32 tag_index = 2[default = 0];	//标签序号，从1开始
+	optional int32 param1 = 3[default = 0];
+}
+
+message rsp_take_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 tag_index = 2[default = 0];	//标签序号，从1开始
+	repeated common.award_info award_list = 3;	//奖励
+	optional uint32 act_id = 4[default = 0];
+}
+
+message ntf_act_chg
+{
+	optional one_act_record act_info = 1;	//变化了的活动
+}
+
+message ntf_red_spot
+{
+	optional int32 act_type = 1[default = 0];
+}
+

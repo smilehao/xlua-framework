@@ -5,6 +5,7 @@
 set UnityProtolDir=..\Assets\LuaScripts\Net\Protol
 set LuaProtoTmpDir=.\__tmp
 set LuaProtoSrcDir=..\ProtoToCS\ProtoGen\proto
+set LuaPluginDir=.\plugin
 
 if exist "%UnityProtolDir%" rd /s /q "%UnityProtolDir%"
 md "%UnityProtolDir%"
@@ -26,7 +27,12 @@ for /r %%i in (*.proto) do (
 	"..\protoc.exe" --plugin=protoc-gen-lua="..\plugin\build.bat" --lua_out="..\%UnityProtolDir%" "!relative!" 
 )  
 
+cd ..
 if exist "%LuaProtoTmpDir%" rd /s /q "%LuaProtoTmpDir%"
+
+cd "%LuaPluginDir%"
+@python msgid-gen-lua
+
 echo DONE
 
 pause

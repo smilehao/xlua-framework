@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ipay_color_value_1"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/ipay_oneclick_title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="5dp"
+        android:fadingEdge="none"
+        android:scrollbarThumbVertical="@drawable/ipay_oneclick_scrollbar" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 验证码提示  tip -->
+
+            <LinearLayout
+                android:id="@+id/relativeLayout_login_register_tip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ipay_color_value_2"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_tips"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/ipay_margin_18"
+                    android:layout_marginLeft="@dimen/ipay_margin_19"
+                    android:layout_marginRight="@dimen/ipay_margin_19"
+                    android:layout_marginTop="@dimen/ipay_margin_18"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="@dimen/ipay_margin_4"
+                    android:text="本次交易需要短信确认，验证码已发送至手机号123 **** 1111，请输入验证码！"
+                    android:textColor="@color/ipay_color_value_4"
+                    android:textSize="@dimen/ipay_text_size_13" />
+
+                <View
+                    android:id="@+id/tv_tips_line1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/ipay_color_value_3"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
+
+            <!-- 验证码提示  输入 -->
+
+            <RelativeLayout
+                android:id="@+id/card_no_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ipay_margin_17"
+                android:layout_marginRight="@dimen/ipay_margin_17"
+                android:layout_marginTop="@dimen/ipay_margin_17"
+                 >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/btn_verification_code"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/edit_verification_code"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/ipay_oneclick_input_bg"
+                        android:gravity="bottom"
+                        android:paddingBottom="@dimen/ipay_margin_8"
+                        android:maxLength="6"
+                        android:hint="请输入短信验证码"
+                        android:textColor="@color/ipay_color_value_6"
+                        android:textColorHint="@color/ipay_color_value_4"
+                        android:textSize="@dimen/ipay_text_size_13" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/ipay_height_50"
+                                        android:background="@drawable/ipay_common_btn_bg_color"
+                android:textColor="@drawable/ipay_common_btn_text_color"
+                        android:textSize="@dimen/ipay_text_size_19"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_verification_code"
+                    android:layout_width="150dp"
+                    android:layout_height="@dimen/ipay_height_50"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/ipay_margin_11"
+                    android:text="重新获取(60s)"
+                                    android:background="@drawable/ipay_common_btn_bg_color"
+                android:textColor="@drawable/ipay_common_btn_text_color"
+                    android:textSize="@dimen/ipay_text_size_19" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/nextStepButton"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ipay_height_50"
+                android:layout_marginLeft="@dimen/ipay_margin_17"
+                android:layout_marginRight="@dimen/ipay_margin_17"
+                android:layout_marginTop="@dimen/ipay_margin_17"
+                android:text="确认支付"
+                                android:background="@drawable/ipay_common_btn_bg_color"
+                android:textColor="@drawable/ipay_common_btn_text_color"
+                android:textSize="@dimen/ipay_text_size_19" />
+
+            <TextView
+                android:id="@+id/tv_tip_verification_code"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/ipay_margin_20"
+                android:layout_marginLeft="@dimen/ipay_margin_17"
+                android:layout_marginRight="@dimen/ipay_margin_17"
+                android:layout_marginTop="@dimen/ipay_margin_17"
+                android:gravity="center|right"
+                android:text="收不到验证码？"
+                android:textColor="@color/ipay_color_value_7"
+                android:textSize="@dimen/ipay_text_size_13" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

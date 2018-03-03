@@ -36,6 +36,10 @@ local function FindText(trans, path)
 	return FindComponent(trans, typeof(CS.UnityEngine.UI.Text), path)
 end
 
+local function FindImage(trans, path)
+	return FindComponent(trans, typeof(CS.UnityEngine.UI.Image), path)
+end
+
 local function FindButton(trans, path)
 	return FindComponent(trans, typeof(CS.UnityEngine.UI.Button), path)
 end
@@ -78,6 +82,7 @@ UIUtil.GetChild = GetChild
 UIUtil.FindComponent = FindComponent
 UIUtil.FindTrans = FindTrans
 UIUtil.FindText = FindText
+UIUtil.FindImage = FindImage
 UIUtil.FindButton = FindButton
 UIUtil.FindInput = FindInput
 UIUtil.FindSlider = FindSlider

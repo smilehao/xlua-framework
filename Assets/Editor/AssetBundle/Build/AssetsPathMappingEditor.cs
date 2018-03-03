@@ -18,11 +18,10 @@ namespace AssetBundles
         const string PATTREN = AssetBundleConfig.CommonMapPattren;
         public static List<string> mappingList = new List<string>();
         
-        public static void BuildPathMapping(BuildTarget target, AssetBundleManifest manifest)
+        public static void BuildPathMapping(AssetBundleManifest manifest)
         {
             mappingList.Clear();
-            string rootPath = System.IO.Path.Combine(Application.dataPath, AssetBundleConfig.AssetsFolderName);
-            string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.AssetsPathMapFileName);
+            string outputFilePath = AssetBundleUtility.PackagePathToAssetsPath(AssetBundleConfig.AssetsPathMapFileName);
             
             string[] allAssetbundles = manifest.GetAllAssetBundles();
             string[] allVariants = manifest.GetAllAssetBundlesWithVariant();
@@ -39,12 +38,13 @@ namespace AssetBundles
                 string[] assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(assetbundle);
                 foreach (string assetPath in assetPaths)
                 {
-                    string mappingItem = string.Format("{0}{1}{2}", assetbundle, PATTREN, assetPath);
+                    string packagePath = AssetBundleUtility.AssetsPathToPackagePath(assetPath);
+                    string mappingItem = string.Format("{0}{1}{2}", assetbundle, PATTREN, packagePath);
                     mappingList.Add(mappingItem);
                 }
             }
             // 处理带variants的assetbundle（已经去重）
-            string variant = "[" + AssetBundleConfig.VariantMapParttren + "]";
+            // string variant = "[" + AssetBundleConfig.VariantMapParttren + "]";
             foreach (string assetbundle in variantWithoutDeplicate)
             {
                 // 该assetbundle中包含的所有asset的路径（相对于Assets文件夹），如：
@@ -81,7 +81,8 @@ namespace AssetBundles
                 {
                     string nowAsset = assetPath.Replace(assetbundlePath, "");
                     string nowAssetPath = nowRoot + nowAsset;
-                    string mappingItem = string.Format("{0}{1}{2}", RemoveVariantSuffix(assetbundle), PATTREN, nowAssetPath);
+                    string packagePath = AssetBundleUtility.AssetsPathToPackagePath(nowAssetPath);
+                    string mappingItem = string.Format("{0}{1}{2}", RemoveVariantSuffix(assetbundle), PATTREN, packagePath);
                     mappingList.Add(mappingItem);
                 }
             }
@@ -94,8 +95,7 @@ namespace AssetBundles
             else
             {
                 AssetDatabase.Refresh();
-                string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
-                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
+                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFilePath);
                 Debug.Log("BuildPathMapping success...");
             }
             AssetDatabase.Refresh();

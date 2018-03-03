@@ -1,0 +1,71 @@
+package challenge;
+
+import "common.proto";
+import "battle.proto";
+
+//暂时不用，客户端自己读表
+//message one_monster
+//{
+//	optional uint32 uid = 1[default = 0];	//怪物id
+//	optional string name = 2[default = ''];	//怪物名字
+//	optional int32 manor_level = 3[default = 0];	//怪物等级
+//	optional int32 use_icon = 5[default = 0];	//怪物头像+框
+//	optional int32 power = 6[default = 0];			//战斗力
+//	repeated common.one_troop_brief troop_brief_list = 7;	//出战的部队
+//	//repeated common.one_troop troop_list = 7;	//出战的部队
+//	repeated common.one_arm_type arm_list = 8;
+//	optional int32 cant_be_attacked = 9[default = 0];	//是否不能被攻击(1:不能打，0：能打)
+//	optional uint32 position = 10[default = 0];
+//}
+//
+//message one_challenge_group
+//{
+//	optional uint32 group_id = 1[default = 0];
+//	optional uint32 min_challenge_power = 2[default = 0];//挑战的战力最小限制
+//	optional int32  box_award_status = 3[default = 0]; //0:不可领，1：可领，2，领过
+//	repeated one_monster monster_list = 4;
+//}
+
+message one_group_challenge_record
+{
+	optional uint32 group_id = 1[default = 0];
+	optional uint32 challenge_win_flag = 2[default = 0]; //0~0x3E， 第0位不用，挑战成功的对应1，2，3，4，5位置上会置1
+	optional int32 is_took_award = 3[default = 0]; //0:不可领，1：可领，2，领过
+}
+
+message req_challenge_list
+{
+}
+
+message rsp_challenge_list
+{
+	optional int32 result = 1[default = 0];
+	optional int32 power = 2[default = 0];
+	repeated one_group_challenge_record challenge_record_list = 3;
+}
+
+message req_challenge
+{
+	optional uint32 group_id = 1[default = 0]; //关卡索引从1开始
+	optional uint32 pos = 2[default = 0];		//每层怪的索引1~5
+}
+
+message rsp_challenge
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}
+
+message req_challenge_award
+{
+	optional uint32 group_id = 1[default =0];
+}
+
+message rsp_challenge_award
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 group_id = 2[default = 0];
+	repeated common.award_info award_list = 3;	//礼包道具列表
+}
+

@@ -1,0 +1,89 @@
+package yidaizhao;
+import "common.proto";
+
+message ntf_show_yidaizhao
+{
+	optional int32 close_time = 1[default = 0]; //通知关闭时间，当前时间大于关闭时间，图标消失
+}
+
+
+message req_yidaizhao_panel
+{
+	
+}
+
+message rsp_yidaizhao_panel
+{
+	optional int32 result = 1[default = 0];
+	optional int32 curr_round = 2[default = 0];//第curr_round场
+	optional common.one_buzhen han_one_buzhen = 3;//汉献帝布阵(包含自己的参战部队)
+	repeated common.one_troop han_troop_list = 4;//汉献帝 部队 (包含自己的参战部队)
+	optional int32 yidaizhao_id = 5[default = 0];
+	optional int32 enemy_monster_id = 6[default = 0];
+	optional int32 han_max_soldier_count = 7[default = 0];
+	optional int32 han_curr_soldier_count = 8[default = 0];
+	optional int32 self_max_soldier_count = 9[default = 0];
+	optional int32 self_curr_soldier_count = 10[default = 0];
+	optional int32 self_total_lose_soldier_count = 11[default = 0];
+	optional int32 total_round = 12[default = 0];//共total_round场
+	optional int32 self_and_han_power = 13[default = 0];
+	optional int32 enemy_power = 14[default = 0];
+	optional int32 han_troop_id = 15[default = 0];//汉献帝所在troopid
+	optional int32 han_wujiang_id = 16[default = 0];//汉献帝武将id
+}
+
+message req_arrange_wujiang
+{
+	optional int32 troop_id = 1[default = 0];
+	repeated int32 wujiang_list = 2;
+}
+
+message rsp_arrange_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_arrange_soldier
+{
+	optional int32 troop_id = 1[default = 0];
+	optional int32 soldier_count = 2[default = 0];
+}
+
+message rsp_arrange_soldier
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_exchange_position
+{
+	optional int32 src_pos = 2[default = 0];
+	optional int32 dst_pos = 3[default = 0];
+}
+message rsp_exchange_position
+{	
+	optional int32 result = 1[default = 0];
+	optional common.one_buzhen one_buzhen = 2;
+}
+
+message req_change_arm_type
+{
+	optional int32 troop_id = 1[default = 0];
+	optional int32 arm_type = 2[default = 0];
+}
+
+message rsp_change_arm_type
+{
+	optional int32 result = 1[default = 0];
+	optional int32 arm_type = 2[default = 0];
+}
+
+message req_yidaizhao_attack
+{
+	optional int32 req_round = 1[default = 0];
+}
+message rsp_yidaizhao_attack
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}

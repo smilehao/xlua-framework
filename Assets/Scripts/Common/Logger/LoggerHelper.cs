@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using XLua;
+using System;
 
-public class LoggerHelper : MonoBehaviour
+[Hotfix]
+public class LoggerHelper : MonoSingleton<LoggerHelper>
 {
     public enum LOG_TYPE
     {
@@ -25,43 +28,34 @@ public class LoggerHelper : MonoBehaviour
     private List<log_info> logList = new List<log_info>(100);
     private List<log_info> tmpLogList = new List<log_info>(100);
 
-    public static LoggerHelper instance
+    protected override void Init()
     {
-        get
+        if (!Application.isEditor)
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType(typeof(LoggerHelper)) as LoggerHelper;
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject(typeof(LoggerHelper).Name);
-                    _instance = go.AddComponent<LoggerHelper>();
-                    GameObject parent = GameObject.Find("Boot");
-                    if (parent != null)
-                    {
-                        go.transform.parent = parent.transform;
-                    }
-                }
-            }
+            Application.logMessageReceived += (LogHandler);
 
-            return _instance;
+            InvokeRepeating("CheckReport", 1f, 1f);
         }
+    }
+
+    private void LogHandler(string condition, string stackTrace, LogType type)
+    {
+        if (Application.isEditor)
+        {
+            return;
+        }
+
+        if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)
+        {
+            Logger.LogError(condition + " \n" + stackTrace);
+        }
+    }
+
+    private void CheckReport()
+    {
+        Logger.CheckReportError();
     }
     
-    private void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void Startup()
-    {
-    }
-
     private void Update()
     {
         lock (logList)
@@ -100,17 +94,14 @@ public class LoggerHelper : MonoBehaviour
         }
     }
 
-    public void DestroySelf()
+    public override void Dispose()
     {
-        //Dispose
-        _instance = null;
-        Destroy(gameObject);
-
         lock (logList)
         {
             logList.Clear();
         }
         tmpLogList.Clear();
+        base.Dispose();
     }
 
     public void LogToMainThread(LOG_TYPE type, string msg)
@@ -121,3 +112,14 @@ public class LoggerHelper : MonoBehaviour
         }
     }
 }
+
+#if UNITY_EDITOR
+public static class LoggerHelperExporter
+{
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>()
+        {
+            typeof(LoggerHelper),
+        };
+}
+#endif

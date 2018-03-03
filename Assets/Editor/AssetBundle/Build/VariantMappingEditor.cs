@@ -16,11 +16,10 @@ namespace AssetBundles
         const string PATTREN = AssetBundleConfig.CommonMapPattren;
         public static List<string> mappingList = new List<string>();
 
-        public static void BuildVariantMapping(BuildTarget target, AssetBundleManifest manifest)
+        public static void BuildVariantMapping(AssetBundleManifest manifest)
         {
             mappingList.Clear();
-            string rootPath = System.IO.Path.Combine(Application.dataPath, AssetBundleConfig.AssetsFolderName);
-            string outputFilePath = System.IO.Path.Combine(rootPath, AssetBundleConfig.VariantsMapFileName);
+            string outputFilePath = AssetBundleUtility.PackagePathToAssetsPath(AssetBundleConfig.VariantsMapFileName);
             string[] allVariants = manifest.GetAllAssetBundlesWithVariant();
 
             // 处理带variants的assetbundle
@@ -67,8 +66,7 @@ namespace AssetBundles
             else
             {
                 AssetDatabase.Refresh();
-                string outputFileAssetPath = GameUtility.FullPathToAssetPath(outputFilePath);
-                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFileAssetPath);
+                AssetBundleEditorHelper.CreateAssetbundleForCurrent(outputFilePath);
                 Debug.Log("BuildVariantMapping success...");
             }
             AssetDatabase.Refresh();

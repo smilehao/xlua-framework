@@ -159,13 +159,13 @@ class Env(object):
         except:
             # if the child doesn't be founded, it must be in this file
             name = type_name[len('.'.join(self.package)) + 1:]
-            return name.upper().replace('.', '_')
+            return "_M." + name.upper().replace('.', '_')
         if node.filename != self.filename:
             name = node.get_local_name()
             name = name.upper().replace('.', '_')
             return node.filename + '_pb.' + name
         name = node.get_local_name()
-        return name.upper().replace('.', '_')
+        return "_M." + name.upper().replace('.', '_')
 
     def lookup_name(self, name):
         names = name.split('.')
@@ -264,10 +264,10 @@ def code_gen_enum_item(index, enum_value, env):
     full_name = env.get_local_name() + '.' + enum_value.name
     obj_name = full_name.upper().replace('.', '_') + '_ENUM'
     env.descriptor.append(
-        "%s = protobuf.EnumValueDescriptor();\n"% obj_name
+        "_M.%s = protobuf.EnumValueDescriptor();\n"% obj_name
     )
 
-    context = Writer(obj_name)
+    context = Writer("_M." + obj_name)
     context('.name = "%s"\n' % enum_value.name)
     context('.index = %d\n' % index)
     context('.number = %d\n' % enum_value.number)
@@ -280,16 +280,16 @@ def code_gen_enum(enum_desc, env):
     full_name = env.get_local_name()
     obj_name = full_name.upper().replace('.', '_')
     env.descriptor.append(
-        "%s = protobuf.EnumDescriptor();\n"% obj_name
+        "_M.%s = protobuf.EnumDescriptor();\n"% obj_name
     )
 
-    context = Writer(obj_name)
+    context = Writer("_M." + obj_name)
     context('.name = "%s"\n' % enum_desc.name)
     context('.full_name = "%s"\n' % env.get_global_name())
 
     values = []
     for i, enum_value in enumerate(enum_desc.value):
-        values.append(code_gen_enum_item(i, enum_value, env))
+        values.append("_M." + code_gen_enum_item(i, enum_value, env))
     context('.values = {%s}\n' % ','.join(values))
 
     env.context.append(context.getvalue())
@@ -300,10 +300,10 @@ def code_gen_field(index, field_desc, env):
     full_name = env.get_local_name() + '.' + field_desc.name
     obj_name = full_name.upper().replace('.', '_') + '_FIELD'
     env.descriptor.append(
-        "%s = protobuf.FieldDescriptor();\n"% obj_name
+        "_M.%s = protobuf.FieldDescriptor();\n"% obj_name
     )
 
-    context = Writer(obj_name)
+    context = Writer("_M." + obj_name)
 
     context('.name = "%s"\n' % field_desc.name)
     context('.full_name = "%s"\n' % (
@@ -317,7 +317,7 @@ def code_gen_field(index, field_desc, env):
         value = field_desc.default_value
         if field_desc.type == FDP.TYPE_STRING:
             context('.default_value = "%s"\n'%value)
-		# add by wsh @ 2017-12-17：修复bytes转lua后默认值出错的问题
+		# added by wsh @ 2017-12-17：修复bytes转lua后默认值出错的问题
         elif field_desc.type == FDP.TYPE_BYTES:
             context('.default_value = "%s"\n'%value)
         else:
@@ -342,7 +342,7 @@ def code_gen_field(index, field_desc, env):
     if field_desc.HasField('extendee'):
         type_name = env.get_ref_name(field_desc.extendee)
         env.register.append(
-            "%s.RegisterExtension(%s)\n" % (type_name, obj_name)
+            "_M.%s.RegisterExtension(_M.%s)\n" % (type_name, obj_name)
         )
 
     context('.type = %d\n' % field_desc.type)
@@ -355,27 +355,27 @@ def code_gen_message(message_descriptor, env, containing_type = None):
     full_name = env.get_local_name()
     obj_name = full_name.upper().replace('.', '_')
     env.descriptor.append(
-        "%s = protobuf.Descriptor();\n"% obj_name
+        "_M.%s = protobuf.Descriptor();\n"% obj_name
     )
 
-    context = Writer(obj_name)
+    context = Writer("_M." + obj_name)
     context('.name = "%s"\n' % message_descriptor.name)
     context('.full_name = "%s"\n' % env.get_global_name())
 
     nested_types = []
     for msg_desc in message_descriptor.nested_type:
         msg_name = code_gen_message(msg_desc, env, obj_name)
-        nested_types.append(msg_name)
+        nested_types.append("_M." + msg_name)
     context('.nested_types = {%s}\n' % ', '.join(nested_types))
 
     enums = []
     for enum_desc in message_descriptor.enum_type:
-        enums.append(code_gen_enum(enum_desc, env))
+        enums.append("_M." + code_gen_enum(enum_desc, env))
     context('.enum_types = {%s}\n' % ', '.join(enums))
 
     fields = []
     for i, field_desc in enumerate(message_descriptor.field):
-        fields.append(code_gen_field(i, field_desc, env))
+        fields.append("_M." + code_gen_field(i, field_desc, env))
 
     context('.fields = {%s}\n' % ', '.join(fields))
     if len(message_descriptor.extension_range) > 0:
@@ -385,13 +385,13 @@ def code_gen_message(message_descriptor, env, containing_type = None):
 
     extensions = []
     for i, field_desc in enumerate(message_descriptor.extension):
-        extensions.append(code_gen_field(i, field_desc, env))
+        extensions.append("_M." + code_gen_field(i, field_desc, env))
     context('.extensions = {%s}\n' % ', '.join(extensions))
 
     if containing_type:
         context('.containing_type = %s\n' % containing_type)
 
-    env.message.append('%s = protobuf.Message(%s)\n' % (full_name,
+    env.message.append('_M.%s = protobuf.Message(_M.%s)\n' % (full_name,
                                                         obj_name))
 
     env.context.append(context.getvalue())
@@ -402,6 +402,9 @@ def write_header(writer):
     writer("""--Generated By protoc-gen-lua Do not Edit
 """)
 
+# added by wsh @ 2017-01-06
+# 1、修改pb库文件路径和生成的pb文件路径
+# 2、拿掉module语法
 def code_gen_file(proto_file, env, is_gen):
     filename = path.splitext(proto_file.name)[0]
     env.enter_file(filename, proto_file.package)
@@ -426,10 +429,10 @@ def code_gen_file(proto_file, env, is_gen):
     if is_gen:
         lua = Writer()
         write_header(lua)
-        lua('local protobuf = require "ToLua.protobuf.protobuf"\n')
+        lua('local protobuf = require "Framework.Net.Protobuf.protobuf"\n')
         for i in includes:
             lua('local %s_pb = require("Net.Protol.%s_pb")\n' % (i, i))
-        lua("module('Net.Protol.%s_pb')" % env.filename)
+        lua("local _M = {}")
 
         lua('\n\n')
         map(lua, env.descriptor)
@@ -440,6 +443,7 @@ def code_gen_file(proto_file, env, is_gen):
         map(lua, env.message)
         lua('\n')
         map(lua, env.register)
+        lua("return _M")
 
         _files[env.filename+ '_pb.lua'] = lua.getvalue()
     env.exit_file()

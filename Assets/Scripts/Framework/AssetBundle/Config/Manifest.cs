@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.IO;
+using XLua;
 
 /// <summary>
 /// added by wsh @ 2017.12.23
@@ -12,6 +12,8 @@ using System.IO;
 
 namespace AssetBundles
 {
+    [Hotfix]
+    [LuaCallCSharp]
     public class Manifest
     {
         const string assetName = "AssetBundleManifest";
@@ -21,7 +23,11 @@ namespace AssetBundles
         
         public Manifest()
         {
-            AssetbundleName = AssetBundleUtility.GetCurPlatformName();
+            AssetbundleName = AssetBundleManager.ManifestBundleName;
+            if (string.IsNullOrEmpty(AssetbundleName))
+            {
+                Logger.LogError("You should set ManifestBundleName first!");
+            }
         }
         
         public AssetBundleManifest assetbundleManifest
@@ -61,10 +67,13 @@ namespace AssetBundles
             manifestBytes = bytes;
         }
 
-        public bool SaveToDiskCahce()
+        public void SaveToDiskCahce()
         {
-            string path = AssetBundleUtility.GetPlatformPersistentDataPath(AssetbundleName);
-            return GameUtility.SafeWriteAllBytes(path, manifestBytes);
+            if (manifestBytes != null && manifestBytes.Length > 0)
+            {
+                string path = AssetBundleUtility.GetPersistentDataPath(AssetbundleName);
+                GameUtility.SafeWriteAllBytes(path, manifestBytes);
+            }
         }
 
         public Hash128 GetAssetBundleHash(string name)

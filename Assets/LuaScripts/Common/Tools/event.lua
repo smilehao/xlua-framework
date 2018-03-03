@@ -13,7 +13,6 @@ local pcall = pcall
 local assert = assert
 local rawget = rawget
 local error = error
-local print = print
 local traceback = debug.traceback
 local ilist = ilist
 

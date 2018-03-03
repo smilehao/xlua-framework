@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ipay_color_value_1"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="37dip"
+            android:gravity="center|left"
+            android:paddingLeft="@dimen/ipay_margin_15"
+            android:textColor="@color/ipay_color_value_7"
+            android:textSize="@dimen/ipay_text_size_14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ipay_title_line_heigth"
+            android:background="@color/ipay_color_value_7" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@null"
+            android:dividerHeight="1px"
+            android:fadingEdge="none"
+            android:scrollbars="none"
+            android:divider="@color/ipay_color_value_3"
+            android:listSelector="@android:color/transparent" 
+            android:scrollingCache="false" />
+    </LinearLayout>
+
+</LinearLayout>

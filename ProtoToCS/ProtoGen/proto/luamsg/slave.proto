@@ -1,0 +1,198 @@
+package slave;
+
+import "common.proto";
+import "battle.proto";
+
+message one_slave
+{
+	optional common.one_user_brief slave_brief = 1;
+	optional int32 rob_item_id = 2[default = 0];
+	optional int32 keep_item_count = 3[default = 0];
+	optional int32 max_item_count = 4[default = 0];
+	optional int32 is_has_robber = 5[default = 0]; //是否有土匪
+	optional int32 redpoint_on_slave = 6[default = 0]; //是否有红点
+}
+
+message req_slave_list
+{
+}
+
+message rsp_slave_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_slave slave_list = 2;
+	optional int32 redpoint_on_collect = 3[default = 0];
+	optional int32 redpoint_on_gotoraid = 4[default = 0];
+	optional int32 redpoint_on_topright = 5[default = 0];
+	repeated common.one_item produce_item_list = 6;//资源产出列表
+}
+
+message ntf_slave_info
+{
+	optional int32 reason = 1[default = 0];		//1 变化；2 失去; 3 增加
+	repeated one_slave slave_list = 2;
+	optional int32 redpoint_on_collect = 3[default = 0];
+	optional int32 redpoint_on_gotoraid = 4[default = 0];
+	optional int32 redpoint_on_topright = 5[default = 0];
+}
+
+message req_collect
+{
+}
+
+message rsp_collect
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+message req_drive_out
+{
+	optional uint32 slave_uid = 1[default = 0];		//0：all
+}
+
+message rsp_drive_out
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 slave_uid = 2[default = 0];
+	optional common.one_item need_update_item = 3;//驱逐
+}
+
+message req_search
+{
+}
+
+message rsp_search
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_user_brief target_brief = 9;
+	//optional common.one_buzhen buzhen_info = 2;
+	repeated common.one_troop troop_list = 3;
+	repeated common.one_arm_type arm_list = 4;
+	optional one_slave capture_slave = 5;
+	repeated common.one_item capture_item_list = 6;
+	optional int32 jianta_atk_percent = 7[default = 0];
+	optional int32 power = 8[default = 0];
+	optional int32 chengqiang_def_percent = 10[default = 0];
+	optional common.one_item sure_item = 11;
+	optional uint32 raid_protect_end_time = 12[default = 0];//掠地保护截至时间
+	optional int32 produce_per_hour =13[default = 0];//产出速度
+	optional int32 need_qianggongling_count = 14[default = 0];
+	optional int32 be_protected_atk_times = 15[default = 0];
+}
+
+message req_attack
+{
+	optional uint32 target_uid = 1[default = 0];
+	optional common.one_item capture_item = 2;
+	optional one_slave capture_slave = 3;
+	optional int32 attack_type = 4[default = 0];//0:正常攻击，1：强行攻击（需消耗强攻令）
+}
+
+message rsp_attack
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+}
+
+
+message req_clear_robber
+{
+	optional uint32 slave_uid = 1[default = 0];
+}
+
+message rsp_clear_robber
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_avenge_search
+{
+	optional int32 report_id = 1[default = 0];
+}
+
+message rsp_avenge_search
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_user_brief target_brief = 9;
+	repeated common.one_troop troop_list = 3;
+	repeated common.one_arm_type arm_list = 4;
+	optional one_slave capture_slave = 5;	
+	repeated common.one_item capture_item_list = 6;
+	optional int32 jianta_atk_percent = 7[default = 0];
+	optional int32 power = 8[default = 0];
+	optional int32 chengqiang_def_percent = 10[default = 0];
+	optional common.one_item sure_item = 11;
+	optional uint32 raid_protect_end_time = 12[default = 0];//掠地保护截至时间
+	optional int32 produce_per_hour =13[default = 0];//产出速度
+	optional int32 need_qianggongling_count = 14[default = 0];
+	optional int32 be_protected_atk_times = 15[default = 0];
+}
+
+message req_avenge_attack
+{
+	optional uint32 target_uid = 1[default = 0];
+	optional common.one_item capture_item = 2;
+	optional one_slave capture_slave = 3;
+	
+	optional int32 report_id = 4[default = 0];
+	optional int32 attack_type = 5[default = 0];//0:正常攻击，1：强行攻击（需消耗强攻令）
+}
+
+message rsp_avenge_attack
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 12;
+}
+
+message req_avenge_help
+{
+	optional int32 report_id = 1[default = 0];
+}
+
+message rsp_avenge_help
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_assist_avenge_search
+{
+	optional int32 report_id = 1[default = 0]; //这个是家族里的那个report id
+}
+
+message rsp_assist_avenge_search
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_user_brief target_brief = 9;
+	repeated common.one_troop troop_list = 3;
+	repeated common.one_arm_type arm_list = 4;
+	optional one_slave capture_slave = 5;	
+	repeated common.one_item capture_item_list = 6;
+	optional int32 jianta_atk_percent = 7[default = 0];
+	optional int32 power = 8[default = 0];
+	optional int32 chengqiang_def_percent = 10[default = 0];
+	optional common.one_item sure_item = 11;
+	optional uint32 raid_protect_end_time = 12[default = 0];//掠地保护截至时间
+	optional int32 produce_per_hour =13[default = 0];//产出速度
+	optional int32 need_qianggongling_count = 14[default = 0];
+	optional int32 be_protected_atk_times = 15[default = 0];
+}
+
+message req_assist_avenge_attack
+{
+	optional uint32 target_uid = 1[default = 0];
+	optional common.one_item capture_item = 2;
+	optional one_slave capture_slave = 3;
+	
+	optional int32 report_id = 4[default = 0];//这个是家族里的那个report id
+	optional int32 attack_type = 5[default = 0];//0:正常攻击，1：强行攻击（需消耗强攻令）
+}
+
+message rsp_assist_avenge_attack
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 12;
+}

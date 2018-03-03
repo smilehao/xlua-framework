@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/ipay_openid_margin_20" >
+
+    <TextView
+        android:id="@+id/master_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/background_dark"
+        android:textSize="@dimen/ipay_openid_text_size_34" />
+
+    <TextView
+        android:id="@+id/detail_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ipay_openid_margin_10"
+        android:text="@string/ipay_openid_not_receive_verifycode_tip1"
+        android:textColor="@android:color/background_dark"
+        android:singleLine="false"
+        android:lineSpacingMultiplier="1.5"
+        android:textSize="@dimen/ipay_openid_text_size_28" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ipay_openid_margin_20"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/negative_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/ipay_openid_margin_34"
+            android:textColor="@color/ipay_openid_dialog_btn_textcolor"
+            android:background="@drawable/ipay_openid_dialog_textbtn_selector"
+            android:textSize="@dimen/ipay_openid_text_size_34" />
+
+        <TextView
+            android:id="@+id/positive_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/ipay_openid_margin_20"
+            android:textColor="@color/ipay_openid_dialog_btn_textcolor"
+            android:background="@drawable/ipay_openid_dialog_textbtn_selector"
+            android:textSize="@dimen/ipay_openid_text_size_34" />
+    </LinearLayout>
+
+</LinearLayout>

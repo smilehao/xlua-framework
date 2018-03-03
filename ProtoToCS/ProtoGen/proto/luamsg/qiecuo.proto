@@ -1,0 +1,27 @@
+package qiecuo;
+
+import "common.proto";
+
+message req_enter_qiecuo
+{
+	optional uint32 rival_uid = 1[default = 0];
+}
+
+message rsp_enter_qiecuo
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video_stream = 2[default = ''];	//录像流
+	optional common.battle_settle settle = 3;
+}
+
+message req_enter_qiecuo_inner
+{
+	optional uint32 rival_uid = 1[default = 0];
+}
+
+message rsp_enter_qiecuo_inner
+{
+	optional int32 result = 1[default = 0];
+	optional uint32 rival_uid = 2[default = 0];
+	optional string str_fighter = 3[default = ""];
+}

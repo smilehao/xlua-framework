@@ -1,0 +1,105 @@
+package mail;
+
+import "common.proto";
+
+message one_mail
+{
+	optional int32 mail_seq = 1[default = 0];	//邮件ID
+	optional string sender = 2[default = ''];	//发送人
+	optional string title = 3[default = ''];	//标题
+	optional string content = 4[default = ''];	//内容
+	repeated common.one_item attach_list = 5;
+	optional int32 send_time = 6[default = 0];	//邮件的发送时间
+	optional int32 icon = 7[default = 0];		//邮件的icon
+	optional int32 is_read = 8[default = 1];	//0未读，1已读
+	optional int32 mail_id = 9[default = 1];	//mail id 可以知道邮件来源
+}
+
+
+message req_fight_report_list
+{
+}
+
+message rsp_fight_report_list
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_fight_report fight_report_list = 2;	
+}
+
+message req_read_fight_report
+{
+	optional int32 report_id = 1[default = 0];
+}
+
+message rsp_read_fight_report
+{
+	optional int32 result = 1[default = 0];
+	optional int32 report_id = 2[default = 0];
+	optional int32 is_read = 3[default = 0];
+}
+
+message req_mail_list
+{
+
+}
+
+message rsp_mail_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_mail mail_list = 2;
+	optional int32 last_mail_time = 3[default = 0];
+}
+
+message req_mail_read
+{
+	optional int32 mail_seq = 1[default = 0];
+}
+
+message rsp_mail_read
+{
+	optional int32 result = 1[default = 0];
+	optional int32 mail_seq = 2[default = 0];
+}
+
+message req_take_attach
+{
+	optional int32 mail_seq = 1[default = 0];
+}
+
+message rsp_take_attach
+{
+	optional int32 result = 1[default = 0];
+	optional int32 is_delete = 2[default = 0];	//是否删除
+	optional int32 mail_seq = 3[default = 0];	
+	repeated common.award_info attach_list = 4;
+}
+
+message mail_attach
+{
+	optional int32 is_delete = 1[default = 0];	//是否删除
+	optional int32 mail_seq = 2[default = 0];	
+	repeated common.award_info attach_list = 3;
+}
+
+message req_take_attach_list
+{
+	
+}
+
+message rsp_take_attach_list
+{
+	optional int32 result = 1[default = 0];
+	repeated mail_attach mail_attach_list = 2;	
+}
+
+message ntf_newmail_list
+{
+	repeated one_mail mail_list = 1;
+
+}
+
+//重新拉取邮件列表
+message ntf_have_newmail
+{
+	optional int32 count = 1[default = 1];//新邮件数量
+}

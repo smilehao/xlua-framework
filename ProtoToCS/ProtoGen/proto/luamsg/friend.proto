@@ -1,0 +1,290 @@
+package friend;
+
+message one_player_brief
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 use_icon = 2[default = 0];
+	optional int32 manor_level = 3[default = 0];
+	optional string name = 4[default = ''];
+	optional int32 last_login_time = 6[default = 0];
+	optional int32 is_online = 7[default = 0];
+	optional string guild_name = 9[default = ''];
+}
+
+message one_apply_info
+{
+	optional one_player_brief applyer_info = 1;
+	optional int32 apply_time = 2[default = 0];
+}
+
+message one_friend_info
+{
+	optional one_player_brief player_info = 1;
+	optional int32 status = 2[default = 0];		// 是否能赠送体力  1:可赠送 2:已赠送 3:可收取
+	optional int32 intimacy         = 3[default = 0];  //亲密度
+}
+
+message one_friend_change_info
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 intimacy = 2[default = 0];
+	optional int32 status = 3[default = 0]; // 是否能赠送体力  1:可赠送 2:已赠送 3:可收取
+}
+
+message one_award_stamina_info
+{
+	optional one_player_brief giver_info = 1;
+	optional int32 give_time = 2[default = 0];
+	optional int32 award_state = 3[default = 0];			// 领取状态 1:可领 2:不可领
+}
+
+// 请求好友列表
+message req_friend_list
+{
+}
+
+message rsp_friend_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_friend_info friend_list = 2;
+	optional int32 max_friend_count = 3[default = 0];
+	optional int32 is_close_apply = 4[default = 0];		//是否关闭申请(0: 不关闭 1：关闭)
+	optional int32 day_give_stamina_count = 5[default = 0];
+	optional int32 day_get_stamina_count = 6[default = 0];
+}
+
+// 请求搜索好友
+message req_search_player
+{
+	optional string str = 1[default = ''];			// 无论是名字还是id输入字符串即可
+}
+
+message rsp_search_player
+{
+	optional int32 result = 1[default = 0];
+	repeated one_player_brief player_list = 2;
+}
+
+// 请求其他玩家申请好友列表
+message req_apply_friend_list
+{
+}
+
+message rsp_apply_friend_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_apply_info apply_list = 2;
+}
+
+// 请求黑名单列表
+message req_black_list
+{
+}
+
+message rsp_black_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_player_brief black_list = 2;
+	optional int32 max_black_count = 3[default = 0];
+}
+
+// 请求添加好友
+message req_add_friend
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_add_friend
+{
+	optional int32 result = 1[default = 0];
+}
+
+// 通知对方有新的好友申请
+message ntf_add_friend
+{
+	optional one_apply_info apply_info = 1;
+	optional int32 is_new_apply = 2[default = 0];
+}
+
+// 通知自己删除请求添加好友记录
+message ntf_del_apply_record
+{
+	repeated uint32 apply_uid_list = 1;
+	optional int32 is_del = 2[default = 0];		// 是否删除  1：删除 2:不删除
+	optional int32 is_agree = 3[default = 0];	// 是否同意 1：同意 2:拒绝
+}
+
+// 请求关闭/开启好友申请按钮
+message req_chg_apply_command
+{
+	optional int32 is_close_apply = 1[default = 0];	// 关闭/开启 0:开启 1：关闭
+}
+
+message rsp_chg_apply_command
+{
+	optional int32 result = 1[default = 0];
+}
+
+// 一键操作好友申请
+message req_answer_all_apply_record
+{	
+	optional int32 is_agree = 1[default = 0];     //1:同意 2:拒绝
+}
+
+message rsp_answer_all_apply_record
+{
+	optional int32 result = 1[default = 0];
+	optional int32 is_friend_max = 2[default = 0];  // 1 达到好友上线
+}
+
+// 回应添加好友
+message req_answer_add_friend
+{
+	optional uint32 target_uid = 1[default = 0];
+	optional int32 is_agree = 2[default = 0];     //1:同意 2:拒绝
+}
+
+message rsp_answer_add_friend
+{
+	optional int32 result = 1[default = 0];
+}
+
+// 通知添加好友
+message ntf_answer_add_friend
+{
+	repeated one_friend_info friend_list = 1;
+}
+
+// 请求删除好友
+message req_del_friend
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_del_friend
+{
+	optional int32 result = 1[default = 0];
+}
+
+// 通知删除好友
+message ntf_del_friend
+{
+	optional one_player_brief del_friend_info = 1;
+}
+
+// 请求赠送体力
+message req_give_stamina
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_give_stamina
+{
+	optional int32 result = 1[default = 0];
+	optional one_friend_change_info change_info = 2;
+	optional int32 day_give_stamina_count = 3[default = 0];
+}
+
+message ntf_give_stamina
+{
+	optional one_award_stamina_info award_stamina_info = 1;
+}
+
+//请求赠送全部体力
+message req_give_all_stamina
+{
+	
+}
+
+message rsp_give_all_stamina
+{
+	optional int32 result = 1[default = 0];
+	repeated one_friend_change_info change_list  = 2;
+	optional int32 day_give_stamina_count = 3[default = 0];
+}
+
+// 请求获得全部体力
+message req_award_all_stamina
+{
+
+}
+
+message rsp_award_all_stamina
+{
+	optional int32 result = 1[default = 0];
+	repeated one_friend_change_info change_list = 2;
+	optional int32 day_get_stamina_count = 3[default = 0];
+}
+
+
+// 请求添加黑名单
+message req_add_black
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_add_black
+{
+	optional int32 result = 1[default = 0];
+}
+
+message ntf_add_black
+{
+	optional one_player_brief black_info = 1;	
+}
+
+// 请求解除黑名单
+message req_release_black
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_release_black
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_award_stamina
+{
+	optional uint32 target_uid = 1[default = 0];
+}
+
+message rsp_award_stamina
+{
+	optional int32 result = 1[default = 0];
+	optional one_friend_change_info change_info = 2;
+	optional int32 day_get_stamina_count = 3[default = 0];
+}
+
+// 通知好友登录/登出
+message notify_login_or_logout
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 login_or_logout = 2[default = 0]; 	// 1：登录 2:登出(下线)
+}
+
+// 通知好友红点
+message notify_red_spot
+{
+	optional int32 have_new_apply = 1[default = 0];		//1: 有新的申请
+	optional int32 can_award_stamina = 2[default = 0];  //1: 有可以领取的体力
+}
+
+// 推荐好友
+message req_recommend_friend
+{
+}
+
+message rsp_recommend_friend
+{
+	optional int32 result = 1[default = 0];
+	repeated one_player_brief player_list = 2;
+}
+
+message ntf_apply_result
+{
+	optional int32 result = 1[default = 0];
+	optional int32 is_agree = 2[default = 0];   //1.同意  2.拒绝
+	optional int32 target_uid = 3[default = 0];  //被请求人的uid
+	optional string user_name = 4[default = ''];  //被请求的人的名称
+}

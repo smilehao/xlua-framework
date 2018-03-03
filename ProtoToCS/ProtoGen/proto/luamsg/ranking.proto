@@ -1,0 +1,40 @@
+package ranking;
+import 'common.proto';
+
+message one_ranking
+{
+	optional common.one_user_brief user_brief_info = 1;
+	optional int32 rank = 2[default = 0];	//当前的排名
+	optional int32 score = 3[default = 0];
+}
+
+message one_guild_ranking
+{
+	optional common.one_guild_brief guild_brief_info = 1;
+	optional int32 rank = 2[default = 0];
+	optional int32 score = 3[default = 0];
+}
+
+message req_ranking_list
+{
+	optional int32 ranking_list_type = 1[default = 0];	//排行榜的类型:0建设,1名将,2战争,3演武(竞技场),4军团建设,5军团名将,6军团战争,7军团演武
+	optional uint32 ranking_time = 2[default = 0];  //上次排序时间戳
+}
+
+message rsp_ranking_list
+{
+	optional int32 result = 1[default = 0];                      // 1.表示已经是最新的了
+	optional int32 ranking_list_type = 2[default =0];
+	optional one_ranking 	own_ranking_info = 3;
+	optional one_guild_ranking own_guild_ranking_info = 4;
+	repeated one_ranking 	arena_ranking_list = 5;
+	repeated one_ranking 	building_ranking_list = 6;
+	repeated one_ranking 	famouswujiang_ranking_list = 7;
+	repeated one_ranking 	warscore_ranking_list = 8;
+	repeated one_guild_ranking 		guild_building_ranking_list = 9;
+	repeated one_guild_ranking 		guild_famouswujiang_ranking_list = 10;
+	repeated one_guild_ranking 		guild_warscore_ranking_list = 11;
+	repeated one_guild_ranking 		guild_arena_ranking_list = 12;
+	optional uint32 ranking_time = 13[default = 0]; //上次排序时间戳
+	optional uint32 rank_same = 14[default = 0]; //排行榜没变化
+}

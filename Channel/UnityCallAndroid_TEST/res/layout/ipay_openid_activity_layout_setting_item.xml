@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/ipay_openid_margin_10"
+    android:paddingTop="@dimen/ipay_openid_margin_10" >
+
+    <TextView
+        android:id="@+id/setting_menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/ipay_openid_input_text_color"
+        android:textSize="@dimen/ipay_openid_text_size_32" />
+
+    <TextView android:id="@+id/setting_menu_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ipay_openid_link_text_color"
+        android:textSize="@dimen/ipay_openid_text_size_32" 
+        />
+    
+    <ImageView
+        android:id="@+id/to_detail_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ipay_openid_todetail" />
+
+</LinearLayout>

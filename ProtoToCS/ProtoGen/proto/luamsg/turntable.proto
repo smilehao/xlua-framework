@@ -1,0 +1,112 @@
+package turntable;
+
+import "common.proto";
+message box_award
+{
+	optional int32 id = 1[default = 0];
+	optional int32 count = 2[default = 0];
+	optional int32 have_taken = 3[default = 0];
+	optional int32 type = 4[default = 0];//类型：0为普通道具，1为翻倍
+	optional int32 multiple = 5[default = 0];//宝箱翻倍倍数
+}
+message one_turntable_award 
+{
+	optional int32 item_id = 1[default = 0];
+	optional int32 type = 3[default = 0];
+}
+
+message req_turntable_panel
+{
+
+}
+
+message rsp_turntable_panel
+{
+	optional int32 result = 1[default = 0];
+	optional int32 stop_trench = 2[default = 0];
+	optional int32 have_shuffle =3[default = 0];
+	repeated one_turntable_award turntable_award_list = 4;//转盘奖励列表
+	repeated box_award box_award_list = 5;//宝箱奖品列表
+	optional int32 turntable_status = 6[default = 0];
+	optional int32 today_turntable_times = 7[default = 0];
+	optional int32 turntable_price = 8[default = 0];
+	optional int32 box_price = 9[default = 0];
+	optional int32 total_multiple = 10[default = 0];
+}
+
+message req_play_turntable
+{
+	
+}
+
+message rsp_play_turntable
+{
+	optional int32 result = 1[default = 0];
+	optional int32 stop_trench = 2[default = 0];
+}
+
+message req_take_turntable_award
+{
+	
+}
+
+message rsp_take_turntable_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 box_id = 2[default = 0];
+	repeated common.award_info award_list = 3;
+	repeated box_award box_award_list = 4;//宝箱奖品列表
+	optional int32 turntable_price = 5[default = 0];
+}
+message req_take_box_award
+{
+	optional int32 box_trench = 1[default = 0];
+}
+
+message rsp_take_box_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 box_trench = 2[default = 0];
+	optional box_award taken_box_award = 3;
+	optional int32 box_price = 4[default = 0];
+	optional int32 total_multiple = 5[default = 0];
+}
+
+message req_shuffle_box_award_list
+{
+
+}
+
+message rsp_shuffle_box_award_list
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_buy_turntable_yubi
+{
+	optional int32 goods_trench = 1[default = 0];
+}
+
+message rsp_buy_turntable_yubi
+{
+	optional int32 result = 1[default = 0];
+}
+message req_buy_turntable_daobi
+{
+	optional int32 goods_trench = 1[default = 0];
+}
+
+message rsp_buy_turntable_daobi
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_giveup_box_award
+{
+
+}
+
+message rsp_giveup_box_award
+{
+	optional int32 result = 1[default = 0];
+}

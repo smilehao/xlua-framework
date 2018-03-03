@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checked_tv"
+    android:layout_width="match_parent"
+    android:layout_height="48dip"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/ipay_margin_25"
+    android:paddingRight="@dimen/ipay_margin_15"
+    android:checkMark="@drawable/ipay_common_radio_btn_selector"
+    android:textSize="@dimen/ipay_text_size_16"
+    android:textColor="@color/ipay_color_value_6"
+/>

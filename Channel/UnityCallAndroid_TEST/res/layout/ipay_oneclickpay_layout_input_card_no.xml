@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ipay_transparent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/ipay_oneclick_title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/ipay_color_value_1"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ipay_margin_19"
+        android:paddingRight="@dimen/ipay_margin_19" >
+
+        <TextView
+            android:id="@+id/payAmountTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="银行卡号"
+            android:textColor="@color/ipay_color_value_4"
+            android:textSize="@dimen/ipay_text_size_12"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/iapppay_oneclick_line"
+            layout="@layout/ipay_oneclick_common_line_layout" 
+            android:visibility="gone"/>
+
+        <!-- 请输入卡号 -->
+        <include
+            android:id="@+id/layout_bankcard_num"
+            layout="@layout/ipay_oneclick_common_bank_info_collect_layout"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/nextStepButton"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ipay_height_50"
+            android:layout_marginTop="@dimen/ipay_margin_20"
+            android:layout_marginBottom="@dimen/ipay_margin_20"
+            android:text="下一步"
+            android:background="@drawable/ipay_common_btn_bg_color"
+            android:textColor="@drawable/ipay_common_btn_text_color"
+            android:textSize="@dimen/ipay_text_size_19" />
+    </LinearLayout>
+
+</LinearLayout>

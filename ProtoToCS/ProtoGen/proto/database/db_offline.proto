@@ -1,0 +1,136 @@
+package db;
+
+import 'db_common.proto';
+
+message guild_apply_del
+{
+	optional uint32 gid = 1[default = 0];
+	optional int32 result = 2[default = 0];//0是拒绝，1是加入
+	optional int32 time = 3[default = 0];
+}
+
+message guild_exit
+{
+	optional uint32 gid = 1[default = 0];
+	optional int32 time = 2[default = 0];
+}
+
+
+message offline_bg_operation
+{
+	optional uint32 uid = 1 [default = 0];
+	optional int32 opcode = 2[default = 0]; // |设置玩家等级|删除武将|设置技能等级|设置玩家游戏币
+	optional int32 param1 = 3[default = 0]; // |玩家等级    |武将id  |武将id      |金币数
+	optional int32 param2 = 4[default = 0]; // |            |        |技能id      |
+	optional int32 param3 = 5[default = 0]; // |            |        |技能等级    |
+	optional string str1 = 6[default = '']; // |            |        |            |游戏币名称 
+	optional string str2 = 7[default = ''];
+	optional string str3 = 8[default = ''];
+}
+message one_offline
+{
+	optional int32 event = 1[default = 0];	//离线事件的类型
+	optional int32 deleted = 2[default = 0];	//标记是否必须删除的
+	optional guild_apply_del guild_apply_del_info = 3;
+	optional guild_exit guild_exit_info = 4;
+	optional offline_bg_operation bg_operation = 9;
+}
+
+message chat_complaint_info
+{
+	optional int32 record_time = 1[default = 0];		//记录的开始时间
+	optional int32 last_complaint_time = 2[default = 0];	//禁言开始时间
+	repeated uint32 uids_list = 3; 
+}
+
+message one_slave
+{
+	optional uint32 slave_uid = 1[default = 0];
+	optional int32 slave_last_gain_time = 2[default = 0];	//附属上次收获时间
+	optional int32 slave_item_id = 3[default = 0];
+}
+
+message one_robber_troop
+{
+	optional int32 troop_id =1[default =0];
+	optional int32 soldier_count = 2[default =0];
+}
+
+message one_robber
+{
+	optional int32 index     = 1[default = 0];
+	optional int32 robber_id = 2[default = 0];
+	optional uint32 create_time = 3[default =0]; //创建时间
+	repeated one_robber_troop troop_list = 4;
+}
+
+message guild_explore_member_info
+{
+	optional uint32 uid = 1[default = 0];
+	optional int32 wujiang_id = 2[default = 0];
+	optional int32 power = 3[default = 0];
+}
+
+message guild_explore_result_info
+{
+	optional int32  power = 1[default = 0];
+	optional int32  grade =  2[default = 0];
+	optional int32  wujiang_id = 3[default = 0];
+	repeated int32  event_list = 4;
+	repeated guild_explore_member_info member_list = 5;
+    repeated one_award_info award_list = 6;
+}
+
+message one_value_record
+{
+	optional int32 sub_type = 1[default = 0];
+	optional int32 curr_value = 2[default = 0];
+}
+
+message personal_sevenday_act
+{
+	optional int32 act_id = 1[default = 0];
+	repeated one_value_record value_record_list = 2;
+	optional int32 award_flag = 3[default = 0];
+	optional int32 start_time = 4[default = 0];
+	optional int32 end_time = 5[default = 0];
+}
+
+message  protected_be_atked //掠地保护被攻击  攻击玩家及次数
+{
+	optional int32 uid = 1[default = 0];
+	optional int32 atk_times = 2[default = 1];
+}
+
+message Offline
+{
+	repeated one_offline offline_list = 1;
+	optional int32 hongdian_flag = 2[default = 0];//红点标记
+	optional int32 last_apply_guild_time = 3[default = 0];	//最近一次申请入团的时间
+	optional int32 last_leave_guild_time = 4[default = 0];	//最后一次退团时间
+	optional chat_complaint_info complaint_info = 5;
+	repeated one_troop troop_list = 7;
+	repeated one_buzhen buzhen_list = 8;
+	repeated one_arm_type arm_type_list = 9;
+	optional int32 war_score = 10[default = 0];
+	optional uint32 war_score_time = 11[default = 0];				
+	repeated one_slave slave_list = 12;					//附属列表
+	repeated one_captured_wujiang captured_wujiang_list = 13;	//被俘虏的武将列表
+	optional uint32 raid_protect_end_time = 14[default = 0];		//掠地保护截至时间
+	repeated one_robber  robber_list = 15;    //土匪列表                      
+	optional int32 sum_of_building_level = 16[default = 0];
+	optional uint32 last_building_levelchg_time = 17[default = 0];			//上次建筑等级改变时间
+	optional int32 last_slave_collect_time = 18[default = 0];
+	optional int32 warscore_in_7d_act_310 = 19[default = 0];		//在7天活动310中的战争积分
+	repeated guild_explore_result_info  explore_result_list = 20;  //探索结果
+	optional int32 fanrong_in_7d_act_314 = 21[default = 0];		//在7天活动314中的繁荣度
+	repeated one_killed_wujiang killed_wujiang_list = 22;	//武将斩杀列表（自己被斩的，和斩杀别人的）
+	optional int32 multiplayerfights_today_win_times = 23[default = 0];//今天胜利场次
+	optional int32 multiplayerfights_win_times = 24[default = 0];//历史累计胜利场次
+	optional int32 kw_last_send_troop_date = 25[default = 0];//上次国战出兵日期（国战日期  年*100 + 季*10 + 日）
+	optional int32 multiplayerfights_curr_win_times = 26[default = 0];	//当前胜场
+	repeated personal_sevenday_act personal_sevenday_act_list = 27;
+	optional int32 personal_sevenday_act_create_time = 28;
+	repeated protected_be_atked protected_be_atked_list = 29;		
+	repeated int32 history_lord_state_list = 30;
+}

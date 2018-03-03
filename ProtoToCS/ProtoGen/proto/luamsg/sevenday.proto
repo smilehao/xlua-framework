@@ -1,0 +1,27 @@
+package sevenday;
+
+import "common.proto";
+message req_sevenday_panel
+{
+
+}
+message rsp_sevenday_panel
+{
+	optional int32 result = 1[default = 0];
+	optional int32 award_times = 2[default = 0];
+	optional int32 if_can_award = 3[default = 0];//1为能获取奖励，0为不能获取奖励
+	
+	optional int32 award_mount_day = 4[default = 0];	// 第几天给坐骑
+	optional int32 award_mount_id = 5[default = 0];		// 坐骑id
+	optional int32 award_mount_stage = 6[default = 0];	// 坐骑阶数
+}
+message req_get_sevenday_award
+{
+
+}
+message rsp_get_sevenday_award
+{
+	optional int32 result = 1[default = 0];
+	optional int32 award_times = 2[default = 0];
+	repeated common.award_info award_list = 7;	//掉落列表
+}

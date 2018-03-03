@@ -1,4 +1,6 @@
-﻿namespace CustomDataStruct
+﻿using System;
+
+namespace CustomDataStruct
 {
     public delegate void DelegateCallback();
     public delegate void DelegateCallback<T>(T arg1);

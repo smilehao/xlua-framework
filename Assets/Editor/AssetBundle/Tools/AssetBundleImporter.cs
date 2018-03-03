@@ -114,7 +114,7 @@ namespace AssetBundles
             {
                 if (IsValid)
                 {
-                    assetImporter.assetBundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(value);
+                    assetImporter.assetBundleName = AssetBundleUtility.AssetBundlePathToAssetBundleName(value);
                 }
             }
         }
@@ -143,6 +143,14 @@ namespace AssetBundles
             } 
         }
 
+        public string packagePath
+        {
+            get
+            {
+                return IsValid ? AssetBundleUtility.AssetsPathToPackagePath(assetPath) : null;
+            }
+        }
+
         public ulong assetTimeStamp { 
             get
             {
@@ -164,7 +172,7 @@ namespace AssetBundles
                 }
             }
         }
-
+        
         public void SaveAndReimport()
         {
             if (IsValid)

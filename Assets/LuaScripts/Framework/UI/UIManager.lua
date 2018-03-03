@@ -22,6 +22,8 @@ local UICameraPath = UIRootPath.."/UICamera"
 local Resolution = Vector2.New(1024, 960)
 -- 窗口最大可使用的相对order_in_layer
 local MaxOderPerWindow = 10
+-- cs Tip
+local UINoticeTip = CS.UINoticeTip.Instance
 
 -- 构造函数
 local function __init(self)
@@ -34,6 +36,10 @@ local function __init(self)
 	self.layers = {}
 	-- 保持Model
 	self.keep_model = {}
+	-- 窗口记录队列
+	self.__window_stack = {}
+	-- 是否启用记录
+	self.__enable_record = true
 	
 	-- 初始化组件
 	self.gameObject = CS.UnityEngine.GameObject.Find(UIRootPath)
@@ -50,12 +56,12 @@ local function __init(self)
 	
 	-- 初始化层级
 	local layers = table.choose(Config.Debug and getmetatable(UILayers) or UILayers, function(k, v)
-		return type(v) == "table" and not IsNull(v.OrderInLayer) and not IsNull(v.Name) and type(v.Name) == "string" and #v.Name > 0
+		return type(v) == "table" and v.OrderInLayer ~= nil and v.Name ~= nil and type(v.Name) == "string" and #v.Name > 0
 	end)
 	table.walksort(layers, function(lkey, rkey)
 		return layers[lkey].OrderInLayer < layers[rkey].OrderInLayer
 	end, function(index, layer)
-		assert(IsNull(self.layers[layer]), "Aready exist layer : "..layer.Name)
+		assert(self.layers[layer.Name] == nil, "Aready exist layer : "..layer.Name)
 		local go = CS.UnityEngine.GameObject(layer.Name)
 		local trans = go.transform
 		trans:SetParent(self.transform)
@@ -66,8 +72,8 @@ local function __init(self)
 end
 
 -- 注册消息
-local function AddListener(self, e_type, e_listener, ...)
-	self.ui_message_center:AddListener(e_type, e_listener, ...)
+local function AddListener(self, e_type, e_listener)
+	self.ui_message_center:AddListener(e_type, e_listener)
 end
 
 -- 发送消息
@@ -83,13 +89,13 @@ end
 -- 获取窗口
 local function GetWindow(self, ui_name, active, view_active)
 	local target = self.windows[ui_name]
-	if IsNull(target) then
+	if target == nil then
 		return nil
 	end
-	if not IsNull(active) and target.Active ~= active then
+	if active ~= nil and target.Active ~= active then
 		return nil
 	end
-	if not IsNull(view_active) and target.View:GetActive() ~= view_active then
+	if view_active ~= nil and target.View:GetActive() ~= view_active then
 		return nil
 	end
 	return target
@@ -104,14 +110,15 @@ local function InitWindow(self, ui_name, window)
 	assert(layer, "No layer named : "..config.Layer.Name..".You should create it first!")
 	
 	window.Name = ui_name
-	window.Model = self.keep_model[ui_name]
-	if not window.Model and not IsNull(config.Model) then
+	if self.keep_model[ui_name] then
+		window.Model = self.keep_model[ui_name]
+	elseif config.Model then
 		window.Model = config.Model.New(ui_name)
 	end
-	if not IsNull(config.Ctrl) then
+	if config.Ctrl then
 		window.Ctrl = config.Ctrl.New(window.Model)
 	end
-	if not IsNull(config.View) then
+	if config.View then
 		window.View = config.View.New(layer, window.Name, window.Model, window.Ctrl)
 	end
 	window.Active = false
@@ -124,7 +131,7 @@ end
 
 -- 激活窗口
 local function ActivateWindow(self, target, ...)
-	assert(not IsNull(target))
+	assert(target)
 	assert(target.IsLoading == false, "You can only activate window after prefab locaded!")
 	target.Model:Activate(...)
 	target.View:SetActive(true)
@@ -140,15 +147,15 @@ end
 
 -- 打开窗口：私有，必要时准备资源
 local function InnerOpenWindow(self, target, ...)
-	assert(not IsNull(target))
-	assert(not IsNull(target.Model))
-	assert(not IsNull(target.Ctrl))
-	assert(not IsNull(target.View))
+	assert(target)
+	assert(target.Model)
+	assert(target.Ctrl)
+	assert(target.View)
 	assert(target.Active == false, "You should close window before open again!")
 	
 	target.Active = true
 	local has_view = target.View ~= UIBaseView
-	local has_prefab_res = not IsNull(target.PrefabPath) and #target.PrefabPath > 0
+	local has_prefab_res = target.PrefabPath and #target.PrefabPath > 0
 	local has_loaded = not IsNull(target.View.gameObject)
 	local need_load = has_view and has_prefab_res and not has_loaded
 	if not need_load then
@@ -156,9 +163,8 @@ local function InnerOpenWindow(self, target, ...)
 	elseif not target.IsLoading then
 		target.IsLoading = true
 		local params = SafePack(...)
-		ResourcesManager:GetInstance():LoadAsync(target.PrefabPath, function(go)
+		GameObjectPool:GetInstance():GetGameObjectAsync(target.PrefabPath, function(go)
 			if IsNull(go) then
-				Logger.LogError("Resources load err : Window "..target.Name.." gameObject nil!")
 				return
 			end
 			
@@ -177,10 +183,10 @@ end
 
 -- 关闭窗口：私有
 local function InnerCloseWindow(self, target)
-	assert(not IsNull(target))
-	assert(not IsNull(target.Model))
-	assert(not IsNull(target.Ctrl))
-	assert(not IsNull(target.View))
+	assert(target)
+	assert(target.Model)
+	assert(target.Ctrl)
+	assert(target.View)
 	if target.Active then
 		Deactivate(self, target)
 		target.Active = false
@@ -190,7 +196,7 @@ end
 -- 打开窗口：公有
 local function OpenWindow(self, ui_name, ...)
 	local target = self:GetWindow(ui_name)
-	if IsNull(target) then
+	if not target then
 		local window = UIWindow.New()
 		self.windows[ui_name] = window
 		target = InitWindow(self, ui_name, window)
@@ -199,16 +205,42 @@ local function OpenWindow(self, ui_name, ...)
 	-- 先关闭
 	InnerCloseWindow(self, target)
 	InnerOpenWindow(self, target, ...)
+	
+	-- 窗口记录
+	local layer = UIConfig[ui_name].Layer
+	if layer == UILayers.BackgroudLayer then
+		local bg_index = self:GetLastBgWindowIndexInWindowStack()
+		if bg_index == -1 or self.__window_stack[bg_index] ~= target.Name then
+			self:AddToWindowStack(target.Name)
+		else
+			self:PopWindowStack()
+		end
+	elseif layer == UILayers.NormalLayer then
+		self:AddToWindowStack(target.Name)
+	end
 end
 
 -- 关闭窗口：公有
 local function CloseWindow(self, ui_name)
 	local target = self:GetWindow(ui_name, true)
-	if IsNull(target) then
+	if not target then
 		return
 	end
 	
 	InnerCloseWindow(self, target)
+	
+	-- 窗口记录
+	local layer = UIConfig[ui_name].Layer
+	if layer == UILayers.BackgroudLayer then
+		if target.Name == self.__window_stack[table.count(self.__window_stack)] then
+			self:RemoveFormWindowStack(target.Name, true)
+			--self:PopWindowStack()
+		else
+			self:RemoveFormWindowStack(target.Name, true)
+		end
+	elseif layer == UILayers.NormalLayer then
+		self:RemoveFormWindowStack(target.Name, true)
+	end
 end
 
 -- 关闭层级所有窗口
@@ -239,7 +271,7 @@ end
 -- 展示窗口
 local function OpenView(self, ui_name, ...)
 	local target = self:GetWindow(ui_name)
-	assert(not IsNull(target), "Try to show a window that does not exist: "..ui_name)
+	assert(target, "Try to show a window that does not exist: "..ui_name)
 	if not target.View:GetActive() then
 		target.View:SetActive(true)
 	end
@@ -248,7 +280,7 @@ end
 -- 隐藏窗口
 local function CloseView(self, ui_name)
 	local target = self:GetWindow(ui_name)
-	assert(not IsNull(target), "Try to hide a window that does not exist: "..ui_name)
+	assert(target, "Try to hide a window that does not exist: "..ui_name)
 	if target.View:GetActive() then
 		target.View:SetActive(false)
 	end
@@ -262,6 +294,8 @@ end
 
 local function InnerDestroyWindow(self, ui_name, target, include_keep_model)
 	self:Broadcast(UIMessageNames.UIFRAME_ON_WINDOW_DESTROY, target)
+	-- 说明：一律缓存，如果要真的清理，那是清理缓存时需要管理的功能
+	GameObjectPool:GetInstance():RecycleGameObject(self.windows[ui_name].PrefabPath, target.View.gameObject)
 	if include_keep_model then
 		self.keep_model[ui_name] = nil
 		InnerDelete(target.Model)
@@ -276,7 +310,7 @@ end
 -- 销毁窗口
 local function DestroyWindow(self, ui_name, include_keep_model)
 	local target = self:GetWindow(ui_name)
-	if IsNull(target) then
+	if not target then
 		return
 	end
 	
@@ -315,7 +349,7 @@ end
 -- 设置是否保持Model
 local function SetKeepModel(self, ui_name, keep)
 	local target = self:GetWindow(ui_name)
-	assert(not IsNull(target), "Try to keep a model that window does not exist: "..ui_name)
+	assert(target, "Try to keep a model that window does not exist: "..ui_name)
 	if keep then
 		self.keep_model[target.Name] = target.Model
 	else
@@ -326,6 +360,123 @@ end
 -- 获取保持的Model
 local function GetKeepModel(self, ui_name)
 	return self.keep_model[ui_name]
+end
+
+-- 加入窗口记录栈
+local function AddToWindowStack(self, ui_name)
+	if not self.__enable_record then
+		return
+	end
+	
+	table.insert(self.__window_stack, ui_name)
+	-- 保持Model
+	self:SetKeepModel(ui_name, true)
+end
+
+-- 从窗口记录栈中移除
+local function RemoveFormWindowStack(self, ui_name, only_check_top)
+	if not self.__enable_record then
+		return
+	end
+	
+	local index = table.indexof(self.__window_stack, ui_name)
+	if not index then
+		return
+	end
+	if only_check_top and index ~= table.count(self.__window_stack) then
+		return
+	end
+	
+	local ui_name = table.remove(self.__window_stack, index)
+	-- 取消Model保持
+	self:SetKeepModel(ui_name, false)
+end
+
+-- 获取记录栈
+local function GetWindowStack(self)
+	return self.__window_stack
+end
+
+-- 清空记录栈
+local function ClearWindowStack(self)
+	self.__window_stack = {}
+end
+
+-- 获取最后添加的一个背景窗口索引
+local function GetLastBgWindowIndexInWindowStack(self)
+	local bg_index = -1
+	for i = 1, table.count(self.__window_stack) do
+		local ui_name = self.__window_stack[i]
+		if UIConfig[ui_name].Layer == UILayers.BackgroudLayer then
+			bg_index = i
+		end
+	end
+	return bg_index
+end
+
+-- 弹出栈
+-- 注意：从上一个记录的背景UI开始弹出之后所有被记录的窗口
+local function PopWindowStack(self)
+	local bg_index = self:GetLastBgWindowIndexInWindowStack()
+	if bg_index == -1 then
+		-- 没找到背景UI
+		if table.count(self.__window_stack) > 0 then
+			error("There is something wrong!")
+		end
+		return
+	end
+	
+	self.__enable_record = false
+	local end_index = table.count(self.__window_stack)
+	for i = bg_index + 1, end_index  do
+		local ui_name = self.__window_stack[i]
+		UIManager:GetInstance():OpenWindow(ui_name)
+	end
+	self.__enable_record = true
+end
+
+-- 展示Tip：单按钮
+local function OpenOneButtonTip(self, title, content, btnText, callback)
+	local ui_name = UIWindowNames.UINoticeTip
+	local cs_func = UINoticeTip.ShowOneButtonTip
+	self:OpenWindow(ui_name, cs_func, title, content, btnText, callback)
+end
+
+-- 展示Tip：双按钮
+local function OpenTwoButtonTip(self, title, content, btnText1, btnText2, callback1, callback2)
+	local ui_name = UIWindowNames.UINoticeTip
+	local cs_func = UINoticeTip.ShowTwoButtonTip
+	self:OpenWindow(ui_name, cs_func, title, content, btnText1, btnText2, callback1, callback2)
+end
+
+-- 展示Tip：三按钮
+local function OpenThreeButtonTip(self, title, content, btnText1, btnText2, btnText3, callback1, callback2, callback3)
+	local ui_name = UIWindowNames.UINoticeTip
+	local cs_func = UINoticeTip.ShowThreeButtonTip
+	self:OpenWindow(ui_name, cs_func, title, content, btnText1, btnText2, btnText3, callback1, callback2, callback3)
+end
+
+-- 隐藏Tip
+local function CloseTip(self)
+	local ui_name = UIWindowNames.UINoticeTip
+	self:CloseWindow(ui_name)
+end
+
+-- 等待View层窗口创建完毕（资源加载完毕）：用于协程
+local function WaitForViewCreated(self, ui_name)
+	local window = self:GetWindow(ui_name, true)
+	assert(window ~= nil, "Try to wait for a not opened window : "..ui_name)
+	if IsNull(window.View.gameObject) then
+		window.View:WaitForCreated()
+	end
+	return window
+end
+
+-- 等待Tip响应：用于协程，返回点击序号，-1表示无响应且窗口被异常关闭
+local function WaitForTipResponse(self)
+	local ui_name = UIWindowNames.UINoticeTip
+	local window = self:WaitForViewCreated(ui_name)
+	return window.Model:WaitForResponse()
 end
 
 -- 析构函数
@@ -354,6 +505,19 @@ UIManager.DestroyWindowExceptLayer = DestroyWindowExceptLayer
 UIManager.DestroyAllWindow = DestroyAllWindow
 UIManager.SetKeepModel = SetKeepModel
 UIManager.GetKeepModel = GetKeepModel
+UIManager.AddToWindowStack = AddToWindowStack
+UIManager.RemoveFormWindowStack = RemoveFormWindowStack
+UIManager.GetLastBgWindowIndexInWindowStack = GetLastBgWindowIndexInWindowStack
+UIManager.GetWindowStack = GetWindowStack
+UIManager.ClearWindowStack = ClearWindowStack
+UIManager.PopWindowStack = PopWindowStack
+UIManager.OpenOneButtonTip = OpenOneButtonTip
+UIManager.OpenTwoButtonTip = OpenTwoButtonTip
+UIManager.OpenThreeButtonTip = OpenThreeButtonTip
+UIManager.CloseTip = CloseTip
+UIManager.WaitForViewCreated = WaitForViewCreated
+UIManager.WaitForTipResponse = WaitForTipResponse
+UIManager.GetTipLastClickIndex = GetTipLastClickIndex
 UIManager.__delete = __delete
 
 return UIManager;

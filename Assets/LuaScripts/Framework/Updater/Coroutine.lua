@@ -10,11 +10,15 @@
 -- 6、子级协同在lua侧等同于普通函数调用，和普通函数一样可在退出函数时带任意返回值，而Unity侧协同不能获取子级协同退出时的返回值
 -- 7、理论上任何协同都可以用回调方式去做，但是对于异步操作，回调方式也需要每帧去检测异步操作是否完成，消耗相差不多，而使用协同可以简单很多，清晰很多
 -- 8、协程所有等待时间的操作，如coroutine.waitforseconds误差由帧率决定，循环等待时有累积误差，所以最好只是用于分帧，或者等待异步操作
--- 9、yieldstart、yieldreturn、yieldbreak实际上是用lua不对称协程实现对称协同，使用方式和Unity侧协同类型，注意点看相关函数头说明
+-- 9、yieldstart、yieldreturn、yieldbreak实际上是用lua不对称协程实现对称协同，使用方式和Unity侧协同类似，注意点看相关函数头说明
+-- TODO：
+-- 1、CS侧做可视化调试器，方便单步查看各个协程运行状态
 --]]
 
 -- 协程内部使用定时器实现，定时器是weak表，所以这里必须缓存Action，否则会被GC回收
 local action_map = {}
+-- action缓存池
+local action_pool = {}
 -- 用于子级协程yieldreturn时寻找父级协程
 local yield_map = {}
 -- 协程数据缓存池
@@ -54,16 +58,42 @@ local function __GetCoroutine()
 	return co
 end
 
+-- 回收Action
+local function __RecycleAction(action)
+	action.co = false
+	action.timer = false
+	action.func = false
+	action.args = false
+	action.result = false
+	table.insert(action_pool, action)
+end
+
+-- 获取Action
+local function __GetAction(co, timer, func, args, result)
+	local action = nil
+	if table.length(action_pool) > 0 then
+		action = table.remove(action_pool)
+	else
+		action = {false, false, false, false, false}
+	end
+	action.co = co and co or false
+	action.timer = timer and timer or false
+	action.func = func and func or false
+	action.args = args and args or false
+	action.result = result and result or false
+	return action
+end
+
 -- 协程运行在保护模式下，不会抛出异常，所以这里要捕获一下异常
 -- 但是可能会遇到调用协程时对象已经被销毁的情况，这种情况应该被当做正常情况
 -- 所以这里并不继续抛出异常，而只是输出一下错误日志，不要让客户端当掉
--- 注意：Logger中实际上再调试模式会抛出异常
+-- 注意：Logger中实际上在调试模式会抛出异常
 local function __PResume(co, func, ...)
 	local resume_ret = nil
 	if func ~= nil then
 		resume_ret = SafePack(coroutine.resume(co, func, ...))
 	else
-		resume_ret = SafePack(coroutine.resume(co))
+		resume_ret = SafePack(coroutine.resume(co, ...))
 	end
 	local flag, msg = resume_ret[1], resume_ret[2]
 	if not flag then
@@ -116,6 +146,7 @@ local function yieldstart(func, callback, ...)
 	if not flag then
 		table.insert(yield_pool, map)
 		yield_map[child] = nil
+		return nil
 	elseif map.over then
 		table.insert(yield_pool, map)
 		yield_map[child] = nil
@@ -157,7 +188,7 @@ end
 -- 注意：
 -- 1、子级协程异步回调并没有运行在子级协程当中，不能使用yieldreturn，实际上不能使用任何协程相关接口，除了start
 -- 2、yieldcallback需要传递当前的子级协程，这个可以从异步回调的首个参数获取
--- 3、不会等待一帧，实际上协程中的回调时每帧执行一次的
+-- 3、不会等待一帧，实际上协程中的回调是每帧执行一次的
 local function yieldcallback(co, ...)
 	assert(co ~= nil and type(co) == "thread")
 	local map = yield_map[co]
@@ -189,7 +220,29 @@ local function yieldbreak(...)
 	if not map.waiting then
 		return ...
 	else
-		coroutine.resume(map.parent, ...)
+		__PResume(map.parent, nil, ...)
+	end
+end
+
+local function __Action(action, abort, ...)
+	assert(action.timer)
+	if not action.func then
+		abort = true
+	end
+	
+	if not abort and action.func then
+		if action.args and action.args.n > 0 then
+			abort = (action.func(SafeUnpack(action.args)) == action.result)
+		else
+			abort = (action.func() == action.result)
+		end
+	end
+	
+	if abort then
+		action.timer:Stop()
+		action_map[action.co] = nil
+		__PResume(action.co, ...)
+		__RecycleAction(action)
 	end
 end
 
@@ -197,15 +250,10 @@ end
 -- 等同于Unity侧的yield return new WaitForFixedUpdate
 local function waitforfixedupdate()
 	local co = coroutine.running() or error ("coroutine.waitforfixedupdate must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoFixedTimer()
+	local timer = TimerManager:GetInstance():GetCoFixedTimer()
+	local action = __GetAction(co, timer)
 	
-	local action = function()
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(0, action, nil, true, true)
+	timer:Init(0, __Action, action, true, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
@@ -213,16 +261,12 @@ end
 
 -- 等待帧数，并在Update执行完毕后resume
 local function waitforframes(frames)
+	assert(type(frames) == "number" and frames >= 1 and math.floor(frames) == frames)
 	local co = coroutine.running() or error ("coroutine.waitforframes must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoTimer()
+	local timer = TimerManager:GetInstance():GetCoTimer()
+	local action = __GetAction(co, timer)
 	
-	local action = function()
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(frames, action, nil, true, true)
+	timer:Init(frames, __Action, action, true, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
@@ -231,19 +275,22 @@ end
 -- 等待秒数，并在Update执行完毕后resume
 -- 等同于Unity侧的yield return new WaitForSeconds
 local function waitforseconds(seconds)
+	assert(type(seconds) == "number" and seconds >= 0)
 	local co = coroutine.running() or error ("coroutine.waitforsenconds must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoTimer()
+	local timer = TimerManager:GetInstance():GetCoTimer()
+	local action = __GetAction(co, timer)
 	
-	local action = function()
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(seconds, action, nil, true)
+	timer:Init(seconds, __Action, action, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
+end
+
+local function __AsyncOpCheck(co, async_operation, callback)
+	if callback ~= nil then
+		callback(co, async_operation.progress)
+	end
+	return async_operation.isDone
 end
 
 -- 等待异步操作完成，并在Update执行完毕resume
@@ -252,23 +299,12 @@ end
 -- @async_operation：异步句柄---或者任何带有isDone、progress成员属性的异步对象
 -- @callback：每帧回调，传入参数为异步操作进度progress
 local function waitforasyncop(async_operation, callback)
+	assert(async_operation)
 	local co = coroutine.running() or error ("coroutine.waitforasyncop must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoTimer()
+	local timer = TimerManager:GetInstance():GetCoTimer()
+	local action = __GetAction(co, timer, __AsyncOpCheck, SafePack(co, async_operation, callback), true)
 	
-	local action = function()
-		if not async_operation.isDone then
-			if callback ~= nil then
-				callback(co, async_operation.progress)
-			end
-			return
-		end		
-		
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(1, action, nil, false, true)
+	timer:Init(1, __Action, action, false, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
@@ -277,21 +313,12 @@ end
 -- 等待条件为真，并在Update执行完毕resume
 -- 等同于Unity侧的yield return new WaitUntil
 local function waituntil(func, ...)
+	assert(func)
 	local co = coroutine.running() or error ("coroutine.waituntil must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoTimer()
-	local args = SafePack(...)
+	local timer = TimerManager:GetInstance():GetCoTimer()
+	local action = __GetAction(co, timer, func, SafePack(...), true)
 	
-	local action = function()
-		if not func(SafeUnpack(args)) then
-			return
-		end		
-		
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(1, action, nil, false, true)
+	timer:Init(1, __Action, action, false, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
@@ -300,21 +327,12 @@ end
 -- 等待条件为假，并在Update执行完毕resume
 -- 等同于Unity侧的yield return new WaitWhile
 local function waitwhile(func, ...)
+	assert(func)
 	local co = coroutine.running() or error ("coroutine.waitwhile must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoTimer()
-	local args = SafePack(...)
+	local timer = TimerManager:GetInstance():GetCoTimer()
+	local action = __GetAction(co, timer, func, SafePack(...), false)
 	
-	local action = function()
-		if func(SafeUnpack(args)) then
-			return
-		end		
-		
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(1, action, nil, false, true)
+	timer:Init(1, __Action, action, false, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
@@ -324,18 +342,21 @@ end
 -- 等同于Unity侧的yield return new WaitForEndOfFrame
 local function waitforendofframe()
 	local co = coroutine.running() or error ("coroutine.waitforendofframe must be run in coroutine")
-	local timer = TimerManager:GetInstance():AddCoLateTimer()
+	local timer = TimerManager:GetInstance():GetCoLateTimer()
+	local action = __GetAction(co, timer)
 	
-	local action = function()
-		timer:Stop()
-		action_map[co] = nil
-		__PResume(co)
-	end
-	
-	timer:Init(0, action, nil, true, true)
+	timer:Init(0, __Action, action, true, true)
  	timer:Start()
 	action_map[co] = action
  	return coroutine.yield()
+end
+
+-- 终止协程等待操作（所有waitXXX接口）
+local function stopwaiting(co, ...)
+	local action = action_map[co]
+	if action then
+		__Action(action, true, ...)
+	end
 end
 
 coroutine.start = start
@@ -350,14 +371,15 @@ coroutine.waitforasyncop = waitforasyncop
 coroutine.waituntil = waituntil
 coroutine.waitwhile = waitwhile
 coroutine.waitforendofframe = waitforendofframe
+coroutine.stopwaiting = stopwaiting
 
 -- 调试用：查看内部状态
 if Config.Debug then
 	return{
 		action_map = action_map,
+		action_pool = action_pool,
 		yield_map = yield_map,
 		yield_pool = yield_pool,
 		co_pool = co_pool,
-		co_running = co_running,
 	}
 end

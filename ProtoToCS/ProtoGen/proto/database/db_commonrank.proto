@@ -1,0 +1,13 @@
+package db;
+
+
+message one_rank_info
+{
+	optional string rank_json_data = 1[default = ''];//排行榜json格式的信息 
+}
+message CommonRank
+{
+	optional uint32 uid = 1[default = 0];
+	optional one_rank_info rank_info = 2;
+	optional int32 seq = 3[default = 0];
+}

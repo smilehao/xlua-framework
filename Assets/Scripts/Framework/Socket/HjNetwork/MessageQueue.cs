@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace networks
+namespace Networks
 {
     class MessageQueue : IMessageQueue
     {

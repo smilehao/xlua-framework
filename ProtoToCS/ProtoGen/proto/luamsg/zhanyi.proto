@@ -1,0 +1,119 @@
+package zhanyi;
+import "common.proto";
+
+message zhanyi_brief_info
+{
+	optional int32 zhanyi_id = 1[default = 0];
+	optional int32 zhengzhuan_status = 2[default = 0]; //0可挑战 1可扫荡2已通关 3不可挑战
+	optional int32 waizhuan_status = 3[default = 0];//0可挑战 1可扫荡2已通关 3不可挑战
+}
+
+message one_saodang_award
+{
+	optional int32 zhanyi_id = 1[default = 0];
+	optional int32 zhuanji_type = 2[default = 0];
+	repeated common.award_info award_list = 3; 
+}
+
+message req_zhanyi_panel
+{
+	
+}
+message rsp_zhanyi_panel
+{
+	optional int32 result = 1[default = 0];
+	repeated zhanyi_brief_info zhanyi_brief_info_list = 2;
+}
+
+message req_zhuanji_panel
+{
+	optional int32 zhanyi_id = 1[default = 0];
+	optional int32 zhuanji_type = 2[default = 0]; //1正传 2外传
+}
+
+message rsp_zhuanji_panel
+{
+	optional int32 result = 1[default = 0];
+	optional int32 curr_copy_id = 3[default = 0]; //99999表示 传记已通过
+	optional int32 is_first_req = 2[default = 0];
+}
+
+message req_saodang_all
+{
+	
+}
+
+message rsp_saodang_all
+{
+	optional int32 result = 1[default = 0];
+	repeated one_saodang_award saodang_award_list = 2;
+}
+
+message req_buzhen_panel
+{
+	optional int32 copy_id = 1[default = 0];
+}
+
+message rsp_buzhen_panel
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_buzhen one_buzhen = 2;
+	repeated common.one_troop troop_list = 3;
+	optional string first_pass_user_name = 4[default = ''];//''无人通过此关卡 
+	optional int32 be_reqed_battle_max_index = 5[default = 0];
+	optional int32 battle_type = 6[default = 0];//0一般战斗1追击2逃跑
+	optional int32 round_limit = 7[default = 0];
+}
+
+message req_svr_first_pass_buzhen_info
+{
+	optional int32 copy_id = 1[default = 0];
+}
+message rsp_svr_first_pass_buzhen_info
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_buzhen one_buzhen = 2;
+	repeated common.one_troop troop_list = 3;
+}
+
+message req_arrange_wujiang
+{
+	optional int32 copy_id = 1[default = 0];
+	optional int32 troop_id = 2[default = 0];
+	repeated int32 wujiang_list = 3;
+}
+
+message rsp_arrange_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_exchange_position
+{
+	optional int32 copy_id = 1[default = 0];
+	optional int32 src_pos = 2[default = 0];
+	optional int32 dst_pos = 3[default = 0];
+}
+message rsp_exchange_position
+{	
+	optional int32 result = 1[default = 0];
+	optional common.one_buzhen one_buzhen = 2;
+}
+
+message req_attack_copy
+{
+	optional int32 copy_id = 1[default = 0];
+	optional int32 battle_index = 2[default = 0];
+}
+
+message rsp_attack_copy
+{
+	optional int32 result = 1[default = 0];
+	optional bytes video = 2[default = ''];
+	optional common.battle_settle settle = 3;
+	optional int32 failed_reason = 4[default = 0];
+}
+
+
+
+

@@ -70,21 +70,27 @@ local function AddCallback(keeper, msg_name, callback)
 	keeper[msg_name] = callback
 end
 
+local function GetCallback(keeper, msg_name)
+	return keeper[msg_name]
+end
+
 local function RemoveCallback(keeper, msg_name, callback)
 	assert(callback ~= nil)
 	keeper[msg_name] = nil
 end
 
 -- 注册UI数据监听事件，别重写
-local function AddUIListener(self, msg_name, callback, ...)
-	AddCallback(self.__ui_callback, msg_name, callback)
-	UIManager:GetInstance():AddListener(msg_name, callback, self, ...)
+local function AddUIListener(self, msg_name, callback)
+	local bindFunc = Bind(self, callback)
+	AddCallback(self.__ui_callback, msg_name, bindFunc)
+	UIManager:GetInstance():AddListener(msg_name, bindFunc)
 end
 
 -- 注销UI数据监听事件，别重写
 local function RemoveUIListener(self, msg_name, callback)
-	RemoveCallback(self.__ui_callback, msg_name, callback)
-	UIManager:GetInstance():RemoveListener(msg_name, callback)
+	local bindFunc = GetCallback(self.__ui_callback, msg_name)
+	RemoveCallback(self.__ui_callback, msg_name, bindFunc)
+	UIManager:GetInstance():RemoveListener(msg_name, bindFunc)
 end
 
 -- 关闭：窗口隐藏
@@ -102,8 +108,6 @@ local function OnDestroy(self)
 	self.model = nil
 	self.ctrl = nil
 	self.__ui_callback = nil
-	-- TODO：暂时，到时候做资源管理再做考虑
-	CS.UnityEngine.GameObject.Destroy(self.gameObject)
 	base.OnDestroy(self)
 end
 

@@ -111,6 +111,10 @@ local function SetName(self, name, toUnity)
 	end
 	self.__name = name
 	if toUnity or Config.Debug then
+		if IsNull(self.gameObject) then
+			Logger.LogError("gameObject null, you maybe have to wait for loading prefab finished!")
+			return
+		end
 		self.gameObject.__name = name
 	end
 end
@@ -139,6 +143,13 @@ end
 -- 获取激活状态
 local function GetActive(self)
 	return self.gameObject.activeSelf
+end
+
+-- 等待资源准备完毕：用于协程
+local function WaitForCreated(self)
+	coroutine.waituntil(function()
+		return not IsNull(self.gameObject)
+	end)
 end
 
 -- 关闭
@@ -170,6 +181,7 @@ UIBaseComponent.SetBindData = SetBindData
 UIBaseComponent.GetBindData = GetBindData
 UIBaseComponent.SetActive = SetActive
 UIBaseComponent.GetActive = GetActive
+UIBaseComponent.WaitForCreated = WaitForCreated
 UIBaseComponent.OnDisable = OnDisable
 UIBaseComponent.OnDestroy = OnDestroy
 

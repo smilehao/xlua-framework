@@ -21,10 +21,6 @@ end
 
 -- 切换场景：内部使用协程
 local function CoInnerSwitchScene(self, scene_config)
-	-- 清理旧场景
-	if self.current_scene then
-		self.current_scene:OnLeave()
-	end
 	-- 打开loading界面
 	local uimgr_instance = UIManager:GetInstance()
 	uimgr_instance:OpenWindow(UIWindowNames.UILoading)
@@ -32,6 +28,21 @@ local function CoInnerSwitchScene(self, scene_config)
 	local model = window.Model
 	model.value = 0
 	coroutine.waitforframes(1)
+	-- 清理旧场景
+	if self.current_scene then
+		self.current_scene:OnLeave()
+	end
+	model.value = model.value + 0.01
+	coroutine.waitforframes(1)
+	-- 清理UI
+	uimgr_instance:DestroyWindowExceptLayer(UILayers.TopLayer)
+	model.value = model.value + 0.01
+	coroutine.waitforframes(1)
+	-- 清理资源缓存
+	GameObjectPool:GetInstance():Cleanup(true)
+	model.value = model.value + 0.01
+	coroutine.waitforframes(1)
+	ResourcesManager:GetInstance():Cleanup()
 	model.value = model.value + 0.01
 	coroutine.waitforframes(1)
 	-- 同步加载loading场景
@@ -40,14 +51,10 @@ local function CoInnerSwitchScene(self, scene_config)
 	scene_mgr.LoadScene(scene_config.Level)
 	model.value = model.value + 0.01
 	coroutine.waitforframes(1)
-	-- 清理UI
-	uimgr_instance:DestroyWindowExceptLayer(UILayers.TopLayer)
-	model.value = model.value + 0.01
-	coroutine.waitforframes(1)
 	-- GC：交替重复2次，清干净一点
-	collectgarbage()
+	collectgarbage("collect")
 	CS.System.GC.Collect()
-	collectgarbage()
+	collectgarbage("collect")
 	CS.System.GC.Collect()
 	local cur_progress = model.value
 	coroutine.waitforasyncop(resources.UnloadUnusedAssets(), function(co, progress)
@@ -88,6 +95,7 @@ local function CoInnerSwitchScene(self, scene_config)
 	coroutine.waitforframes(3)
 	-- 加载完成，关闭loading界面
 	uimgr_instance:DestroyWindow(UIWindowNames.UILoading)
+	self.current_scene = logic_scene
 	self.busing = false
 end
 

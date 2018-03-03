@@ -6,14 +6,8 @@ using XLua;
 public static class GenConfig
 {
     //lua中要使用到C#库的配置，比如C#标准库，或者Unity API，第三方库等。
-    //added by wsh @ 2017-12-27
-    //注意：
-    //1、Unity API以及Plugin目录下所有库导出均放这来导出
-    //2、所有非Plugin目录下的脚本使用标签导出
-    //3、Plugin下脚本目前无法热修复
-    //4、已经在lua侧实现的部分功能不要再导出
-	[LuaCallCSharp]
-	public static List<Type> LuaCallCSharp = new List<Type>() {
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>() {
 		// unity
 		typeof(System.Object),
         typeof(UnityEngine.Object),
@@ -63,6 +57,7 @@ public static class GenConfig
         typeof(UnityEngine.Rect),
         typeof(UnityEngine.RectTransform),
         typeof(UnityEngine.RectOffset),
+        typeof(UnityEngine.Sprite),
         typeof(UnityEngine.UI.CanvasScaler),
         typeof(UnityEngine.UI.CanvasScaler.ScaleMode),
         typeof(UnityEngine.UI.CanvasScaler.ScreenMatchMode),
@@ -96,6 +91,8 @@ public static class GenConfig
     public static List<Type> CSharpCallLua = new List<Type>() {
 		// unity
 		typeof(Action),
+        typeof(Action<int>),
+        typeof(Action<WWW>),
         typeof(Callback),
         typeof(UnityEngine.Event),
         typeof(UnityEngine.Events.UnityAction),

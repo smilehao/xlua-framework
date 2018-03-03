@@ -1,0 +1,19 @@
+package db;
+
+import 'db_common.proto';
+
+message shenbing_reset_skill_extra_data
+{
+	message one_no_lottery_skill
+	{
+		optional int32 skill_base_id = 1[default = 0]; //技能baseid
+		optional int32 no_lottery_times = 2[default = 0];//未抽中次数
+	}
+	repeated one_no_lottery_skill no_lottery_skill_list = 1;
+}
+
+message Wujiang
+{
+	repeated one_wujiang wujiang_list = 1;//武将列表 
+	optional shenbing_reset_skill_extra_data shenbing_reset_skill_extra = 2;//神兵洗练额外数据
+}

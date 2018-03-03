@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/ipay_account_color_value_5" android:state_enabled="false" />
+    <item android:color="@color/ipay_account_color_value_1" android:state_enabled="true" />
+</selector>
+

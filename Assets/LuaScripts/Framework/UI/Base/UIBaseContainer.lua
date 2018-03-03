@@ -6,10 +6,6 @@
 -- 2、AddComponent用来添加组件，一般在window.view的OnCreate中使用，RemoveComponent相反
 -- 3、GetComponent用来获取组件，GetComponents用来获取一个类别的组件
 -- 4、很重要：子组件必须保证名字互斥，即一个不同的名字要保证对应于Unity中一个不同的Transform
--- 5、所有容器不负责资源加载，是否负责Unity侧组件创建由组件自行决定
--- 6、如果要在View层加载资源，比如用户自定义头像，自行使用ResourcesManager加载，完成后再创建Lua侧组件
--- 7、同样，容器也不负责销毁Unity侧资源，从容器中移除组件只是放弃对该组件的管理
--- 8、一般Unity侧GameObject要考虑缓存问题，Lua侧组件系统完全不干预这块，由专门的缓存管理或者资源模块去做
 --]]
 
 local UIBaseContainer = BaseClass("UIBaseContainer", UIBaseComponent)

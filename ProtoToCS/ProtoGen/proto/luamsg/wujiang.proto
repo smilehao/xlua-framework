@@ -1,0 +1,266 @@
+package wujiang;
+
+import 'common.proto';
+
+
+message req_wujiang_list
+{
+
+}
+
+message rsp_wujiang_list
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_wujiang wujiang_list = 2;
+}
+
+
+//升级
+message req_levelup
+{
+	optional int32 id = 1[default = 0];	//武将ID
+	optional int32 up_count = 2[default = 0];	//升级次数
+}
+
+message rsp_levelup
+{
+	optional int32 result = 1[default = 0]; //0代表成功,-1代表已经上限,-2银两不够,-3道具不足,-4等级不够
+	optional int32 id = 2[default = 0];	//武将ID
+	optional int32 curr_level = 3[default = 0];
+}
+
+message ntf_wujiang_chg
+{
+	optional common.one_wujiang wujiang_info = 1; //信息发生变化的武将
+	optional int32 reason = 2[default = 0];	//改变原因,NORMAL = 0,LEVEL_UP = 1,ZHUANSHENG = 2,XIUXING = 3,HECHENG=4,EQUIP_SHENBING = 5,SHENBING_SKILL_RESET = 6,SHENBING_LEVEL_UP = 7,
+}
+
+//  武将觉醒
+message req_zhuansheng
+{
+	optional int32 wujiang_id = 1[default = 0];	//武将ID
+}
+message rsp_zhuansheng
+{
+	optional int32 result = 1[default = 0]; //改变原因,0表示觉醒成功
+	optional int32 id = 2[default = 0];	//武将ID
+	optional int32 curr_zhuansheng = 3[default = 0];
+}
+
+//武将修行
+message req_xiuxing
+{
+	optional int32 id = 1[default = 0];	//武将ID
+	optional int32 attr = 2[default = 0];	//属性 TONGSHUAI = 1, WULI = 2, ZHILI = 3,
+}
+
+message rsp_xiuxing
+{
+	optional int32 result = 1[default = 0]; //0代表成功,-1代表已经上限,-2银两不够,-3代表材料不够,-4等级不满足	
+	optional int32 succeed = 2[default = 0];	// 1 概率成功
+}
+
+//武将合成
+message req_blend
+{
+	optional int32 id = 1[default = 0];	//武将ID
+}
+
+message rsp_blend
+{
+	optional int32 result = 1[default = 0]; //0代表成功,-1代表已经上限,-2银两不够,-3代表材料不够,-4等级不满足
+	optional common.one_wujiang wujiang_info = 2;
+	
+}
+
+
+//////////俘虏武将////////////////////////
+
+
+message one_capture_wujiang
+{
+	optional uint32 from_uid = 1[default = 0];
+	optional uint32 captured_time = 2[default = 0];	//俘虏时间
+	optional int32 wujiang_id = 3[default = 0];
+	optional uint32 killed_time = 4[default = 0];	//斩首时间
+	optional int32 wujiang_level = 5[default = 0];
+	optional int32 wujiang_zhuansheng = 6[default = 0];
+	optional string from_name = 7[default = ''];
+	optional int32 buy_cost = 8[default = 0];
+	optional int32 killed_award = 9[default = 0];
+	optional int32 ask_for_pay = 10[default = 0];
+	optional int32 have_paid = 11[default = 0]; 
+}
+
+message one_killed_wujiang
+{
+	optional uint32 lord_uid = 1[default = 0];
+	optional uint32 slave_uid = 2[default = 0];
+	optional int32 wujiang_id = 3[default = 0];
+	optional int32 wujiang_level = 4[default = 0];
+	optional int32 wujiang_zhuansheng = 5[default = 0];
+	optional uint32 killed_time = 6[default = 0];
+	optional string others_name = 7[default = ''];
+	
+}
+
+
+message ntf_capture_wujiang_count_info
+{
+	optional int32 capture_wujiang_count = 2[default = 0];
+}
+
+message ntf_be_captured_wujiang_info
+{
+	optional int32 reason = 1[default = 0];			//1:变化(增加)；2:删除
+	optional common.one_be_captured_wujiang captured_wujiang_info = 2;
+}
+
+message ntf_capture_wujiang_info
+{
+	optional int32 reason = 1[default = 0];	//1:变化(增加)；2:删除
+	optional one_capture_wujiang capture_wujiang_info = 2;
+}
+
+message req_kill_capture_wujiang
+{
+	optional uint32 wujiang_owner_uid = 1[default = 0];
+	optional int32 wujiang_id = 2[default = 0];
+}
+
+message rsp_kill_capture_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_release_capture_wujiang
+{
+	optional uint32 wujiang_owner_uid = 1[default = 0];
+	optional int32 wujiang_id = 2[default = 0];
+}
+
+message rsp_release_capture_wujiang
+{
+	optional int32 result = 1[default = 0];
+	optional int32 got_pay = 2[default = 0];//得到的赎金
+}
+
+message req_capture_wujiang_list
+{
+}
+
+message rsp_capture_wujiang_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_capture_wujiang capture_wujiang_list = 2;
+}
+
+message req_be_captured_wujiang_list
+{
+}
+
+message rsp_be_captured_wujiang_list
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_be_captured_wujiang be_captured_wujiang_list = 2;
+}
+
+message req_killed_wujiang_list
+{
+}
+
+message rsp_killed_wujiang_list
+{
+	optional int32 result = 1[default = 0];
+	repeated one_killed_wujiang killed_wujiang_list = 2;
+}
+
+message req_buy_back_captured_wujiang	//对方要求了赎金的情况下
+{
+	optional int32 wujiang_id = 1[default = 0];
+}
+
+message rsp_buy_back_captured_wujiang
+{
+	optional int32 result = 1[default = 0];
+	optional int32 paid = 2[default = 0];	//支付的赎金
+}
+
+message req_revive_captured_wujiang
+{
+	optional int32 wujiang_id = 1[default = 0];
+}
+
+message rsp_revive_captured_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+
+message req_apply_for_pay	//（被动方）请求赎回去
+{
+	optional int32 wujiang_id = 1[default = 0];
+}
+
+message rsp_apply_for_pay
+{
+	optional int32 result = 1[default = 0];
+	optional int32 paid = 2[default = 0];	//支付的赎金
+}
+
+message req_ask_for_paid	//（主动方）请求被赎回
+{
+	optional int32 wujiang_id = 1[default = 0];
+	optional int32 wujiang_owner_uid = 2[default = 0];
+}
+
+message rsp_ask_for_paid
+{
+	optional int32 result = 1[default = 0];
+	optional int32 asked_pay = 2[default = 0]; //要求的赎金
+}
+
+message req_reset_shenbing_skill
+{
+	optional int32 wujiang_id = 1[default = 0];
+	optional int32 shenbing_id = 2[default = 0];
+}
+
+message rsp_reset_shenbing_skill
+{
+	optional int32 result = 1[default = 0];
+	optional int32 skill_id = 2[default = 0];
+}
+
+message req_shenbing_levelup
+{
+	optional int32 wujiang_id = 1[default = 0];
+	optional int32 shenbing_id = 2[default = 0];
+}
+
+message rsp_shenbing_levelup
+{
+	optional int32 result = 1[default = 0];
+	optional int32 shenbing_level = 2[default = 0];
+}
+
+message req_equip_shenbing
+{
+	optional int32 shenbing_id = 1[default = 0];
+}
+
+message rsp_equip_shenbing
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_equip_baowu
+{
+	optional int32 baowu_id = 1[default = 0];
+	optional int32 wujiang_id = 2[default = 0];
+}
+
+message rsp_equip_baowu
+{
+	optional int32 result = 1[default = 0];
+}

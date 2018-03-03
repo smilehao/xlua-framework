@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
+using XLua;
 
 /// <summary>
 /// added by wsh @ 2017.12.26
@@ -38,7 +36,9 @@ namespace AssetBundles
         public string assetbundleName;
         public string assetName;
     }
-    
+
+    [Hotfix]
+    [LuaCallCSharp]
     public class AssetsPathMapping
     {
         protected const string PATTREN = AssetBundleConfig.CommonMapPattren;
@@ -49,8 +49,8 @@ namespace AssetBundles
 
         public AssetsPathMapping()
         {
-            AssetName = AssetBundleUtility.RelativeAssetPathToAbsoluteAssetPath(AssetBundleConfig.AssetsPathMapFileName);
-            AssetbundleName = AssetBundleUtility.AssetBundleAssetPathToAssetBundleName(AssetName);
+            AssetName = AssetBundleUtility.PackagePathToAssetsPath(AssetBundleConfig.AssetsPathMapFileName);
+            AssetbundleName = AssetBundleUtility.AssetBundlePathToAssetBundleName(AssetName);
         }
 
         public string AssetbundleName
@@ -90,20 +90,12 @@ namespace AssetBundles
                 }
 
                 ResourcesMapItem item = new ResourcesMapItem();
-                // 如：assetspackage/ui/prefab/assetbundleupdaterpanel_prefab.assetbundle
+                // 如：ui/prefab/assetbundleupdaterpanel_prefab.assetbundle
                 item.assetbundleName = splitArr[0];
-                // 如：Assets/AssetsPackage/UI/Prefab/AssetbundleUpdaterPanel.prefab
+                // 如：UI/Prefab/AssetbundleUpdaterPanel.prefab
                 item.assetName = splitArr[1];
-
-                // 如：Assets/AssetsPackage/
-                string assetPath = null;
-                string mapHead = string.Format("Assets/{0}/", AssetBundleConfig.AssetsFolderName);
-                if (item.assetName.StartsWith(mapHead))
-                {
-                    // 如：UI/Prefab/AssetbundleUpdaterPanel.prefabd
-                    assetPath = GameUtility.FormatToUnityPath(item.assetName.Replace(mapHead, ""));
-                }
                 
+                var assetPath = item.assetName;
                 pathLookup.Add(assetPath, item);
                 List<string> assetsList = null;
                 assetsLookup.TryGetValue(item.assetbundleName, out assetsList);

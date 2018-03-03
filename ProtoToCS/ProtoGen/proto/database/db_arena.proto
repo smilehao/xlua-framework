@@ -1,0 +1,50 @@
+package db;
+
+import 'db_common.proto';
+
+//对战记录
+message one_fight_record
+{
+	optional int32 record_time = 1[default = 0];	//对战时间
+	optional int32 curr_rank = 2[default = 0];	//当时的排名 
+	optional int32 prev_rank = 3[default = 0];
+	optional uint32 uid = 4[default = 0];	//敌人的uid	
+	optional int32 is_victory = 5[default = 1];	//是否胜利
+	optional string video_id = 6[default = ''];	//录像ID
+}
+
+//正在打竞技场的记录
+message one_fighting_info
+{
+	optional uint32 rival_uid = 1[default = 0];	//对手的UID
+	optional int32 start_time = 2[default = 0];	//发起战斗的时间
+	optional int32 fight_seq = 3[default = 0];	//战斗序号，防止作弊
+	optional int32 rival_power = 4[default = 0];	//对手的战力
+	optional int32 self_power = 5[default = 0];	//自己挑战时候的战力
+	optional int32 rival_level = 6[default = 0];
+	optional int32 self_level = 7[default = 0];	
+}
+
+
+message one_chat_info
+{
+	optional int32 seq = 1[default = 0];
+	optional int32 curr_time = 2[default = 0];
+}
+
+//竞技场数据
+message Arena
+{
+	optional int32 rank = 1[default = 0];		//当前的排名
+	optional int32 highest_rank = 2[default = 0];	//历史上最高排名
+	repeated uint32 rival_list = 3;		//记录上一次选中的对手uid
+	optional int32 reserve = 4[default = 0];	//没用
+	repeated one_fight_record fight_record_list = 5;	 //对战记录列表
+	optional int32 reserve2 = 6[default = 0];	//没用
+	optional one_fighting_info fighting_info = 7;
+	optional int32 win_times = 8[default = 0];//历史上赢的次数	
+	optional int32 today_arena_times = 9[default = 0];//已挑战竞技场的次数
+	optional int32 buy_arena_times = 10[default = 0];//当天已购买的竞技场挑战次数
+	optional int32 today_open_bx_id = 11[default = 0];//当天已开宝箱用最后三位置1表示	
+	repeated one_chat_info chat_info_list = 12; //对话信息
+}

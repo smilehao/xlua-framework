@@ -1,0 +1,110 @@
+package building;
+
+import 'common.proto';
+
+message ntf_building_chg
+{
+	optional common.one_building building_info = 1; //信息发生变化的建筑
+	optional int32 reason = 2[default = 0];	
+}
+
+message building_simple_info
+{
+	optional int32 building_id = 1[default = 0];
+	optional int32 people_count = 2[default = 0];
+	optional int32 product_count = 3[default = 0];
+}
+
+message all_building_info
+{
+	optional uint32 next_gain_time = 1[default = 0];
+//	repeated common.one_item item_chg_list = 2;
+	repeated building_simple_info building_list = 3;
+}
+
+message req_all_building_info
+{}
+
+message rsp_all_building_info
+{
+	optional int32 result = 1[default = 0];
+	optional all_building_info all_building = 2;
+}
+
+message notify_all_building_info
+{
+	optional all_building_info all_building = 1;
+}
+
+message notify_next_gain_time
+{
+	optional uint32 next_gain_time = 1[default = 0];
+}
+
+//升级建筑
+message req_levelup_building
+{
+	optional int32 id = 1[default = 0];	//建筑ID
+}
+
+message rsp_levelup_building
+{
+	optional int32 result = 1[default = 0]; //0代表成功,-1代表已经上限,-2银两不够,-3道具不足,-4等级不够
+	optional int32 id = 2[default = 0];	//建筑ID
+	optional int32 curr_level = 3[default = 0];
+}
+
+//  分配人口
+message req_arrange_people
+{
+	repeated building_simple_info building_list = 1;
+}
+message rsp_arrange_people
+{
+	optional int32 result = 1[default = 0]; //改变原因,0表示觉醒成功
+}
+
+//升级领地
+message req_levelup_manor
+{
+}
+
+message rsp_levelup_manor
+{
+	optional int32 result = 1[default = 0]; //0代表成功,-1代表已经上限,-2银两不够,-3代表材料不够,-4等级不满足	
+	optional int32 curr_level = 2[default = 0];	// 
+	repeated common.award_info award_info_list = 3;//升级奖励
+}
+
+// 分配武将
+message req_arrange_wujiang
+{
+	optional int32 building_id = 1[default = 0];	//建筑ID
+	repeated int32 wujiang_list = 3;
+}
+
+message rsp_arrange_wujiang
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_finish_levelup
+{
+	optional int32 building_id = 1[default = 0];
+}
+
+message rsp_finish_levelup
+{
+	optional int32 result = 1[default = 0];
+}
+
+message req_building_info
+{
+	optional int32 id = 1[default = 0]; //建筑ID
+}
+
+message rsp_building_info
+{
+	optional int32 result = 1[default = 0];
+	optional common.one_building building_info = 2;
+}

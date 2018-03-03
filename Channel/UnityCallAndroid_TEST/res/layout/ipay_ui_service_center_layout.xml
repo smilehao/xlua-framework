@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ipay_transparent"
+    android:orientation="vertical" >
+
+     <include
+        android:id="@+id/title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+    
+	<WebView 
+	    android:id="@+id/aipay_service_view"
+	    android:focusable="false"
+	    android:focusableInTouchMode="false"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+</LinearLayout>

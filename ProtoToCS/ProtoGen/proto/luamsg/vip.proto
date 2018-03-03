@@ -1,0 +1,147 @@
+package vip;
+
+import "common.proto";
+
+
+message req_buy_goods
+{
+	optional int32 goods_id = 1[default = 0];
+}
+
+message rsp_buy_goods
+{
+	optional int32 result = 1[default = 0];
+	optional int32 goods_id = 2[default = 0];
+}
+
+message req_vip_shop_info
+{
+	optional int32 enable_large_charge = 1[default = 0];//1允许大额充值；0不允许大额充值
+}
+
+message rsp_vip_shop_info
+{
+	optional int32 result = 1[default = 0];
+	repeated int32 goods_id_list = 2;
+	
+	message one_goods_cfg
+	{
+		optional int32 goods_id = 1[default = 0];
+		optional double price = 2[default = 0.0];
+	}
+
+	repeated one_goods_cfg goods_cfg_list = 5;
+}
+
+message req_charging_poll
+{
+}
+
+message rsp_charging_poll
+{
+	optional int32 result = 1[default = 0];
+}
+
+/////////////////////////////////////////
+
+message one_yueka
+{
+	optional int32 goods_id = 1[default = 0];
+	optional double price = 2[default = 0.0];
+	optional int32 left_days = 3[default = 0];
+	repeated common.one_item item_list = 4;
+	optional int32 status = 5[default = 0];		//1:可购买 2:可领取 3:已领取
+}
+
+message one_accumulation_charged_info
+{
+	optional int32 type = 1[default = 0];
+	repeated common.one_item item_list = 2;
+	optional int32 status = 3[default = 0];	//1:不可领取 2:可领取 3:已领取
+	optional int32 extral_charge_money = 4[default = 0];//还需充值金额（rmb）
+}
+
+message req_yueka_info
+{
+}
+	
+message rsp_yueka_info
+{
+	
+	optional one_yueka small_yueka = 1;
+	optional one_yueka big_yueka = 2;
+	optional one_yueka forever_yueka = 3;
+	optional int32 result = 4[default = 0];
+}
+
+message ntf_yueka_info
+{
+	optional one_yueka small_yueka = 1;
+	optional one_yueka big_yueka = 2;
+	optional one_yueka forever_yueka = 3;
+}
+
+message req_take_yueka_award
+{
+	optional int32 yueka_type = 1[default = 0];
+}
+
+message rsp_take_yueka_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+message req_take_viplevelgift_award
+{
+	optional int32 vip_level = 1[default = 0];
+}
+
+message rsp_take_viplevelgift_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+message req_first_recharge_award_info
+{
+
+}
+
+message rsp_first_recharge_award_info
+{
+	optional int32 result = 1[default = 0];
+	repeated common.one_item item_list = 2;
+	optional int32 status = 3[default = 0];		//1:可购买 2:可领取 3:已领取
+}
+
+message req_take_first_recharge_award
+{
+	
+}
+message rsp_take_first_recharge_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}
+
+message req_accumulation_charged_award_info
+{
+
+}
+
+message rsp_accumulation_charged_award_info
+{
+	optional int32 result = 1[default = 0];
+	repeated one_accumulation_charged_info accumulation_charged_info_list= 2;
+}
+
+message req_take_accumulation_charged_award
+{
+	optional int32 type = 1[default = 0];
+}
+message rsp_take_accumulation_charged_award
+{
+	optional int32 result = 1[default = 0];
+	repeated common.award_info award_list = 2;
+}

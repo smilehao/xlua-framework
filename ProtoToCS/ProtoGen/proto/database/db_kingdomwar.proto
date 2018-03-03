@@ -1,0 +1,56 @@
+package db;
+
+message one_donation_progress
+{
+    optional int32 item_id = 1[default = 0];
+    optional int32 num = 2[default = 0];
+}
+message one_grid
+{
+    optional int32 grid_id = 1[default = 0];  /// 格子ID 
+    optional int32 occ_guildid = 2[default = 0];  /// 占领该格子的 帮派id
+    optional uint32 occ_time = 3[default = 0];  /// 占领的时间
+    optional int32 level = 4[default = 0];  /// 等级
+    repeated one_donation_progress donations = 5;
+}
+
+message one_server_data
+{
+    optional uint32 server_id = 1[default = 0];
+    optional uint32 open_server_time = 2[default = 0];
+    optional uint32 start_kw_day = 3[default = 0];
+    optional uint32 start_kw_time = 4[default = 0];
+    optional int32  dist_id = 5[default = 0];
+}
+
+message one_state_data
+{
+    message state_lord
+    {
+
+        optional uint32 guild_id = 1[default = 0]; 
+        optional uint32 time = 2[default = 0]; 
+    }
+    optional int32 state_id = 1[default = 0];
+    optional state_lord curr_lord = 2;
+    repeated state_lord history_lord_list = 3;
+    optional bool  has_ntf_curr_lord = 4[default = false];
+    optional int32 last_send_award_season = 5[default = 0];
+}
+
+message KingdomWar
+{
+    optional uint32 war_year = 1[default = 0];
+    optional uint32 war_season  = 2[default = 0];
+    optional uint32 war_day  = 3[default = 0];
+
+    optional uint32 curr_status  = 4[default = 0];
+    optional uint32 curr_status_start_time  = 5[default = 0];
+    optional uint32 last_update_time  = 8[default = 0];
+
+    optional uint32 war_start_time  = 6[default = 0];
+    optional uint32 settled_season = 9[default = 0];  /// 已经结算的season
+    repeated one_grid grid_list = 7;
+    repeated one_server_data server_data_list = 10;
+    repeated one_state_data state_list = 11;
+}
