@@ -35,7 +35,7 @@ local function Run()
 	LuaUtilTest.Run()
 	TableUtilTest.Run()
 	StringTest.Run()
-	coroutine.start(LoopRunTimes, {CoroutineTest}, 1000)
+	coroutine.start(LoopRunTimes, {CoroutineTest}, 1)
 end
 
 return {
