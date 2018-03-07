@@ -76,6 +76,14 @@ public static class GenConfig
         typeof(UnityEngine.UI.ContentSizeFitter),
         typeof(UnityEngine.UI.Slider),
 
+        // easy touch
+        // TODO：后续需要什么脚本再添加进来
+        typeof(ETCArea),
+        typeof(ETCAxis),
+        typeof(ETCButton),
+        typeof(ETCInput),
+        typeof(ETCJoystick),
+
         // 场景、资源加载
         typeof(UnityEngine.Resources),
         typeof(UnityEngine.ResourceRequest),
@@ -106,6 +114,8 @@ public static class GenConfig
 		// unity
 		new List<string>(){"UnityEngine.WWW", "movie"},
 		new List<string>(){"UnityEngine.Texture2D", "alphaIsTransparency"},
+        new List<string>(){"UnityEngine.WWW", "GetMovieTexture"},
+        new List<string>(){"UnityEngine.Texture2D", "alphaIsTransparency"},
 		new List<string>(){"UnityEngine.Security", "GetChainOfTrustValue"},
 		new List<string>(){"UnityEngine.CanvasRenderer", "onRequestRebuild"},
 		new List<string>(){"UnityEngine.Light", "areaSize"},

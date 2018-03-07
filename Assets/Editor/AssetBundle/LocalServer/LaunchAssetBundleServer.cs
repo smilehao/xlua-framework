@@ -138,27 +138,9 @@ namespace AssetBundles
 
         public static string GetAssetBundleServerURL()
         {
-            string downloadURL = string.Empty;
-            // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
-            var ips = new List<string>();
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    ips.Add(ip.ToString());
-                }
-            }
-            ips.Sort();
-            if (ips.Count <= 0)
-            {
-                Logger.LogError("Get inter network ip failed!");
-            }
-            else
-            {
-                downloadURL = "http://" + ips[0] + ":7888/";
-                downloadURL = downloadURL + PackageUtils.GetCurPlatformChannelPath() + "/";
-            }
+            string ip = PackageUtils.GetLocalServerIP();
+            string downloadURL = "http://" + ip + ":7888/";
+            downloadURL = downloadURL + PackageUtils.GetCurPlatformChannelPath() + "/";
             return downloadURL;
         }
     }

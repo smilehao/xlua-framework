@@ -19,10 +19,16 @@ public class PackageTool : EditorWindow
     static private BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
     static private ChannelType channelType = ChannelType.Test;
     static private string resVersion = "1.0.0";
+    static private LocalServerType localServerType = LocalServerType.CurrentMachine;
+    static private string localServerIP = "127.0.0.1";
 
     static PackageTool()
     {
+        buildTarget = EditorUserBuildSettings.activeBuildTarget;
         channelType = PackageUtils.GetCurSelectedChannel();
+
+        localServerType = PackageUtils.GetLocalServerType();
+        localServerIP = PackageUtils.GetLocalServerIP();
     }
 
     [MenuItem("Tools/Package", false, 0)]
@@ -73,7 +79,38 @@ public class PackageTool : EditorWindow
         }
         GUILayout.EndHorizontal();
     }
-    
+
+    void DrawLocalServerGUI()
+    {
+        GUILayout.Space(3);
+        GUILayout.Label("-------------[AssetBundles Local Server]-------------");
+        GUILayout.Space(3);
+
+        GUILayout.BeginHorizontal();
+        var curSelected = (LocalServerType)EditorGUILayout.EnumPopup("Local Server Type : ", localServerType, GUILayout.Width(300));
+        bool typeChanged = curSelected != localServerType;
+        if (typeChanged)
+        {
+            PackageUtils.SaveLocalServerType(curSelected);
+
+            localServerType = curSelected;
+            localServerIP = PackageUtils.GetLocalServerIP();
+        }
+        if (localServerType == LocalServerType.CurrentMachine)
+        {
+            GUILayout.Label(localServerIP);
+        }
+        else
+        {
+            localServerIP = GUILayout.TextField(localServerIP, GUILayout.Width(100));
+            if (GUILayout.Button("Save", GUILayout.Width(200)))
+            {
+                PackageUtils.SaveLocalServerIP(localServerIP);
+            }
+        }
+        GUILayout.EndHorizontal();
+    }
+
     void DrawAssetBundlesGUI()
     {
         GUILayout.Space(3);
@@ -186,6 +223,7 @@ public class PackageTool : EditorWindow
         }
 
         DrawConfigGUI();
+        DrawLocalServerGUI();
         DrawAssetBundlesGUI();
         DrawXLuaGUI();
         DrawBuildPlayerGUI();

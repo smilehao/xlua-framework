@@ -11,11 +11,17 @@ namespace AssetBundles
 		public static string GetFrameWorksFolder()
 		{
 			var editorAppPath = EditorApplication.applicationPath;
-			if (Application.platform == RuntimePlatform.WindowsEditor)
-				return Path.Combine(Path.GetDirectoryName(editorAppPath), "Data");
-			else if (Application.platform == RuntimePlatform.OSXEditor)
-				return Path.Combine(editorAppPath, Path.Combine("Contents", "Frameworks"));
-			else // Linux...?
+            if (Application.platform == RuntimePlatform.WindowsEditor)
+                return Path.Combine(Path.GetDirectoryName(editorAppPath), "Data");
+            else if (Application.platform == RuntimePlatform.OSXEditor)
+            {
+#if UNITY_5_4_OR_NEWER
+                return Path.Combine(editorAppPath, "Contents");
+#else
+                return Path.Combine(editorAppPath, Path.Combine("Contents", "Frameworks"));
+#endif
+            }
+            else // Linux...?
 				return Path.Combine(Path.GetDirectoryName(editorAppPath), "Data");
 		}
 		
@@ -27,11 +33,11 @@ namespace AssetBundles
 		
 		public static string GetMonoInstallation()
 		{
-			#if INCLUDE_MONO_2_12
+#if INCLUDE_MONO_2_12
 			return GetMonoInstallation("MonoBleedingEdge");
-			#else
+#else
 			return GetMonoInstallation("Mono");
-			#endif
+#endif
 		}
 		
 		public static string GetMonoInstallation(string monoName)

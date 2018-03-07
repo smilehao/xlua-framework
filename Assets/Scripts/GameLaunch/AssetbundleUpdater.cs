@@ -45,9 +45,6 @@ public class AssetbundleUpdater : MonoBehaviour
     Slider slider;
 
 #if UNITY_EDITOR || CLIENT_DEBUG
-#if !CLIENT_DEBUG
-        [BlackList]
-#endif
     // Hotfix测试---用于测试热更模块的热修复
     public void TestHotfix()
     {

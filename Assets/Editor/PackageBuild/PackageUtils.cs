@@ -4,14 +4,100 @@ using GameChannel;
 using System;
 using AssetBundles;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 
 /// <summary>
 /// added by wsh @ 2018.01.03
 /// 功能： 打包相关配置和通用函数
 /// </summary>
 
+public enum LocalServerType
+{
+    CurrentMachine = 0,
+    AnyMachine = 1,
+}
+
 public class PackageUtils
 {
+    public const string LocalServerPrefsKey = "AssetBundlesLocalServerType";
+    public const string LocalServerIPPrefsKey = "AssetBundlesLocalServerIP";
+
+    public static LocalServerType GetLocalServerType()
+    {
+        if (!EditorPrefs.HasKey(LocalServerPrefsKey))
+        {
+            SaveLocalServerType(LocalServerType.CurrentMachine);
+            return LocalServerType.CurrentMachine;
+        }
+
+        int type = EditorPrefs.GetInt(LocalServerPrefsKey, (int)LocalServerType.CurrentMachine);
+        return (LocalServerType)type;
+    }
+
+    public static void SaveLocalServerType(LocalServerType type)
+    {
+        EditorPrefs.SetInt(LocalServerPrefsKey, (int)type);
+    }
+
+    public static string GetLocalServerIP()
+    {
+        string ip = string.Empty;
+        var type = GetLocalServerType();
+        if (type == LocalServerType.CurrentMachine)
+        {
+            ip = GetCurrentMachineLocalIP();
+        }
+        else
+        {
+            ip = EditorPrefs.GetString(LocalServerIPPrefsKey, "127.0.0.1");
+        }
+        return ip;
+    }
+
+    public static void SaveLocalServerIP(string ip)
+    {
+        var type = GetLocalServerType();
+        if (type == LocalServerType.CurrentMachine)
+        {
+            return;
+        }
+        EditorPrefs.SetString(LocalServerIPPrefsKey, ip);
+    }
+
+    public static string GetCurrentMachineLocalIP()
+    {
+        try
+        {
+            // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
+            var ips = new List<string>();
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    ips.Add(ip.ToString());
+                }
+            }
+            ips.Sort();
+            if (ips.Count <= 0)
+            {
+                Logger.LogError("Get inter network ip failed!");
+            }
+            else
+            {
+                return ips[0];
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Logger.LogError("Get inter network ip failed with err : " + ex.Message);
+            Logger.LogError("Go Tools/Package to specify any machine as local server!!!");
+        }
+        return string.Empty;
+    }
+
     public static string GetCurPlatformName()
     {
         return GetPlatformName(EditorUserBuildSettings.activeBuildTarget);
