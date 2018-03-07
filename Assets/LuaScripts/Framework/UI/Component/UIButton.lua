@@ -41,7 +41,9 @@ end
 -- 资源释放
 local function OnDestroy(self)
 	if self.__onclick ~= nil then
-		self.unity_uibutton.onClick:RemoveListener(self.__onclick)
+		-- TODO：RemoveListener在iOS真机上测试有问题，原因暂时不知
+		--self.unity_uibutton.onClick:RemoveListener(self.__onclick)
+		self.unity_uibutton.onClick:RemoveAllListeners()
 	end
 	self.unity_uibutton = nil
 	self.__onclick = nil
