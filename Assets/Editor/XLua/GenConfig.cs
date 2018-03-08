@@ -29,9 +29,9 @@ public static class GenConfig
         typeof(List<int>),
         typeof(Action<string>),
         typeof(UnityEngine.Debug),
-        typeof(UnityEngine.UI.Text),
         typeof(Delegate),
         typeof(Dictionary<string, GameObject>),
+        typeof(UnityEngine.Events.UnityEvent),
 
         // unity结合lua，这部分导出很多功能在lua侧重新实现，没有实现的功能才会跑到cs侧
         typeof(Bounds),
