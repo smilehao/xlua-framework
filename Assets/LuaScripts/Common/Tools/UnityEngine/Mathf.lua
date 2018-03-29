@@ -235,4 +235,5 @@ end
 
 Mathf.unity_mathf = CS.UnityEngine.Mathf
 CS.UnityEngine.Mathf = Mathf
+setmetatable(Mathf, Mathf)
 return Mathf
