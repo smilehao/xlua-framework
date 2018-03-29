@@ -41,6 +41,15 @@ Mathf.Deg = math.deg
 Mathf.Rad = math.rad
 Mathf.Random = math.random
 
+Mathf.__index = function(t, k)
+	local var = rawget(Mathf, k)
+	if var ~= nil then
+		return var
+	end
+	
+	return rawget(unity_mathf, k)
+end
+
 function Mathf.Approximately(a, b)
 	return abs(b - a) < math.max(1e-6 * math.max(abs(a), abs(b)), 1.121039e-44)
 end
