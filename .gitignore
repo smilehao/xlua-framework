@@ -19,3 +19,4 @@ Assets/Scripts/XLua/Gen.meta
 Assets/AssetsPackage/Lua.meta
 *.csproj
 *.sln
+Library/
