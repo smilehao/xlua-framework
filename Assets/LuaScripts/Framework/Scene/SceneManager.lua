@@ -64,10 +64,10 @@ local function CoInnerSwitchScene(self, scene_config)
 	model.value = cur_progress + 0.1
 	coroutine.waitforframes(1)
 	-- 初始化目标场景
-	local logic_scene = self.scenes[scene_config.Type]
+	local logic_scene = self.scenes[scene_config.Name]
 	if logic_scene == nil then
 		logic_scene = scene_config.Type.New(scene_config)
-		self.scenes[scene_config.Type] = logic_scene
+		self.scenes[scene_config.Name] = logic_scene
 	end
 	assert(logic_scene ~= nil)
 	logic_scene:OnEnter()
@@ -106,7 +106,7 @@ local function SwitchScene(self, scene_config)
 	if self.busing then 
 		return
 	end
-	if self.current_scene and self.current_scene.name == scene_config.Name then
+	if self.current_scene and self.current_scene.scene_config.Name == scene_config.Name then
 		return
 	end
 	
