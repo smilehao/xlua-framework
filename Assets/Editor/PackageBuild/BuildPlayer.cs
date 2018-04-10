@@ -103,8 +103,8 @@ public class BuildPlayer : Editor
     public static void BuildAssetBundlesForCurSetting()
     {
         var buildTarget = EditorUserBuildSettings.activeBuildTarget;
-        var outputPath = PackageUtils.GetCurBuildSettingOutputPath();
-        BuildAssetBundles(buildTarget, outputPath);
+        string channelName = PackageUtils.GetCurSelectedChannel().ToString();
+        BuildAssetBundles(buildTarget, channelName);
     }
 
     public static void BuildAndroid(string channelName, bool isTest)

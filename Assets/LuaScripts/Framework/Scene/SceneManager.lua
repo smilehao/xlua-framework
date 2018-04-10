@@ -48,7 +48,7 @@ local function CoInnerSwitchScene(self, scene_config)
 	-- 同步加载loading场景
 	local scene_mgr = CS.UnityEngine.SceneManagement.SceneManager
 	local resources = CS.UnityEngine.Resources
-	scene_mgr.LoadScene(scene_config.Level)
+	scene_mgr.LoadScene(SceneConfig.LoadingScene.Level)
 	model.value = model.value + 0.01
 	coroutine.waitforframes(1)
 	-- GC：交替重复2次，清干净一点
