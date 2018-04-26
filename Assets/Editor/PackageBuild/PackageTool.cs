@@ -11,7 +11,7 @@ using System.Text;
 /// added by wsh @ 2018.01.03
 /// 说明：打包工具
 /// TODO：
-/// 1、安装打包可以不用区分渠道，没有IOS那样的机器审核难以通过的问题
+/// 1、安卓打包可以不用区分渠道，没有IOS那样的机器审核难以通过的问题
 /// </summary>
 
 public class PackageTool : EditorWindow
