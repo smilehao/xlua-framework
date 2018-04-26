@@ -50,6 +50,8 @@ local function OnCreate(self, wrap_class, ...)
 	local cell_size = self.unity_grid.cellSize
 	local spacing = self.unity_grid.spacing
 	local padding = self.unity_grid.padding
+	self.item_size = cell_size
+	self.item_spacing = spacing
 	self.cell_size = Vector2.New(cell_size.x + spacing.x, cell_size.y + spacing.y)
 	self.topleft_offset = Vector3.New(padding.left - spacing.x / 2, padding.top - spacing.y / 2, 0)
 	-- 行/列数限制
@@ -184,7 +186,7 @@ local function AddComponent(self, component_target, var_arg, ...)
 	cmp.rectTransform.anchorMax = Vector2.New(0, 1)
 	cmp.rectTransform.pivot = Vector2.New(0.5, 0.5)
 	-- 设置Item宽、高
-	cmp.rectTransform.sizeDelta = self.cell_size
+	cmp.rectTransform.sizeDelta = self.item_size
 	return cmp
 end
 
