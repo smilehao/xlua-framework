@@ -21,19 +21,19 @@ public class PackageTool : EditorWindow
     static private string resVersion = "1.0.0";
     static private LocalServerType localServerType = LocalServerType.CurrentMachine;
     static private string localServerIP = "127.0.0.1";
+    
+    [MenuItem("Tools/Package", false, 0)]
+    static void Init() {
+        EditorWindow.GetWindow(typeof(PackageTool));
+    }
 
-    static PackageTool()
+    void OnEnable()
     {
         buildTarget = EditorUserBuildSettings.activeBuildTarget;
         channelType = PackageUtils.GetCurSelectedChannel();
 
         localServerType = PackageUtils.GetLocalServerType();
         localServerIP = PackageUtils.GetLocalServerIP();
-    }
-
-    [MenuItem("Tools/Package", false, 0)]
-    static void Init() {
-        EditorWindow.GetWindow(typeof(PackageTool));
     }
 
     void DrawConfigGUI()
