@@ -16,7 +16,7 @@ using System.Text;
 
 public class PackageTool : EditorWindow
 {
-    static private BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;
+    static private BuildTarget buildTarget = BuildTarget.Android;
     static private ChannelType channelType = ChannelType.Test;
     static private string resVersion = "1.0.0";
     static private LocalServerType localServerType = LocalServerType.CurrentMachine;
