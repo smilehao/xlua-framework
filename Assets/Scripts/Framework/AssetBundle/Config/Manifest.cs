@@ -101,21 +101,21 @@ namespace AssetBundles
             return manifest == null ? emptyStringArray : manifest.GetDirectDependencies(assetbundleName);
         }
         
-        public List<string> CompareTo(Manifest manifest)
+        public List<string> CompareTo(Manifest otherManifest)
         {
             List<string> ret_list = new List<string>();
-            if (manifest.assetbundleManifest == null)
+            if (otherManifest.assetbundleManifest == null)
             {
                 return ret_list;
             }
 
-            if (manifest == null )
+            if (otherManifest == null )
             {
-                ret_list.AddRange(manifest.GetAllAssetBundleNames());
+                ret_list.AddRange(otherManifest.GetAllAssetBundleNames());
                 return ret_list;
             }
 
-            string[] other_name_list = manifest.GetAllAssetBundleNames();
+            string[] other_name_list = otherManifest.GetAllAssetBundleNames();
             string[] self_name_list = GetAllAssetBundleNames();
             foreach (string name in other_name_list)
             {
@@ -125,7 +125,7 @@ namespace AssetBundles
                     //对方有、自己无
                     ret_list.Add(name);
                 }
-                else if (!GetAssetBundleHash(self_name_list[idx]).Equals(manifest.GetAssetBundleHash(name)))
+                else if (!GetAssetBundleHash(self_name_list[idx]).Equals(otherManifest.GetAssetBundleHash(name)))
                 {
                     //对方有，自己有，但是hash不同
                     ret_list.Add(name);

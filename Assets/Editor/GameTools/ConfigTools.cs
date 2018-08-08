@@ -10,8 +10,8 @@ public class ConfigTools : EditorWindow
 
     private bool xlsxGenLuaFinished = false;
     private bool protoGenLuaFinished = false;
-
-    static ConfigTools()
+    
+    void OnEnable()
     {
         ReadPath();
     }
