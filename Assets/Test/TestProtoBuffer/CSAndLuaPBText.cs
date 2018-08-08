@@ -1,4 +1,5 @@
 ﻿//#define FOR_GC_TEST
+using AssetBundles;
 using battle;
 using CustomDataStruct;
 using System;
@@ -10,6 +11,9 @@ using XLua;
 
 /// <summary>
 /// CS与Lua侧PB协议相互解析测试：启用宏测试GC
+/// 
+/// 注意：
+/// 1）如果不是从LaunchScene登陆进入有戏点击CustomTest按钮进行的测试，则AB模拟模式必须选择EditorMode
 /// 
 /// TODO：
 /// 1）唯一GC源头来自XLua中Marshal的Lua.lua_tobytes，对高频网络通讯游戏，这个要考虑优化下
@@ -32,7 +36,6 @@ public class CSAndLuaPBText : MonoBehaviour
     ntf_battle_frame_data data = new ntf_battle_frame_data();
     StreamBuffer msSend;
     StreamBuffer msRecive;
-    LuaEnv luaEnv;
 
     Action<byte[]> ForCSCallLua;
     const float LOG_INTERVAL = 1.0f;
@@ -69,11 +72,9 @@ public class CSAndLuaPBText : MonoBehaviour
 #if !FOR_GC_TEST
         Logger.Log("=========================CSAndLuaPBText=========================");
 #endif
-        luaEnv = new LuaEnv();
-        luaEnv.AddLoader(CustomLoader);
-        luaEnv.AddBuildin("pb", XLua.LuaDLL.Lua.LoadPb);
-        luaEnv.DoString(CSAndLuaPBTextLuaScript.text);
-        ForCSCallLua = luaEnv.Global.Get<Action<byte[]>>("TestCSEncodeAndLuaDeconde");//映射到一个delgate，要求delegate加到生成列表，否则返回null，建议用法
+        XLuaManager.Instance.Startup();
+        XLuaManager.Instance.SafeDoString(CSAndLuaPBTextLuaScript.text);
+        ForCSCallLua = XLuaManager.Instance.GetLuaEnv().Global.Get<Action<byte[]>>("TestCSEncodeAndLuaDeconde");//映射到一个delgate，要求delegate加到生成列表，否则返回null，建议用法
 
         InitData(data);
 
@@ -246,24 +247,13 @@ public class CSAndLuaPBText : MonoBehaviour
         }
         Debug.Log(sb.ToString());
     }
-
-    public static byte[] CustomLoader(ref string filepath)
-    {
-        string scriptPath = string.Empty;
-        filepath = filepath.Replace(".", "/") + ".lua";
-        scriptPath = Path.Combine(Application.dataPath, XLuaManager.luaScriptsFolder);
-        scriptPath = Path.Combine(scriptPath, filepath);
-        //Logger.Log("Load lua script : " + scriptPath);
-        return GameUtility.SafeReadAllBytes(scriptPath);
-    }
-#endregion
+    #endregion
 
     void OnDestory()
     {
         Instance = null;
         StreamBufferPool.RecycleStream(msSend);
         StreamBufferPool.RecycleStream(msRecive);
-        luaEnv.Dispose();
     }
 }
 

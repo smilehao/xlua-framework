@@ -1,10 +1,15 @@
 ﻿//#define FOR_GC_TEST
+using AssetBundles;
 using System.IO;
 using UnityEngine;
 using XLua;
 
 /// <summary>
 /// Xlua集成proto-gen-lua插件测试：启用宏测试GC
+/// 
+/// 注意：
+/// 1）如果不是从LaunchScene登陆进入有戏点击CustomTest按钮进行的测试，则AB模拟模式必须选择EditorMode
+/// 
 /// added by wsh @ 2018-08-09
 /// </summary>
 
@@ -31,24 +36,10 @@ public class XluaProtoGenLuaTest : MonoBehaviour
 #if !FOR_GC_TEST
         Logger.Log(" =========================XluaProtoGenLuaTest=========================");
 #endif
-
-        LuaEnv luaEnv = new LuaEnv();
-        luaEnv.AddLoader(CustomLoader);
-        luaEnv.AddBuildin("pb", XLua.LuaDLL.Lua.LoadPb);
-        luaEnv.DoString(XluaProtoGenLuaTestLuaScript.text);
-        luaEnv.Dispose();
+        XLuaManager.Instance.Startup();
+        XLuaManager.Instance.SafeDoString(XluaProtoGenLuaTestLuaScript.text);
     }
-
-    public static byte[] CustomLoader(ref string filepath)
-    {
-        string scriptPath = string.Empty;
-        filepath = filepath.Replace(".", "/") + ".lua";
-        scriptPath = Path.Combine(Application.dataPath, XLuaManager.luaScriptsFolder);
-        scriptPath = Path.Combine(scriptPath, filepath);
-        //Logger.Log("Load lua script : " + scriptPath);
-        return GameUtility.SafeReadAllBytes(scriptPath);
-    }
-
+    
 #if !FOR_GC_TEST
     #region 给个提示
     void OnGUI()
