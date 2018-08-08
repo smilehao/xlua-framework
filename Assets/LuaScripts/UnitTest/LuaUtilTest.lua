@@ -115,6 +115,7 @@ end
 
 local function Run()
 	TestBind()
+	print("LuaUtilTest Pass!")
 end
 
 return {

@@ -1,0 +1,41 @@
+package room;
+
+import 'common.proto';
+
+message req_join_match 
+{
+	optional int32 battle_type = 1[default = 0];      //  1  3v3   4 1v1   5 天梯
+}
+
+message rsp_join_match
+{
+	optional int32 result = 1[default = 0];
+	optional common.match_player player = 2;
+	optional int32 battle_type = 3[default =0];  //  1  3v3   4 1v1   5 天梯	
+}
+
+message ntf_join_match_mateinfo
+{
+	optional int32 result = 1[default = 0];
+	repeated common.match_player mate_list = 2;
+}
+
+message ntf_join_match_result
+{
+	optional int32 result = 1[default = 0];
+	optional int32 battle_svr_id = 2[default = 0];
+	optional int64 battle_id = 3[default = 0];
+	repeated common.match_player mate_list = 4;
+	repeated common.match_player enemy_list = 5;
+	optional int32 battle_type = 6[default = 0];
+}
+
+message req_cancel_join_match  
+{
+
+}
+
+message rsp_cancel_join_match
+{
+	optional int32 result = 1[default = 0]; 
+}

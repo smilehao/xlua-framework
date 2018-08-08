@@ -3,10 +3,12 @@ import "test_common.proto";
 message Person 
 {  
   required Header header = 1;
-  required int64 id = 2;
+  //TODO：后续测试int64的支持
+  //required int64 id = 2;
+  required string id = 2;
   required string name = 3;    
   optional int32 age = 4 [default = 18];
-  optional string email = 5 [default = "topameng@qq.com"];
+  optional string email = 5 [default = "703016035@qq.com"];
   repeated int32 array = 6;  
 
   extensions 10 to max;

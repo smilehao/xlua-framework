@@ -1,6 +1,8 @@
 
 message Header 
 {
-  required int64 cmd = 1;
+  //TODO：后续测试int64的支持
+  //required int64 cmd = 1;
+  required int32 cmd = 1;
   required int32 seq = 2;
 }

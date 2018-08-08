@@ -1,0 +1,32 @@
+package battle;
+
+message one_cmd
+{
+	optional int32 cmd_id = 1[default = 0];
+	optional uint32 UID = 2[default = 0];
+	optional bytes cmd_data = 3[default = ""];
+}
+
+message ntf_battle_frame_data
+{
+	message cmd_with_frame
+	{
+		optional int32 server_frame = 1[default = 0];
+		optional one_cmd cmd = 2;
+	}
+
+	message one_slot
+	{
+		optional int32 slot = 1[default = 0];			
+		repeated cmd_with_frame cmd_list = 3;
+	}
+	
+	optional int32 time = 1[default = 0];						// 这一帧的时间
+	repeated one_slot slot_list = 3;				// slot列表
+	
+	optional int32 server_from_slot = 5[default = 0];	
+	optional int32 server_to_slot = 6[default = 0];
+	
+	optional int32 server_curr_frame = 7[default = 0];
+	optional int32 is_check_frame = 8[default =0]; // 1 表示这帧需要检测
+}

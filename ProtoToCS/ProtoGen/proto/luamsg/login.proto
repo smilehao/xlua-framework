@@ -1,0 +1,35 @@
+package login;
+
+import 'common.proto';
+
+message test2
+{
+	optional int32 c = 1[default = 0];
+	repeated common.test3 ss = 2;
+}
+
+message test1
+{
+	optional int32 a = 1[default = 0];
+	repeated test2 b = 2;
+}
+
+message req_login
+{
+	optional int32 flag = 1[default = 0];
+}
+
+message rsp_login
+{
+	optional int32 result = 1[default = 0];//登录失败，请重试
+	optional int32 game_time = 2[default = 0];	//服务器游戏时间，秒
+	optional int32 status = 3[default = 0];   //玩家状态   2.在线 3.匹配中 4.战斗中 
+	optional common.client_info client_info = 4;
+	optional test1  test = 5;
+}
+
+//通知玩家退出
+message ntf_logout
+{
+	optional int32 reason = 1[default = 0];	//0表示异地登录
+}

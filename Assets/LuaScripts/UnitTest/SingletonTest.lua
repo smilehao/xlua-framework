@@ -84,6 +84,7 @@ local function Run()
 	TestSingleton()
 	TestSingleton2()
 	assert(pcall(TestSingletonErr) == false, "TestSingletonErr failed!")
+	print("SingletonTest Pass!")
 end
 
 return {

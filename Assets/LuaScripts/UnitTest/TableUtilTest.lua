@@ -157,6 +157,7 @@ local function Run()
 	TestWalk()
 	TestFilter()
 	TestChoose()
+	print("TableUtilTest Pass!")
 end
 
 return {

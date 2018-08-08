@@ -244,6 +244,7 @@ local function Run()
 	assert(pcall(TestConstClassWriteErr1) == false, "TestConstClassWriteErr1 failed!")
 	assert(pcall(TestConstClassWriteErr2) == false, "TestConstClassWriteErr2 failed!")
 	assert(pcall(TestConstClassReadErr) == false, "TestConstClassReadErr failed!")
+	print("ClassTest Pass!")
 end
 
 return {

@@ -35,9 +35,9 @@ _M.PERSON_ID_FIELD.number = 2
 _M.PERSON_ID_FIELD.index = 1
 _M.PERSON_ID_FIELD.label = 2
 _M.PERSON_ID_FIELD.has_default_value = false
-_M.PERSON_ID_FIELD.default_value = 0
-_M.PERSON_ID_FIELD.type = 3
-_M.PERSON_ID_FIELD.cpp_type = 2
+_M.PERSON_ID_FIELD.default_value = ""
+_M.PERSON_ID_FIELD.type = 9
+_M.PERSON_ID_FIELD.cpp_type = 9
 
 _M.PERSON_NAME_FIELD.name = "name"
 _M.PERSON_NAME_FIELD.full_name = ".Person.name"
@@ -65,7 +65,7 @@ _M.PERSON_EMAIL_FIELD.number = 5
 _M.PERSON_EMAIL_FIELD.index = 4
 _M.PERSON_EMAIL_FIELD.label = 1
 _M.PERSON_EMAIL_FIELD.has_default_value = true
-_M.PERSON_EMAIL_FIELD.default_value = "topameng@qq.com"
+_M.PERSON_EMAIL_FIELD.default_value = "703016035@qq.com"
 _M.PERSON_EMAIL_FIELD.type = 9
 _M.PERSON_EMAIL_FIELD.cpp_type = 9
 

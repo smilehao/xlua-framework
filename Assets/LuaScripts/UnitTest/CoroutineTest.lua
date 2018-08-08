@@ -233,7 +233,8 @@ local function InnerRun()
 			return true
 		end
 		return false
-	end)
+	end)	
+	print("CorountineTest Pass!")
 end
 
 local function Run()

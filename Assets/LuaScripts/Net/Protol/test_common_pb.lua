@@ -13,8 +13,8 @@ _M.HEADER_CMD_FIELD.index = 0
 _M.HEADER_CMD_FIELD.label = 2
 _M.HEADER_CMD_FIELD.has_default_value = false
 _M.HEADER_CMD_FIELD.default_value = 0
-_M.HEADER_CMD_FIELD.type = 3
-_M.HEADER_CMD_FIELD.cpp_type = 2
+_M.HEADER_CMD_FIELD.type = 5
+_M.HEADER_CMD_FIELD.cpp_type = 1
 
 _M.HEADER_SEQ_FIELD.name = "seq"
 _M.HEADER_SEQ_FIELD.full_name = ".Header.seq"

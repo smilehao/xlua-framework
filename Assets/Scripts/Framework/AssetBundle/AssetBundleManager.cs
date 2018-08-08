@@ -70,6 +70,9 @@ namespace AssetBundles
         }
 
 #if UNITY_EDITOR || CLIENT_DEBUG
+#if !CLIENT_DEBUG
+        [BlackList]
+#endif
         // Hotfix测试---用于侧测试资源模块的热修复
         public void TestHotfix()
         {
@@ -258,7 +261,7 @@ namespace AssetBundles
             assetsCaching[assetName] = asset;
         }
 
-        public void AddAssetbundleAssetsCache(string assetbundleName)
+        public void AddAssetbundleAssetsCache(string assetbundleName, string postfix = null)
         {
 #if UNITY_EDITOR
             if (AssetBundleConfig.IsEditorMode)
@@ -278,6 +281,10 @@ namespace AssetBundles
             {
                 var assetName = allAssetNames[i];
                 if (IsAssetLoaded(assetName))
+                {
+                    continue;
+                }
+                if (!string.IsNullOrEmpty(postfix) && !assetName.EndsWith(postfix))
                 {
                     continue;
                 }

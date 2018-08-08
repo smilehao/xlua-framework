@@ -339,7 +339,7 @@ local function DestroyWindowExceptLayer(self, layer, include_keep_model)
 end
 
 -- 销毁所有窗口
-local function DestroyAllWindow(self, ui_name, include_keep_model)
+local function DestroyAllWindow(self, include_keep_model)
 	for k,v in pairs(self.windows) do
 		InnerCloseWindow(self, v)
 		InnerDestroyWindow(self, k, v, include_keep_model)

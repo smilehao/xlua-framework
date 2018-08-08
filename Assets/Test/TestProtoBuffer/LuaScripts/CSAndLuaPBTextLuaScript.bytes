@@ -1,0 +1,59 @@
+-- added @ 2018-08-09
+-- CS与Lua侧PB协议相互解析测试：禁用Log无GC
+
+local log_enable = true
+local battle_pb = require 'Net.Protol.test_battle_pb'
+
+function PrintData(data)
+	local output = 'data.server_curr_frame = '..data.server_curr_frame..'\n'
+	output = output..'data.server_from_slot = '..data.server_from_slot..'\n'
+	output = output..'data.server_to_slot = '..data.server_to_slot..'\n'
+	output = output..'data.time = '..data.time..'\n'
+	output = output..'data.slot_list.Count = '..#data.slot_list..'\n'
+	if #data.slot_list > 0 then
+		local oneSlot = data.slot_list[1]
+		output = output..'oneSlot[0].slot = '..oneSlot.slot..'\n'
+		output = output..'oneSlot[0].cmd_list.Count = '..#oneSlot.cmd_list..'\n'
+		if #oneSlot.cmd_list > 0 then
+			local cmdWithFrame = oneSlot.cmd_list[1];
+			output = output..'oneSlot[0].cmd_list[0].server_frame = '..cmdWithFrame.server_frame..'\n'
+			if cmdWithFrame.cmd ~= nil then
+				output = output..'oneSlot[0].cmd_list[0].cmd.cmd_id = '..cmdWithFrame.cmd.cmd_id..'\n'
+				output = output..'oneSlot[0].cmd_list[0].cmd.UID = '..cmdWithFrame.cmd.UID..'\n'
+				if cmdWithFrame.cmd.cmd_data ~= nil then
+					output = output..'oneSlot[0].cmd_list[0].cmd.cmd_data.Length = '..#cmdWithFrame.cmd.cmd_data..'\n'
+					output = output..'oneSlot[0].cmd_list[0].cmd.cmd_data[0] = '..cmdWithFrame.cmd.cmd_data:byte(1)..'\n'
+					output = output..'oneSlot[0].cmd_list[0].cmd.cmd_data[Length - 1] = '..cmdWithFrame.cmd.cmd_data:byte(#cmdWithFrame.cmd.cmd_data)..'\n'
+				end
+			end
+		end
+	end
+	print(output);
+end
+
+function TestCSEncodeAndLuaDeconde(cs_encode_bytes)
+	if log_enable then
+		-- 打印字节流
+		print('Lua receive from CS =================>>>'..#cs_encode_bytes..' bytes :')
+		print(string.byte(cs_encode_bytes, 0, #cs_encode_bytes))
+	end
+	
+	-- 解析协议
+	local msg = battle_pb.ntf_battle_frame_data()
+	msg:ParseFromString(cs_encode_bytes)
+	if log_enable then
+		PrintData(msg)
+	end
+	
+	-- 重新编码协议
+	local pb_data = msg:SerializeToString()
+	
+	if log_enable then
+		-- 打印字节流
+		print('Lua send to CS =================>>>'..#pb_data..' bytes :')
+		print(string.byte(pb_data, 0, #pb_data))
+	end
+	
+	-- 发送到CS
+	CS.CSAndLuaPBText.ForLuaCallCS(pb_data)
+end

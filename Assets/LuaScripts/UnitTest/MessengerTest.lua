@@ -202,6 +202,7 @@ local function Run()
 	TestReAdd()
 	TestMix()
 	TestParamsBind()
+	print("MessengerTest Pass!")
 end
 
 return {
