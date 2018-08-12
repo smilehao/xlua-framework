@@ -50,7 +50,7 @@ namespace AssetBundles
 
             var buildTargetName = PackageUtils.GetCurPlatformName();
             var channelName = PackageUtils.GetCurSelectedChannel().ToString();
-            var outputManifest = PackageUtils.GetCurBuildSettingOutputManifestPath();
+            var outputManifest = PackageUtils.GetCurBuildSettingAssetBundleManifestPath();
             bool hasBuildAssetBundles = false;
             if (!File.Exists(outputManifest))
             {
@@ -132,7 +132,8 @@ namespace AssetBundles
                 return;
             }
 
-            CheckAssetBundles.Run();
+            bool checkChannel = PackageUtils.BuildAssetBundlesForPerChannel(EditorUserBuildSettings.activeBuildTarget);
+            PackageUtils.CheckAndRunAllCheckers(checkChannel, true);
         }
 
         [MenuItem(kToolBuildForCurrentSetting, false, 1100)]
@@ -152,7 +153,7 @@ namespace AssetBundles
         }
 
         [MenuItem(kToolsCopyAssetbundles, false, 1101)]
-        static public void ToolsToolsCopyAssetbundles()
+        static public void ToolsCopyAssetbundles()
         {
             var buildTargetName = PackageUtils.GetCurPlatformName();
             var channelName = PackageUtils.GetCurSelectedChannel().ToString();
@@ -168,9 +169,9 @@ namespace AssetBundles
         }
 
         [MenuItem(kToolsOpenOutput, false, 1201)]
-        static public void ToolsToolsOpenOutput()
+        static public void ToolsOpenOutput()
         {
-            string outputPath = PackageUtils.GetCurBuildSettingOutputPath();
+            string outputPath = PackageUtils.GetCurBuildSettingAssetBundleOutputPath();
             EditorUtils.ExplorerFolder(outputPath);
         }
 
@@ -192,9 +193,9 @@ namespace AssetBundles
             {
                 return;
             }
-            string outputPath = PackageUtils.GetCurBuildSettingOutputPath();
+            string outputPath = PackageUtils.GetCurBuildSettingAssetBundleOutputPath();
             GameUtility.SafeDeleteDir(outputPath);
-            Debug.Log(string.Format("Clear done : ", outputPath));
+            Debug.Log(string.Format("Clear done : {0}", outputPath));
         }
 
         [MenuItem(kToolsClearStreamingAssets, false, 1303)]
@@ -334,7 +335,7 @@ namespace AssetBundles
         {
             if (AssetBundleEditorHelper.HasValidSelection())
             {
-                string localFilePath = PackageUtils.GetCurBuildSettingOutputManifestPath();
+                string localFilePath = PackageUtils.GetCurBuildSettingAssetBundleManifestPath();
 
                 Object[] selObjs = Selection.objects;
                 var depsList = AssetBundleEditorHelper.GetDependancisFormBuildManifest(localFilePath, selObjs, isAll);

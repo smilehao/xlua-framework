@@ -357,6 +357,7 @@ public class GameUtility
             {
                 return true;
             }
+            SafeDeleteFile(destFileName);
             File.SetAttributes(sourceFileName, FileAttributes.Normal);
             File.Move(sourceFileName, destFileName);
             return true;
@@ -382,10 +383,7 @@ public class GameUtility
                 return false;
             }
             CheckFileAndCreateDirWhenNeeded(toFile);
-            if (File.Exists(toFile))
-            {
-                File.SetAttributes(toFile, FileAttributes.Normal);
-            }
+            SafeDeleteFile(toFile);
             File.Copy(fromFile, toFile, true);
             return true;
         }

@@ -43,7 +43,7 @@ public static class CheckAssetBundles
         }
     }
 
-    public static void RunAllCheckers()
+    public static void RunAllCheckers(bool checkChannel)
     {
         var guids = AssetDatabase.FindAssets("t:AssetBundleDispatcherConfig", new string[] { AssetBundleInspectorUtils.DatabaseRoot });
         var length = guids.Length;
@@ -55,17 +55,15 @@ public static class CheckAssetBundles
             var config = AssetDatabase.LoadAssetAtPath<AssetBundleDispatcherConfig>(assetPath);
             config.Load();
             EditorUtility.DisplayProgressBar("Run checker :", config.PackagePath, (float)count / length);
-            AssetBundleDispatcher.Run(config);
+            AssetBundleDispatcher.Run(config, checkChannel);
         }
         AssetDatabase.Refresh();
         EditorUtility.ClearProgressBar();
     }
 
-    public static void Run()
+    public static void Run(bool checkChannel)
     {
-        XLuaMenu.CopyLuaFilesToAssetsPackage();
-
         ClearAllAssetBundles();
-        RunAllCheckers();
+        RunAllCheckers(checkChannel);
     }
 }

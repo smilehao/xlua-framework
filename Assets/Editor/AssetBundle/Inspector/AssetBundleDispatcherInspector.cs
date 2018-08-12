@@ -15,6 +15,8 @@ namespace AssetBundles
     [CustomEditor(typeof(DefaultAsset), true)]
     public class AssetBundleDispatcherInspector : Editor
     {
+        public static bool hasAnythingModified = false;
+
         AssetBundleDispatcherConfig dispatcherConfig = null;
         string packagePath = null;
         string targetAssetPath = null;
@@ -23,6 +25,7 @@ namespace AssetBundles
         static Dictionary<string, bool> inspectorSate = new Dictionary<string, bool>();
         AssetBundleDispatcherFilterType filterType = AssetBundleDispatcherFilterType.Root;
         bool configChanged = false;
+        bool isNewCreate = false;
 
         void OnEnable()
         {
@@ -49,6 +52,12 @@ namespace AssetBundles
             }
         }
 
+        void MarkChanged()
+        {
+            configChanged = true;
+            hasAnythingModified = true;
+        }
+
         void DrawCreateAssetBundleDispatcher()
         {
             if (GUILayout.Button("Create AssetBundle Dispatcher"))
@@ -62,6 +71,9 @@ namespace AssetBundles
 
                 Initialize();
                 Repaint();
+
+                isNewCreate = true;
+                MarkChanged();
             }
         }
 
@@ -72,12 +84,12 @@ namespace AssetBundles
             var objectFilter = GUILayoutUtils.DrawInputField("ObjectFilter:", checkerFilter.ObjectFilter, 300f, 80f);
             if (relativePath != checkerFilter.RelativePath)
             {
-                configChanged = true;
+                MarkChanged();
                 checkerFilter.RelativePath = relativePath;
             }
             if (objectFilter != checkerFilter.ObjectFilter)
             {
-                configChanged = true;
+                MarkChanged();
                 checkerFilter.ObjectFilter = objectFilter;
             }
             GUILayout.EndVertical();
@@ -98,7 +110,7 @@ namespace AssetBundles
                 var stateKey = "CheckerFilters" + i.ToString();
                 if (GUILayoutUtils.DrawRemovableSubHeader(1, filterType, inspectorSate, stateKey, () =>
                 {
-                    configChanged = true;
+                    MarkChanged();
                     checkerFilters.RemoveAt(i);
                     i--;
                 }))
@@ -109,7 +121,7 @@ namespace AssetBundles
             }
             if (GUILayout.Button("Add"))
             {
-                configChanged = true;
+                MarkChanged();
                 checkerFilters.Add(new AssetBundleCheckerFilter("", "t:prefab"));
             }
             EditorGUILayout.Separator();
@@ -130,7 +142,7 @@ namespace AssetBundles
             if (selectType != filterType)
             {
                 filterType = selectType;
-                configChanged = true;
+                MarkChanged();
             }
             EditorGUILayout.EndHorizontal();
 
@@ -155,7 +167,7 @@ namespace AssetBundles
             GUI.color = new Color(1, 0.5f, 0.5f);
             if (GUILayout.Button("Remove"))
             {
-                Remove();
+                ConfirmRemove();
             }
             GUI.color = color;
             GUILayout.EndHorizontal();
@@ -177,7 +189,7 @@ namespace AssetBundles
             configChanged = false;
         }
 
-        void Remove()
+        void ConfirmRemove()
         {
             bool checkRemove = EditorUtility.DisplayDialog("Remove Warning",
                 "Sure to remove the AssetBundle dispatcher ?",
@@ -186,6 +198,12 @@ namespace AssetBundles
             {
                 return;
             }
+
+            Remove();
+        }
+
+        void Remove()
+        {
             GameUtility.SafeDeleteFile(databaseAssetPath);
             AssetDatabase.Refresh();
 
@@ -232,9 +250,14 @@ namespace AssetBundles
                 {
                     Apply();
                 }
+                else if(isNewCreate)
+                {
+                    Remove();
+                }
             }
             dispatcherConfig = null;
             inspectorSate.Clear();
+            isNewCreate = false;
         }
     }
 }

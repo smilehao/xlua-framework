@@ -28,10 +28,10 @@ public class GameLaunch : MonoBehaviour
         yield return InitAppVersion();
         Logger.Log(string.Format("InitAppVersion use {0}ms", (DateTime.Now - start).Milliseconds));
 
-        // 初始化包名
+        // 初始化渠道
         start = DateTime.Now;
-        yield return InitPackageName();
-        Logger.Log(string.Format("InitPackageName use {0}ms", (DateTime.Now - start).Milliseconds));
+        yield return InitChannel();
+        Logger.Log(string.Format("InitChannel use {0}ms", (DateTime.Now - start).Milliseconds));
 
         // 启动资源管理模块
         start = DateTime.Now;
@@ -91,7 +91,7 @@ public class GameLaunch : MonoBehaviour
         yield break;
     }
 
-    IEnumerator InitPackageName()
+    IEnumerator InitChannel()
     {
 #if UNITY_EDITOR
         if (AssetBundleConfig.IsEditorMode)
@@ -99,13 +99,12 @@ public class GameLaunch : MonoBehaviour
             yield break;
         }
 #endif
-        var packageNameRequest = AssetBundleManager.Instance.RequestAssetFileAsync(BuildUtils.PackageNameFileName);
-        yield return packageNameRequest;
-        var packageName = packageNameRequest.text;
-        packageNameRequest.Dispose();
-        AssetBundleManager.ManifestBundleName = packageName;
-        ChannelManager.instance.Init(packageName);
-        Logger.Log(string.Format("packageName = {0}", packageName));
+        var channelNameRequest = AssetBundleManager.Instance.RequestAssetFileAsync(BuildUtils.ChannelNameFileName);
+        yield return channelNameRequest;
+        var channelName = channelNameRequest.text;
+        channelNameRequest.Dispose();
+        ChannelManager.instance.Init(channelName);
+        Logger.Log(string.Format("channelName = {0}", channelName));
         yield break;
     }
 

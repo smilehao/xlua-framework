@@ -18,7 +18,7 @@
 
         public abstract string GetBundleID();
         
-        public abstract string GetPackageName();
+        public abstract string GetProductName();
         
         public virtual bool IsInternalChannel()
         {

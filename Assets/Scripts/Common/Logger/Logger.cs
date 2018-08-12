@@ -111,7 +111,7 @@ public class Logger
                 m_isInit = true;
             }
 
-            m_webClient.UploadStringAsync(new Uri(Setting.REPORT_ERROR_URL), "POST", postData);
+            m_webClient.UploadStringAsync(new Uri(URLSetting.REPORT_ERROR_URL), "POST", postData);
         }
     }
 

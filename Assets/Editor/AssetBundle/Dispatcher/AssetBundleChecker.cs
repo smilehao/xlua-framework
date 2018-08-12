@@ -114,11 +114,14 @@ namespace AssetBundles
             imp.assetBundleName = assetsPath;
         }
 
-        public static void Run(AssetBundleCheckerConfig config)
+        public static void Run(AssetBundleCheckerConfig config, bool checkChannel)
         {
             var checker = new AssetBundleChecker(config);
             checker.CheckAssetBundleName();
-            checker.CheckChannelName();
+            if (checkChannel)
+            {
+                checker.CheckChannelName();
+            }
             AssetDatabase.Refresh();
         }
     }

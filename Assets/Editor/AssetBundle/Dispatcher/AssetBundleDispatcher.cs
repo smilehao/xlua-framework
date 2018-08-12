@@ -37,28 +37,28 @@ namespace AssetBundles
             }
         }
 
-        public void RunCheckers()
+        public void RunCheckers(bool checkChannel)
         {
             switch (config.Type)
             {
                 case AssetBundleDispatcherFilterType.Root:
-                    CheckRoot();
+                    CheckRoot(checkChannel);
                     break;
                 case AssetBundleDispatcherFilterType.Children:
                 case AssetBundleDispatcherFilterType.ChildrenFoldersOnly:
                 case AssetBundleDispatcherFilterType.ChildrenFilesOnly:
-                    CheckChildren();
+                    CheckChildren(checkChannel);
                     break;
             }
         }
 
-        void CheckRoot()
+        void CheckRoot(bool checkChannel)
         {
             var checkerConfig = new AssetBundleCheckerConfig(config.PackagePath, config.CheckerFilters);
-            AssetBundleChecker.Run(checkerConfig);
+            AssetBundleChecker.Run(checkerConfig, checkChannel);
         }
 
-        void CheckChildren()
+        void CheckChildren(bool checkChannel)
         {
             var childrenImporters = importer.GetChildren();
             var checkerConfig = new AssetBundleCheckerConfig();
@@ -75,14 +75,14 @@ namespace AssetBundles
 
                 checkerConfig.CheckerFilters = config.CheckerFilters;
                 checkerConfig.PackagePath = childrenImport.packagePath;
-                AssetBundleChecker.Run(checkerConfig);
+                AssetBundleChecker.Run(checkerConfig, checkChannel);
             }
         }
 
-        public static void Run(AssetBundleDispatcherConfig config)
+        public static void Run(AssetBundleDispatcherConfig config, bool checkChannel)
         {
             var dispatcher = new AssetBundleDispatcher(config);
-            dispatcher.RunCheckers();
+            dispatcher.RunCheckers(checkChannel);
             AssetDatabase.Refresh();
         }
     }

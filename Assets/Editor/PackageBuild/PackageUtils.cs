@@ -23,6 +23,42 @@ public class PackageUtils
 {
     public const string LocalServerPrefsKey = "AssetBundlesLocalServerType";
     public const string LocalServerIPPrefsKey = "AssetBundlesLocalServerIP";
+    public const string AndroidBuildABForPerChannelPrefsKey = "AndroidBuildABForPerChannelPrefsKey";
+    public const string IOSBuildABForPerChannelPrefsKey = "IOSBuildABForPerChannelPrefsKey";
+
+    public static bool GetAndroidBuildABForPerChannelSetting()
+    {
+        if (!EditorPrefs.HasKey(AndroidBuildABForPerChannelPrefsKey))
+        {
+            SaveAndroidBuildABForPerChannelSetting(false);
+            return false;
+        }
+
+        bool enable = EditorPrefs.GetBool(AndroidBuildABForPerChannelPrefsKey, false);
+        return enable;
+    }
+
+    public static void SaveAndroidBuildABForPerChannelSetting(bool enable)
+    {
+        EditorPrefs.SetBool(AndroidBuildABForPerChannelPrefsKey, enable);
+    }
+
+    public static bool GetIOSBuildABForPerChannelSetting()
+    {
+        if (!EditorPrefs.HasKey(IOSBuildABForPerChannelPrefsKey))
+        {
+            SaveIOSBuildABForPerChannelSetting(false);
+            return false;
+        }
+
+        bool enable = EditorPrefs.GetBool(IOSBuildABForPerChannelPrefsKey, false);
+        return enable;
+    }
+
+    public static void SaveIOSBuildABForPerChannelSetting(bool enable)
+    {
+        EditorPrefs.SetBool(IOSBuildABForPerChannelPrefsKey, enable);
+    }
 
     public static LocalServerType GetLocalServerType()
     {
@@ -98,6 +134,16 @@ public class PackageUtils
         return string.Empty;
     }
 
+    public static bool BuildAssetBundlesForPerChannel(BuildTarget buildTarget)
+    {
+        if (buildTarget == BuildTarget.Android && GetAndroidBuildABForPerChannelSetting() ||
+            buildTarget == BuildTarget.iOS && GetIOSBuildABForPerChannelSetting())
+        {
+            return true;
+        }
+        return false;
+    }
+
     public static string GetCurPlatformName()
     {
         return GetPlatformName(EditorUserBuildSettings.activeBuildTarget);
@@ -137,43 +183,85 @@ public class PackageUtils
         EditorPrefs.SetString("ChannelName", channelType.ToString());
     }
 
-    public static string GetPlatformChannelPath(BuildTarget target, string channelName)
+    public static string GetPlatformChannelFolderName(BuildTarget target, string channelName)
     {
-        return Path.Combine(PackageUtils.GetPlatformName(target), channelName);
+        if (BuildAssetBundlesForPerChannel(target))
+        {
+            // 不同渠道的AB输出到不同的文件夹
+            return channelName;
+        }
+        else
+        {
+            // 否则写入通用的平台文件夹
+            return GetPlatformName(target);
+        }
     }
 
-    public static string GetCurPlatformChannelPath()
+    public static string GetChannelRelativePath(BuildTarget target, string channelName)
     {
-        var buildTarget = EditorUserBuildSettings.activeBuildTarget;
-        var channelName = GetCurSelectedChannel().ToString();
-        return GetPlatformChannelPath(buildTarget, channelName);
+        string outputPath = Path.Combine(GetPlatformName(target), GetPlatformChannelFolderName(target, channelName));
+        return outputPath;
     }
 
-    public static string GetBuildPlatformOutputPath(BuildTarget target, string channelName)
+    public static string GetAssetBundleRelativePath(BuildTarget target, string channelName)
     {
-        string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, GetPlatformChannelPath(target, channelName));
+        string outputPath = GetChannelRelativePath(target, channelName);
+        outputPath = Path.Combine(outputPath, BuildUtils.ManifestBundleName);
+        return outputPath;
+    }
+
+    public static string GetChannelOutputPath(BuildTarget target, string channelName)
+    {
+        string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, GetChannelRelativePath(target, channelName));
         GameUtility.CheckDirAndCreateWhenNeeded(outputPath);
         return outputPath;
     }
 
-    public static string GetCurBuildSettingOutputPath()
+    public static string GetAssetBundleOutputPath(BuildTarget target, string channelName)
+    {
+        string outputPath = Path.Combine(AssetBundleConfig.AssetBundlesBuildOutputPath, GetAssetBundleRelativePath(target, channelName));
+        GameUtility.CheckDirAndCreateWhenNeeded(outputPath);
+        return outputPath;
+    }
+
+    public static string GetAssetBundleFilePath(BuildTarget target, string channelName, string fileName)
+    {
+        string outputPath = GetAssetBundleOutputPath(target, channelName);
+        return Path.Combine(outputPath, fileName);
+
+    }
+
+    public static string GetAssetbundleManifestPath(BuildTarget target, string channelName)
+    {
+        string outputPath = GetAssetBundleOutputPath(target, channelName);
+        return Path.Combine(outputPath, BuildUtils.ManifestBundleName);
+    }
+
+    public static string GetCurPlatformChannelRelativePath()
+    {
+        var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+        var channelName = GetCurSelectedChannel().ToString();
+        return GetChannelRelativePath(buildTarget, channelName);
+    }
+
+    public static string GetCurBuildSettingAssetBundleOutputPath()
     {
         var buildTarget = EditorUserBuildSettings.activeBuildTarget;
         var channelType = GetCurSelectedChannel();
-        return GetBuildPlatformOutputPath(buildTarget, channelType.ToString());
+        return GetAssetBundleOutputPath(buildTarget, channelType.ToString());
     }
 
-    public static string GetCurBuildSettingOutputManifestPath()
+    public static string GetCurBuildSettingAssetBundleManifestPath()
     {
-        string path = GetCurBuildSettingOutputPath();
-        path = Path.Combine(path, GetCurSelectedChannel().ToString());
-        return path;
+        var buildTarget = EditorUserBuildSettings.activeBuildTarget;
+        var channelType = GetCurSelectedChannel();
+        return GetAssetbundleManifestPath(buildTarget, channelType.ToString());
     }
 
     public static string GetCurBuildSettingStreamingManifestPath()
     {
         string path = AssetBundleUtility.GetStreamingAssetsDataPath();
-        path = Path.Combine(path, GetCurSelectedChannel().ToString());
+        path = Path.Combine(path, BuildUtils.ManifestBundleName);
         return path;
     }
 
@@ -198,7 +286,7 @@ public class PackageUtils
 
     public static void CopyAssetBundlesToStreamingAssets(BuildTarget buildTarget, string channelName)
     {
-        string source = GetBuildPlatformOutputPath(buildTarget, channelName);
+        string source = GetAssetBundleOutputPath(buildTarget, channelName);
         string destination = AssetBundleUtility.GetStreamingAssetsDataPath();
         // 有毒，竟然在有的windows系统这个函数删除不了目录，不知道是不是Unity的Bug
         // GameUtility.SafeDeleteDir(destination);
@@ -250,6 +338,55 @@ public class PackageUtils
             symbols = string.Format("{0};{1};", symbols, "HOTFIX_ENABLE");
         }
         PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, symbols);
+    }
+
+    public static void CheckAndRunAllCheckers(bool buildForPerChannel, bool forceRun)
+    {
+        // 这东西有点浪费时间，没必要的时候不跑它
+        if (AssetBundleDispatcherInspector.hasAnythingModified || forceRun)
+        {
+            AssetBundleDispatcherInspector.hasAnythingModified = false;
+            var start = DateTime.Now;
+            CheckAssetBundles.Run(buildForPerChannel);
+            Debug.Log("Finished CheckAssetBundles.Run! use " + (DateTime.Now - start).TotalSeconds + "s");
+        }
+    }
+    
+    public static void CopyAndroidSDKResources(string channelName)
+    {
+        string targetPath = Path.Combine(Application.dataPath, "Plugins");
+        targetPath = Path.Combine(targetPath, "Android");
+        GameUtility.SafeDeleteDir(targetPath);
+
+        string channelPath = Path.Combine(Environment.CurrentDirectory, "Channel");
+        string resPath = Path.Combine(channelPath, "UnityCallAndroid_" + channelName);
+        if (!Directory.Exists(resPath))
+        {
+            resPath = Path.Combine(channelPath, "UnityCallAndroid");
+        }
+
+        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0f);
+        PackageUtils.CopyJavaFolder(resPath + "/assets", targetPath + "/assets");
+        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0.3f);
+        PackageUtils.CopyJavaFolder(resPath + "/libs", targetPath + "/libs");
+        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0.6f);
+        PackageUtils.CopyJavaFolder(resPath + "/res", targetPath + "/res");
+        if (File.Exists(resPath + "/bin/UnityCallAndroid.jar"))
+        {
+            File.Copy(resPath + "/bin/UnityCallAndroid.jar", targetPath + "/libs/UnityCallAndroid.jar", true);
+        }
+        if (File.Exists(resPath + "/AndroidManifest.xml"))
+        {
+            File.Copy(resPath + "/AndroidManifest.xml", targetPath + "/AndroidManifest.xml", true);
+        }
+        if (File.Exists(resPath + "/icon/icon.png"))
+        {
+            File.Copy(resPath + "/icon/icon.png", Application.dataPath + "/icon.png", true);
+        }
+
+        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 1f);
+        EditorUtility.ClearProgressBar();
+        AssetDatabase.Refresh();
     }
 
     public static void CopyJavaFolder(string source, string destination)

@@ -65,8 +65,10 @@ namespace AssetBundles
 
         public static string ManifestBundleName
         {
-            get;
-            set;
+            get
+            {
+                return BuildUtils.ManifestBundleName;
+            }
         }
 
 #if UNITY_EDITOR || CLIENT_DEBUG
@@ -199,7 +201,7 @@ namespace AssetBundles
         {
             get
             {
-                return Setting.SERVER_RESOURCE_ADDR;
+                return URLSetting.SERVER_RESOURCE_URL;
             }
         }
         

@@ -7,20 +7,28 @@ using AssetBundles;
 using System;
 using System.Text;
 
+/// <summary>
+/// added by wsh @ 2018.01.03
+/// 功能： 打包相关配置和通用函数
+/// 
+/// 注意：
+/// 1）如果为每个渠道分别打AB包，则将渠道名打入各个AB包<---为了解决iOS各个渠道包的提审问题
+/// 
+/// </summary>
+
 public class BuildPlayer : Editor
 {
-    public const string ApkOutputPath = "vAPK";
     public const string XCodeOutputPath = "vXCode";
 
-    public static void WritePackageNameFile(BuildTarget buildTarget, string channelName)
+    public static void WriteChannelNameFile(BuildTarget buildTarget, string channelName)
     {
-        var outputPath = PackageUtils.GetBuildPlatformOutputPath(buildTarget, channelName);
-        GameUtility.SafeWriteAllText(Path.Combine(outputPath, BuildUtils.PackageNameFileName), channelName);
+        var outputPath = PackageUtils.GetAssetBundleOutputPath(buildTarget, channelName);
+        GameUtility.SafeWriteAllText(Path.Combine(outputPath, BuildUtils.ChannelNameFileName), channelName);
     }
 
     public static void WriteAssetBundleSize(BuildTarget buildTarget, string channelName)
     {
-        var outputPath = PackageUtils.GetBuildPlatformOutputPath(buildTarget, channelName);
+        var outputPath = PackageUtils.GetAssetBundleOutputPath(buildTarget, channelName);
         var allAssetbundles = GameUtility.GetSpecifyFilesInFolder(outputPath, new string[] { ".assetbundle" });
         StringBuilder sb = new StringBuilder();
         if (allAssetbundles != null && allAssetbundles.Length > 0)
@@ -36,11 +44,11 @@ public class BuildPlayer : Editor
         string content = sb.ToString().Trim();
         GameUtility.SafeWriteAllText(Path.Combine(outputPath, BuildUtils.AssetBundlesSizeFileName), content);
     }
-
+    
     private static void InnerBuildAssetBundles(BuildTarget buildTarget, string channelName, bool writeConfig)
     {
         BuildAssetBundleOptions buildOption = BuildAssetBundleOptions.IgnoreTypeTreeChanges | BuildAssetBundleOptions.DeterministicAssetBundle;
-        var outputPath = PackageUtils.GetBuildPlatformOutputPath(buildTarget, channelName);
+        string outputPath = PackageUtils.GetAssetBundleOutputPath(buildTarget, channelName);
         AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(outputPath, buildOption, buildTarget);
         if (manifest != null && writeConfig)
         {
@@ -48,20 +56,25 @@ public class BuildPlayer : Editor
             VariantMappingEditor.BuildVariantMapping(manifest);
             BuildPipeline.BuildAssetBundles(outputPath, buildOption, buildTarget);
         }
-        WritePackageNameFile(buildTarget, channelName);
+        WriteChannelNameFile(buildTarget, channelName);
         WriteAssetBundleSize(buildTarget, channelName);
         AssetDatabase.Refresh();
     }
 
     public static void BuildAssetBundles(BuildTarget buildTarget, string channelName)
     {
-        var start = DateTime.Now;
-        CheckAssetBundles.Run();
-        Debug.Log("Finished CheckAssetBundles.Run! use " + (DateTime.Now - start).TotalSeconds + "s");
+        bool buildForPerChannel = PackageUtils.BuildAssetBundlesForPerChannel(buildTarget);
 
-        start = DateTime.Now;
-        CheckAssetBundles.SwitchChannel(channelName.ToString());
-        Debug.Log("Finished CheckAssetBundles.SwitchChannel! use " + (DateTime.Now - start).TotalSeconds + "s");
+        XLuaMenu.CopyLuaFilesToAssetsPackage();
+        PackageUtils.CheckAndRunAllCheckers(buildForPerChannel, false);
+
+        DateTime start = DateTime.Now;
+        if (buildForPerChannel)
+        {
+            start = DateTime.Now;
+            CheckAssetBundles.SwitchChannel(channelName);
+            Debug.Log("Finished CheckAssetBundles.SwitchChannel! use " + (DateTime.Now - start).TotalSeconds + "s");
+        }
 
         start = DateTime.Now;
         InnerBuildAssetBundles(buildTarget, channelName, true);
@@ -73,19 +86,22 @@ public class BuildPlayer : Editor
 
     public static void BuildAssetBundlesForAllChannels(BuildTarget buildTarget)
     {
+        bool buildForPerChannel = PackageUtils.BuildAssetBundlesForPerChannel(buildTarget);
         var targetName = PackageUtils.GetPlatformName(buildTarget);
+        Debug.Assert(buildForPerChannel == true);
 
-        var start = DateTime.Now;
-        CheckAssetBundles.Run();
-        Debug.Log("Finished CheckAssetBundles.Run! use " + (DateTime.Now - start).TotalSeconds + "s");
+        XLuaMenu.CopyLuaFilesToAssetsPackage();
+        PackageUtils.CheckAndRunAllCheckers(buildForPerChannel, false);
 
         int index = 0;
         double switchChannel = 0;
         double buildAssetbundles = 0;
+        var start = DateTime.Now;
         foreach (var current in (ChannelType[])Enum.GetValues(typeof(ChannelType)))
         {
-            start = DateTime.Now;
             var channelName = current.ToString();
+
+            start = DateTime.Now;
             CheckAssetBundles.SwitchChannel(channelName);
             switchChannel = (DateTime.Now - start).TotalSeconds;
 
@@ -113,34 +129,32 @@ public class BuildPlayer : Editor
         PackageUtils.CopyAssetBundlesToStreamingAssets(buildTarget, channelName);
         if (!isTest)
         {
-            CopyAndroidSDKResources(channelName);
             LaunchAssetBundleServer.ClearAssetBundleServerURL();
         }
         else
         {
             LaunchAssetBundleServer.WriteAssetBundleServerURL();
         }
-
-        string buildFolder = Path.Combine(System.Environment.CurrentDirectory, ApkOutputPath);
-        GameUtility.CheckDirAndCreateWhenNeeded(buildFolder);
+        
         BaseChannel channel = ChannelManager.instance.CreateChannel(channelName);
 #if UNITY_5_6_OR_NEWER
         PlayerSettings.applicationIdentifier = channel.GetBundleID();
 #else
         PlayerSettings.bundleIdentifier = channel.GetBundleID();
 #endif
-        PlayerSettings.productName = channel.GetPackageName();
-
-        string savePath = null;
+        PlayerSettings.productName = channel.GetProductName();
+        
+        string savePath = PackageUtils.GetChannelOutputPath(buildTarget, channelName);
+        string appName = channel.GetProductName() + ".apk";
         if (channel.IsGooglePlay())
         {
-            savePath = Path.Combine(buildFolder, channelName);
+            savePath = Path.Combine(savePath, "GooglePlay");
             GameUtility.SafeDeleteDir(savePath);
             BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, buildTarget, BuildOptions.AcceptExternalModificationsToPlayer);
         }
         else
         {
-            savePath = Path.Combine(buildFolder, channel.GetPackageName() + ".apk");
+            savePath = Path.Combine(savePath, appName);
             BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, buildTarget, BuildOptions.None);
         }
         Debug.Log(string.Format("Build android player for : {0} done! output ：{1}", channelName, savePath));
@@ -179,7 +193,7 @@ public class BuildPlayer : Editor
 #else
         PlayerSettings.bundleIdentifier = channel.GetBundleID();
 #endif
-        PlayerSettings.productName = channel.GetPackageName();
+        PlayerSettings.productName = channel.GetProductName();
         PackageUtils.CheckAndAddSymbolIfNeeded(buildTarget, channelName);
         BuildPipeline.BuildPlayer(GetBuildScenes(), buildFolder, buildTarget, BuildOptions.None);
     }
@@ -195,41 +209,5 @@ public class BuildPlayer : Editor
             }
         }
         return names.ToArray();
-    }
-
-
-    public static void CopyAndroidSDKResources(string channelName)
-    {
-        string targetPath = Path.Combine(Application.dataPath, "/Plugins/Android");
-        GameUtility.SafeDeleteDir(targetPath);
-
-        string resPath = Path.Combine(Environment.CurrentDirectory, "/Channel/UnityCallAndroid_" + channelName);
-        if (!Directory.Exists(resPath))
-        {
-            resPath = Path.Combine(Environment.CurrentDirectory, "/Channel/UnityCallAndroid" + channelName);
-        }
-
-        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0f);
-        PackageUtils.CopyJavaFolder(resPath + "/assets", targetPath + "/assets");
-        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0.3f);
-        PackageUtils.CopyJavaFolder(resPath + "/libs", targetPath + "/libs");
-        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 0.6f);
-        PackageUtils.CopyJavaFolder(resPath + "/res", targetPath + "/res");
-        if (File.Exists(resPath + "/bin/UnityCallAndroid.jar"))
-        {
-            File.Copy(resPath + "/bin/UnityCallAndroid.jar", targetPath + "/libs/UnityCallAndroid.jar", true);
-        }
-        if (File.Exists(resPath + "/AndroidManifest.xml"))
-        {
-            File.Copy(resPath + "/AndroidManifest.xml", targetPath + "/AndroidManifest.xml", true);
-        }
-        if (File.Exists(resPath + "/icon/icon.png"))
-        {
-            File.Copy(resPath + "/icon/icon.png", Application.dataPath + "/icon.png", true);
-        }
-
-        EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 1f);
-        EditorUtility.ClearProgressBar();
-        AssetDatabase.Refresh();
     }
 }

@@ -14,7 +14,7 @@ namespace GameChannel
         public Action downLoadGameFail = null;
         public Action<int> downLoadGameProgress = null;
 
-        public string packageName
+        public string channelName
         {
             get;
             protected set;
@@ -44,15 +44,15 @@ namespace GameChannel
             set;
         }
 
-        public void Init(string packageName)
+        public void Init(string channelName)
         {
-            this.packageName = packageName;
-            channel = CreateChannel(packageName);
+            this.channelName = channelName;
+            channel = CreateChannel(channelName);
         }
         
-        public BaseChannel CreateChannel(string packageName)
+        public BaseChannel CreateChannel(string channelName)
         {
-            ChannelType platName = (ChannelType)Enum.Parse(typeof(ChannelType), packageName);
+            ChannelType platName = (ChannelType)Enum.Parse(typeof(ChannelType), channelName);
             switch ((platName))
             {
                 case ChannelType.Test:
@@ -72,7 +72,7 @@ namespace GameChannel
 
         public void InitSDKComplete(string msg)
         {
-            Logger.platChannel = packageName;
+            Logger.platChannel = channelName;
 
             if (initDelFun != null)
             {
@@ -134,7 +134,25 @@ namespace GameChannel
             }
             return channel.IsInternalChannel();
         }
-        
+
+        public string GetProductName()
+        {
+            if (channel == null)
+            {
+                return "xluaframework";
+            }
+            return channel.GetProductName();
+        }
+
+        public bool IsGooglePlay()
+        {
+            if (channel == null)
+            {
+                return false;
+            }
+            return channel.IsGooglePlay();
+        }
+
         public override void Dispose()
         {
         }

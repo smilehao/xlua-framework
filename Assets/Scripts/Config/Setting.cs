@@ -1,22 +1,22 @@
 ﻿
-public class Setting
+public class URLSetting
 {
     public static string START_UP_URL
     {
         get
         {
-            // TODO：外围启动地址
+            // TODO：外网启动地址，这个地址在发布线上游戏时自行部署和设置
             return "https://chivas.framework.com/startup";
         }
     }
 
-    public static string SERVER_RESOURCE_ADDR
+    public static string SERVER_RESOURCE_URL
     {
         get;
         set;
     }
 
-    public static string APP_ADDR
+    public static string APP_DOWNLOAD_URL
     {
         get;
         set;

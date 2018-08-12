@@ -21,7 +21,10 @@ public class PackageTool : EditorWindow
     static private string resVersion = "1.0.0";
     static private LocalServerType localServerType = LocalServerType.CurrentMachine;
     static private string localServerIP = "127.0.0.1";
-    
+    static private bool androidBuildABForPerChannel;
+    static private bool iosBuildABForPerChannel;
+    static private bool buildABSForPerChannel;
+
     [MenuItem("Tools/Package", false, 0)]
     static void Init() {
         EditorWindow.GetWindow(typeof(PackageTool));
@@ -34,8 +37,84 @@ public class PackageTool : EditorWindow
 
         localServerType = PackageUtils.GetLocalServerType();
         localServerIP = PackageUtils.GetLocalServerIP();
+
+        androidBuildABForPerChannel = PackageUtils.GetAndroidBuildABForPerChannelSetting();
+        iosBuildABForPerChannel = PackageUtils.GetIOSBuildABForPerChannelSetting();
     }
 
+    void OnGUI()
+    {
+        GUILayout.BeginVertical();
+        GUILayout.Space(10);
+        buildTarget = (BuildTarget)EditorGUILayout.EnumPopup("Build Target : ", buildTarget);
+        GUILayout.Space(5);
+        bool buildTargetSupport = false;
+        if (buildTarget != BuildTarget.Android && buildTarget != BuildTarget.iOS)
+        {
+            GUILayout.Label("Error : Only android or iOS build target supported!!!");
+        }
+        else
+        {
+            buildTargetSupport = true;
+            channelType = (ChannelType)EditorGUILayout.EnumPopup("Build Channel : ", channelType);
+        }
+        GUILayout.EndVertical();
+
+        if (buildTargetSupport)
+        {
+            if (GUI.changed)
+            {
+                PackageUtils.SaveCurSelectedChannel(channelType);
+            }
+
+            DrawAssetBundlesConfigGUI();
+            DrawConfigGUI();
+            DrawLocalServerGUI();
+            DrawAssetBundlesGUI();
+            DrawXLuaGUI();
+            DrawBuildPlayerGUI();
+        }
+    }
+
+    #region AB相关配置
+    void DrawAssetBundlesConfigGUI()
+    {
+        GUILayout.Space(3);
+        GUILayout.Label("-------------[AssetBundles Config]-------------");
+        GUILayout.Space(3);
+
+        // 是否为每个channel打一个AB包
+        GUILayout.Space(3);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Build For Per Channel : ", GUILayout.Width(150));
+        if (buildTarget == BuildTarget.Android)
+        {
+            buildABSForPerChannel = EditorGUILayout.Toggle(androidBuildABForPerChannel, GUILayout.Width(50));
+            if (buildABSForPerChannel != androidBuildABForPerChannel)
+            {
+                androidBuildABForPerChannel = buildABSForPerChannel;
+                PackageUtils.SaveAndroidBuildABForPerChannelSetting(buildABSForPerChannel);
+            }
+        }
+        else
+        {
+            buildABSForPerChannel = EditorGUILayout.Toggle(iosBuildABForPerChannel, GUILayout.Width(50));
+            if (buildABSForPerChannel != iosBuildABForPerChannel)
+            {
+                iosBuildABForPerChannel = buildABSForPerChannel;
+                PackageUtils.SaveIOSBuildABForPerChannelSetting(buildABSForPerChannel);
+            }
+        }
+        if (GUILayout.Button("Run All Checkers", GUILayout.Width(200)))
+        {
+            bool checkChannel = PackageUtils.BuildAssetBundlesForPerChannel(buildTarget);
+            PackageUtils.CheckAndRunAllCheckers(checkChannel, true);
+        }
+        GUILayout.EndHorizontal();
+    }
+    #endregion
+
+    #region 资源配置GUI
     void DrawConfigGUI()
     {
         GUILayout.Space(3);
@@ -61,25 +140,41 @@ public class PackageTool : EditorWindow
 
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Load Current", GUILayout.Width(100)))
+        if (PackageUtils.BuildAssetBundlesForPerChannel(buildTarget))
         {
-            LoadCurrentVersionFile();
+            if (GUILayout.Button("Load Current", GUILayout.Width(100)))
+            {
+                LoadCurrentVersionFile();
+            }
+            if (GUILayout.Button("Save Current", GUILayout.Width(100)))
+            {
+                SaveCurrentVersionFile();
+            }
+            if (GUILayout.Button("Validate All", GUILayout.Width(100)))
+            {
+                ValidateAllVersionFile();
+            }
+            if (GUILayout.Button("Save For All", GUILayout.Width(100)))
+            {
+                SaveAllVersionFile();
+            }
         }
-        if (GUILayout.Button("Save Current", GUILayout.Width(100)))
+        else
         {
-            SaveCurrentVersionFile();
-        }
-        if (GUILayout.Button("Validate All", GUILayout.Width(100)))
-        {
-            ValidateAllVersionFile();
-        }
-        if (GUILayout.Button("Save For All", GUILayout.Width(100)))
-        {
-            SaveAllVersionFile();
+            if (GUILayout.Button("Load Version", GUILayout.Width(100)))
+            {
+                LoadCurrentVersionFile();
+            }
+            if (GUILayout.Button("Save Version", GUILayout.Width(100)))
+            {
+                SaveCurrentVersionFile();
+            }
         }
         GUILayout.EndHorizontal();
     }
+    #endregion
 
+    #region 本地服务器配置GUI
     void DrawLocalServerGUI()
     {
         GUILayout.Space(3);
@@ -110,33 +205,56 @@ public class PackageTool : EditorWindow
         }
         GUILayout.EndHorizontal();
     }
+    #endregion
 
+    #region AB相关操作GUI
     void DrawAssetBundlesGUI()
     {
         GUILayout.Space(3);
         GUILayout.Label("-------------[Build AssetBundles]-------------");
         GUILayout.Space(3);
-
+        
+        GUILayout.Space(3);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+        if (buildABSForPerChannel)
         {
-            BuildAssetBundlesForCurrentChannel();
+            if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+            {
+                BuildAssetBundlesForCurrentChannel();
+            }
+            if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+            {
+                BuildAssetBundlesForAllChannels();
+            }
+            if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
+            {
+                AssetBundleMenuItems.ToolsOpenOutput();
+            }
+            if (GUILayout.Button("Copy To StreamingAsset", GUILayout.Width(200)))
+            {
+                AssetBundleMenuItems.ToolsCopyAssetbundles();
+            }
         }
-        if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+        else
         {
-            BuildAssetBundlesForAllChannels();
-        }
-        if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
-        {
-            AssetBundleMenuItems.ToolsToolsOpenOutput();
-        }
-        if (GUILayout.Button("Copy To StreamingAsset", GUILayout.Width(200)))
-        {
-            AssetBundleMenuItems.ToolsToolsCopyAssetbundles();
+            if (GUILayout.Button("Execute Build", GUILayout.Width(200)))
+            {
+                BuildAssetBundlesForCurrentChannel();
+            }
+            if (GUILayout.Button("Open Output Folder", GUILayout.Width(200)))
+            {
+                AssetBundleMenuItems.ToolsOpenOutput();
+            }
+            if (GUILayout.Button("Copy To StreamingAsset", GUILayout.Width(200)))
+            {
+                AssetBundleMenuItems.ToolsCopyAssetbundles();
+            }
         }
         GUILayout.EndHorizontal();
     }
+    #endregion
 
+    #region xlua相关GUI
     void DrawXLuaGUI()
     {
         GUILayout.Space(3);
@@ -150,7 +268,9 @@ public class PackageTool : EditorWindow
         }
         GUILayout.EndHorizontal();
     }
+    #endregion
 
+    #region 打包相关GUI
     void DrawBuildAndroidPlayerGUI()
     {
         GUILayout.Space(3);
@@ -158,18 +278,41 @@ public class PackageTool : EditorWindow
         GUILayout.Space(3);
 
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+        if (PackageUtils.BuildAssetBundlesForPerChannel(buildTarget))
         {
-            EditorApplication.delayCall += BuildAndroidPlayerForCurrentChannel;
+            if (GUILayout.Button("Copy SDK Resource", GUILayout.Width(200)))
+            {
+                PackageUtils.CopyAndroidSDKResources(channelType.ToString());
+            }
+            if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildAndroidPlayerForCurrentChannel;
+            }
+            if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildAndroidPlayerForAllChannels;
+            }
+            if (GUILayout.Button("Open Output Folder", GUILayout.Width(200)))
+            {
+                var folder = PackageUtils.GetChannelOutputPath(buildTarget, channelType.ToString());
+                EditorUtils.ExplorerFolder(folder);
+            }
         }
-        if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+        else
         {
-            EditorApplication.delayCall += BuildAndroidPlayerForAllChannels;
-        }
-        if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
-        {
-            var folder = Path.Combine(System.Environment.CurrentDirectory, BuildPlayer.ApkOutputPath);
-            EditorUtils.ExplorerFolder(folder);
+            if (GUILayout.Button("Copy SDK Resource", GUILayout.Width(200)))
+            {
+                PackageUtils.CopyAndroidSDKResources(channelType.ToString());
+            }
+            if (GUILayout.Button("Execute Build", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildAndroidPlayerForCurrentChannel;
+            }
+            if (GUILayout.Button("Open Output Folder", GUILayout.Width(200)))
+            {
+                var folder = PackageUtils.GetChannelOutputPath(buildTarget, channelType.ToString());
+                EditorUtils.ExplorerFolder(folder);
+            }
         }
         GUILayout.EndHorizontal();
     }
@@ -180,18 +323,33 @@ public class PackageTool : EditorWindow
         GUILayout.Label("-------------[Build IOS Player]-------------");
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+        if (PackageUtils.BuildAssetBundlesForPerChannel(buildTarget))
         {
-            EditorApplication.delayCall += BuildIOSPlayerForCurrentChannel;
+            if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildIOSPlayerForCurrentChannel;
+            }
+            if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildIOSPlayerForAllChannels;
+            }
+            if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
+            {
+                var folder = Path.Combine(System.Environment.CurrentDirectory, BuildPlayer.XCodeOutputPath);
+                EditorUtils.ExplorerFolder(folder);
+            }
         }
-        if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
+        else
         {
-            EditorApplication.delayCall += BuildIOSPlayerForAllChannels;
-        }
-        if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
-        {
-            var folder = Path.Combine(System.Environment.CurrentDirectory, BuildPlayer.XCodeOutputPath);
-            EditorUtils.ExplorerFolder(folder);
+            if (GUILayout.Button("Execute Build", GUILayout.Width(200)))
+            {
+                EditorApplication.delayCall += BuildIOSPlayerForCurrentChannel;
+            }
+            if (GUILayout.Button("Open Output Folder", GUILayout.Width(200)))
+            {
+                var folder = Path.Combine(System.Environment.CurrentDirectory, BuildPlayer.XCodeOutputPath);
+                EditorUtils.ExplorerFolder(folder);
+            }
         }
         GUILayout.EndHorizontal();
     }
@@ -207,37 +365,18 @@ public class PackageTool : EditorWindow
             DrawBuildIOSPlayerGUI();
         }
     }
+    #endregion
 
-    void OnGUI()
-    {
-        GUILayout.BeginVertical();
-        GUILayout.Space(10);
-        buildTarget = (BuildTarget)EditorGUILayout.EnumPopup("Build Target : ", buildTarget);
-        GUILayout.Space(5);
-        channelType = (ChannelType)EditorGUILayout.EnumPopup("Build Channel : ", channelType);
-        GUILayout.EndVertical();
-
-        if (GUI.changed)
-        {
-            PackageUtils.SaveCurSelectedChannel(channelType);
-        }
-
-        DrawConfigGUI();
-        DrawLocalServerGUI();
-        DrawAssetBundlesGUI();
-        DrawXLuaGUI();
-        DrawBuildPlayerGUI();
-    }
-
+    #region 资源配置操作
     public static string ReadVersionFile(BuildTarget target, ChannelType channel)
     {
-        string rootPath = PackageUtils.GetBuildPlatformOutputPath(target, channel.ToString());
+        string rootPath = PackageUtils.GetAssetBundleOutputPath(target, channel.ToString());
         return GameUtility.SafeReadAllText(Path.Combine(rootPath, BuildUtils.ResVersionFileName));
     }
 
     public static void SaveVersionFile(BuildTarget target, ChannelType channel)
     {
-        string rootPath = PackageUtils.GetBuildPlatformOutputPath(target, channel.ToString());
+        string rootPath = PackageUtils.GetAssetBundleOutputPath(target, channel.ToString());
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.ResVersionFileName), resVersion);
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.NoticeVersionFileName), resVersion);
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.AppVersionFileName), PlayerSettings.bundleVersion);
@@ -308,14 +447,17 @@ public class PackageTool : EditorWindow
         }
         EditorUtility.DisplayDialog("Success", "Save all version files done!", "Confirm");
     }
-    
+    #endregion
+
+    #region AB相关操作
     public static void BuildAssetBundlesForCurrentChannel()
     {
         var start = DateTime.Now;
         BuildPlayer.BuildAssetBundles(buildTarget, channelType.ToString());
 
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
-        EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
+        EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", 
+            buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
 
     public static void BuildAssetBundlesForAllChannels()
@@ -353,7 +495,9 @@ public class PackageTool : EditorWindow
         }
         return false;
     }
+    #endregion
 
+    #region 打包相关操作
     public static void BuildAndroidPlayerForCurrentChannel()
     {
         if (CheckSymbolsToCancelBuild())
@@ -415,4 +559,5 @@ public class PackageTool : EditorWindow
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : all \n\ndone! use {2}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
+    #endregion
 }

@@ -140,7 +140,7 @@ namespace AssetBundles
         {
             string ip = PackageUtils.GetLocalServerIP();
             string downloadURL = "http://" + ip + ":7888/";
-            downloadURL = downloadURL + PackageUtils.GetCurPlatformChannelPath() + "/";
+            downloadURL = downloadURL + PackageUtils.GetCurPlatformChannelRelativePath() + "/";
             return downloadURL;
         }
     }

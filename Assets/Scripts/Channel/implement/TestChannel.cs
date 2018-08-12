@@ -31,7 +31,7 @@
         
         }
 
-        public override string GetPackageName()
+        public override string GetProductName()
         {
             return "xluaframework";
         }
