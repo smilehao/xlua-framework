@@ -55,5 +55,5 @@ function TestCSEncodeAndLuaDeconde(cs_encode_bytes)
 	end
 	
 	-- 发送到CS
-	CS.CSAndLuaPBText.ForLuaCallCS(pb_data)
+	CS.CSAndLuaPBTest.ForLuaCallCS(pb_data)
 end

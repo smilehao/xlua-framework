@@ -22,9 +22,9 @@ using XLua;
 /// </summary>
 
 [LuaCallCSharp]
-public class CSAndLuaPBText : MonoBehaviour
+public class CSAndLuaPBTest : MonoBehaviour
 {
-    public static CSAndLuaPBText Instance;
+    public static CSAndLuaPBTest Instance;
 
     public TextAsset CSAndLuaPBTextLuaScript;
     const int DATA_BYTE_LENGTH = 40;//假设一个字段4个字节，共10个字段，已经远远超过游戏实际情况了
