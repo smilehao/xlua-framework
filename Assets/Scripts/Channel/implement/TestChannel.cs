@@ -1,34 +1,19 @@
-﻿namespace GameChannel
+﻿using System;
+
+namespace GameChannel
 {
     public class TestChannel : BaseChannel
     {
         public override void Init()
         {
-            ChannelManager.instance.InitSDKComplete("");
+            // TODO：
+            //AndroidSDKHelper.FuncCall("Init");
+            ChannelManager.instance.OnInitSDKCompleted("");
         }
 
-        public override void Login()
+        public override string GetBundleID()
         {
-        }
-
-        public override void Logout()
-        { 
-        
-        }
-
-        public override void ShowUserCenter(int serverId, string roleId)
-        { 
-        
-        }
-
-        public override void Pay(params object[] paramList)
-        { 
-        
-        }
-
-        public override void SubmitUserConfig(params object[] paramList)
-        { 
-        
+            return "com.chivas.framework";
         }
 
         public override string GetProductName()
@@ -43,11 +28,32 @@
 
         public override void DownloadGame(params object[] paramList)
         {
+            string url = paramList[0] as string;
+            string saveName = paramList[1] as string;
+            // TODO：
+            //AndroidSDKHelper.FuncCall("DownLoadGame", url, saveName);
+            ChannelManager.instance.OnDownloadGameFinished(true);
         }
 
-        public override string GetBundleID()
+        public override void InstallApk()
         {
-            return "com.chivas.framework";
+            // TODO：
+            //AndroidSDKHelper.FuncCall("InstallApk");
+            ChannelManager.instance.OnInstallGameFinished(true);
+        }
+
+        public override void Login()
+        {
+        }
+
+        public override void Logout()
+        { 
+        
+        }
+        
+        public override void Pay(params object[] paramList)
+        { 
+        
         }
     }
 }

@@ -416,7 +416,7 @@ public class AssetbundleUpdater : MonoBehaviour
         slider.normalizedValue = 0;
         slider.gameObject.SetActive(true);
         statusText.text = "正在下载游戏...";
-        ChannelManager.instance.StartDownLoadGame(URLSetting.APP_DOWNLOAD_URL, DownloadGameSuccess, DownloadGameFail, (int progress) =>
+        ChannelManager.instance.StartDownloadGame(URLSetting.APP_DOWNLOAD_URL, DownloadGameSuccess, DownloadGameFail, (int progress) =>
         {
             slider.normalizedValue = progress;
         }, string.Format(APK_FILE_PATH, ChannelManager.instance.channelName, serverAppVersion));
@@ -426,7 +426,7 @@ public class AssetbundleUpdater : MonoBehaviour
     {
         UINoticeTip.Instance.ShowOneButtonTip("下载完毕", "游戏下载完毕，确认安装？", "安装", () =>
         {
-            ChannelManager.instance.InstallGame(DownloadGameSuccess, DownloadGameFail);
+            ChannelManager.instance.InstallGame(InstallGameSuccess, DownloadGameFail);
         });
     }
 
@@ -436,6 +436,13 @@ public class AssetbundleUpdater : MonoBehaviour
         {
             DownloadGameForAndroid();
         });
+    }
+
+    void InstallGameSuccess()
+    {
+        // 正常情况下安装游戏成功不应该会走到这里
+        Debug.LogError("InstallGameSuccess, but something must be wrong!!!");
+        StartCoroutine(StartGame());
     }
 #endif
 
