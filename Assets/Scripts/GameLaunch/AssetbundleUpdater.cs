@@ -91,27 +91,31 @@ public class AssetbundleUpdater : MonoBehaviour
         Logger.Log(string.Format("InitSDK use {0}ms", (DateTime.Now - start).Milliseconds));
 
 #if UNITY_EDITOR
-        // EditorMode总是跳过资源更新
+        serverAppVersion = clientAppVersion;
+        serverResVersion = clientResVersion;
         if (AssetBundleConfig.IsEditorMode)
         {
+            // EditorMode总是跳过资源更新
             yield return StartGame();
             yield break;
         }
+        else
+        {
 #if UNITY_5_5
-        // 说明：亲测在Unity5.5版本本地服务器根本无法连接，倒是在手机上正常
-        Logger.Log("No support simulate in Unity5.5 in windows...");
-        yield return StartGame();
-        yield break;
+            // 说明：亲测在Unity5.5版本本地服务器根本无法连接，倒是在手机上正常
+            Logger.Log("No support simulate in Unity5.5 in windows...");
+            yield return StartGame();
+            yield break;
 #endif
+        }
 #endif
-        yield return null;
-        
+
         // 获取服务器地址，并检测大版本更新、资源更新
         bool isInternalVersion = ChannelManager.instance.IsInternalVersion();
         serverAppVersion = clientAppVersion;
         serverResVersion = clientResVersion;
         yield return GetUrlListAndCheckUpdate(isInternalVersion);
-
+        
         // 执行大版本更新、资源更新
         if (needDownloadGame)
         {
@@ -138,8 +142,8 @@ public class AssetbundleUpdater : MonoBehaviour
 #if UNITY_EDITOR || CLIENT_DEBUG
         AssetBundleManager.Instance.TestHotfix();
 #endif
-        Logger.clientVerstion = clientResVersion;
-        ChannelManager.instance.resVersion = clientResVersion;
+        Logger.clientVerstion = clientAppVersion;
+        ChannelManager.instance.resVersion = serverResVersion;
 
         XLuaManager.Instance.StartGame();
         CustomDataStruct.Helper.Startup();
@@ -299,6 +303,27 @@ public class AssetbundleUpdater : MonoBehaviour
         yield break;
     }
 
+    IEnumerator DownloadLocalServerResVersion()
+    {
+        var request = AssetBundleManager.Instance.DownloadAssetFileAsync(BuildUtils.ResVersionFileName);
+        yield return request;
+        if (request.error != null)
+        {
+            UINoticeTip.Instance.ShowOneButtonTip("网络错误", "检测更新失败，请确认网络已经连接！", "重试", null);
+            yield return UINoticeTip.Instance.WaitForResponse();
+            Logger.LogError("Download :  " + request.assetbundleName + "\n from url : " + request.url + "\n err : " + request.error);
+            request.Dispose();
+
+            // 内部版本本地服务器有问题直接跳过，不要卡住游戏
+            yield break;
+        }
+
+        serverResVersion = request.text.Trim().Replace("\r", "");
+        request.Dispose();
+
+        yield break;
+    }
+
     IEnumerator InternalGetUrlList()
     {
         // 内网服务器地址设置
@@ -319,6 +344,9 @@ public class AssetbundleUpdater : MonoBehaviour
 
         // 从本地服务器拉一下App版本号
         yield return DownloadLocalServerAppVersion();
+
+        // 从本地服务器拉一下资源版本号
+        yield return DownloadLocalServerResVersion();
 
         yield break;
     }

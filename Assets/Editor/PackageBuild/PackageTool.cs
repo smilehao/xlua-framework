@@ -473,7 +473,7 @@ public class PackageTool : EditorWindow
         {
             int subVer = 0;
             int.TryParse(vers[vers.Length - 1], out subVer);
-            vers[vers.Length - 1] = (subVer + 1).ToString();
+            vers[vers.Length - 1] = string.Format("{0:D3}", subVer + 1);
         }
         resVersion = string.Join(".", vers);
         SaveCurrentVersionFile(true);
@@ -540,7 +540,7 @@ public class PackageTool : EditorWindow
         {
             int subVer = 0;
             int.TryParse(vers[vers.Length - 1], out subVer);
-            vers[vers.Length - 1] = (subVer + 1).ToString();
+            vers[vers.Length - 1] = string.Format("{0:D3}", subVer + 1);
         }
         PlayerSettings.bundleVersion = string.Join(".", vers);
         SaveCurrentVersionFile(true);
