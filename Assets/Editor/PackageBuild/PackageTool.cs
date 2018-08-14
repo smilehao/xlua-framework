@@ -481,10 +481,11 @@ public class PackageTool : EditorWindow
 
     public static void BuildAssetBundlesForCurrentChannel()
     {
+        IncreaseResSubVersion();
+
         var start = DateTime.Now;
         BuildPlayer.BuildAssetBundles(buildTarget, channelType.ToString());
 
-        IncreaseResSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", 
             buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
@@ -492,10 +493,11 @@ public class PackageTool : EditorWindow
 
     public static void BuildAssetBundlesForAllChannels()
     {
+        IncreaseResSubVersion();
+
         var start = DateTime.Now;
         BuildPlayer.BuildAssetBundlesForAllChannels(buildTarget);
-
-        IncreaseResSubVersion();
+        
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : all \n\ndone! use {1}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -551,10 +553,11 @@ public class PackageTool : EditorWindow
             return;
         }
 
+        IncreaseAppSubVersion();
+
         var start = DateTime.Now;
         BuildPlayer.BuildAndroid(channelType.ToString(), channelType == ChannelType.Test);
 
-        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -566,13 +569,14 @@ public class PackageTool : EditorWindow
             return;
         }
 
+        IncreaseAppSubVersion();
+
         var start = DateTime.Now;
         foreach (var current in (ChannelType[])Enum.GetValues(typeof(ChannelType)))
         {
             BuildPlayer.BuildAndroid(current.ToString(), current == ChannelType.Test);
         }
 
-        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : all \n\ndone! use {2}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -584,10 +588,11 @@ public class PackageTool : EditorWindow
             return;
         }
 
+        IncreaseAppSubVersion();
+
         var start = DateTime.Now;
         BuildPlayer.BuildXCode(channelType.ToString(), channelType == ChannelType.Test);
 
-        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -599,13 +604,14 @@ public class PackageTool : EditorWindow
             return;
         }
 
+        IncreaseAppSubVersion();
+
         var start = DateTime.Now;
         foreach (var current in (ChannelType[])Enum.GetValues(typeof(ChannelType)))
         {
             BuildPlayer.BuildXCode(current.ToString(), channelType == ChannelType.Test);
         }
 
-        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : all \n\ndone! use {2}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }

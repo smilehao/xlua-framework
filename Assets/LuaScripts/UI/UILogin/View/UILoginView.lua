@@ -11,12 +11,13 @@ local UILoginView = BaseClass("UILoginView", UIBaseView)
 local base = UIBaseView
 
 -- 各个组件路径
-local version_text_path = "ContentRoot/VersionText"
 local server_text_path = "ContentRoot/SvrRoot/SvrSelectBtn/SvrText"
 local account_input_path = "ContentRoot/AccountRoot/AccountInput"
 local password_input_path = "ContentRoot/PasswordRoot/PasswordInput"
 local server_select_btn_path = "ContentRoot/SvrRoot/SvrSelectBtn"
 local login_btn_path = "ContentRoot/LoginBtn"
+local app_version_text_path = "ContentRoot/AppVersionText"
+local res_version_text_path = "ContentRoot/ResVersionText"
 
 -- 以下为测试用的组件路径
 local test_uieffect1_path = "TestEffect1"
@@ -43,7 +44,8 @@ end
 local function OnCreate(self)
 	base.OnCreate(self)
 	-- 初始化各个组件
-	self.version_text = self:AddComponent(UIText, version_text_path)
+	self.app_version_text = self:AddComponent(UIText, app_version_text_path)
+	self.res_version_text = self:AddComponent(UIText, res_version_text_path)
 	self.server_text = self:AddComponent(UIText, server_text_path)
 	self.account_input = self:AddComponent(UIInput, account_input_path)
 	self.password_input = self:AddComponent(UIInput, password_input_path)
@@ -121,7 +123,8 @@ end
 
 local function OnRefresh(self)
 	-- 各组件刷新
-	self.version_text:SetText(self.model.client_ver)
+	self.app_version_text:SetText("游戏版本号："..self.model.client_app_ver)
+	self.res_version_text:SetText("资源版本号："..self.model.client_res_ver)
 	self.account_input:SetText(self.model.account)
 	self.password_input:SetText(self.model.password)
 	OnRefreshServerInfo(self)
@@ -141,7 +144,8 @@ local function OnRemoveListener(self)
 end
 
 local function OnDestroy(self)
-	self.version_text = nil
+	self.app_version_text = nil
+	self.res_version_text = nil
 	self.server_text = nil
 	self.account_input = nil
 	self.password_input = nil

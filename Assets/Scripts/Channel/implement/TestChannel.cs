@@ -33,8 +33,7 @@ namespace GameChannel
 
         public override void InstallApk()
         {
-            //AndroidSDKHelper.FuncCall("InstallApk");
-            ChannelManager.instance.OnInstallGameFinished(true);
+            AndroidSDKHelper.FuncCall("InstallApk");
         }
 
         public override void Login()

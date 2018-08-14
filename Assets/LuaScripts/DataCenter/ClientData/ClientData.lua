@@ -6,7 +6,8 @@
 local ClientData = BaseClass("ClientData", Singleton)
 
 local function __init(self)
-	self.version = "Alpha 1.0 000"
+	self.app_version = CS.GameChannel.ChannelManager.instance.appVersion
+	self.res_version = CS.GameChannel.ChannelManager.instance.resVersion
 	self.account = CS.UnityEngine.PlayerPrefs.GetString("account")
 	self.password = CS.UnityEngine.PlayerPrefs.GetString("password")
 	self.login_server_id = CS.UnityEngine.PlayerPrefs.GetInt("login_server_id")

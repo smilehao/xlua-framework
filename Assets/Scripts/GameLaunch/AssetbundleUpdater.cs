@@ -80,6 +80,16 @@ public class AssetbundleUpdater : MonoBehaviour
 
     IEnumerator CheckUpdateOrDownloadGame()
     {
+        // 初始化本地版本信息
+        var start = DateTime.Now;
+        yield return InitLocalVersion();
+        Logger.Log(string.Format("InitLocalVersion use {0}ms", (DateTime.Now - start).Milliseconds));
+
+        // 初始化SDK
+        start = DateTime.Now;
+        yield return InitSDK();
+        Logger.Log(string.Format("InitSDK use {0}ms", (DateTime.Now - start).Milliseconds));
+
 #if UNITY_EDITOR
         // EditorMode总是跳过资源更新
         if (AssetBundleConfig.IsEditorMode)
@@ -96,16 +106,6 @@ public class AssetbundleUpdater : MonoBehaviour
 #endif
         yield return null;
         
-        // 初始化本地版本信息
-        var start = DateTime.Now;
-        yield return InitLocalVersion();
-        Logger.Log(string.Format("InitLocalVersion use {0}ms", (DateTime.Now - start).Milliseconds));
-        
-        // 初始化SDK
-        start = DateTime.Now;
-        yield return InitSDK();
-        Logger.Log(string.Format("InitSDK use {0}ms", (DateTime.Now - start).Milliseconds));
-
         // 获取服务器地址，并检测大版本更新、资源更新
         bool isInternalVersion = ChannelManager.instance.IsInternalVersion();
         serverAppVersion = clientAppVersion;
@@ -395,7 +395,6 @@ public class AssetbundleUpdater : MonoBehaviour
     #region 游戏下载
     IEnumerator DownloadGame()
     {
-        Logger.Log(string.Format("Download game : channelName = {0}, serverAppVersion = {1}", ChannelManager.instance.channelName, serverAppVersion));
 #if UNITY_ANDROID
         if (Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
         {
@@ -415,10 +414,13 @@ public class AssetbundleUpdater : MonoBehaviour
         slider.normalizedValue = 0;
         slider.gameObject.SetActive(true);
         statusText.text = "正在下载游戏...";
+
+        string saveName = string.Format(APK_FILE_PATH, ChannelManager.instance.channelName, serverAppVersion);
+        Logger.Log(string.Format("Download game : {0}", saveName));
         ChannelManager.instance.StartDownloadGame(URLSetting.APP_DOWNLOAD_URL, DownloadGameSuccess, DownloadGameFail, (int progress) =>
         {
             slider.normalizedValue = progress;
-        }, string.Format(APK_FILE_PATH, ChannelManager.instance.channelName, serverAppVersion));
+        }, saveName);
     }
 
     void DownloadGameSuccess()

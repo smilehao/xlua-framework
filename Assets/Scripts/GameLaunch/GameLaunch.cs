@@ -65,12 +65,6 @@ public class GameLaunch : MonoBehaviour
 
     IEnumerator InitAppVersion()
     {
-#if UNITY_EDITOR
-        if (AssetBundleConfig.IsEditorMode)
-        {
-            yield break;
-        }
-#endif
         var appVersionRequest = AssetBundleManager.Instance.RequestAssetFileAsync(BuildUtils.AppVersionFileName);
         yield return appVersionRequest;
         var streamingAppVersion = appVersionRequest.text;
