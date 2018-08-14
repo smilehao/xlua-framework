@@ -40,13 +40,7 @@ public class URLSetting
         set;
     }
     
-    public static string NOTIFY_URL
-    {
-        get;
-        set;
-    }
-
-    public static string NOTIFY_URL1
+    public static string NOTICE_URL
     {
         get;
         set;

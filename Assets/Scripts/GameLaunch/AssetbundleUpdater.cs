@@ -19,8 +19,7 @@ public class AssetbundleUpdater : MonoBehaviour
     static int MAX_DOWNLOAD_NUM = 5;
     static int UPDATE_SIZE_LIMIT = 5 * 1024 * 1024;
     static string APK_FILE_PATH = "/xluaframework_{0}_{1}.apk";
-
-    string noticeUrl = null;
+    
     string resVersionPath = null;
     string noticeVersionPath = null;
     string clientAppVersion = null;
@@ -101,7 +100,7 @@ public class AssetbundleUpdater : MonoBehaviour
         var start = DateTime.Now;
         yield return InitLocalVersion();
         Logger.Log(string.Format("InitLocalVersion use {0}ms", (DateTime.Now - start).Milliseconds));
-
+        
         // 初始化SDK
         start = DateTime.Now;
         yield return InitSDK();
@@ -187,6 +186,9 @@ public class AssetbundleUpdater : MonoBehaviour
 
     IEnumerator InitSDK()
     {
+#if UNITY_EDITOR
+        yield break;
+#else
         bool SDKInitComplete = false;
         ChannelManager.instance.InitSDK(() =>
         {
@@ -196,6 +198,7 @@ public class AssetbundleUpdater : MonoBehaviour
             return SDKInitComplete;
         });
         yield break;
+#endif
     }
     #endregion
 
@@ -263,13 +266,9 @@ public class AssetbundleUpdater : MonoBehaviour
         sb.AppendFormat("SERVER_LIST_URL = {0}\n", URLSetting.SERVER_LIST_URL);
         sb.AppendFormat("LOGIN_URL = {0}\n", URLSetting.LOGIN_URL);
         sb.AppendFormat("REPORT_ERROR_URL = {0}\n", URLSetting.REPORT_ERROR_URL);
-        sb.AppendFormat("NOTIFY_URL = {0}\n", URLSetting.NOTIFY_URL);
-        sb.AppendFormat("NOTIFY_URL1 = {0}\n", URLSetting.NOTIFY_URL1);
-        sb.AppendFormat("APP_ADDR = {0}\n", URLSetting.APP_DOWNLOAD_URL);
+        sb.AppendFormat("NOTIFY_URL = {0}\n", URLSetting.NOTICE_URL);
+        sb.AppendFormat("APP_DOWNLOAD_URL = {0}\n", URLSetting.APP_DOWNLOAD_URL);
         sb.AppendFormat("SERVER_RESOURCE_ADDR = {0}\n", URLSetting.SERVER_RESOURCE_URL);
-        sb.AppendFormat("noticeUrl = {0}\n", noticeUrl);
-        sb.AppendFormat("appUrl = {0}\n", URLSetting.APP_DOWNLOAD_URL);
-        sb.AppendFormat("resUrl = {0}\n", URLSetting.SERVER_RESOURCE_URL);
         sb.AppendFormat("noticeVersion = {0}\n", ChannelManager.instance.noticeVersion);
         sb.AppendFormat("serverAppVersion = {0}\n", serverAppVersion);
         sb.AppendFormat("serverResVersion = {0}\n", serverResVersion);
@@ -379,7 +378,7 @@ public class AssetbundleUpdater : MonoBehaviour
         }
         if (urlList.ContainsKey("notice_url") && !string.IsNullOrEmpty(urlList["notice_url"].ToString()))
         {
-            noticeUrl = urlList["notice_url"].ToString();
+            URLSetting.NOTICE_URL = urlList["notice_url"].ToString();
         }
         if (urlList.ContainsKey("app") && !string.IsNullOrEmpty(urlList["app"].ToString()))
         {
@@ -396,6 +395,7 @@ public class AssetbundleUpdater : MonoBehaviour
     #region 游戏下载
     IEnumerator DownloadGame()
     {
+        Logger.Log(string.Format("Download game : channelName = {0}, serverAppVersion = {1}", ChannelManager.instance.channelName, serverAppVersion));
 #if UNITY_ANDROID
         if (Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
         {
@@ -412,7 +412,6 @@ public class AssetbundleUpdater : MonoBehaviour
 #if UNITY_ANDROID
     void DownloadGameForAndroid()
     {
-        // TODO：sdk下载还跑不通
         slider.normalizedValue = 0;
         slider.gameObject.SetActive(true);
         statusText.text = "正在下载游戏...";
@@ -426,7 +425,7 @@ public class AssetbundleUpdater : MonoBehaviour
     {
         UINoticeTip.Instance.ShowOneButtonTip("下载完毕", "游戏下载完毕，确认安装？", "安装", () =>
         {
-            ChannelManager.instance.InstallGame(InstallGameSuccess, DownloadGameFail);
+            ChannelManager.instance.InstallGame(DownloadGameSuccess, DownloadGameFail);
         });
     }
 
@@ -436,13 +435,6 @@ public class AssetbundleUpdater : MonoBehaviour
         {
             DownloadGameForAndroid();
         });
-    }
-
-    void InstallGameSuccess()
-    {
-        // 正常情况下安装游戏成功不应该会走到这里
-        Debug.LogError("InstallGameSuccess, but something must be wrong!!!");
-        StartCoroutine(StartGame());
     }
 #endif
 
@@ -512,6 +504,7 @@ public class AssetbundleUpdater : MonoBehaviour
         yield return UpdateFinish();
         Logger.Log(string.Format("UpdateFinish use {0}ms", (DateTime.Now - start).Milliseconds));
 
+        string noticeUrl = URLSetting.NOTICE_URL;
         if (!string.IsNullOrEmpty(noticeUrl))
         {
             var url = noticeUrl + "?v" + timeStamp;

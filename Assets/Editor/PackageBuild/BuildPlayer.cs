@@ -123,6 +123,20 @@ public class BuildPlayer : Editor
         BuildAssetBundles(buildTarget, channelName);
     }
 
+    private static void SetPlayerSetting(BaseChannel channel)
+    {
+        if (channel != null)
+        {
+#if UNITY_5_6_OR_NEWER
+            PlayerSettings.applicationIdentifier = channel.GetBundleID();
+#else
+            PlayerSettings.bundleIdentifier = channel.GetBundleID();
+#endif
+            PlayerSettings.productName = channel.GetProductName();
+            PlayerSettings.companyName = channel.GetCompanyName();
+        }
+    }
+
     public static void BuildAndroid(string channelName, bool isTest)
     {
         BuildTarget buildTarget = BuildTarget.Android;
@@ -137,13 +151,8 @@ public class BuildPlayer : Editor
         }
         
         BaseChannel channel = ChannelManager.instance.CreateChannel(channelName);
-#if UNITY_5_6_OR_NEWER
-        PlayerSettings.applicationIdentifier = channel.GetBundleID();
-#else
-        PlayerSettings.bundleIdentifier = channel.GetBundleID();
-#endif
-        PlayerSettings.productName = channel.GetProductName();
-        
+        SetPlayerSetting(channel);
+
         string savePath = PackageUtils.GetChannelOutputPath(buildTarget, channelName);
         string appName = channel.GetProductName() + ".apk";
         if (channel.IsGooglePlay())
@@ -188,12 +197,8 @@ public class BuildPlayer : Editor
         PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.iOS, iconList.ToArray());
 
         BaseChannel channel = ChannelManager.instance.CreateChannel(channelName);
-#if UNITY_5_6_OR_NEWER
-        PlayerSettings.applicationIdentifier = channel.GetBundleID();
-#else
-        PlayerSettings.bundleIdentifier = channel.GetBundleID();
-#endif
-        PlayerSettings.productName = channel.GetProductName();
+        SetPlayerSetting(channel);
+
         PackageUtils.CheckAndAddSymbolIfNeeded(buildTarget, channelName);
         BuildPipeline.BuildPlayer(GetBuildScenes(), buildFolder, buildTarget, BuildOptions.None);
     }

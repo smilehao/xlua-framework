@@ -8,6 +8,11 @@
         {
         }
 
+        public virtual string GetCompanyName()
+        {
+            return "chivas";
+        }
+
         public abstract string GetBundleID();
 
         public abstract string GetProductName();

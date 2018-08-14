@@ -40,6 +40,7 @@ public class PackageTool : EditorWindow
 
         androidBuildABForPerChannel = PackageUtils.GetAndroidBuildABForPerChannelSetting();
         iosBuildABForPerChannel = PackageUtils.GetIOSBuildABForPerChannelSetting();
+        LoadCurrentVersionFile(true);
     }
 
     void OnGUI()
@@ -124,18 +125,21 @@ public class PackageTool : EditorWindow
         GUILayout.BeginHorizontal();
         GUILayout.Label("res_version", GUILayout.Width(100));
         resVersion = GUILayout.TextField(resVersion, GUILayout.Width(100));
+        GUILayout.Label("Auto increase sub version, otherwise modify the text directly!", GUILayout.Width(500));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
         GUILayout.Label("notice_version", GUILayout.Width(100));
         GUILayout.Label("1.0.0", GUILayout.Width(100));
+        GUILayout.Label("No supported yet!", GUILayout.Width(500));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
         GUILayout.Label("app_version", GUILayout.Width(100));
         GUILayout.Label(PlayerSettings.bundleVersion, GUILayout.Width(100));
+        GUILayout.Label("Auto increase sub version, otherwise go to PlayerSetting!", GUILayout.Width(500));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(3);
@@ -280,7 +284,7 @@ public class PackageTool : EditorWindow
         GUILayout.BeginHorizontal();
         if (PackageUtils.BuildAssetBundlesForPerChannel(buildTarget))
         {
-            if (GUILayout.Button("Copy SDK Resource", GUILayout.Width(200)))
+            if (GUILayout.Button("Copy SDK Resources", GUILayout.Width(200)))
             {
                 PackageUtils.CopyAndroidSDKResources(channelType.ToString());
             }
@@ -382,25 +386,35 @@ public class PackageTool : EditorWindow
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.AppVersionFileName), PlayerSettings.bundleVersion);
     }
 
-    public static void LoadCurrentVersionFile()
+    public static void LoadCurrentVersionFile(bool silence = false)
     {
         string readVersion = ReadVersionFile(buildTarget, channelType);
         if (string.IsNullOrEmpty(readVersion))
         {
-            var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
-            EditorUtility.DisplayDialog("Error", string.Format("No version file  for : \n\nplatform : {0} \nchannel : {1} \n\n", buildTargetName, channelType.ToString()), "Confirm");
+            if (!silence)
+            {
+                var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
+                EditorUtility.DisplayDialog("Error", string.Format("No version file  for : \n\nplatform : {0} \nchannel : {1} \n\n",
+                    buildTargetName, channelType.ToString()), "Confirm");
+            }
         }
         else
         {
             resVersion = readVersion;
-            EditorUtility.DisplayDialog("Success", "Load cur version file done!", "Confirm");
+            if (!silence)
+            {
+                EditorUtility.DisplayDialog("Success", "Load cur version file done!", "Confirm");
+            }
         }
     }
 
-    public static void SaveCurrentVersionFile()
+    public static void SaveCurrentVersionFile(bool silence = false)
     {
         SaveVersionFile(buildTarget, channelType);
-        EditorUtility.DisplayDialog("Success", "Save version file done!", "Confirm");
+        if (!silence)
+        {
+            EditorUtility.DisplayDialog("Success", "Save version file done!", "Confirm");
+        }
     }
 
     public static void ValidateAllVersionFile()
@@ -450,11 +464,27 @@ public class PackageTool : EditorWindow
     #endregion
 
     #region AB相关操作
+    public static void IncreaseResSubVersion()
+    {
+        // 每一次构建资源，子版本号自增，注意：前两个字段这里不做托管，自行编辑设置
+        LoadCurrentVersionFile(true);
+        string[] vers = resVersion.Split('.');
+        if (vers.Length > 0)
+        {
+            int subVer = 0;
+            int.TryParse(vers[vers.Length - 1], out subVer);
+            vers[vers.Length - 1] = (subVer + 1).ToString();
+        }
+        resVersion = string.Join(".", vers);
+        SaveCurrentVersionFile(true);
+    }
+
     public static void BuildAssetBundlesForCurrentChannel()
     {
         var start = DateTime.Now;
         BuildPlayer.BuildAssetBundles(buildTarget, channelType.ToString());
 
+        IncreaseResSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", 
             buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
@@ -465,6 +495,7 @@ public class PackageTool : EditorWindow
         var start = DateTime.Now;
         BuildPlayer.BuildAssetBundlesForAllChannels(buildTarget);
 
+        IncreaseResSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build AssetBundles for : \n\nplatform : {0} \nchannel : all \n\ndone! use {1}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -498,6 +529,21 @@ public class PackageTool : EditorWindow
     #endregion
 
     #region 打包相关操作
+    public static void IncreaseAppSubVersion()
+    {
+        // 每一次构建安装包，子版本号自增，注意：前两个字段这里不做托管，自行到PlayerSetting中设置
+        string bundleVersion = PlayerSettings.bundleVersion;
+        string[] vers = bundleVersion.Split('.');
+        if (vers.Length > 0)
+        {
+            int subVer = 0;
+            int.TryParse(vers[vers.Length - 1], out subVer);
+            vers[vers.Length - 1] = (subVer + 1).ToString();
+        }
+        PlayerSettings.bundleVersion = string.Join(".", vers);
+        SaveCurrentVersionFile(true);
+    }
+
     public static void BuildAndroidPlayerForCurrentChannel()
     {
         if (CheckSymbolsToCancelBuild())
@@ -508,6 +554,7 @@ public class PackageTool : EditorWindow
         var start = DateTime.Now;
         BuildPlayer.BuildAndroid(channelType.ToString(), channelType == ChannelType.Test);
 
+        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -525,6 +572,7 @@ public class PackageTool : EditorWindow
             BuildPlayer.BuildAndroid(current.ToString(), current == ChannelType.Test);
         }
 
+        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : all \n\ndone! use {2}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -539,6 +587,7 @@ public class PackageTool : EditorWindow
         var start = DateTime.Now;
         BuildPlayer.BuildXCode(channelType.ToString(), channelType == ChannelType.Test);
 
+        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : {1} \n\ndone! use {2}s", buildTargetName, channelType, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
@@ -556,6 +605,7 @@ public class PackageTool : EditorWindow
             BuildPlayer.BuildXCode(current.ToString(), channelType == ChannelType.Test);
         }
 
+        IncreaseAppSubVersion();
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         EditorUtility.DisplayDialog("Success", string.Format("Build player for : \n\nplatform : {0} \nchannel : all \n\ndone! use {2}s", buildTargetName, (DateTime.Now - start).TotalSeconds), "Confirm");
     }
