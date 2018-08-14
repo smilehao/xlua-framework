@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/ipay_margin_17"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_master_title"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="身份证"
+                android:textColor="@color/ipay_color_value_6"
+                android:textSize="@dimen/ipay_text_size_16" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ipay_color_value_1"
+                android:orientation="vertical"
+                android:paddingLeft="10.0dip" >
+
+                <LinearLayout
+                    android:id="@+id/card_no_area"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ipay_oneclick_input_bg"
+                    android:gravity="center_vertical" >
+
+ 					<EditText
+                        android:id="@+id/cardNumberEditText"
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@null"
+        				android:singleLine="true"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/ipay_color_value_6"
+                        android:textColorHint="@color/ipay_color_value_4"
+                        android:textSize="@dimen/ipay_text_size_16" />
+
+                    <ImageView
+                        android:id="@+id/clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Image"
+                        android:paddingRight="4dp"
+                        android:gravity="center_vertical"
+                        android:visibility="invisible"
+                        android:src="@drawable/ipay_oneclickpay_bg_clear_selector" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tip_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_tip_title"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="身份证"
+                android:textColor="#303030"
+                android:textSize="@dimen/ipay_text_size_13"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ipay_color_value_1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical" 
+                    android:paddingLeft="10.0dip"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_tip_value"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/ipay_margin_7"
+                        android:text="采用银联标准安全加密"
+                        android:textColor="@color/ipay_color_value_4"
+                        android:textSize="@dimen/ipay_text_size_13" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

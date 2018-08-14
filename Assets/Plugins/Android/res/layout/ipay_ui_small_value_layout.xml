@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ipay_bg"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/iapppay_ui_title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ipay_margin_15"
+        android:layout_marginLeft="@dimen/ipay_margin_15"
+        android:layout_marginRight="@dimen/ipay_margin_15"
+        android:layout_marginTop="@dimen/ipay_margin_15" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:text="小额免密"
+            android:textColor="@color/ipay_color_value_7_1"
+            android:textSize="@dimen/ipay_text_size_13" />
+
+        <ImageView
+            android:id="@+id/btn_account_amount_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ipay_ui_radio_group_off"
+            android:minHeight="0dp"
+            android:minWidth="0dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ipay_divid_line_h"
+        android:layout_marginLeft="@dimen/ipay_margin_10"
+        android:layout_marginRight="@dimen/ipay_margin_10"
+        android:background="@color/ipay_color_value_3" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/ipay_margin_10"
+        android:background="@color/ipay_color_value_1"
+        android:fadingEdge="none"
+        android:scrollbarThumbVertical="@drawable/ipay_ui_scrollbar" >
+
+        <LinearLayout
+            android:id="@+id/account_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/ipay_color_value_1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/ll_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ipay_color_value_1"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/ipay_margin_15"
+                android:layout_marginRight="@dimen/ipay_margin_15"
+                android:layout_marginTop="@dimen/ipay_margin_20"
+                android:background="@color/ipay_color_value_1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/ipay_margin_10"
+                    android:paddingTop="@dimen/ipay_margin_10"
+                    android:text="* "
+                    android:textColor="@color/ipay_color_value_8_3"
+                    android:textSize="@dimen/ipay_text_size_13" />
+
+                <TextView
+                    android:id="@+id/tv_amount_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/ipay_margin_10"
+                    android:paddingTop="@dimen/ipay_margin_10"
+                    android:text="使用爱贝快付和虚拟币日累计消费金额小于500元，无需输入支付密码"
+                    android:textColor="@color/ipay_color_value_5"
+                    android:textSize="@dimen/ipay_text_size_13" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="@dimen/ipay_password_edittext_w"
+                android:layout_height="@dimen/ipay_height_50"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/ipay_margin_20"
+                android:layout_marginTop="@dimen/ipay_margin_20"
+                android:background="@drawable/ipay_common_btn_bg_color"
+                android:text="保  存"
+                android:textColor="@drawable/ipay_common_btn_text_color"
+                android:textSize="@dimen/ipay_text_size_14" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,1 +1,1 @@
-jar cvf .\bin\UnityCallAndroid.jar -C bin\classes .
+jar cvf .\bin\UnityCallAndroid.jar -C src .

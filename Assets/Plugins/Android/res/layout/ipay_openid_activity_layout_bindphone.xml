@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/ipay_openid_margin_20"
+        android:paddingRight="@dimen/ipay_openid_margin_20" >
+
+        <TextView
+            android:id="@+id/notify_message_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ipay_openid_margin_10"
+            android:text="@string/ipay_openid_bind_notice"
+            android:textColor="@color/ipay_openid_tip_text_color"
+            android:textSize="@dimen/ipay_openid_text_size_28" />
+
+        <LinearLayout
+            android:id="@+id/input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_btn"
+            style="@style/ipay_openid_submit_btn_style"
+            android:layout_marginBottom="@dimen/ipay_openid_margin_15"
+            android:text="@string/ipay_openid_bind" />
+
+        <LinearLayout
+            android:id="@+id/cancel_bind_notice_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ipay_openid_margin_15"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/not_remind_checkbox"
+                style="@style/ipay_openid_custom_checkbox_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:paddingLeft="5dp"
+                android:text="@string/ipay_openid_not_remind"
+                android:textColor="@color/ipay_openid_input_disabled_color"
+                android:textSize="@dimen/ipay_openid_text_size_28" />
+
+            <TextView
+                android:id="@+id/cancel_bind_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:drawableRight="@drawable/ipay_openid_todetail"
+                android:text="@string/ipay_openid_cancel_this_bind"
+                android:gravity="center_vertical"
+                android:textColor="@color/ipay_openid_link_text_color"
+                android:textSize="@dimen/ipay_openid_text_size_28" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

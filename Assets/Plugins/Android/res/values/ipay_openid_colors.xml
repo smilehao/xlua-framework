@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="ipay_openid_main_background">#a0000000</color>
+    <color name="ipay_openid_title_background">#323232</color>
+    <color name="ipay_openid_divider_line_focus">#33b5e5</color>
+    <color name="ipay_openid_divider_line_normal">#c4ccdc</color>
+    <color name="ipay_openid_divider_line_disabled">#70c4ccdc</color>
+    <color name="ipay_openid_input_text_color">#333</color>
+    <color name="ipay_openid_input_hint_color">#d2dbe6</color>
+    <color name="ipay_openid_input_disabled_color">#999</color>
+    <color name="ipay_openid_tip_text_color">#6B8594</color>
+    <color name="ipay_openid_dialog_btn_textcolor">#64808F</color>
+    <color name="ipay_openid_dialog_btn_focus_color">#d4dcf0</color>
+    <color name="ipay_openid_textbtn_normal_color">#33b5e5</color>
+    <color name="ipay_openid_textbtn_pressed_color">#026387</color>
+    <!--color name="ipay_openid_textbtn_disable_color">#b8e2f1</color-->
+    <color name="ipay_openid_textbtn_disable_color">#9fdcf1</color>
+    <color name="ipay_openid_link_text_color">#4a646d</color>
+    <color name="ipay_openid_divid_line">#d2dbe6</color>
+    <color name="ipay_openid_transparent">#00000000</color>
+    <color name="ipay_openid_bg_light_grey">#f1f1f1</color>
+    <color name="ipay_openid_ffffff">#ffffff</color>
+    <color name="ipay_openid_text_gray">#949393</color>
+</resources>

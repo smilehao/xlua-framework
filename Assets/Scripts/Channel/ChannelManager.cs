@@ -49,6 +49,8 @@ namespace GameChannel
         {
             this.channelName = channelName;
             channel = CreateChannel(channelName);
+
+            AndroidSDKListener.Instance.Startup();
         }
         
         public BaseChannel CreateChannel(string channelName)
@@ -101,6 +103,7 @@ namespace GameChannel
 
         public void OnInitSDKCompleted(string msg)
         {
+            Logger.Log("OnInitSDKCompleted : " + msg);
             Logger.platChannel = channelName;
 
             if (onInitCompleted != null)

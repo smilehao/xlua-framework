@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/haoxin_btn1_s_x" />
+    <item android:state_pressed="false" android:state_focused="false" android:drawable="@drawable/haoxin_btn1_n_x" />
+</selector>

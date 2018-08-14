@@ -1,0 +1,56 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="ipay_openid_custom_dialog_style" parent="@android:style/Theme.Dialog">
+
+        <!-- item name="android:windowFrame">@null</item -->
+        <item name="android:windowBackground">@color/ipay_openid_title_background</item>
+        <item name="android:windowIsFloating">true</item>
+        <!-- 更改对话框标题栏 -->
+        <item name="android:textSize">@dimen/ipay_openid_text_size_32</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <!-- 勾选框样式 -->
+    <style name="ipay_openid_custom_checkbox_style" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawableLeft">@drawable/ipay_openid_checkbox_style</item>
+    </style>
+    
+    <!-- 通用listview样式 -->
+    <style name="ipay_openid_common_listview_style">
+        <!--item name="android:background">@android:color/transparent</item-->
+        <item name="android:scrollbars">none</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:listSelector">@null</item>
+    </style>
+    
+    <!-- 提交按钮样式 -->
+    <style name="ipay_openid_submit_btn_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/ipay_openid_height_40</item>
+        <item name="android:layout_marginTop">@dimen/ipay_openid_margin_15</item>
+        <item name="android:background">@drawable/ipay_openid_confrim_selector</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/ipay_openid_text_size_34</item>
+    </style>
+
+</resources>

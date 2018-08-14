@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ipay_account_color_value_1"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/image_tip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_gravity="center_horizontal"
+        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+	
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="7dp"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:textColor="@color/ipay_account_color_value_6"
+        android:textSize="13sp" 
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+    
+</LinearLayout>

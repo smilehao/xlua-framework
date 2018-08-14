@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/ipay_openid_margin_20"
+    android:paddingRight="@dimen/ipay_openid_margin_20" >
+
+    <LinearLayout
+        android:id="@+id/not_login_notice_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ipay_openid_margin_20"
+            android:gravity="center_horizontal"
+            android:lineSpacingMultiplier="1.5"
+            android:singleLine="false"
+            android:text="@string/ipay_openid_login_notice"
+            android:textColor="@android:color/background_dark"
+            android:textSize="@dimen/ipay_openid_text_size_32" />
+
+        <Button
+            android:id="@+id/login_btn"
+            style="@style/ipay_openid_submit_btn_style"
+            android:layout_marginBottom="@dimen/ipay_openid_margin_20"
+            android:enabled="true"
+            android:text="@string/ipay_openid_login_btn_login" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/menus_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:divider="@color/ipay_openid_divider_line_normal"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/ipay_openid_listitem_bg"
+            android:scrollbars="@null"
+            android:scrollingCache="@null" >
+        </ListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ipay_openid_divider_line_normal" />
+
+        <TextView
+            android:id="@+id/phoneNumber_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/ipay_openid_margin_20"
+            android:text="@string/ipay_openid_server_phone"
+            android:textColor="@color/ipay_openid_link_text_color"
+            android:textSize="@dimen/ipay_openid_text_size_28" />
+    </LinearLayout>
+
+</LinearLayout>

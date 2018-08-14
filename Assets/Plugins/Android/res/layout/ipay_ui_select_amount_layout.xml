@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ipay_color_value_1"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/ipay_ui_title_bar_activity" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:fadingEdge="none"
+        android:scrollbarThumbVertical="@drawable/ipay_ui_scrollbar" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/ipay_color_value_1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="35dip"
+                android:layout_gravity="center_vertical"
+                android:background="@color/ipay_color_value_2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:text="预计到账："
+                    android:textColor="@color/ipay_color_value_5"
+                    android:textSize="@dimen/ipay_text_size_16" />
+
+                <TextView
+                    android:id="@+id/tv_VirtualCurrency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ipay_color_value_8_3"
+                    android:textSize="@dimen/ipay_text_size_20" />
+
+                <TextView
+                    android:id="@+id/tv_VirtualCurrency_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ipay_color_value_5"
+                    android:textSize="@dimen/ipay_text_size_16" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="15dip"
+                android:text="请选择充值金额"
+                android:textColor="@color/ipay_color_value_4"
+                android:textSize="@dimen/ipay_text_size_14" />
+
+            <RelativeLayout
+                android:id="@+id/rl_select_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/ipay_color_value_1" >
+
+                <ScrollView
+                    android:id="@+id/sv_select_amount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ipay_margin_15"
+                    android:layout_marginRight="@dimen/ipay_margin_15"
+                    android:background="@color/ipay_color_value_1"
+                    android:scrollbars="none" >
+
+                    <LinearLayout
+                        android:id="@+id/ll_select_amount"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/ipay_color_value_1"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:id="@+id/ll_gridview"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/ipay_color_value_1"
+                            android:orientation="vertical" >
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_other_amount"
+                            android:layout_width="fill_parent"
+                            android:layout_height="35dip"
+                            android:layout_marginTop="10dip"
+                            android:background="@drawable/ipay_border_style"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:layout_width="110dip"
+                                android:layout_height="fill_parent"
+                                android:background="@color/ipay_color_value_2"
+                                android:gravity="center"
+                                android:text="其他金额（元）"
+                                android:textColor="@color/ipay_color_value_4"
+                                android:textSize="@dimen/ipay_text_size_14" />
+
+                            <EditText
+                                android:id="@+id/et_input_amount"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="@color/ipay_transparent"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="5dip"
+                                android:textColor="@color/ipay_color_value_7"
+                                android:textSize="@dimen/ipay_text_size_14" 
+                                android:focusableInTouchMode="true"
+                                />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_submit_pay"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ipay_height_50"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/ipay_common_btn_bg_color"
+                android:text="充  值"
+                android:textColor="@color/ipay_color_value_1"
+                android:textSize="@dimen/ipay_text_size_14" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

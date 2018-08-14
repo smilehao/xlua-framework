@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ipay_margin_19"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_show_info_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="银行卡类型"
+                android:textColor="@color/ipay_color_value_6"
+                android:textSize="@dimen/ipay_text_size_16" />
+
+            <TextView
+                android:id="@+id/tv_show_info_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="招商银行    储蓄卡"
+                android:textColor="@color/ipay_color_value_6"
+                android:textSize="@dimen/ipay_text_size_16" />
+        </RelativeLayout>
+
+        <include
+            android:id="@+id/iapppay_oneclick_line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ipay_margin_7"
+            layout="@layout/ipay_oneclick_common_line_layout" />
+    </LinearLayout>
+
+</LinearLayout>

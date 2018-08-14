@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+
+    <ListView
+        android:id="@+id/lv_list_aipay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ipay_margin_10"
+        android:layout_marginRight="@dimen/ipay_margin_10"
+        android:background="@color/ipay_color_value_2_1"
+        android:cacheColorHint="@color/ipay_color_value_2_2"
+        android:divider="@color/ipay_color_value_2_3"
+        android:dividerHeight="@dimen/ipay_divid_line_h"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true"
+        android:listSelector="@drawable/ipay_list_widget_item_bg"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:scrollingCache="false" />
+
+</LinearLayout>

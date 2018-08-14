@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<selector xmlns:android="http://schemas.android.com/apk/res/android">  
+    <!--item android:state_enabled="false" android:color="@color/ipay_openid_textbtn_disable_color"></item>
+    <item android:state_enabled="true" android:state_pressed="true" android:color="@color/ipay_openid_textbtn_pressed_color"></item>
+    <item android:state_enabled="true" android:state_selected="true" android:color="@color/ipay_openid_textbtn_pressed_color"></item>
+    <item android:color="@color/ipay_openid_textbtn_normal_color"></item-->  
+    
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/ipay_openid_textbtn_disable_color"/>
+            <corners android:radius="2dip"/>
+            <padding android:left="6dp" android:right="6dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape>
+    </item>
+    <item android:state_enabled="true" android:state_pressed="true"><shape>
+            <solid android:color="@color/ipay_openid_textbtn_pressed_color" />
+            <corners android:radius="2dip" />
+            <padding android:left="6dp" android:right="6dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape></item>
+    <item android:state_enabled="true" android:state_focused="true"><shape>
+            <solid android:color="@color/ipay_openid_textbtn_pressed_color" />
+            <corners android:radius="2dip" />
+            <padding android:left="6dp" android:right="6dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape></item>
+    <item><shape>
+            <solid android:color="@color/ipay_openid_textbtn_normal_color" />
+            <corners android:radius="2dip" />
+            <padding android:left="6dp" android:right="6dp" android:top="3dp" android:bottom="3dp" ></padding>
+        </shape></item>
+        
+</selector> 

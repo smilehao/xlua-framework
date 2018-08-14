@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/welcome_page"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/ipay_title_h"
+    android:background="@color/ipay_color_value_7" >
+
+    <RelativeLayout
+        android:id="@+id/title_bar_layout_back"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:background="@drawable/ipay_ui_back_selector"
+        android:paddingLeft="@dimen/ipay_margin_9"
+        android:paddingRight="@dimen/ipay_margin_9" >
+
+        <ImageView
+            android:id="@+id/iv_left_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/ipay_margin_6"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" 
+			 android:src="@drawable/ipay_common_back_normal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_left_button_back"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_left_title_master"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ipay_color_value_1"
+                android:textSize="@dimen/ipay_text_size_18"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_left_title_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ipay_title_bar_text_line_margin"
+                android:textColor="@color/ipay_color_value_1"
+                android:textSize="@dimen/ipay_text_size_13"
+                android:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_right_button_aipay"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+</RelativeLayout>

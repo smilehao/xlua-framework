@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="45dp"
+    android:background="@color/ipay_color_value_1"
+    android:orientation="horizontal" >
+
+	<TextView 
+	    android:id="@+id/tv_select_amount"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:background="@color/ipay_color_value_2"
+	    android:textSize="@dimen/ipay_text_size_14"
+	    android:textColor="@color/ipay_color_value_6"
+	    android:text="10元" />
+	
+    <RelativeLayout 
+        android:id="@+id/line_select_amount"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ipay_divid_line_h"
+            android:layout_alignParentTop="true"
+            android:background="@color/ipay_color_value_2" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ipay_divid_line_h"
+            android:layout_alignParentBottom="true"
+            android:background="@color/ipay_color_value_2" />
+        <View
+            android:layout_width="@dimen/ipay_divid_line_h"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/ipay_color_value_2" />
+        <View
+            android:layout_width="@dimen/ipay_divid_line_h"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/ipay_color_value_2" />
+    </RelativeLayout>
+    
+
+</FrameLayout>

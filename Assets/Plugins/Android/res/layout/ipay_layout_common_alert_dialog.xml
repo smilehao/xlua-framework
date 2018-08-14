@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/ipay_color_value_1" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:gravity="center"
+            android:textColor="@color/ipay_color_value_7"
+            android:textSize="@dimen/ipay_text_size_14" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ipay_title_line_heigth"
+            android:background="@color/ipay_color_value_7" />
+		<ScrollView android:layout_width="match_parent"
+		    android:layout_height="wrap_content">
+		    <LinearLayout android:layout_height="wrap_content"
+		        android:layout_width="match_parent"
+		        android:orientation="vertical"
+		        android:gravity="center">
+		        <FrameLayout
+		            android:id="@+id/fl_content"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content" >
+		
+		            <LinearLayout
+		                android:id="@+id/ll_message"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:orientation="vertical" >
+		
+		                <TextView
+		                    android:id="@+id/tv_message"
+		                    android:layout_width="fill_parent"
+		                    android:layout_height="wrap_content"
+		                    android:layout_marginBottom="20dp"
+		                    android:layout_marginLeft="10dip"
+		                    android:layout_marginRight="10dip"
+		                    android:layout_marginTop="20dp"
+		                    android:gravity="left"
+		                    android:lineSpacingExtra="3dp"
+		                    android:maxHeight="400dp"
+		                    android:scrollbars="vertical"
+		                    android:singleLine="false"
+		                    android:textColor="@color/ipay_color_value_6"
+		                    android:textSize="@dimen/ipay_text_size_15" />
+		
+		                <CheckedTextView
+		                    android:id="@+id/ctv_checkbox"
+		                    android:layout_width="wrap_content"
+		                    android:layout_height="wrap_content"
+		                    android:layout_marginBottom="18dp"
+		                    android:layout_marginLeft="20dp"
+		                    android:checked="false"
+		                    android:drawableLeft="@drawable/ipay_common_checkbox_selector"
+		                    android:drawablePadding="12dp"
+		                    android:gravity="center_vertical"
+		                    android:text="知道了，不再提示"
+		                    android:textColor="#8a8a8a"
+		                    android:textSize="@dimen/ipay_text_size_14"
+		                    android:visibility="gone" />
+		            </LinearLayout>
+		
+		            <ListView
+		                android:id="@+id/lv_list"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:cacheColorHint="@null"
+		                android:dividerHeight="1px"
+		                android:fadingEdge="none"
+		                android:listSelector="@null"
+		                android:scrollingCache="false"
+		                android:visibility="gone" />
+		        </FrameLayout>
+		
+		        <View
+		            android:id="@+id/btn_splitor"
+		            android:layout_width="fill_parent"
+		            android:layout_height="@dimen/ipay_divid_line_h"
+		            android:visibility="gone"
+		            android:layout_marginTop="12dip"
+		            android:background="#d2dbe6" />
+		
+		        <LinearLayout
+		            android:id="@+id/ll_button_bar"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginLeft="10dip"
+		            android:layout_marginRight="10dip"
+		            android:layout_marginBottom="10dip"
+		            android:orientation="horizontal" >
+		
+		            <Button
+		                android:id="@+id/b_negative_button"
+		                android:layout_width="0.0dp"
+		                android:layout_height="40dip"
+		                android:layout_weight="1"
+		                android:background="@drawable/ipay_common_btn_disable"
+		                android:gravity="center"
+		                android:layout_marginRight="10dip"
+		                android:singleLine="true"
+		                android:text="@android:string/cancel"
+		                android:textColor="@color/ipay_color_value_5"
+		                android:textSize="@dimen/ipay_text_size_14" />
+		
+		            <View
+		                android:id="@+id/btn_splitor_between_neg_and_neu"
+		                android:layout_width="1dp"
+		                android:layout_height="40dip"
+		                android:background="#d2dbe6"
+		                android:visibility="gone" />
+		
+		            <Button
+		                android:id="@+id/b_neutral_button"
+		                android:layout_width="0.0dp"
+		                android:layout_height="40dip"
+		                android:layout_weight="1"
+		                android:background="@drawable/ipay_common_btn_bg_color"
+		                android:gravity="center"
+		                android:layout_marginRight="10dip"
+		                android:singleLine="true"
+		                android:textColor="@color/ipay_color_value_1"
+		                android:textSize="@dimen/ipay_text_size_14" />
+		
+		            <View
+		                android:id="@+id/btn_splitor_between_neu_and_pos"
+		                android:layout_width="1dp"
+		                android:layout_height="40dip"
+		                android:background="#d2dbe6"
+		                android:visibility="gone" />
+		
+		            <Button
+		                android:id="@+id/b_positive_button"
+		                android:layout_width="0.0dp"
+		                android:layout_height="40dip"
+		                android:layout_weight="1"
+		                android:background="@drawable/ipay_common_btn_bg_color"
+		                android:gravity="center"
+		                android:singleLine="true"
+		                android:text="@android:string/ok"
+		                android:textColor="@color/ipay_color_value_1" 
+		                android:textSize="@dimen/ipay_text_size_14">
+		            </Button>
+		        </LinearLayout>
+		    </LinearLayout>
+		</ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

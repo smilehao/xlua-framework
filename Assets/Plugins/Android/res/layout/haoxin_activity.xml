@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/haoxin_activity"  
+    android:layout_width="280dp" android:layout_height="325dp"  
+    android:gravity="center"
+   	android:layout_gravity="center"
+    android:padding="15dip" android:layout_margin="15dip"
+    android:orientation="vertical" >  
+</LinearLayout>

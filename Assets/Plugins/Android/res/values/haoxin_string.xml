@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+	<string name="haoxin_img_des">img</string>
+	<string name="haoxin_login_submit">登录</string>
+	<string name="haoxin_loing_fast">游客登录</string>
+	<string name="haoxin_login_register">注册帐号</string>
+	<string name="haoxin_login_user_hint">请输入帐号</string>
+	<string name="haoxin_login_password_hint">请输入密码</string>
+	<string name="haoxin_login_forget_password">忘记密码</string>
+	<string name="haoxin_login_eye">显示</string>
+	<string name="haoxin_login_modify_password">修改密码</string>
+	<string name="haoxin_login_bind_email">绑定邮箱</string>
+	<string name="haoxin_login_title">登  录</string>
+	<string name="haoxin_wait_desc">自动登录中</string>
+	<string name="haoxin_wait_btn_text">取  消</string>
+	<string name="haoxin_register_title">注  册</string>
+	<string name="haoxin_old_password_hint">请输入旧密码</string>
+	<string name="haoxin_new_password_hint">请输入新密码</string>
+	<string name="haoxin_modify_password_submit">确认修改</string>
+	<string name="haoxin_pay_title">浩信支付平台</string>
+	<string name="haoxin_pay_submit">立即充值</string>
+	<string name="haoxin_pay_select">请选择支付方式：</string>
+	<string name="haoxin_pay_ali">支付宝</string>
+	<string name="haoxin_pay_weixin">微信</string>
+	<string name="haoxin_pay_union">银联</string>
+	<string name="haoxin_pay_money_desc">充值：</string>
+	<string name="haoxin_pay_goods_desc">获得：</string>
+	<string name="haoxin_bind_telephone_desc">绑定手机</string>
+	<string name="haoxin_telephone_hint">请输入手机号</string>
+	<string name="haoxin_vertify_code_hint">请输入验证码</string>
+	<string name="haoxin_send_vertify_code_hint">发送验证码</string>
+	<string name="haoxin_reset_pwd_desc">重设密码</string>
+	<string name="haoxin_reset_pwd_confirm">确认</string>
+	<string name="haoxin_other_login">第三方登录</string>
+</resources>

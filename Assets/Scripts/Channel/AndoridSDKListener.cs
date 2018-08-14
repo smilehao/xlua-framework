@@ -2,7 +2,7 @@
 
 namespace GameChannel
 {
-    public class AndroidSDKListener : MonoBehaviour
+    public class AndroidSDKListener : MonoSingleton<AndroidSDKListener>
     {
         private void InitCallback(string msg)
         {
@@ -24,6 +24,14 @@ namespace GameChannel
             int progress = 0;
             int.TryParse(msg, out progress);
             ChannelManager.instance.OnDownloadGameProgressValueChange(progress);
+        }
+
+        private void InstallApkCallback(string msg)
+        {
+            Logger.Log("Install apk with msg: " + msg);
+            int result = -1;
+            int.TryParse(msg, out result);
+            ChannelManager.instance.OnInstallGameFinished(result == 0);
         }
 
         private void LoginCallback(string msg)

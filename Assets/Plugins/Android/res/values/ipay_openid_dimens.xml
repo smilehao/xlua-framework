@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 字体大小 -->
+    <dimen name="ipay_openid_text_size_16">8sp</dimen>
+    <dimen name="ipay_openid_text_size_26">13sp</dimen>
+    <dimen name="ipay_openid_text_size_28">14sp</dimen>
+    <dimen name="ipay_openid_text_size_32">16sp</dimen>
+    <dimen name="ipay_openid_text_size_48">24sp</dimen>
+    <dimen name="ipay_openid_text_size_34">17sp</dimen>
+    <dimen name="ipay_openid_text_size_38">19sp</dimen>
+
+    <!-- 边距 -->
+    <dimen name="ipay_openid_margin_34">34dp</dimen>
+    <dimen name="ipay_openid_margin_30">30dp</dimen>
+    <dimen name="ipay_openid_margin_20">20dp</dimen>
+    <dimen name="ipay_openid_margin_16">16dp</dimen>
+    <dimen name="ipay_openid_margin_15">15dp</dimen>
+    <dimen name="ipay_openid_margin_12">12dp</dimen>
+    <dimen name="ipay_openid_margin_10">10dp</dimen>
+    <dimen name="ipay_openid_margin_5">5dp</dimen>
+    <dimen name="ipay_openid_margin_3">3dp</dimen>
+
+    <!-- button 高度 -->
+    <dimen name="ipay_openid_height_40">40dp</dimen>
+    <dimen name="ipay_openid_height_50">50dp</dimen>
+    <dimen name="ipay_openid_divid_line_h">1dp</dimen>
+
+    <!-- 对话框的宽高 -->
+    <dimen name="ipay_openid_dialog_width">1000px</dimen>
+    <dimen name="ipay_openid_dialog_height">800px</dimen>
+
+</resources>
