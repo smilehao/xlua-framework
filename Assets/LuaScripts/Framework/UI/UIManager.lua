@@ -19,7 +19,7 @@ local EventSystemPath = "EventSystem"
 -- UICamera路径
 local UICameraPath = UIRootPath.."/UICamera"
 -- 分辨率
-local Resolution = Vector2.New(1024, 960)
+local Resolution = Vector2.New(1024, 768)
 -- 窗口最大可使用的相对order_in_layer
 local MaxOderPerWindow = 10
 -- cs Tip
