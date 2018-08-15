@@ -28,6 +28,10 @@ local function CoInnerSwitchScene(self, scene_config)
 	local model = window.Model
 	model.value = 0
 	coroutine.waitforframes(1)
+	-- 等待资源管理器加载任务结束，否则很多Unity版本在切场景时会有异常，甚至在真机上crash
+	coroutine.waitwhile(function()
+		return ResourcesManager:GetInstance():IsProsessRunning()
+	end)
 	-- 清理旧场景
 	if self.current_scene then
 		self.current_scene:OnLeave()

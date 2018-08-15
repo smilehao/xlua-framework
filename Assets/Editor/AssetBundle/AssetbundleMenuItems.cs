@@ -79,6 +79,9 @@ namespace AssetBundles
                     return;
                 }
 
+                // 拷贝到StreamingAssets目录时，相当于执行大版本更新，那么沙盒目录下的数据就作废了
+                // 真机上会对比这两个目录下的App版本号来删除，编辑器下暴力一点，直接删除
+                ToolsClearPersistentAssets();
                 PackageUtils.CopyCurSettingAssetBundlesToStreamingAssets();
             }
             LaunchAssetBundleServer.CheckAndDoRunning();
@@ -165,6 +168,9 @@ namespace AssetBundles
                 return;
             }
 
+            // 拷贝到StreamingAssets目录时，相当于执行大版本更新，那么沙盒目录下的数据就作废了
+            // 真机上会对比这两个目录下的App版本号来删除，编辑器下暴力一点，直接删除
+            ToolsClearPersistentAssets();
             PackageUtils.CopyCurSettingAssetBundlesToStreamingAssets();
         }
 
