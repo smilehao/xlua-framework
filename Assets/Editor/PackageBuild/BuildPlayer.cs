@@ -166,6 +166,8 @@ public class BuildPlayer : Editor
             savePath = Path.Combine(savePath, appName);
             BuildPipeline.BuildPlayer(GetBuildScenes(), savePath, buildTarget, BuildOptions.None);
         }
+        string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
+        GameUtility.SafeDeleteDir(outputPath);
         Debug.Log(string.Format("Build android player for : {0} done! output ：{1}", channelName, savePath));
     }
     
@@ -201,6 +203,9 @@ public class BuildPlayer : Editor
 
         PackageUtils.CheckAndAddSymbolIfNeeded(buildTarget, channelName);
         BuildPipeline.BuildPlayer(GetBuildScenes(), buildFolder, buildTarget, BuildOptions.None);
+
+        string outputPath = Path.Combine(Application.persistentDataPath, AssetBundleConfig.AssetBundlesFolderName);
+        GameUtility.SafeDeleteDir(outputPath);
     }
 	
 	static string[] GetBuildScenes()

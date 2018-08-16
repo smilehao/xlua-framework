@@ -131,7 +131,6 @@ public class PackageTool : EditorWindow
         if (curResVersion != resVersion)
         {
             resVersion = curResVersion;
-            SaveResVersionConfig(resVersion);
             SaveAllCurrentVersionFile(true);
         }
         GUILayout.Label("Auto increase sub version, otherwise modify the text directly!", GUILayout.Width(500));
@@ -179,7 +178,7 @@ public class PackageTool : EditorWindow
             {
                 LoadCurrentResVersionFromFile();
             }
-            if (GUILayout.Button("Save Version To All Channels", GUILayout.Width(200)))
+            if (GUILayout.Button("Save All Version To Channel", GUILayout.Width(200)))
             {
                 SaveAllCurrentVersionFile();
             }
@@ -454,6 +453,7 @@ public class PackageTool : EditorWindow
     {
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         SaveAllVersionFile(buildTarget, channelType);
+        SaveResVersionConfig(resVersion);
         if (!silence)
         {
             EditorUtility.DisplayDialog("Success", string.Format("Save all version file : \n\nplatform : {0} \nchannel : {1} \n\n",
