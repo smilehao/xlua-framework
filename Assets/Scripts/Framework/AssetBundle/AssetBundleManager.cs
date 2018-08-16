@@ -144,7 +144,14 @@ namespace AssetBundles
                     }
                 }
 
+                // 说明：设置被依赖数量为1的AB包为常驻包的理由详细情况见AssetBundleAsyncLoader.cs那一大堆注释
+                // TODO：1）目前已知Unity5.3版本和Unity5.5版本没问题，其它试过的几个版本都有问题，如果你使用的版本也有问题，需要修改这里的宏
+                //       2）整套AB包括压缩格式可能都要重新设计，这个以后有时间再去尝试
+#if !UNITY_5_3 && !UNITY_5_5
+                if (count >= 1)
+#else
                 if (count >= 2)
+#endif
                 {
                     SetAssetBundleResident(curAssetbundleName, true);
                 }
@@ -296,7 +303,7 @@ namespace AssetBundles
                 var assetPath = AssetBundleUtility.PackagePathToAssetsPath(assetName);
                 var asset = curAssetbundle == null ? null : curAssetbundle.LoadAsset(assetPath);
                 AddAssetCache(assetName, asset);
-
+                
 #if UNITY_EDITOR
                 // 说明：在Editor模拟时，Shader要重新指定
                 var go = asset as GameObject;
@@ -322,7 +329,7 @@ namespace AssetBundles
 #endif
             }
         }
-
+        
         public void ClearAssetsCache()
         {
             assetsCaching.Clear();
