@@ -354,6 +354,10 @@ public class PackageUtils
     
     public static void CopyAndroidSDKResources(string channelName)
     {
+        string targetPath = Path.Combine(Application.dataPath, "Plugins");
+        targetPath = Path.Combine(targetPath, "Android");
+        GameUtility.SafeClearDir(targetPath);
+
         // TODO：andorid sdk兼容问题
         // 目前我自己用的Unity5.3.4f1开发，没有任何问题，其它版本需要验证下
 #if UNITY_2017_1_OR_NEWER
@@ -363,10 +367,6 @@ public class PackageUtils
         // 给个警告先
         Debug.LogWarning("If any build err, try modify 'android:targetSdkVersion' in file : Plugins/Android/AndroidManifest.xml");
 #endif
-
-        string targetPath = Path.Combine(Application.dataPath, "Plugins");
-        targetPath = Path.Combine(targetPath, "Android");
-        GameUtility.SafeDeleteDir(targetPath);
 
         string channelPath = Path.Combine(Environment.CurrentDirectory, "Channel");
         string resPath = Path.Combine(channelPath, "UnityCallAndroid_" + channelName);
