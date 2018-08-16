@@ -18,7 +18,8 @@ public class PackageTool : EditorWindow
 {
     static private BuildTarget buildTarget = BuildTarget.Android;
     static private ChannelType channelType = ChannelType.Test;
-    static private string resVersion = "1.0.0";
+    static private string resVersion = "1.0.000";
+    static private string bundleVersion = "1.0.000";
     static private LocalServerType localServerType = LocalServerType.CurrentMachine;
     static private string localServerIP = "127.0.0.1";
     static private bool androidBuildABForPerChannel;
@@ -35,12 +36,14 @@ public class PackageTool : EditorWindow
         buildTarget = EditorUserBuildSettings.activeBuildTarget;
         channelType = PackageUtils.GetCurSelectedChannel();
 
+        resVersion = ReadResVersionConfig();
+        bundleVersion = PlayerSettings.bundleVersion;
+
         localServerType = PackageUtils.GetLocalServerType();
         localServerIP = PackageUtils.GetLocalServerIP();
 
         androidBuildABForPerChannel = PackageUtils.GetAndroidBuildABForPerChannelSetting();
         iosBuildABForPerChannel = PackageUtils.GetIOSBuildABForPerChannelSetting();
-        LoadCurrentVersionFile(true);
     }
 
     void OnGUI()
@@ -124,7 +127,13 @@ public class PackageTool : EditorWindow
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
         GUILayout.Label("res_version", GUILayout.Width(100));
-        resVersion = GUILayout.TextField(resVersion, GUILayout.Width(100));
+        string curResVersion = GUILayout.TextField(resVersion, GUILayout.Width(100));
+        if (curResVersion != resVersion)
+        {
+            resVersion = curResVersion;
+            SaveResVersionConfig(resVersion);
+            SaveAllCurrentVersionFile(true);
+        }
         GUILayout.Label("Auto increase sub version, otherwise modify the text directly!", GUILayout.Width(500));
         GUILayout.EndHorizontal();
 
@@ -138,40 +147,41 @@ public class PackageTool : EditorWindow
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
         GUILayout.Label("app_version", GUILayout.Width(100));
-        GUILayout.Label(PlayerSettings.bundleVersion, GUILayout.Width(100));
-        GUILayout.Label("Auto increase sub version, otherwise go to PlayerSetting!", GUILayout.Width(500));
+        string curBundleVersion = GUILayout.TextField(bundleVersion, GUILayout.Width(100));
+        if (curBundleVersion != bundleVersion)
+        {
+            bundleVersion = curBundleVersion;
+            PlayerSettings.bundleVersion = curBundleVersion;
+        }
+        GUILayout.Label("Auto increase sub version, otherwise modify the text directly or go to PlayerSetting!", GUILayout.Width(500));
         GUILayout.EndHorizontal();
 
         GUILayout.Space(3);
         GUILayout.BeginHorizontal();
         if (PackageUtils.BuildAssetBundlesForPerChannel(buildTarget))
         {
-            if (GUILayout.Button("Load Current", GUILayout.Width(100)))
+            if (GUILayout.Button("Load ResVersion From Channel", GUILayout.Width(200)))
             {
-                LoadCurrentVersionFile();
+                LoadCurrentResVersionFromFile();
             }
-            if (GUILayout.Button("Save Current", GUILayout.Width(100)))
+            if (GUILayout.Button("Validate All Channels ResVersion", GUILayout.Width(200)))
             {
-                SaveCurrentVersionFile();
+                ValidateAllResVersionFile();
             }
-            if (GUILayout.Button("Validate All", GUILayout.Width(100)))
-            {
-                ValidateAllVersionFile();
-            }
-            if (GUILayout.Button("Save For All", GUILayout.Width(100)))
+            if (GUILayout.Button("Save Version To All Channels", GUILayout.Width(200)))
             {
                 SaveAllVersionFile();
             }
         }
         else
         {
-            if (GUILayout.Button("Load Version", GUILayout.Width(100)))
+            if (GUILayout.Button("Load ResVersion From Channel", GUILayout.Width(200)))
             {
-                LoadCurrentVersionFile();
+                LoadCurrentResVersionFromFile();
             }
-            if (GUILayout.Button("Save Version", GUILayout.Width(100)))
+            if (GUILayout.Button("Save Version To All Channels", GUILayout.Width(200)))
             {
-                SaveCurrentVersionFile();
+                SaveAllCurrentVersionFile();
             }
         }
         GUILayout.EndHorizontal();
@@ -372,29 +382,60 @@ public class PackageTool : EditorWindow
     #endregion
 
     #region 资源配置操作
-    public static string ReadVersionFile(BuildTarget target, ChannelType channel)
+    public static string ReadResVersionConfig()
     {
+        // 从数据库加载资源版本号
+        AssetBundleResVersionConfig config = AssetDatabase.LoadAssetAtPath(AssetBundleResVersionConfig.RES_PATH, typeof(AssetBundleResVersionConfig)) as AssetBundleResVersionConfig;
+        if (config == null)
+        {
+            config = CreateInstance<AssetBundleResVersionConfig>();
+            AssetDatabase.CreateAsset(config, AssetBundleResVersionConfig.RES_PATH);
+            AssetDatabase.Refresh();
+        }
+
+        return config.resVersion;
+    }
+
+    public static void SaveResVersionConfig(string curResVersion)
+    {
+        // 保存资源版本号到数据库
+        AssetBundleResVersionConfig config = AssetDatabase.LoadAssetAtPath(AssetBundleResVersionConfig.RES_PATH, typeof(AssetBundleResVersionConfig)) as AssetBundleResVersionConfig;
+        if (config == null)
+        {
+            config = CreateInstance<AssetBundleResVersionConfig>();
+            AssetDatabase.CreateAsset(config, AssetBundleResVersionConfig.RES_PATH);
+            AssetDatabase.Refresh();
+        }
+
+        config.resVersion = curResVersion;
+        AssetDatabase.SaveAssets();
+    }
+
+    public static string ReadResVersionFile(BuildTarget target, ChannelType channel)
+    {
+        // 从资源版本号文件（当前渠道AB输出目录中）加载资源版本号
         string rootPath = PackageUtils.GetAssetBundleOutputPath(target, channel.ToString());
         return GameUtility.SafeReadAllText(Path.Combine(rootPath, BuildUtils.ResVersionFileName));
     }
 
-    public static void SaveVersionFile(BuildTarget target, ChannelType channel)
+    public static void SaveAllVersionFile(BuildTarget target, ChannelType channel)
     {
+        // 保存所有版本号信息到资源版本号文件（当前渠道AB输出目录中）
         string rootPath = PackageUtils.GetAssetBundleOutputPath(target, channel.ToString());
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.ResVersionFileName), resVersion);
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.NoticeVersionFileName), resVersion);
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.AppVersionFileName), PlayerSettings.bundleVersion);
     }
 
-    public static void LoadCurrentVersionFile(bool silence = false)
+    public static void LoadCurrentResVersionFromFile(bool silence = false)
     {
-        string readVersion = ReadVersionFile(buildTarget, channelType);
+        var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
+        string readVersion = ReadResVersionFile(buildTarget, channelType);
         if (string.IsNullOrEmpty(readVersion))
         {
             if (!silence)
             {
-                var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
-                EditorUtility.DisplayDialog("Error", string.Format("No version file  for : \n\nplatform : {0} \nchannel : {1} \n\n",
+                EditorUtility.DisplayDialog("Error", string.Format("No res version file for : \n\nplatform : {0} \nchannel : {1} \n\n",
                     buildTargetName, channelType.ToString()), "Confirm");
             }
         }
@@ -403,27 +444,31 @@ public class PackageTool : EditorWindow
             resVersion = readVersion;
             if (!silence)
             {
-                EditorUtility.DisplayDialog("Success", "Load cur version file done!", "Confirm");
+                EditorUtility.DisplayDialog("Success", string.Format("Load cur res version file : \n\nplatform : {0} \nchannel : {1} \n\n",
+                    buildTargetName, channelType.ToString()), "Confirm");
             }
         }
     }
 
-    public static void SaveCurrentVersionFile(bool silence = false)
+    public static void SaveAllCurrentVersionFile(bool silence = false)
     {
-        SaveVersionFile(buildTarget, channelType);
+        var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
+        SaveAllVersionFile(buildTarget, channelType);
         if (!silence)
         {
-            EditorUtility.DisplayDialog("Success", "Save version file done!", "Confirm");
+            EditorUtility.DisplayDialog("Success", string.Format("Save all version file : \n\nplatform : {0} \nchannel : {1} \n\n",
+                buildTargetName, channelType.ToString()), "Confirm");
         }
     }
 
-    public static void ValidateAllVersionFile()
+    public static void ValidateAllResVersionFile()
     {
+        // 校验所有渠道AB输出目录下资源版本号信息
         Dictionary<string, List<ChannelType>> versionMap = new Dictionary<string, List<ChannelType>>();
         List<ChannelType> channelList = null;
         foreach (var current in (ChannelType[])Enum.GetValues(typeof(ChannelType)))
         {
-            string readVersion = ReadVersionFile(buildTarget, current);
+            string readVersion = ReadResVersionFile(buildTarget, current);
             if (readVersion == null)
             {
                 readVersion = "";
@@ -455,11 +500,12 @@ public class PackageTool : EditorWindow
 
     void SaveAllVersionFile()
     {
+        // 保存当前版本号信息到所有渠道AB输出目录
         foreach (var current in (ChannelType[])Enum.GetValues(typeof(ChannelType)))
         {
-            SaveVersionFile(buildTarget, current);
+            SaveAllVersionFile(buildTarget, current);
         }
-        EditorUtility.DisplayDialog("Success", "Save all version files done!", "Confirm");
+        EditorUtility.DisplayDialog("Success", "Save all version files to all channels done!", "Confirm");
     }
     #endregion
 
@@ -467,7 +513,7 @@ public class PackageTool : EditorWindow
     public static void IncreaseResSubVersion()
     {
         // 每一次构建资源，子版本号自增，注意：前两个字段这里不做托管，自行编辑设置
-        LoadCurrentVersionFile(true);
+        LoadCurrentResVersionFromFile(true);
         string[] vers = resVersion.Split('.');
         if (vers.Length > 0)
         {
@@ -476,7 +522,7 @@ public class PackageTool : EditorWindow
             vers[vers.Length - 1] = string.Format("{0:D3}", subVer + 1);
         }
         resVersion = string.Join(".", vers);
-        SaveCurrentVersionFile(true);
+        SaveAllCurrentVersionFile(true);
     }
 
     public static void BuildAssetBundlesForCurrentChannel()
@@ -543,7 +589,7 @@ public class PackageTool : EditorWindow
             vers[vers.Length - 1] = string.Format("{0:D3}", subVer + 1);
         }
         PlayerSettings.bundleVersion = string.Join(".", vers);
-        SaveCurrentVersionFile(true);
+        SaveAllCurrentVersionFile(true);
     }
 
     public static void BuildAndroidPlayerForCurrentChannel()
