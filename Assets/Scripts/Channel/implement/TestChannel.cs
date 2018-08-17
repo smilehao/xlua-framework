@@ -17,11 +17,7 @@ namespace GameChannel
     {
         public override void Init()
         {
-#if UNITY_2017_1_OR_NEWER
-            ChannelManager.instance.OnInitSDKCompleted("No use android sdk !!!");
-#else
             AndroidSDKHelper.FuncCall("TestChannelInit");
-#endif
         }
 
         public override string GetBundleID()
@@ -43,20 +39,12 @@ namespace GameChannel
         {
             string url = paramList[0] as string;
             string saveName = paramList[1] as string;
-#if UNITY_2017_1_OR_NEWER
-            Logger.LogError("No support download game !!!");
-#else
             AndroidSDKHelper.FuncCall("DownloadGame", url, saveName);
-#endif
         }
 
         public override void InstallApk()
         {
-#if UNITY_2017_1_OR_NEWER
-            Logger.LogError("No support install game !!!");
-#else
             AndroidSDKHelper.FuncCall("InstallApk");
-#endif
         }
 
         public override void Login()

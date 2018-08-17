@@ -23,6 +23,8 @@ local function EnterGame()
 	end
 	
 	SceneManager:GetInstance():SwitchScene(SceneConfig.LoginScene)
+	
+	--Logger.Log("###################################################")
 end
 
 --主入口函数。从这里开始lua逻辑
