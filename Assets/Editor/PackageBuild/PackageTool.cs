@@ -407,6 +407,7 @@ public class PackageTool : EditorWindow
         }
 
         config.resVersion = curResVersion;
+        EditorUtility.SetDirty(config);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
@@ -424,7 +425,7 @@ public class PackageTool : EditorWindow
         string rootPath = PackageUtils.GetAssetBundleOutputPath(target, channel.ToString());
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.ResVersionFileName), resVersion);
         GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.NoticeVersionFileName), resVersion);
-        GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.AppVersionFileName), PlayerSettings.bundleVersion);
+        GameUtility.SafeWriteAllText(Path.Combine(rootPath, BuildUtils.AppVersionFileName), bundleVersion);
     }
 
     public static void LoadCurrentResVersionFromFile(bool silence = false)
