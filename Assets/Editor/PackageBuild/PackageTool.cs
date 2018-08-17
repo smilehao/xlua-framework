@@ -233,11 +233,11 @@ public class PackageTool : EditorWindow
         {
             if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
             {
-                BuildAssetBundlesForCurrentChannel();
+                EditorApplication.delayCall += BuildAssetBundlesForCurrentChannel;
             }
             if (GUILayout.Button("For All Channels", GUILayout.Width(200)))
             {
-                BuildAssetBundlesForAllChannels();
+                EditorApplication.delayCall += BuildAssetBundlesForAllChannels;
             }
             if (GUILayout.Button("Open Current Output", GUILayout.Width(200)))
             {
@@ -252,7 +252,7 @@ public class PackageTool : EditorWindow
         {
             if (GUILayout.Button("Execute Build", GUILayout.Width(200)))
             {
-                BuildAssetBundlesForCurrentChannel();
+                EditorApplication.delayCall += BuildAssetBundlesForCurrentChannel;
             }
             if (GUILayout.Button("Open Output Folder", GUILayout.Width(200)))
             {
@@ -456,6 +456,7 @@ public class PackageTool : EditorWindow
         var buildTargetName = PackageUtils.GetPlatformName(buildTarget);
         SaveAllVersionFile(buildTarget, channelType);
         SaveResVersionConfig(resVersion);
+        PlayerSettings.bundleVersion = bundleVersion;
         if (!silence)
         {
             EditorUtility.DisplayDialog("Success", string.Format("Save all version file : \n\nplatform : {0} \nchannel : {1} \n\n",
@@ -515,7 +516,6 @@ public class PackageTool : EditorWindow
     public static void IncreaseResSubVersion()
     {
         // 每一次构建资源，子版本号自增，注意：前两个字段这里不做托管，自行编辑设置
-        LoadCurrentResVersionFromFile(true);
         string[] vers = resVersion.Split('.');
         if (vers.Length > 0)
         {
@@ -582,7 +582,6 @@ public class PackageTool : EditorWindow
     public static void IncreaseAppSubVersion()
     {
         // 每一次构建安装包，子版本号自增，注意：前两个字段这里不做托管，自行到PlayerSetting中设置
-        string bundleVersion = PlayerSettings.bundleVersion;
         string[] vers = bundleVersion.Split('.');
         if (vers.Length > 0)
         {
@@ -590,7 +589,7 @@ public class PackageTool : EditorWindow
             int.TryParse(vers[vers.Length - 1], out subVer);
             vers[vers.Length - 1] = string.Format("{0:D3}", subVer + 1);
         }
-        PlayerSettings.bundleVersion = string.Join(".", vers);
+        bundleVersion = string.Join(".", vers);
         SaveAllCurrentVersionFile(true);
     }
 
