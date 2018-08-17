@@ -408,6 +408,7 @@ public class PackageTool : EditorWindow
 
         config.resVersion = curResVersion;
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     public static string ReadResVersionFile(BuildTarget target, ChannelType channel)
