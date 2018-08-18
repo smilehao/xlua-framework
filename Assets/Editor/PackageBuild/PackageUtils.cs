@@ -379,10 +379,6 @@ public class PackageUtils
         {
             File.Copy(resPath + "/AndroidManifest.xml", targetPath + "/AndroidManifest.xml", true);
         }
-        if (File.Exists(resPath + "/icon/icon.png"))
-        {
-            File.Copy(resPath + "/icon/icon.png", Application.dataPath + "/icon.png", true);
-        }
 
         EditorUtility.DisplayProgressBar("提示", "正在拷贝SDK资源，请稍等", 1f);
         EditorUtility.ClearProgressBar();

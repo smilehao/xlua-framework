@@ -84,10 +84,8 @@ class GameNotification implements Parcelable {
 public class SGNotificationService extends Service {
 
 	ArrayList<GameNotification> notificationList = null;
-	//娣囨繂鐡ㄩ幒銊╋拷浣规殶閹诡喚娈戦弬鍥︽閸氾拷
 	static final String NOTIFI_FILE_NAME = "NotifiDataFile";
 
-	// 鐎规碍妞傞崳锟�
 	ScheduledThreadPoolExecutor mTimer = new ScheduledThreadPoolExecutor(1);
 
 	@Override
@@ -125,7 +123,7 @@ public class SGNotificationService extends Service {
 		{
 			notificationList.add(notifi);
 		}
-		SaveNotifiDataFile();//鐏忓棙甯归柅浣规殶閹诡喕绻氱�涙ê鍩岄弬鍥︽娑擄拷
+		SaveNotifiDataFile();
 	}
 
 	@Override
@@ -194,7 +192,7 @@ public class SGNotificationService extends Service {
 		long currTimeMS = currDate.getTime();
 		if(notificationList.size() <= 0)
 		{
-			LoadNotifiDataFile();//娴犲孩鏋冩禒鏈佃厬鐠囪褰囬崙鐑樺腹闁焦鏆熼幑锟�
+			LoadNotifiDataFile();
 		}
 		for (GameNotification notification : notificationList) {
 			calendar.set(Calendar.HOUR_OF_DAY, notification.hour);
@@ -217,7 +215,6 @@ public class SGNotificationService extends Service {
 	public Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			// 鏉╂瑩鍣风憰浣诡梾閺屻儲妞傞梻锟�
 			CheckIfNeedNotification();
 			super.handleMessage(msg);
 		}
@@ -250,7 +247,6 @@ public class SGNotificationService extends Service {
 		}
 	}
 
-	//閸愭瑦鏆熼幑锟�
 	public void writeFile(String fileName,String writestr) //throws IOException
 	{
 		try
@@ -266,7 +262,6 @@ public class SGNotificationService extends Service {
 		}
 	}
 
-	//鐠囩粯鏆熼幑锟�
 	public String readFile(String fileName) //throws IOException
 	{
 		String res = "";
@@ -286,7 +281,6 @@ public class SGNotificationService extends Service {
 		return res;
 	}
 
-	//鐏忓棙甯归柅浣规殶閹诡喕绻氱�涙ê鍩岄弬鍥︽娑擄拷
 	public void SaveNotifiDataFile()
 	{
 		String strNotifiData = "";
@@ -307,7 +301,6 @@ public class SGNotificationService extends Service {
 		writeFile(NOTIFI_FILE_NAME, strNotifiData);
 	}
 
-	//娴犲孩鏋冩禒鏈佃厬鐠囪褰囬崙鐑樺腹闁焦鏆熼幑锟�
 	public void LoadNotifiDataFile()
 	{
 		String strNotifiData = readFile(NOTIFI_FILE_NAME);

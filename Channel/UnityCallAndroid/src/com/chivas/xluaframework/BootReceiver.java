@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class BootReceiver extends BroadcastReceiver {
 	public BootReceiver() {
-		Log.d("sanguo", "BootReceiver start ... ");
+		Log.d("xluaframework", "BootReceiver start ... ");
 	}
 
 	@Override

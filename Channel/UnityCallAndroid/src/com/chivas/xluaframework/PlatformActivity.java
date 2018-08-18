@@ -12,10 +12,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.haoxin.sdk.HaoXinLoginCallback;
@@ -30,9 +32,7 @@ import com.unity3d.player.UnityPlayer;
 public class PlatformActivity extends MainActivity
 {
 	private Handler m_downloadHandler;
-	/* 锟斤拷锟斤拷锟斤拷 */
     private static final int DOWNLOAD = 1;
-    /* 锟斤拷锟截斤拷锟斤拷 */
     private static final int DOWNLOAD_FINISH = 2;
     
     private int m_progress;
@@ -193,16 +193,12 @@ public class PlatformActivity extends MainActivity
 		return 0;
 	}
 	
-    /**
-     * 鏀粯缁撴灉鍥炶皟
-     */
     IPayResultCallback iPayResultCallback = new IPayResultCallback() {
 
         @Override
         public void onPayResult(int resultCode, String signvalue, String resultInfo) {
             switch (resultCode) {
                 case IAppPay.PAY_SUCCESS:
-                    //璋冪敤 IAppPayOrderUtils 鐨勯獙绛炬柟娉曡繘琛屾敮浠樼粨鏋滈獙璇�
                     boolean payState = IAppPayOrderUtils.checkPayResult(signvalue, iappayPublicKey);
                     if(payState){
                     	UnityPlayer.UnitySendMessage("AndroidSDKListener", "PayCallback", "ret=0");
@@ -243,13 +239,10 @@ public class PlatformActivity extends MainActivity
 	        {
 	            switch (msg.what)
 	            {
-	            // 锟斤拷锟斤拷锟斤拷锟斤拷
 	            case DOWNLOAD:
-	                // 锟斤拷锟矫斤拷锟斤拷锟斤拷位锟斤拷
 	            	UnityPlayer.UnitySendMessage("AndroidSDKListener", "DownloadGameProgressValueChangeCallback", String.valueOf(m_progress));
 	                break;
 	            case DOWNLOAD_FINISH:
-	                // 锟斤拷装锟侥硷拷
 	            	InstallApk();
 	                break;
 	            default:
@@ -268,14 +261,11 @@ public class PlatformActivity extends MainActivity
         {
             try
             {
-                // 锟叫讹拷SD锟斤拷锟角凤拷锟斤拷冢锟斤拷锟斤拷锟斤拷欠锟斤拷锟叫讹拷写权锟斤拷
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
                 {
-                    // 锟斤拷么娲拷锟斤拷锟铰凤拷锟�
                     String sdpath = Environment.getExternalStorageDirectory() + "/";
                     m_savePath = sdpath + "Download";
                     File file = new File(m_savePath);
-                    // 锟叫讹拷锟侥硷拷目录锟角凤拷锟斤拷锟�
                     if (!file.exists())
                     {
                         file.mkdir();
@@ -293,28 +283,22 @@ public class PlatformActivity extends MainActivity
                     int loadedLength = (int)tmpFile.length();
                     
                     URL url = new URL(m_url);
-                    // 锟斤拷锟斤拷锟斤拷锟斤拷
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestProperty("range", "bytes=" + loadedLength + "-");
                     conn.connect();
-                    // 锟斤拷取锟侥硷拷锟斤拷小
                     int length = conn.getContentLength();
                     length += loadedLength;
-                    // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
                     InputStream is = conn.getInputStream();
 
                     FileOutputStream fos = new FileOutputStream(tmpFile, tmpFile.exists());
                     int count = loadedLength;
-                    // 锟斤拷锟斤拷
                     byte buf[] = new byte[1024];
                     m_progress = 0;
                     m_downloadHandler.sendEmptyMessage(DOWNLOAD);
-                    // 写锟诫到锟侥硷拷锟斤拷
                     while (true)
                     {
                         int numread = is.read(buf);
                         count += numread;
-                        // 锟斤拷锟斤拷锟斤拷锟斤拷锟轿伙拷锟�
                         int newProgress = (int) (((float) count / length) * 100);
                         if (newProgress > m_progress)
                         {
@@ -323,10 +307,8 @@ public class PlatformActivity extends MainActivity
                         }
                         if (numread <= 0)
                         {
-                            // 锟斤拷锟斤拷锟斤拷锟�
                             break;
                         }
-                        // 写锟斤拷锟侥硷拷
                         fos.write(buf, 0, numread);
                     }
                     fos.close();
@@ -356,11 +338,23 @@ public class PlatformActivity extends MainActivity
         {
             return;
         }
-        // 通锟斤拷Intent锟斤拷装APK锟侥硷拷
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
-        this.startActivity(i);
+		
+        // 解决Android N 上 报错：android.os.FileUriExposedException
+        // https://stackoverflow.com/questions/38200282/android-os-fileuriexposedexception-file-storage-emulated-0-test-txt-exposed
+        // http://android.xsoftlab.net/reference/android/support/v4/content/FileProvider.html
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if(Build.VERSION.SDK_INT >= 24)
+        {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(getBaseContext(), getBaseContext().getApplicationContext().getPackageName()  + ".fileProvider", apkfile);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        }
+        else
+        {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
+        }
+        this.startActivity(intent);
 
         UnityPlayer.UnitySendMessage("AndroidSDKListener", "InstallApkCallback", "0");
 	}

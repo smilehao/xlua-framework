@@ -22,7 +22,7 @@ namespace GameChannel
 
         public override string GetBundleID()
         {
-            return "com.chivas.framework";
+            return "com.chivas.xluaframework";
         }
 
         public override string GetProductName()
