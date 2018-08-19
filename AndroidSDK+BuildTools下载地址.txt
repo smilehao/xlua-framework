@@ -1,0 +1,103 @@
+1、NDK下载地址：
+macosx-64bit：https://dl-ssl.google.com/android/repository/android-ndk-r17b-darwin-x86_64.zip
+linux-64bit：https://dl-ssl.google.com/android/repository/android-ndk-r17b-linux-x86_64.zip
+windows-32bit：https://dl-ssl.google.com/android/repository/android-ndk-r17b-windows-x86.zip
+windows-64bit：https://dl-ssl.google.com/android/repository/android-ndk-r17b-windows-x86_64.zip
+
+2、SDK下载地址：
+Android SDK Platform 28：https://dl-ssl.google.com/android/repository/platform-28_r06.zip
+Android SDK Platform 27：https://dl-ssl.google.com/android/repository/platform-27_r03.zip
+Android SDK Platform 26：https://dl-ssl.google.com/android/repository/platform-26_r02.zip
+Android SDK Platform 25：https://dl-ssl.google.com/android/repository/platform-25_r03.zip
+Android SDK Platform 24：https://dl-ssl.google.com/android/repository/platform-24_r02.zip
+Android SDK Platform 23：https://dl-ssl.google.com/android/repository/platform-23_r03.zip
+Android SDK Platform 22：https://dl-ssl.google.com/android/repository/android-22_r02.zip
+Android SDK Platform 21：https://dl-ssl.google.com/android/repository/android-21_r02.zip
+Android SDK Platform 20：https://dl-ssl.google.com/android/repository/android-20_r02.zip
+Android SDK Platform 19：https://dl-ssl.google.com/android/repository/android-19_r04.zip
+Android SDK Platform 18：https://dl-ssl.google.com/android/repository/android-18_r03.zip
+Android SDK Platform 17：https://dl-ssl.google.com/android/repository/android-17_r03.zip
+Android SDK Platform 16：https://dl-ssl.google.com/android/repository/android-16_r05.zip
+Android SDK Platform 15：https://dl-ssl.google.com/android/repository/android-15_r05.zip
+Android SDK Platform 14：https://dl-ssl.google.com/android/repository/android-14_r04.zip
+Android SDK Platform 13：https://dl-ssl.google.com/android/repository/android-3.2_r01.zip
+Android SDK Platform 12：https://dl-ssl.google.com/android/repository/android-3.1_r03.zip
+Android SDK Platform 11：https://dl-ssl.google.com/android/repository/android-3.0_r02.zip
+Android SDK Platform 10：https://dl-ssl.google.com/android/repository/android-2.3.3_r02.zip
+Android SDK Platform 9：https://dl-ssl.google.com/android/repository/android-2.3.1_r02.zip
+Android SDK Platform 8：https://dl-ssl.google.com/android/repository/android-2.2_r03.zip
+Android SDK Platform 7：https://dl-ssl.google.com/android/repository/android-2.1_r03.zip
+
+3、build-tool下载地址：
+linux-28.0.1：https://dl-ssl.google.com/android/repository/build-tools_r28.0.1-linux.zip
+macosx-28.0.1：https://dl-ssl.google.com/android/repository/build-tools_r28.0.1-macosx.zip
+windows-28.0.1：https://dl-ssl.google.com/android/repository/build-tools_r28.0.1-windows.zip
+
+linux-27.0.3：https://dl-ssl.google.com/android/repository/build-tools_r27.0.3-linux.zip
+macosx-27.0.3：https://dl-ssl.google.com/android/repository/build-tools_r27.0.3-macosx.zip
+windows-27.0.3：https://dl-ssl.google.com/android/repository/build-tools_r27.0.3-windows.zip
+
+linux-26.0.3：https://dl-ssl.google.com/android/repository/build-tools_r26.0.3-linux.zip
+macosx-26.0.3：https://dl-ssl.google.com/android/repository/build-tools_r26.0.3-macosx.zip
+windows-26.0.3：https://dl-ssl.google.com/android/repository/build-tools_r26.0.3-windows.zip
+
+linux-25.0.3：https://dl-ssl.google.com/android/repository/build-tools_r25.0.3-linux.zip
+macosx-25.0.3：https://dl-ssl.google.com/android/repository/build-tools_r25.0.3-macosx.zip
+windows-25.0.3：https://dl-ssl.google.com/android/repository/build-tools_r25.0.3-windows.zip
+
+linux-24.0.3：https://dl-ssl.google.com/android/repository/build-tools_r24.0.3-linux.zip
+macosx-24.0.3：https://dl-ssl.google.com/android/repository/build-tools_r24.0.3-macosx.zip
+windows-24.0.3：https://dl-ssl.google.com/android/repository/build-tools_r24.0.3-windows.zip
+
+linux-23.0.3：https://dl-ssl.google.com/android/repository/build-tools_r23.0.3-linux.zip
+macosx-23.0.3：https://dl-ssl.google.com/android/repository/build-tools_r23.0.3-macosx.zip
+windows-23.0.3：https://dl-ssl.google.com/android/repository/build-tools_r23.0.3-windows.zip
+
+linux-22.0.1：https://dl-ssl.google.com/android/repository/build-tools_r22.0.1-linux.zip
+macosx-22.0.1：https://dl-ssl.google.com/android/repository/build-tools_r22.0.1-macosx.zip
+windows-22.0.1：https://dl-ssl.google.com/android/repository/build-tools_r22.0.1-windows.zip
+
+linux-21.1.2：https://dl-ssl.google.com/android/repository/build-tools_r21.1.2-linux.zip
+macosx-21.1.2：https://dl-ssl.google.com/android/repository/build-tools_r21.1.2-macosx.zip
+windows-21.1.2：https://dl-ssl.google.com/android/repository/build-tools_r21.1.2-windows.zip
+
+linux-20.0.0：https://dl-ssl.google.com/android/repository/build-tools_r20-linux.zip
+macosx-20.0.0：https://dl-ssl.google.com/android/repository/build-tools_r20-macosx.zip
+windows-20.0.0：https://dl-ssl.google.com/android/repository/build-tools_r20-windows.zip
+
+linux-19.1.0：https://dl-ssl.google.com/android/repository/build-tools_r19.1-linux.zip
+macosx-19.1.0：https://dl-ssl.google.com/android/repository/build-tools_r19.1-macosx.zip
+windows-19.1.0：https://dl-ssl.google.com/android/repository/build-tools_r19.1-windows.zip
+
+linux-18.1.1：https://dl-ssl.google.com/android/repository/build-tools_r18.1.1-linux.zip
+macosx-18.1.1：https://dl-ssl.google.com/android/repository/build-tools_r18.1.1-macosx.zip
+windows-18.1.1：https://dl-ssl.google.com/android/repository/build-tools_r18.1.1-windows.zip
+
+linux-17.0.0：https://dl-ssl.google.com/android/repository/build-tools_r17-linux.zip
+macosx-17.0.0：https://dl-ssl.google.com/android/repository/build-tools_r17-macosx.zip
+windows-17.0.0：https://dl-ssl.google.com/android/repository/build-tools_r17-windows.zip
+
+百度网盘：链接：https://pan.baidu.com/s/1exhKQdTPK-bRdlteXXcOiw 密码：91ds
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
