@@ -172,6 +172,7 @@ namespace AssetBundles
             // 真机上会对比这两个目录下的App版本号来删除，编辑器下暴力一点，直接删除
             ToolsClearPersistentAssets();
             PackageUtils.CopyCurSettingAssetBundlesToStreamingAssets();
+            LaunchAssetBundleServer.CheckAndDoRunning();
         }
 
         [MenuItem(kToolsOpenOutput, false, 1201)]

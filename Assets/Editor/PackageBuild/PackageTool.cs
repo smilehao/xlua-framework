@@ -295,7 +295,7 @@ public class PackageTool : EditorWindow
         {
             if (GUILayout.Button("Copy SDK Resources", GUILayout.Width(200)))
             {
-                PackageUtils.CopyAndroidSDKResources(channelType.ToString());
+                EditorApplication.delayCall += CopyAndroidSDKResources;
             }
             if (GUILayout.Button("Current Channel Only", GUILayout.Width(200)))
             {
@@ -315,7 +315,7 @@ public class PackageTool : EditorWindow
         {
             if (GUILayout.Button("Copy SDK Resource", GUILayout.Width(200)))
             {
-                PackageUtils.CopyAndroidSDKResources(channelType.ToString());
+                EditorApplication.delayCall += CopyAndroidSDKResources;
             }
             if (GUILayout.Button("Execute Build", GUILayout.Width(200)))
             {
@@ -591,6 +591,11 @@ public class PackageTool : EditorWindow
         }
         bundleVersion = string.Join(".", vers);
         SaveAllCurrentVersionFile(true);
+    }
+
+    public static void CopyAndroidSDKResources()
+    {
+        PackageUtils.CopyAndroidSDKResources(channelType.ToString());
     }
 
     public static void BuildAndroidPlayerForCurrentChannel()
