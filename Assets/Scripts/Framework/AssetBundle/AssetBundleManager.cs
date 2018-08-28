@@ -692,7 +692,6 @@ namespace AssetBundles
                     {
                         UnloadAssetBundle(loader.assetbundleName);
                     }
-                    UnloadAssetBundle(loader.assetbundleName);
                     prosessingAssetBundleAsyncLoader.RemoveAt(i);
                 }
             }
