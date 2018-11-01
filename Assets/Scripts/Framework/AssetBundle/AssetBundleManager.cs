@@ -72,17 +72,14 @@ namespace AssetBundles
                 return BuildUtils.ManifestBundleName;
             }
         }
-
-#if UNITY_EDITOR || CLIENT_DEBUG
-#if !CLIENT_DEBUG
-        [BlackList]
-#endif
+        
         // Hotfix测试---用于侧测试资源模块的热修复
         public void TestHotfix()
         {
+#if UNITY_EDITOR || CLIENT_DEBUG
             Logger.Log("********** AssetBundleManager : Call TestHotfix in cs...");
-        }
 #endif
+        }
 
         public IEnumerator Initialize()
         {
