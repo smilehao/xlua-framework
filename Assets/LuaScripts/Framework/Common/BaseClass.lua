@@ -65,8 +65,6 @@ function BaseClass(classname, super)
 	end
 
 	local vtbl = {}
-	-- added by wsh @ 2017-12-08
-	assert(_class[class_type] == nil, "Aready defined class : ", classname)
 	_class[class_type] = vtbl
  
 	setmetatable(class_type, {
