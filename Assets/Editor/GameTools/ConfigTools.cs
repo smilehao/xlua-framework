@@ -3,6 +3,12 @@ using UnityEditor;
 using System.IO;
 using System.Diagnostics;
 
+/// <summary>
+/// modify by zfc @ 2018.11.16
+/// 说明：此处xlsx生成lua 以及proto 生成lua配置工具
+/// 如果生成失败 配置下protobuf环境 已经python环境 备注：python版本最好是2 以及安装读取excel库 xlrd
+/// </summary>
+
 public class ConfigTools : EditorWindow
 {
     private static string xlsxFolder = string.Empty;
