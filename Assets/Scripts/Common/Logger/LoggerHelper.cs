@@ -25,8 +25,8 @@ public class LoggerHelper : MonoSingleton<LoggerHelper>
     }
 
     private static LoggerHelper _instance = null;
-    private List<log_info> logList = new List<log_info>(100);
-    private List<log_info> tmpLogList = new List<log_info>(100);
+    private List<log_info> backList = new List<log_info>(100);
+    private List<log_info> frontList = new List<log_info>(100);
 
     protected override void Init()
     {
@@ -58,24 +58,21 @@ public class LoggerHelper : MonoSingleton<LoggerHelper>
     
     private void Update()
     {
-        lock (logList)
+        lock (backList)
         {
-            if (logList.Count > 0)
+            if (backList.Count > 0)
             {
-                tmpLogList.Clear();
-                for (int i = 0; i < logList.Count; i++)
-                {
-                    tmpLogList.Add(logList[i]);
-                }
-                logList.Clear();
+                List<log_info> tmp = frontList;
+                frontList = backList;
+                backList = tmp;
             }
         }
 
-        if (tmpLogList.Count > 0)
+        if (frontList.Count > 0)
         {
-            for (int i = 0; i < tmpLogList.Count; i++)
+            for (int i = 0; i < frontList.Count; i++)
             {
-                var logInfo = tmpLogList[i];
+                var logInfo = frontList[i];
                 switch (logInfo.type)
                 {
                     case LOG_TYPE.LOG:
@@ -90,25 +87,25 @@ public class LoggerHelper : MonoSingleton<LoggerHelper>
                         }
                 }
             }
-            tmpLogList.Clear();
+            frontList.Clear();
         }
     }
 
     public override void Dispose()
     {
-        lock (logList)
+        lock (backList)
         {
-            logList.Clear();
+            backList.Clear();
         }
-        tmpLogList.Clear();
+        frontList.Clear();
         base.Dispose();
     }
 
     public void LogToMainThread(LOG_TYPE type, string msg)
     {
-        lock (logList)
+        lock (backList)
         {
-            logList.Add(new log_info(type, msg));
+            backList.Add(new log_info(type, msg));
         }
     }
 }
