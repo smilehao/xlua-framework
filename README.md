@@ -136,6 +136,11 @@ XLua框架设计文档目录如下（具体内容查看工程下的《XLua框架
 
 11.3 其它	91
 
+其它：
+-
+QQ交流群：571621746
+
+![image](https://github.com/smilehao/xlua-framework/raw/master/images/xlua-framework.png)
 
 
  
