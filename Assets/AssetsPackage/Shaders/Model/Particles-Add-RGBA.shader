@@ -1,4 +1,6 @@
-﻿// Simplified Additive Particle shader. Differences from regular Additive Particle one:
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Simplified Additive Particle shader. Differences from regular Additive Particle one:
 // - no Tint color
 // - no Smooth particle support
 // - no AlphaTest
@@ -38,7 +40,7 @@ Shader "HOG/Particles/Additive_RGBA" {
 		v2f vert (appdata_full v)
 		{
 			v2f o;
-			o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+			o.pos = UnityObjectToClipPos(v.vertex);
 			o.uv.xy = TRANSFORM_TEX(v.texcoord.xy,_MainTex);
 			o.color = v.color;
 			return o;

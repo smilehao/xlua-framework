@@ -3,17 +3,20 @@ guid: 9c65dd127bb8b454e8673fc5e93c2e74
 timeCreated: 1444909075
 licenseType: Free
 TrueTypeFontImporter:
-  serializedVersion: 3
+  serializedVersion: 4
   fontSize: 40
   forceTextureCase: -2
-  characterSpacing: 1
-  characterPadding: 0
+  characterSpacing: 0
+  characterPadding: 1
   includeFontData: 1
-  fontNames: []
+  fontName: HYXiaoLiShuJ
+  fontNames:
+  - HYXiaoLiShuJ
   fallbackFontReferences: []
   customCharacters: "\u5305\u88F9\u5408\u6210\u6D88\u8017\u54C1\u5B9D\u77F3\u836F\u5168\u90E8\u5546\u4F1A\u6574\u7406"
   fontRenderingMode: 0
   ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
   userData: 
   assetBundleName: ui/fonts/system_art_ttf.assetbundle
   assetBundleVariant: 

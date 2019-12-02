@@ -3,6 +3,7 @@ guid: eeb287ef62e4a68488316d5e29120a70
 timeCreated: 1520046898
 licenseType: Pro
 NativeFormatImporter:
+  mainObjectFileID: -1
   userData: 
   assetBundleName: ui/prefabs/view/uitestmain_prefab.assetbundle
   assetBundleVariant: 

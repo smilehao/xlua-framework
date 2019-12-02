@@ -3,6 +3,7 @@ guid: df85c5346108ee847b34882c23c85b9e
 timeCreated: 1513142623
 licenseType: Pro
 NativeFormatImporter:
+  mainObjectFileID: -1
   userData: 
   assetBundleName: effect/prefab/ui/ef_ui_taskfinish_prefab.assetbundle
   assetBundleVariant: 
