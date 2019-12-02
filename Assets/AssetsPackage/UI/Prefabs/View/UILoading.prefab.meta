@@ -3,6 +3,7 @@ guid: 9db9569f5e1c09349b99f7d673107696
 timeCreated: 1441706026
 licenseType: Free
 NativeFormatImporter:
+  mainObjectFileID: -1
   userData: 
   assetBundleName: ui/prefabs/view/uiloading_prefab.assetbundle
   assetBundleVariant: 

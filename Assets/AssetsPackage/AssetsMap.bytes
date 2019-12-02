@@ -1,4 +1,3 @@
-assetsmap_bytes.assetbundle,AssetsMap.bytes
 effect/common.assetbundle,Effect/Common/Materials/models_fx_R.mat
 effect/common.assetbundle,Effect/Common/Materials/models_fx_RGB.mat
 effect/common.assetbundle,Effect/Common/Texture/Matcap_Encode2.png
@@ -367,4 +366,3 @@ ui/prefabs/view/uiloading_prefab.assetbundle,UI/Prefabs/View/UILoading.prefab
 ui/prefabs/view/uilogin_prefab.assetbundle,UI/Prefabs/View/UILogin.prefab
 ui/prefabs/view/uiloginserver_prefab.assetbundle,UI/Prefabs/View/UILoginServer.prefab
 ui/prefabs/view/uitestmain_prefab.assetbundle,UI/Prefabs/View/UITestMain.prefab
-variantsmap_bytes.assetbundle,VariantsMap.bytes
