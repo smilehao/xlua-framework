@@ -52,16 +52,16 @@ local function OnCreate(self, layer)
 end
 
 -- pop window order
-local function PopWindowOder(self)
+local function PopWindowOrder(self)
 	local cur = self.top_window_order
-	self.top_window_order = self.top_window_order + UIManager:GetInstance().MaxOderPerWindow
+	self.top_window_order = self.top_window_order + UIManager:GetInstance().MaxOrderPerWindow
 	return cur
 end
 
 -- push window order
 local function PushWindowOrder(self)
 	assert(self.top_window_order > self.min_window_order)
-	self.top_window_order = self.top_window_order - UIManager:GetInstance().MaxOderPerWindow
+	self.top_window_order = self.top_window_order - UIManager:GetInstance().MaxOrderPerWindow
 end
 
 -- 销毁
@@ -74,7 +74,7 @@ end
 
 
 UILayer.OnCreate = OnCreate
-UILayer.PopWindowOder = PopWindowOder
+UILayer.PopWindowOrder = PopWindowOrder
 UILayer.PushWindowOrder = PushWindowOrder
 UILayer.OnDestroy = OnDestroy
 

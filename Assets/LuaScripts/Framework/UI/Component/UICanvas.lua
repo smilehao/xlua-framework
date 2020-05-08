@@ -53,7 +53,7 @@ end
 local function SetOrder(self, relative_order)
 	assert(type(relative_order) == "number", "Relative order must be nonnegative number!")
 	assert(relative_order >= 0, "Relative order must be nonnegative number!")
-	assert(relative_order < UIManager:GetInstance().MaxOderPerWindow, "Relative order larger then MaxOderPerWindow!")
+	assert(relative_order < UIManager:GetInstance().MaxOrderPerWindow, "Relative order larger then MaxOrderPerWindow!")
 	self.relative_order = relative_order
 	self.unity_canvas.sortingOrder = self.view.base_order + relative_order
 end

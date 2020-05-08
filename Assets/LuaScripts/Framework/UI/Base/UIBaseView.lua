@@ -52,7 +52,7 @@ end
 
 -- 打开：窗口显示
 local function OnEnable(self)
-	self.base_order = self.holder:PopWindowOder()
+	self.base_order = self.holder:PopWindowOrder()
 	base.OnEnable(self)
 	self:OnAddListener()
 end

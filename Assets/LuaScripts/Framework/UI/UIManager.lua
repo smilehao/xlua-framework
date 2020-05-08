@@ -21,7 +21,7 @@ local UICameraPath = UIRootPath.."/UICamera"
 -- 分辨率
 local Resolution = Vector2.New(1024, 768)
 -- 窗口最大可使用的相对order_in_layer
-local MaxOderPerWindow = 10
+local MaxOrderPerWindow = 10
 -- cs Tip
 local UINoticeTip = CS.UINoticeTip.Instance
 
@@ -47,7 +47,7 @@ local function __init(self)
 	self.camera_go = CS.UnityEngine.GameObject.Find(UICameraPath)
 	self.UICamera = self.camera_go:GetComponent(typeof(CS.UnityEngine.Camera))
 	self.Resolution = Resolution
-	self.MaxOderPerWindow = MaxOderPerWindow
+	self.MaxOrderPerWindow = MaxOrderPerWindow
 	CS.UnityEngine.Object.DontDestroyOnLoad(self.gameObject)
 	local event_system = CS.UnityEngine.GameObject.Find(EventSystemPath)
 	CS.UnityEngine.Object.DontDestroyOnLoad(event_system)
