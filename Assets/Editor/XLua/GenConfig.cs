@@ -107,7 +107,11 @@ public static class GenConfig
         typeof(System.Collections.IEnumerator),
         typeof(UnityEngine.Events.UnityAction<Vector2>),
     };
-
+    // 避免在IL2CPP下被裁剪
+    [ReflectionUse]
+    public static List<Type> ReflectionUse = new List<Type>(){
+        typeof(AsyncOperation),
+    };
 	//黑名单
 	[BlackList]
 	public static List<List<string>> BlackList = new List<List<string>>()  {
