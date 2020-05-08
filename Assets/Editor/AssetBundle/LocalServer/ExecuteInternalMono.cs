@@ -48,7 +48,7 @@ namespace AssetBundles
 	
 	class ExecuteInternalMono
 	{
-		private static readonly Regex UnsafeCharsWindows = new Regex("[^A-Za-z0-9\\_\\-\\.\\:\\,\\/\\@\\\\]");
+		private static readonly Regex UnsafeCharsWindows = new Regex("[^A-Za-z0-9\\-\\.\\:\\,\\/\\@\\\\]");
 		private static readonly Regex UnescapeableChars = new Regex("[\\x00-\\x08\\x10-\\x1a\\x1c-\\x1f\\x7f\\xff]");
 		private static readonly Regex Quotes = new Regex("\"");
 		
