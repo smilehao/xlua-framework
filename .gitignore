@@ -22,3 +22,6 @@ Temp/
 .vs/
 Assets/Plugins/Android/
 Assets/Plugins/Android.meta
+/.vscode
+/AssetsScripts/XLua/Gen
+/Logs

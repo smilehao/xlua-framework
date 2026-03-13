@@ -102,14 +102,15 @@ public class PackageUtils
         EditorPrefs.SetString(LocalServerIPPrefsKey, ip);
     }
 
+
     public static string GetCurrentMachineLocalIP()
     {
         try
         {
             // 注意：这里获取所有内网地址后选择一个最小的，因为可能存在虚拟机网卡
             var ips = new List<string>();
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
+            IPHostEntry hostInfo = HostNameResolver.GetHostEntrySafe();
+            foreach (IPAddress ip in hostInfo.AddressList)
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {

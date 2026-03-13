@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: 21ad54ab5fbe40f4594710fcdb25d439
-timeCreated: 1520048332
-licenseType: Pro
-NativeFormatImporter:
-  mainObjectFileID: -1
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: ui/prefabs/view/uibattlemain_prefab.assetbundle
   assetBundleVariant: 

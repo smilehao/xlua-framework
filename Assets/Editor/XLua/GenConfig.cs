@@ -2,6 +2,8 @@
 using System;
 using UnityEngine;
 using XLua;
+using System.Reflection;
+using System.Linq;
 
 public static class GenConfig
 {
@@ -107,12 +109,14 @@ public static class GenConfig
         typeof(UnityEngine.Events.UnityAction),
         typeof(System.Collections.IEnumerator),
         typeof(UnityEngine.Events.UnityAction<Vector2>),
+        typeof(System.Action<float, float>),
     };
     // 避免在IL2CPP下被裁剪
     [ReflectionUse]
     public static List<Type> ReflectionUse = new List<Type>(){
         typeof(AsyncOperation),
     };
+    
 	//黑名单
 	[BlackList]
 	public static List<List<string>> BlackList = new List<List<string>>()  {
@@ -120,14 +124,13 @@ public static class GenConfig
 		new List<string>(){"UnityEngine.WWW", "movie"},
 		new List<string>(){"UnityEngine.Texture2D", "alphaIsTransparency"},
         new List<string>(){"UnityEngine.WWW", "GetMovieTexture"},
-        new List<string>(){"UnityEngine.Texture2D", "alphaIsTransparency"},
 		new List<string>(){"UnityEngine.Security", "GetChainOfTrustValue"},
 		new List<string>(){"UnityEngine.CanvasRenderer", "onRequestRebuild"},
 		new List<string>(){"UnityEngine.Light", "areaSize"},
 		new List<string>(){"UnityEngine.AnimatorOverrideController", "PerformOverrideClipListCleanup"},
-		#if !UNITY_WEBPLAYER
+#if !UNITY_WEBPLAYER
 		new List<string>(){"UnityEngine.Application", "ExternalEval"},
-		#endif
+#endif
 		new List<string>(){"UnityEngine.GameObject", "networkView"}, //4.6.2 not support
 		new List<string>(){"UnityEngine.Component", "networkView"},  //4.6.2 not support
 		new List<string>(){"System.IO.FileInfo", "GetAccessControl", "System.Security.AccessControl.AccessControlSections"},
@@ -138,5 +141,67 @@ public static class GenConfig
 		new List<string>(){"System.IO.DirectoryInfo", "Create", "System.Security.AccessControl.DirectorySecurity"},
 		new List<string>(){"UnityEngine.MonoBehaviour", "runInEditMode"},
 		new List<string>(){"UnityEngine.UI.Text", "OnRebuildRequested"},
+		new List<string>(){"UnityEngine.UI.Text", "OnRebuildRequested"},
+        new List<string>(){"System.Xml.XmlNodeList", "ItemOf"},
+        new List<string>(){"UnityEngine.WWW", "movie"},
+#if UNITY_WEBGL
+        new List<string>(){"UnityEngine.WWW", "threadPriority"},
+#endif
 	};
+
+#if UNITY_2018_1_OR_NEWER
+    // 修复在 Unity 2022 下生成代码报 Span 无法作泛型参数的问题
+    [BlackList]
+    public static List<Type> BlackGenericTypeList = new List<Type>()
+    {
+        typeof(Span<>),
+        typeof(ReadOnlySpan<>)
+    };
+
+    private static bool IsBlacklistedGenericType(Type type)
+    {
+        if (!type.IsGenericType) return false;
+        return BlackGenericTypeList.Contains(type.GetGenericTypeDefinition());
+    }
+
+    [BlackList]
+    public static Func<MemberInfo, bool> GenericTypeFilter = (memberInfo) =>
+    {
+        switch (memberInfo)
+        {
+            case PropertyInfo propertyInfo:
+                return IsBlacklistedGenericType(propertyInfo.PropertyType);
+            case ConstructorInfo constructorInfo:
+                return constructorInfo.GetParameters()
+                    .Any(p => IsBlacklistedGenericType(p.ParameterType));
+            case MethodInfo methodInfo:
+                return methodInfo.GetParameters()
+                    .Any(p => IsBlacklistedGenericType(p.ParameterType));
+            default:
+                return false;
+        }
+    };
+#endif
+
+    [BlackList]
+    public static Func<MemberInfo, bool> MethodFilter = (memberInfo) =>
+    {
+        if (memberInfo is MethodInfo method)
+        {
+            // 屏蔽名为 MakeGenericSignatureType 的方法
+            if (method.Name == "MakeGenericSignatureType")
+            {
+                return true; // 列入黑名单，不生成
+            }
+        }
+        if (memberInfo is PropertyInfo property)
+        {
+            // 屏蔽名为 IsCollectible 的属性
+            if (property.Name == "IsCollectible")
+            {
+                return true; // 列入黑名单，不生成
+            }
+        }
+        return false;
+    };
 }

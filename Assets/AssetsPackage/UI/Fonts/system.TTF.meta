@@ -1,15 +1,13 @@
 fileFormatVersion: 2
 guid: 80f6a38f8321b4afbadbd21b0681ba26
-timeCreated: 1436769338
-licenseType: Free
 TrueTypeFontImporter:
+  externalObjects: {}
   serializedVersion: 4
   fontSize: 25
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: PingFang SC
   fontNames:
   - PingFang SC
   fallbackFontReferences: []
@@ -18,6 +16,7 @@ TrueTypeFontImporter:
   fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: ui/fonts/system_ttf.assetbundle
   assetBundleVariant: 
